@@ -41,14 +41,33 @@ public class HomeworkWeek8 {
     return nums[index] + sum(nums, ++index);
   }
 
+  public boolean isPalindrome(String str) {
+    if (str.length() == 1 || str.length() == 0) return true;
+    String sub = str.substring(1, str.length() - 1);
+    return (str.charAt(0) == str.charAt(str.length() - 1)) && isPalindrome(sub); 
+  }
+
+  public int countSubstring(String str, String sub) {
+    if (str.length() == sub.length()) return 0;
+   
+    String tempSub = str.substring(0, sub.length());
+    if (tempSub.equalsIgnoreCase(sub)) {
+      return 1 + countSubstring(str.substring(1), sub);
+    }
+
+    return countSubstring(str.substring(1), sub);
+  }
+
   public static void main (String[] args) {
     HomeworkWeek8 HW8 = new HomeworkWeek8();
 
-    int result = HW8.sum(new int[]{2,4,8}, 0);
-    int result2 = HW8.sum(new int[]{-2,2,-3,3}, 0);
+    int result = HW8.countSubstring("he and herself", "he");
+    int result2 = HW8.countSubstring("I love CTA, CTA is the best", "CTA");
+    int result3 = HW8.countSubstring("he and herself", "Alan");
 
     System.out.println(result);
     System.out.println(result2);
+    System.out.println(result3);
  
   }
 }
