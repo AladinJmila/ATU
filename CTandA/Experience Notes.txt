@@ -4,3 +4,6 @@ DON'T BE FANCY WITH SYNTAX MAKING THIGS SHORTER. WRITE EVERYTHING VERBOSE!!
 When passing the base condition, make sure you are sure that that's the value you're checking for. For example, when checking against index and a length and you alreay already incrementing the index before passing it then you should compare it against the length not length - 1.
 
 Be mindful when you increment the index using either index++ or ++index. If you're passing straigth in the function call, look into using the ++index so you would increment then send it.
+
+Make sure to test against all available examples as some of them maybe used to test against and edge case that you are not aware of.
+
