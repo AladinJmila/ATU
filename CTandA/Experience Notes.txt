@@ -1,0 +1,5 @@
+MAN... READ TO THE END, BE MEDITATIVE AND PATIENT!!!
+DON'T BE FANCY WITH SYNTAX MAKING THIGS SHORTER. WRTIE EVERYTHING VERBOSE!!
+
+When passing the base condition, make sure you are sure that that's the value you're checking for. For example, when checking against index and a length and you alreay already incrementing the index before passing it then you should compare it against the length not length - 1.
+

@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class HomeWork {
+public class HomeworkWeek7 {
   /* exercice 2 */
   public String concat(String str1, String str2) {
     String newStr = "";
@@ -89,7 +89,7 @@ public class HomeWork {
   public static void main(String[] args) {
     int[] data = new int[]{2,4};
 
-    HomeWork HM = new HomeWork();
+    HomeworkWeek7 HM = new HomeworkWeek7();
     boolean result = HM.check(data);
     System.out.println(result);
   }
