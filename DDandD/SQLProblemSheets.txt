@@ -1,0 +1,76 @@
+PROBLEM SHEET 1
+***********************************************
+1. Describe the Structure of the EMP Table.
+Table name: EMP
+Cardinality = 14 ROWS
+Degree of relationship = 8 COLUMNS
+Attributes: EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO
+
+EMPNO > Type: SMALLINT > PRIMARY KEY
+ENAME > type: CHAR
+JOB > Type: CHAR
+MGR > Type: SMALLINT
+HIREDATE > Type: VARCHAR
+SAL > Type: DECIMAL
+COMM > Type: DECIMAL
+DEPTNO > Type: SMALLINT > FOREIGN KEY
+
+2. List all of the information in all of the fields in the EMP table.
+SELECT * FROM EMP;
+
+3. List the name and number of all the departments in the DEPT table.
+SELECT DNAME, DEPTNO FROM DEPT;
+
+4. List all of the information in the EMP table for those employees who are in department number 30.
+SELECT * FROM EMP 
+WHERE DEPTNO = 30;
+
+5. Retrieve all of the information in the EMP table from those employees who are MANAGERs and who earn more
+than £2500 per year.
+SELECT * FROM EMP 
+WHERE JOB = "MANAGER" AND SAL > 2500.00;
+
+6. List the name, job and department number of all of those employees who are managers and who are not in
+department number 30.
+Hint : !=
+SELECT ENAME, JOB, DEPTNO FROM EMP 
+WHERE JOB = "MANAGER" AND DEPTNO != 30;
+
+7. List the name and salary of all the employees in the EMP table who earn between £1200 and £1400
+Hint : BETWEEN A and B
+SELECT ENAME, SAL FROM EMP 
+WHERE SAL BETWEEN 1200.00 AND 1400.00;
+
+8. List all of the information in DEPT about those departments whose number is either 10 or 30.
+Hint : IN (10,30)
+SELECT * FROM EMP WHERE DEPTNO IN (10, 30);
+
+PROBLEM SHEET 2
+***********************************************
+1. List the salaries, jobs, and names of the employees who are in department 30. Display the rows in salary order.
+SELECT SAL, JOB, ENAME FROM EMP 
+WHERE DEPTNO = 30 
+ORDER BY SAL DESC;
+
+2. List the job, salary and employee name of all those employees in the emp table. Display the rows in job order
+and then in descending salary order.
+Hint : Order by
+Hint : Desc
+SELECT JOB, SAL, ENAME FROM EMP 
+ORDER BY JOB, SAL DESC;
+
+3. Get a listing of the distinct jobs in the emp table.
+Hint : Distinct
+SELECT DISTINCT JOB FROM EMP;
+
+4. Get the employee name and department number of all employees called ADAMS.
+SELECT ENAME, DEPTNO FROM EMP 
+WHERE ENAME = "ADAMS";
+
+5. Get the location of department number 20.
+SELECT LOC FROM DEPT WHERE DEPTNO = 20;
+
+6. Get the employee name and total salary of all employees who are salesmen.
+Hint : Sal + Comm
+SELECT ENAME, (SAL + COMM) AS TOTALSAL FROM EMP 
+WHERE JOB = "SALESMAN";
