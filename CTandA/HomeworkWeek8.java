@@ -36,15 +36,19 @@ public class HomeworkWeek8 {
     return linearSearchRecursion(arr, target, index);
   }
 
+  public int sum(int[] nums, int index) {
+    if (index == nums.length) return 0;
+    return nums[index] + sum(nums, ++index);
+  }
 
   public static void main (String[] args) {
     HomeworkWeek8 HW8 = new HomeworkWeek8();
 
-    boolean result = HW8.linearSearchRecursion(new int[]{0,3,4,2,8,1,9}, 4, 0);
-    boolean result2 = HW8.linearSearchRecursion(new int[]{0,3,4,2,8,1,9}, 12, 0);
-    boolean result3 = HW8.linearSearchRecursion(new int[]{0,3,4,2,8,1,9}, 9, 0);
+    int result = HW8.sum(new int[]{2,4,8}, 0);
+    int result2 = HW8.sum(new int[]{-2,2,-3,3}, 0);
+
     System.out.println(result);
     System.out.println(result2);
-    System.out.println(result3);
+ 
   }
 }
