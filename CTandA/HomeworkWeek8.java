@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class HomeworkWeek8 {
 
@@ -6,7 +7,7 @@ public class HomeworkWeek8 {
   
     String workString = str.substring(index + 1, (str.length() - index - 1));
     String firstPart = str.substring(0, index);
-    String secondPart = str.substring(str.length() - index , str.length());
+    String secondPart = str.substring((str.length() - index) , str.length());
     String endToFlip = str.substring((str.length() - 1 - index), (str.length() - index));
     String startToFlip = str.substring(index, index + 1);
 
@@ -58,16 +59,34 @@ public class HomeworkWeek8 {
     return countSubstring(str.substring(1), sub);
   }
 
+  public int fibonacci (int n) {
+    if (n == 1 || n == 0) return 1;
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+
+  public int power (int n, int pow) {
+    if (pow == 1) return n;
+
+    return power(n, pow - 1) * n ;
+  }
+
+  public int[] revInPlace (int[] arr, int index) {
+    if (index >= arr.length / 2) return arr;
+   
+    int temp = arr[index];
+    arr[index] = arr[arr.length - 1 - index];
+    arr[arr.length - 1 - index] = temp;
+    
+    return revInPlace(arr, ++index);
+  }
+
   public static void main (String[] args) {
     HomeworkWeek8 HW8 = new HomeworkWeek8();
 
-    int result = HW8.countSubstring("he and herself", "he");
-    int result2 = HW8.countSubstring("I love CTA, CTA is the best", "CTA");
-    int result3 = HW8.countSubstring("he and herself", "Alan");
-
-    System.out.println(result);
-    System.out.println(result2);
-    System.out.println(result3);
+    int[] result = HW8.revInPlace(new int[]{1,2,3,4,5}, 0);
+  
+    System.out.println(Arrays.toString(result));
  
   }
 }
