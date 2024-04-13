@@ -2,44 +2,14 @@ CREATE DATABASE IF NOT EXISTS vet;
 USE vet;
 
 DROP TABLE IF EXISTS bills;
-DROP TABLE IF EXISTS consultations;
-DROP TABLE IF EXISTS perscriptions_medications;
-DROP TABLE IF EXISTS medications;
 DROP TABLE IF EXISTS perscriptions;
-DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS medications;
+DROP TABLE IF EXISTS consultations;
 DROP TABLE IF EXISTS staff_appointments;
 DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS animals;
 DROP TABLE IF EXISTS owners;
-
-CREATE TABLE IF NOT EXISTS medications (
-  medication_id INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
-  description TEXT
-);
-
-CREATE TABLE IF NOT EXISTS perscriptions (
-  perscription_id INT PRIMARY KEY AUTO_INCREMENT,
-  dosage DECIMAL(8, 2) NOT NULL,
-  dosage_unit VARCHAR(25) NOT NULL,
-  frequency VARCHAR(25) NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE
-);
-
-CREATE TABLE IF NOT EXISTS perscriptions_medications (
-  perscription_id INT,
-  medication_id INT,
-  PRIMARY KEY (perscription_id, medication_id),
-  FOREIGN KEY (perscription_id)
-    REFERENCES perscriptions (perscription_id)
-    ON UPDATE CASCADE
-    ON DELETE NO ACTION,
-  FOREIGN KEY (medication_id)
-    REFERENCES medications (medication_id)
-    ON UPDATE CASCADE
-    ON DELETE NO ACTION
-);
 
 CREATE TABLE IF NOT EXISTS owners (
   owner_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -99,15 +69,35 @@ CREATE TABLE IF NOT EXISTS staff_appointments (
 CREATE TABLE IF NOT EXISTS consultations (
   consultation_id INT PRIMARY KEY AUTO_INCREMENT,
   appointment_id INT NOT NULL,
-  perscription_id INT,
   diagnosis TEXT NOT NULL,
   followup_date DATE,
   FOREIGN KEY (appointment_id)
     REFERENCES appointments (appointment_id)
     ON UPDATE CASCADE
+    ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS medications (
+  medication_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  description TEXT
+);
+
+CREATE TABLE IF NOT EXISTS perscriptions (
+  perscription_id INT PRIMARY KEY AUTO_INCREMENT,
+  consultation_id INT NOT NULL,
+  medication_id INT NOT NULL,
+  dosage DECIMAL(8, 2) NOT NULL,
+  dosage_unit VARCHAR(25) NOT NULL,
+  frequency VARCHAR(25) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE,
+  FOREIGN KEY (consultation_id)
+    REFERENCES consultations (consultation_id)
+    ON UPDATE CASCADE
     ON DELETE NO ACTION,
-  FOREIGN KEY (perscription_id)
-    REFERENCES perscriptions (perscription_id)
+  FOREIGN KEY (medication_id)
+    REFERENCES medications (medication_id)
     ON UPDATE CASCADE
     ON DELETE NO ACTION
 );
@@ -119,7 +109,7 @@ CREATE TABLE IF NOT EXISTS bills (
   status ENUM('Paid', 'Late', 'Pending', 'Cancelled'),
   due_date DATE NOT NULL,
   payment_date DATE,
-  payment_method ENUM('Credit card', 'Debit Card', 'Bank Transfer', 'Cheque', 'Cash', 'Mobile Payment'),
+  payment_method ENUM('Credit Card', 'Debit Card', 'Bank Transfer', 'Cheque', 'Cash', 'Mobile Payment'),
   FOREIGN KEY (appointment_id)
     REFERENCES appointments (appointment_id)
     ON UPDATE CASCADE
