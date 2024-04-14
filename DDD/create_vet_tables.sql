@@ -7,7 +7,9 @@ DROP TABLE IF EXISTS medications;
 DROP TABLE IF EXISTS consultations;
 DROP TABLE IF EXISTS staff_appointments;
 DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS appointments_symptoms;
 DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS symptoms;
 DROP TABLE IF EXISTS animals;
 DROP TABLE IF EXISTS owners;
 
@@ -32,13 +34,33 @@ CREATE TABLE IF NOT EXISTS animals (
     ON DELETE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS symptoms (
+  symptom_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(55) NOT NULL,
+  description TEXT
+);
+
 CREATE TABLE IF NOT EXISTS appointments (
   appointment_id INT PRIMARY KEY AUTO_INCREMENT,
   animal_id INT NOT NULL,
-  symptoms TEXT NOT NULL,
+  note TEXT,
   visit_date DATE NOT NULL,
   FOREIGN KEY (animal_id)
     REFERENCES animals (animal_id)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS appointments_symptoms (
+  appointment_id INT NOT NULL,
+  symptom_id INT NOT NULL,
+  PRIMARY KEY (appointment_id, symptom_id),
+  FOREIGN KEY (appointment_id)
+    REFERENCES appointments (appointment_id)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION,
+  FOREIGN KEY (symptom_id)
+    REFERENCES symptoms (symptom_id)
     ON UPDATE CASCADE
     ON DELETE NO ACTION
 );

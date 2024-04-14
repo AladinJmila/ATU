@@ -12,11 +12,34 @@ INSERT INTO animals (owner_id, species, breed, age, sex)
     (1, 'Cat', 'Siamese', 5, 'Female'),
     (2, 'Bird', 'Parrot', NULL, 'Unknown');
 
-INSERT INTO appointments (animal_id, symptoms, visit_date)
+INSERT INTO symptoms (name, description) 
+  VALUES
+    ('Vaccination', 'Symptoms related to the need for vaccination'),
+    ('Allergies', 'Symptoms indicating allergic reactions'),
+    ('Running eyes', 'Symptoms of watery or runny eyes'),
+    ('Limp', 'Symptoms of lameness or limping'),
+    ('Fever', 'Symptoms of elevated body temperature'),
+    ('Vomiting', 'Symptoms of nausea and vomiting'),
+    ('Diarrhea', 'Symptoms of loose or watery stools'),
+    ('Coughing', 'Symptoms of respiratory irritation or infection'),
+    ('Skin rash', 'Symptoms of skin irritation or rash'),
+    ('Loss of appetite', 'Symptoms of reduced desire to eat');
+
+INSERT INTO appointments (animal_id, note, visit_date)
   VALUES 
-    (1, 'Limbing and loss of apetite', '2024-04-15'),
-    (2, 'Coughing and sneezing', '2024-04-16'),
-    (3, 'Routine check-up', '2024-04-17');
+    (1, 'custom notes that are not covered by the symptoms part', '2024-04-15'),
+    (2, 'more custom notes here', '2024-04-16'),
+    (3, NULL, '2024-04-17');
+
+INSERT INTO appointments_symptoms
+  VALUES
+    (1, 2),
+    (1, 3),
+    (1, 5),
+    (2, 2),
+    (2, 7),
+    (2, 9),
+    (3, 1);
 
 INSERT INTO staff (first_name, last_name, email, job_title, phone)
   VALUES
