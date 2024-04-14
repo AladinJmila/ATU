@@ -1,0 +1,54 @@
+- e-commerce web application
+
+1 - allows customer to enter their login details that will be validated before receiving a summary of the order
+* credentials for the website should be "user" and "pass" all lowercase
+
+2 -  create a form that performs vaidations through both JavaScript and HTML to ensure that:
+* text fields are not empty
+* a valid email address is entered to sign-up to a news letter
+
+3 - Include a slideshow or carousel which displays a different emage each time the page is loaded
+
+4 - Allow the user to purchase items from the site. purchase can mean:
+* the user is presented with the possibility to choose a product or item
+* select a quantity
+* if the purchase button is clicked, they will be repesented with a total cost
+
+5 - Use an object or an array in JavaScript
+
+6 - Use at least one custom module in Node
+
+7 - Include the capability for handling POST and GET requests
+
+8 - Include both static and dynamic content
+
+9 - Include the use of Templates in Node
+
+10 - Include error messages to provide feedback to users in case of any issues or errors
+
+11 - Connect to a MySQL database that contains relevant site information such a product info using Node
+* You database name should be your ATU ID
+* both username and password should be "root"
+
+12 - Use bootstrap version 5 via CDN
+
+13 - Provide a document briefly outlining the details of your project illustrating:
+* how you have implemented each of the items
+* any other information you deem relevant
+* you can use the example document or create your own
+
+14 - Ensure to submit the following when uploading your project:
+* a zip file of your project
+* a backup of your databse in .sql format
+
+15 - Note the following on your code and comments
+* all major blocks of code (HTML, CSS, JS) should include comments that describe its function
+* all classes and ids created by you must be accompanied by comments describing their purpose
+* all functions in JS must inclde a comment describing their purpose
+* if you have code you wish to use but unsure of how it works, or code you have sourced, it must be referenced
+* refer to the document to see how comments should be added
+
+
+
+
+
