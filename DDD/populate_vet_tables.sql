@@ -69,11 +69,11 @@ INSERT INTO perscriptions (consultation_id, medication_id, dosage, dosage_unit, 
     (2, 2, 10, 'mg', 'Twice daily', '2024-04-15', '2024-04-25'),
     (2, 3, 100, 'mg', 'Once daily', '2024-04-16', '2024-04-20');
 
-INSERT INTO bills (appointment_id, amount, status, due_date, payment_date, payment_method)
+INSERT INTO bills (appointment_id, amount, remaining_amount, status, due_date, payment_date, payment_method)
   VALUES 
-    (1, 75.00, 'Pending', '2024-04-20', NULL, NULL),
-    (2, 120.00, 'Late', '2024-04-14', NULL, NULL),
-    (3, 60.00, 'Paid', '2024-04-17', '2024-04-10', 'Credit Card');
+    (1, 75.00, 75.00, 'Pending', '2024-04-20', NULL, NULL),
+    (2, 120.00, 120.00, 'Late', '2024-04-14', NULL, NULL),
+    (3, 60.00, 0.00, 'Paid', '2024-04-17', '2024-04-10', 'Credit Card');
 
 
 

@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS bills (
   bill_id INT PRIMARY KEY AUTO_INCREMENT,
   appointment_id INT NOT NULL,
   amount DECIMAL(10, 2) NOT NULL,
+  remaining_amount DECIMAL(10, 2) NOT NULL,
   status ENUM('Paid', 'Late', 'Pending', 'Cancelled'),
   due_date DATE NOT NULL,
   payment_date DATE,
