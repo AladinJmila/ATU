@@ -1,3 +1,4 @@
+USE vet;
 -- You may need to save all these enhancments in separate folders with separate names grouped by feature
 -- this will enable others to access them and alter them, or enchance if needed with no risk of breaking other stuff
 
@@ -45,9 +46,9 @@ CREATE PROCEDURE create_appointment (
   IN p_symptoms_ids VARCHAR(50)
 )
 BEGIN
-  START TRANSACTION;
   DECLARE v_appointment_id INT;
 
+  START TRANSACTION;
   INSERT INTO appointments (animal_id, note, visit_date_time)
   VALUES (p_animal_id, p_note, p_visit_date_time);
 
@@ -72,6 +73,28 @@ BEGIN
   END IF;
 
   COMMIT;
+END //
+
+CREATE TRIGGER appointments_associations_after_delete
+  AFTER DELETE ON appointments
+  FOR EACH ROW
+BEGIN
+  START TRANSACTION;
+
+  DELETE FROM staff_appointments WHERE appointment_id = OLD.appointment_id;
+  DELETE FROM appointments_symptoms WHERE appointment_id = OLD.appointment_id;
+
+  COMMIT;
+END //
+
+CREATE TRIGGER bill_after_insert 
+  -- BEFORE
+  -- OLD
+  AFTER INSERT ON bills
+  FOR EACH ROW
+BEGIN
+  UPDATE bills 
+  SET remaining_amount = remaining_amount - NEW.amount;
 END //
 
 DELIMITER ;

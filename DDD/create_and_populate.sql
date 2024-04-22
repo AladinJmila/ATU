@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS appointments_symptoms (
   FOREIGN KEY (appointment_id)
     REFERENCES appointments (appointment_id)
     ON UPDATE CASCADE
-    ON DELETE NO ACTION,
+    ON DELETE CASCADE,
   FOREIGN KEY (symptom_id)
     REFERENCES symptoms (symptom_id)
     ON UPDATE CASCADE
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS staff_appointments (
   FOREIGN KEY (appointment_id)
     REFERENCES appointments (appointment_id)
     ON UPDATE CASCADE
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS consultations (
