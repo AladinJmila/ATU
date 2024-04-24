@@ -21,7 +21,7 @@
 -- 2 - 40 minutes: build and data population
 
 -- 3 - 30 minutes: iterate to perfect design
--- CREATE DATABASE IF NOT EXISTS wild_atlantic_way_feedback_hub;
+CREATE DATABASE IF NOT EXISTS wild_atlantic_way_feedback_hub;
 USE wild_atlantic_way_feedback_hub;
 
 DROP TABLE IF EXISTS reviews;
