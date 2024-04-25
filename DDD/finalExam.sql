@@ -135,7 +135,6 @@ CREATE TRIGGER attraction_after_review_insert
   AFTER INSERT ON reviews
   FOR EACH ROW
 BEGIN
-  
   UPDATE attractions 
   SET 
     average_rating = (average_rating * (SELECT COUNT(*) FROM reviews WHERE attraction_id = NEW.attraction_id) + New.rating) / (average_rating * (SELECT COUNT(*) FROM reviews WHERE attraction_id = NEW.attraction_id) + New.rating) + 1,
@@ -161,7 +160,7 @@ SELECT average_rating, total_reviews FROM attractions WHERE name = 'Cliffs of Mo
 
 INSERT INTO reviews (tourist_id, attraction_id, feedback, rating, posted_date)
   VALUES
-  (1, 1, 'Just leaving a low rating', 1, '2024-04-09');
+  (1, 1, 'Just leaving a better rating', 3, '2024-04-09');
 
 DELETE FROM reviews WHERE review_id = 3;
 
@@ -199,7 +198,7 @@ CREATE USER joan@'admin.wawfeedbackhub.ie' IDENTIFIED BY '1234';
 
 GRANT ALL
 ON wild_atlantic_way_feedback_hub.*
-TO rohin@'admin.bestvets.ie';
+TO joan@'admin.wawfeedbackhub.ie';
 
 -- RULE 7: CRUD Operation modifying more than one row at a time
 DELETE FROM reviews WHERE rating = 1;

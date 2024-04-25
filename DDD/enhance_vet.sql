@@ -75,17 +75,20 @@ BEGIN
   COMMIT;
 END //
 
+DELIMITER //
+
 CREATE TRIGGER appointments_associations_after_delete
   AFTER DELETE ON appointments
   FOR EACH ROW
-BEGIN
-  START TRANSACTION;
+BEGIN 
 
   DELETE FROM staff_appointments WHERE appointment_id = OLD.appointment_id;
   DELETE FROM appointments_symptoms WHERE appointment_id = OLD.appointment_id;
 
-  COMMIT;
 END //
+
+DELIMITER ;
+
 
 CREATE TRIGGER bill_after_insert 
   -- BEFORE
@@ -176,3 +179,24 @@ SELECT
   GROUP BY ap.appointment_id
   ORDER BY ap.visit_date_time;
 
+-- INDEXING
+-- Indexes are ideally created based on the most accessed data when a system goes live. For demo purpose only, I will create an example now even it might not be needed in a realy world scenario.
+
+CREATE INDEX idx_animal_specie ON animals (species);
+SHOW INDEXES IN animals;
+
+-- Permissions
+-- People
+CREATE USER rohin@'admin.bestvets.ie' IDENTIFIED BY '1234';
+GRANT ALL
+ON vet.*
+TO rohin@'admin.bestvets.ie'
+-- ON *.*
+
+-- Apps
+CREATE USER vet_app@'%.bestvets.ie' INDETIFIED BY '1234';
+GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE
+ON vet.*;
+TO vet_app@'%.bestvets.ie';
+
+SELECT * FROM mysql.user;
