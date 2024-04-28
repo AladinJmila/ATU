@@ -1,26 +1,10 @@
 const express = require('express')
 const { engine } = require('express-handlebars')
-const mysql = require('mysql2/promise')
+const getDBdata = require('./src/db')
 
 const app = express()
 const port = 7777
-
-async function getDBdata (query) {
-  const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'g00438809'
-  })
-
-  try {
-    const [result] = await connection.query(query)
-
-    return result
-  } catch (err) {
-    console.log(err)
-  }
-}
+app.use(express.static('static'))
 
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
