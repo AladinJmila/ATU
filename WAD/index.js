@@ -20,6 +20,14 @@ app.get('/', async (req, res) => {
   res.render('home', { data })
 })
 
+app.get('/plants/:id', async (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  // const data = await getDBdata('SELECT first_name, last_name FROM test;')
+  // console.log(data)
+  res.render('plant', {})
+})
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}...`)
 })

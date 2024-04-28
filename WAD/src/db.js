@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise')
 
-async function getDBdata (query) {
+async function getDBdata(query) {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',

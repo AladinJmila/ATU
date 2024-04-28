@@ -1,7 +1,91 @@
+:root {
+  --custom-color-1: #ffeaed;
+  --custom-color-2: #ffb6c1;
+  --custom-color-3: #0f1626;
+  --custom-color-4: #a8a4a4;
+  --custom-color-5: #ff5f77;
+}
+
 body {
-  background-color: rgb(30, 46, 30) !important;
+  background-color: var(--custom-color-3);
 }
 
 * {
-  color: white;
+  color: var(--custom-color-1);
+}
+
+nav.navbar {
+  background-color: var(--custom-color-1) !important;
+  border-bottom: 5px solid var(--custom-color-2);
+  margin-bottom: 40px;
+}
+
+a:not(nav.navbar a) {
+  color: var(--custom-color-2) !important;
+}
+
+a:visited:not(nav.navbar a),
+a:active:not(nav.navbar a) {
+  color: var(--custom-color-4) !important;
+}
+
+.carousel.slide .carousel-item {
+  height: 400px;
+}
+
+.carousel.slide .carousel-item {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.carousel.slide .carousel-item:nth-of-type(1) {
+  background-image: url(https://img.freepik.com/premium-photo/banner-pink-planet-earth-sphere-ball-with-plants-greenery-pink-background-earth-day-ecology_218479-76.jpg);
+}
+.carousel.slide .carousel-item:nth-of-type(2) {
+  background-image: url(https://img.freepik.com/premium-photo/banner-pink-planet-earth-sphere-ball-with-plants-greenery-pink-background-earth-day-ecology_218479-76.jpg);
+}
+.carousel.slide .carousel-item:nth-of-type(3) {
+  background-image: url(https://img.freepik.com/premium-photo/banner-pink-planet-earth-sphere-ball-with-plants-greenery-pink-background-earth-day-ecology_218479-76.jpg);
+}
+
+.fa.fa-shopping-cart {
+  position: relative;
+  color: var(--custom-color-3);
+  margin-top: 4px;
+  z-index: 10;
+}
+
+.fa.fa-pagelines {
+  position: absolute;
+  color: green;
+  top: 4;
+  right: 10px;
+  display: none;
+}
+
+.fa.fa-pagelines.show {
+  display: inline-block;
+}
+
+#shopping-cart {
+  position: relative;
+}
+
+#cart-items-count {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  color: var(--custom-color-5);
+}
+
+#cart-items-count.two-digits {
+  right: -13px;
+}
+
+.row img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: cover;
+  border: 3px solid var(--custom-color-2);
 }
