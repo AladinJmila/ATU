@@ -1,11 +1,15 @@
 const express = require('express')
 const { engine } = require('express-handlebars')
+const path = require('path')
 const getDBdata = require('./src/db')
 
 const app = express()
 const port = 7777
-app.use(express.static('static'))
 
+// Set directory for static files
+app.use(express.static(path.join(__dirname, 'public')))
+
+// Set Handlebars as view engine
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', './views')
