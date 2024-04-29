@@ -59,4 +59,27 @@ function removeFromBasket(productId) {
   }
 }
 
-window.addEventListener('load', displayBasketCount)
+// attach get query params to basket page get request
+const basketButtons = document.querySelectorAll('[href="/basket/"]')
+basketButtons.forEach(button => {
+  button.addEventListener('click', e => {
+    e.preventDefault()
+
+    const orders = window.localStorage.getItem('basket')
+    window.location.href = `/basket/?orders=${orders || ''}`
+  })
+})
+
+function handleNavLinks() {
+  const navLinks = document.querySelectorAll('.nav-link')
+  navLinks.forEach(function (link) {
+    if (window.location.href.split('?')[0] === link.href) {
+      link.classList.add('active')
+    }
+  })
+}
+
+window.addEventListener('load', () => {
+  displayBasketCount()
+  handleNavLinks()
+})

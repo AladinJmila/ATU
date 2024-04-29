@@ -85,7 +85,6 @@ a:active:not(nav.navbar a) {
 .row img {
   width: 100%;
   height: auto;
-  max-height: 350px;
   object-fit: cover;
 }
 
@@ -117,4 +116,14 @@ a:active:not(nav.navbar a) {
 .product-card {
   border: 3px solid var(--custom-color-2);
   border-radius: 8px;
+  overflow: hidden;
+}
+
+.nav-link {
+  border-bottom: 2px solid transparent;
+  padding-bottom: 6px;
+}
+
+.nav-link.active {
+  border-bottom: 2px solid var(--custom-color-3);
 }

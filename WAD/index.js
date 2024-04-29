@@ -16,16 +16,30 @@ app.set('views', './views')
 
 app.get('/', async (req, res) => {
   const data = await getDBdata('SELECT first_name, last_name FROM test;')
-  console.log(data)
+  // console.log(data)
   res.render('home', { data })
 })
 
 app.get('/plants/:id', async (req, res) => {
   const id = req.params.id
-  console.log(id)
+  // console.log(id)
   // const data = await getDBdata('SELECT first_name, last_name FROM test;')
   // console.log(data)
   res.render('plant', {})
+})
+
+app.get('/basket/', async (req, res) => {
+  if (!req.query?.orders) {
+    return res
+      .status(404)
+      .render('error', { message: 'Please select at least one item to' })
+  }
+  const ids = JSON.parse(req.query.orders)
+  console.log(ids)
+  // console.log(id)
+  // const data = await getDBdata('SELECT first_name, last_name FROM test;')
+  // console.log(data)
+  res.render('basket', {})
 })
 
 app.listen(port, () => {
