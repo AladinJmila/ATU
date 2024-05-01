@@ -1,7 +1,19 @@
 // Optimized version
+// We need mulitple passes to sort an array
+// In each pass, we scan the array from left to right, and if items are out of order, we swap them
+// The reason it's called bubble sort,is that the big values bubble to the top/end of the array with every pass
+
+// Best case:  Array already sorted
+// Worst case: Array sorted in reverse
+// TIME COMPLEXITIY ANALYSIS
+//                Best         Worst
+// ------------+-----------+----------
+//      Passes |    O(1)   |   O(n)
+// Comparisons |    O(n)   |   O(n)
+//      Total  |    O(n)   |  O(n^2)
+//                Linear    Quadratic
+
 public class BubbleSort {
-  // Best:   Linear     O(n)
-  // Worst:  Quadratic  O(n2)
   public void sort(int[] array) {
     boolean isSorted;
     for (var i = 0; i < array.length; i++) {
