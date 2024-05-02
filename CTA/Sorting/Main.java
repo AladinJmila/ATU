@@ -4,8 +4,8 @@ public class Main {
   
   public static void main(String[] args) {
     int [] numbers = {7, 3, 1, 4, 6, 2, 3};
-    var sorter = new QuickSort();
-    sorter.sort(numbers);
+    var sorter = new CountingSort();
+    sorter.sort(numbers, 7);
     System.out.println(Arrays.toString(numbers));
   }
 }
