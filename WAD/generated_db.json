@@ -1,0 +1,1213 @@
+[
+  {
+    "name": "Monstera Deliciosa",
+    "quantity_in_stock": 15,
+    "description": "The Monstera Deliciosa, also known as the Swiss Cheese Plant, is a popular tropical houseplant with large, glossy leaves that develop iconic splits and holes as they mature.",
+    "price": 25,
+    "image_url": "/images/_29b94ca3-a839-4192-b69c-d516b853f015.jpg",
+    "category": "Tropical",
+    "height": "Medium (2-3 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Easy",
+    "benefits": ["Air-purifying", "Adds tropical flair to indoor spaces"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover23",
+        "rating": 4,
+        "comment": "Beautiful plant, easy to care for. Thriving in my living room!"
+      },
+      {
+        "username": "Greenthumb99",
+        "rating": 5,
+        "comment": "Absolutely love my Monstera! It's a showstopper in my home."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Fiddle Leaf Fig",
+        "image_url": "https://example.com/images/fiddle_leaf_fig.jpg",
+        "price": 35
+      },
+      {
+        "name": "Snake Plant",
+        "image_url": "https://example.com/images/snake_plant.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Tradescantia zebrina (Wandering Jew)",
+    "quantity_in_stock": 20,
+    "description": "Tradescantia zebrina, also known as Wandering Jew or Inch Plant, is a vibrant and fast-growing trailing plant with striking purple and silver striped leaves. It thrives in bright indirect light and requires regular watering to keep its soil evenly moist.",
+    "price": 22,
+    "image_url": "/images/_49c95c5c-2477-4aee-a18c-65051f33d59b.jpg",
+    "category": "Trailing Plants",
+    "height": "Medium (6-12 inches)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": ["Beautiful trailing foliage", "Easy to propagate"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover789",
+        "rating": 5,
+        "comment": "My Wandering Jew is thriving and trailing beautifully!"
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Lovely addition to my indoor plant collection. Very easy to care for."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Spider Plant (Chlorophytum comosum)",
+        "image_url": "https://example.com/images/spider_plant.jpg",
+        "price": 15
+      },
+      {
+        "name": "Pothos (Epipremnum aureum)",
+        "image_url": "https://example.com/images/pothos.jpg",
+        "price": 18
+      }
+    ]
+  },
+  {
+    "name": "Fiddle Leaf Fig",
+    "quantity_in_stock": 8,
+    "description": "The Fiddle Leaf Fig is a popular indoor tree with large, glossy fiddle-shaped leaves. It makes a striking statement as a focal point in any room and prefers bright, indirect light.",
+    "price": 45,
+    "image_url": "/images/_bb6ce6d8-c399-4f48-a284-b7ee68ae9272.jpg",
+    "category": "Tree",
+    "height": "Medium to Tall (3-6 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Adds a dramatic touch to interiors",
+      "Moderate air purification"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover2022",
+        "rating": 5,
+        "comment": "My Fiddle Leaf Fig is gorgeous! It brings life to my living room."
+      },
+      {
+        "username": "GardenEnthusiast",
+        "rating": 4,
+        "comment": "Love the look of this plant, but it requires consistent care."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Monstera Deliciosa",
+        "image_url": "https://example.com/images/monstera.jpg",
+        "price": 25
+      },
+      {
+        "name": "Rubber Plant",
+        "image_url": "https://example.com/images/rubber_plant.jpg",
+        "price": 30
+      }
+    ]
+  },
+  {
+    "name": "Caladium (Caladium bicolor)",
+    "quantity_in_stock": 15,
+    "description": "Caladium, particularly Caladium bicolor varieties, are tropical plants prized for their colorful and uniquely patterned arrow-shaped leaves. They thrive in indirect light and require consistently moist soil to maintain their vibrant appearance.",
+    "price": 20,
+    "image_url": "/images/_5087f0a1-2149-479a-b67c-9be23d416f60.jpg",
+    "category": "Tropical Foliage",
+    "height": "Medium (12-18 inches)",
+    "light_requirements": "Indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Colorful and patterned foliage",
+      "Adds tropical flair to indoor spaces"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "TropicalPlantLover",
+        "rating": 5,
+        "comment": "My Caladiums are stunning! Love the vibrant colors."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor jungle. Requires a bit of attention but worth it."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Begonia rex",
+        "image_url": "https://example.com/images/begonia_rex.jpg",
+        "price": 30
+      },
+      {
+        "name": "Calathea medallion",
+        "image_url": "https://example.com/images/calathea_medallion.jpg",
+        "price": 25
+      }
+    ]
+  },
+  {
+    "name": "String of Pearls",
+    "quantity_in_stock": 12,
+    "description": "The String of Pearls is a unique and eye-catching succulent with trailing stems adorned with spherical, bead-like leaves. It's an ideal choice for hanging baskets or elevated planters.",
+    "price": 20,
+    "image_url": "/images/_660d0190-e87c-4187-8f78-5f8da4d6c222.jpg",
+    "category": "Succulent",
+    "height": "Trailing (up to 1-2 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": ["Beautiful trailing foliage", "Low water needs"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast88",
+        "rating": 5,
+        "comment": "Absolutely adore my String of Pearls! It's thriving and looks stunning in my apartment."
+      },
+      {
+        "username": "GreenThumb22",
+        "rating": 4,
+        "comment": "Love the unique appearance of this plant. Requires occasional attention but worth it!"
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "String of Bananas",
+        "image_url": "https://example.com/images/string_of_bananas.jpg",
+        "price": 18
+      },
+      {
+        "name": "Burro's Tail",
+        "image_url": "https://example.com/images/burros_tail.jpg",
+        "price": 22
+      }
+    ]
+  },
+  {
+    "name": "Epipremnum aureum (Golden Pothos)",
+    "quantity_in_stock": 20,
+    "description": "Epipremnum aureum, also known as Golden Pothos or Devil's Ivy, is a popular and versatile indoor plant with heart-shaped, glossy leaves marbled in green and yellow. It's easy to care for and can thrive in various light conditions.",
+    "price": 18,
+    "image_url": "/images/_ddecc805-894e-427e-ad50-860c67d0d43e.jpg",
+    "category": "Trailing Plants",
+    "height": "Trailing (up to 6 feet)",
+    "light_requirements": "Low to bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": ["Air-purifying properties", "Tolerates low light conditions"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover101",
+        "rating": 5,
+        "comment": "My Golden Pothos is thriving with minimal care! It's perfect for beginners."
+      },
+      {
+        "username": "GardenGuru55",
+        "rating": 4,
+        "comment": "Lovely addition to my indoor garden. The variegated leaves are beautiful."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Philodendron Heartleaf",
+        "image_url": "https://example.com/images/philodendron_heartleaf.jpg",
+        "price": 15
+      },
+      {
+        "name": "Spider Plant",
+        "image_url": "https://example.com/images/spider_plant.jpg",
+        "price": 12
+      }
+    ]
+  },
+  {
+    "name": "Fittonia spp. (Nerve Plant)",
+    "quantity_in_stock": 15,
+    "description": "Fittonia spp., also known as Nerve plants, are eye-catching indoor plants with vibrant, veined leaves that come in various colors like green, pink, and red. They thrive in medium to bright indirect light and require consistently moist soil to stay healthy.",
+    "price": 18,
+    "image_url": "/images/_4c4fb6dd-4e5d-4a3e-9853-1762f30be34a.jpg",
+    "category": "Small Plants",
+    "height": "Low (6-12 inches)",
+    "light_requirements": "Medium to bright indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Colorful and attractive foliage",
+      "Ideal for terrariums and small spaces"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover789",
+        "rating": 5,
+        "comment": "My Fittonia Nerve Plant is thriving! Love the vibrant colors."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor garden. Requires a bit of attention but worth it."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea ornata",
+        "image_url": "https://example.com/images/calathea_ornata.jpg",
+        "price": 22
+      },
+      {
+        "name": "Peperomia obtusifolia (Baby Rubber Plant)",
+        "image_url": "https://example.com/images/peperomia_obtusifolia.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Calathea Orbifolia",
+    "quantity_in_stock": 7,
+    "description": "The Calathea Orbifolia is a stunning indoor plant known for its large, round leaves with silver-green stripes. It's prized for its decorative foliage and prefers bright, indirect light.",
+    "price": 25,
+    "image_url": "/images/_3a1135a4-30fa-49af-a9eb-f75079249f7b.jpg",
+    "category": "Decorative Foliage",
+    "height": "Medium (1-2 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": ["Beautiful decorative foliage", "Air-purifying qualities"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover456",
+        "rating": 5,
+        "comment": "My Calathea Orbifolia is a showstopper! I love the unique leaf patterns."
+      },
+      {
+        "username": "GardeningGuru",
+        "rating": 4,
+        "comment": "Beautiful plant but requires consistent care. Worth the effort for its beauty."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea Medallion",
+        "image_url": "https://example.com/images/calathea_medallion.jpg",
+        "price": 30
+      },
+      {
+        "name": "Prayer Plant",
+        "image_url": "https://example.com/images/prayer_plant.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Pilea Peperomioides",
+    "quantity_in_stock": 10,
+    "description": "The Pilea Peperomioides, also known as the Chinese Money Plant or Pancake Plant, is a charming and easy-to-care-for indoor plant characterized by its round, coin-shaped leaves on upright stems.",
+    "price": 12,
+    "image_url": "/images/_660b30c5-742b-4046-9779-97ec7be3466a.jpg",
+    "category": "Small Plants",
+    "height": "Small (6-12 inches)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Easy",
+    "benefits": ["Unique round foliage", "Fast-growing"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast55",
+        "rating": 5,
+        "comment": "Love my Pilea! It's adorable and requires minimal care."
+      },
+      {
+        "username": "GardenLover123",
+        "rating": 4,
+        "comment": "Great addition to my plant collection. Thrives on my windowsill."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "String of Hearts",
+        "image_url": "https://example.com/images/string_of_hearts.jpg",
+        "price": 18
+      },
+      {
+        "name": "Peperomia Obtusifolia",
+        "image_url": "https://example.com/images/peperomia_obtusifolia.jpg",
+        "price": 15
+      }
+    ]
+  },
+  {
+    "name": "Strelitzia reginae (Bird of Paradise)",
+    "quantity_in_stock": 5,
+    "description": "Strelitzia reginae, also known as Bird of Paradise, is a stunning tropical plant with large, banana-like leaves and striking orange and blue bird-shaped flowers. It thrives in bright indirect light and requires regular watering to keep its soil evenly moist during the growing season.",
+    "price": 45,
+    "image_url": "/images/_ba23f0cd-5a98-48cf-a9f4-567a9e553645.jpg",
+    "category": "Tropical Plants",
+    "height": "Large (4-6 feet)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Dramatic foliage and flowers",
+      "Adds a tropical touch to indoor spaces"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "TropicalPlantFanatic",
+        "rating": 5,
+        "comment": "My Bird of Paradise is a showstopper! Absolutely love the vibrant flowers."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor garden. Requires a bit of attention but worth it for the stunning blooms."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Fiddle Leaf Fig (Ficus lyrata)",
+        "image_url": "https://example.com/images/fiddle_leaf_fig.jpg",
+        "price": 50
+      },
+      {
+        "name": "Monstera deliciosa",
+        "image_url": "https://example.com/images/monstera_deliciosa.jpg",
+        "price": 40
+      }
+    ]
+  },
+  {
+    "name": "Calathea spp. (Calathea varieties)",
+    "quantity_in_stock": 12,
+    "description": "Calathea spp., including varieties like Calathea orbifolia and Calathea medallion, are beautiful and unique indoor plants known for their ornate and colorful foliage patterns. These plants prefer bright, indirect light and moderate humidity.",
+    "price": 30,
+    "image_url": "/images/_39b2dea7-f8ce-4b63-83f3-5d53f7c77eaf.jpg",
+    "category": "Decorative Foliage",
+    "height": "Small to Medium (1-2 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Beautiful decorative foliage",
+      "Require moderate watering and humidity"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover22",
+        "rating": 5,
+        "comment": "Absolutely adore my Calathea orbifolia! The leaf patterns are mesmerizing."
+      },
+      {
+        "username": "GardenEnthusiast99",
+        "rating": 4,
+        "comment": "Love the Calathea medallion in my home. Requires a bit of care but worth it for its beauty."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Maranta leuconeura (Prayer Plant)",
+        "image_url": "https://example.com/images/prayer_plant.jpg",
+        "price": 25
+      },
+      {
+        "name": "Stromanthe sanguinea",
+        "image_url": "https://example.com/images/stromanthe.jpg",
+        "price": 35
+      }
+    ]
+  },
+  {
+    "name": "Philodendron spp. (Various Types)",
+    "quantity_in_stock": 18,
+    "description": "Philodendron spp., including varieties like Philodendron Brasil and Philodendron Micans, are versatile and attractive indoor plants known for their lush foliage and easy-care nature. These plants thrive in medium to bright indirect light and are perfect for adding greenery to any space.",
+    "price": 20,
+    "image_url": "/images/_266c55cb-c99a-4654-acbf-4ba5c63f085a.jpg",
+    "category": "Trailing Plants",
+    "height": "Trailing (up to 4 feet)",
+    "light_requirements": "Medium to bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Lush foliage for indoor spaces",
+      "Adaptable to various light conditions"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover33",
+        "rating": 5,
+        "comment": "I adore my Philodendron Micans! It's thriving on my bookshelf."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Philodendron Brasil is a great addition to my indoor garden. Low maintenance and looks stunning."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Pothos (Epipremnum aureum)",
+        "image_url": "https://example.com/images/pothos.jpg",
+        "price": 18
+      },
+      {
+        "name": "Spider Plant (Chlorophytum comosum)",
+        "image_url": "https://example.com/images/spider_plant.jpg",
+        "price": 15
+      }
+    ]
+  },
+  {
+    "name": "Spider Plant (Chlorophytum comosum)",
+    "quantity_in_stock": 25,
+    "description": "The Spider Plant, scientifically known as Chlorophytum comosum, is a popular and easy-to-care-for indoor plant characterized by its arching, narrow leaves with white variegation. It's known for its air-purifying properties and ability to produce 'spiderettes' or baby plants on long, wiry stems.",
+    "price": 15,
+    "image_url": "/images/_75a93335-aac8-46f2-9cfe-be6efdf5774b.jpg",
+    "category": "Trailing Plants",
+    "height": "Trailing (up to 2 feet)",
+    "light_requirements": "Moderate to bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Air-purifying properties",
+      "Produces baby plants (spiderettes)"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast123",
+        "rating": 5,
+        "comment": "Love my Spider Plant! It's thriving on my windowsill and producing baby plants."
+      },
+      {
+        "username": "GardenLover456",
+        "rating": 4,
+        "comment": "Great addition to my indoor garden. Very low maintenance and looks beautiful."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Pothos (Epipremnum aureum)",
+        "image_url": "https://example.com/images/pothos.jpg",
+        "price": 18
+      },
+      {
+        "name": "Snake Plant (Sansevieria trifasciata)",
+        "image_url": "https://example.com/images/snake_plant.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Alocasia amazonica",
+    "quantity_in_stock": 15,
+    "description": "Alocasia amazonica, also known as African Mask Plant, is a stunning indoor plant featuring large, arrow-shaped leaves with prominent veins and striking dark green foliage contrasted by silver-white veins. It thrives in bright, indirect light and adds a dramatic touch to any indoor space.",
+    "price": 40,
+    "image_url": "/images/_8a6a2f3a-3cb0-4d5a-94d7-53cd14c3dbbe.jpg",
+    "category": "Large Plants",
+    "height": "Tall (2-3 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": ["Dramatic foliage for interiors", "Requires high humidity"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast789",
+        "rating": 5,
+        "comment": "Absolutely love my Alocasia amazonica! It's a showstopper in my living room."
+      },
+      {
+        "username": "GardenGuru123",
+        "rating": 4,
+        "comment": "Beautiful plant but requires regular care. Worth it for its unique foliage."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea orbifolia",
+        "image_url": "https://example.com/images/calathea_orbifolia.jpg",
+        "price": 35
+      },
+      {
+        "name": "Philodendron Pink Princess",
+        "image_url": "https://example.com/images/philodendron_pink_princess.jpg",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "name": "Maranta leuconeura (Prayer Plant)",
+    "quantity_in_stock": 20,
+    "description": "Maranta leuconeura, also known as the Prayer Plant, is a captivating indoor plant with unique, patterned leaves that fold upward in the evening resembling hands in prayer. It thrives in low to moderate indirect light and requires consistent moisture.",
+    "price": 25,
+    "image_url": "/images/_38b2bc57-7824-4cde-a0ee-bde7c6ea7dd4.jpg",
+    "category": "Decorative Foliage",
+    "height": "Medium (1-2 feet)",
+    "light_requirements": "Low to moderate indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": ["Unique foliage movement", "Adds charm to indoor spaces"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover456",
+        "rating": 5,
+        "comment": "Absolutely love my Prayer Plant! The leaf movement is mesmerizing."
+      },
+      {
+        "username": "GardenEnthusiast789",
+        "rating": 4,
+        "comment": "Beautiful plant but requires a bit of attention. Worth it for its unique charm."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea medallion",
+        "image_url": "https://example.com/images/calathea_medallion.jpg",
+        "price": 30
+      },
+      {
+        "name": "Fittonia (Nerve Plant)",
+        "image_url": "https://example.com/images/fittonia.jpg",
+        "price": 20
+      }
+    ]
+  },
+
+  {
+    "name": "Pothos (Epipremnum aureum varieties)",
+    "quantity_in_stock": 25,
+    "description": "Pothos (Epipremnum aureum) is a versatile and popular indoor plant known for its trailing vines and easy care. Varieties like Marble Queen and Neon feature variegated leaves that add color and interest to any space. Pothos plants thrive in low to moderate indirect light and require minimal maintenance.",
+    "price": 18,
+    "image_url": "/images/_2997f804-a24b-4b6c-8eb9-87a8edfaf148.jpg",
+    "category": "Trailing Plants",
+    "height": "Trailing (up to 6 feet)",
+    "light_requirements": "Low to moderate indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Air-purifying properties",
+      "Adaptable to various light conditions"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover123",
+        "rating": 5,
+        "comment": "Absolutely love my Marble Queen Pothos! It's thriving on my shelf."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Neon Pothos is a bright addition to my indoor jungle. Requires very little attention."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Philodendron Brasil",
+        "image_url": "https://example.com/images/philodendron_brasil.jpg",
+        "price": 20
+      },
+      {
+        "name": "Spider Plant (Chlorophytum comosum)",
+        "image_url": "https://example.com/images/spider_plant.jpg",
+        "price": 15
+      }
+    ]
+  },
+  {
+    "name": "Hoya carnosa (Wax Plant)",
+    "quantity_in_stock": 15,
+    "description": "Hoya carnosa, also known as the Wax Plant or Hindu Rope Plant, is a beautiful and unique indoor plant prized for its waxy, succulent leaves and clusters of star-shaped flowers. It thrives in bright indirect light and requires minimal care, making it an ideal choice for any indoor setting.",
+    "price": 30,
+    "image_url": "/images/_ba5b5709-3a51-408e-bca8-7f7a23d462e1.jpg",
+    "category": "Succulents",
+    "height": "Medium (1-2 feet)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Beautiful waxy foliage",
+      "Produces clusters of fragrant flowers"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast123",
+        "rating": 5,
+        "comment": "My Wax Plant is thriving! Love the unique flowers it produces."
+      },
+      {
+        "username": "GardenLover456",
+        "rating": 4,
+        "comment": "Beautiful addition to my succulent collection. Very low maintenance."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "String of Pearls (Senecio rowleyanus)",
+        "image_url": "https://example.com/images/string_of_pearls.jpg",
+        "price": 25
+      },
+      {
+        "name": "Snake Plant (Sansevieria trifasciata)",
+        "image_url": "https://example.com/images/snake_plant.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Peperomia obtusifolia (Baby Rubber Plant)",
+    "quantity_in_stock": 15,
+    "description": "Peperomia obtusifolia, also known as the Baby Rubber Plant, is a compact and attractive indoor plant with glossy, rounded leaves that have a rubbery texture. It's easy to care for and thrives in moderate indoor light conditions, making it a perfect choice for tabletops or shelves.",
+    "price": 20,
+    "image_url": "/images/_aa79d1a7-3050-49c1-b999-83c3d0f058b9.jpg",
+    "category": "Small Plants",
+    "height": "Small (6-12 inches)",
+    "light_requirements": "Moderate indoor light",
+    "care_difficulty": "Easy",
+    "benefits": ["Compact and attractive foliage", "Ideal for small spaces"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover789",
+        "rating": 5,
+        "comment": "Love my Baby Rubber Plant! It's thriving on my desk."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor garden. Very low maintenance."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "ZZ Plant (Zamioculcas zamiifolia)",
+        "image_url": "https://example.com/images/zz_plant.jpg",
+        "price": 35
+      },
+      {
+        "name": "Spider Plant (Chlorophytum comosum)",
+        "image_url": "https://example.com/images/spider_plant.jpg",
+        "price": 15
+      }
+    ]
+  },
+  {
+    "name": "Anthurium (Flamingo Flower)",
+    "quantity_in_stock": 12,
+    "description": "Anthurium, also known as Flamingo Flower or Laceleaf, is a stunning tropical plant prized for its glossy, heart-shaped leaves and vibrant, long-lasting flowers. It thrives in bright indirect light and requires regular watering to keep its soil consistently moist.",
+    "price": 35,
+    "image_url": "/images/_20997485-1f14-49b9-98fd-bbaa17f6c95d.jpg",
+    "category": "Flowering Plants",
+    "height": "Medium (1-2 feet)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Beautiful glossy foliage",
+      "Produces vibrant and long-lasting flowers"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantLover789",
+        "rating": 5,
+        "comment": "My Anthurium is a showstopper! Love the glossy leaves and stunning flowers."
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor plant collection. Requires a bit of attention but worth it."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Peace Lily (Spathiphyllum)",
+        "image_url": "https://example.com/images/peace_lily.jpg",
+        "price": 25
+      },
+      {
+        "name": "Orchid (Phalaenopsis)",
+        "image_url": "https://example.com/images/orchid.jpg",
+        "price": 40
+      }
+    ]
+  },
+  {
+    "name": "Dracaena marginata (Dragon Tree)",
+    "quantity_in_stock": 15,
+    "description": "Dracaena marginata, also known as the Dragon Tree, is a striking indoor plant with thin, upright stems and narrow, sword-shaped leaves that have a reddish edge. It's an excellent air-purifying plant and can thrive in various light conditions.",
+    "price": 25,
+    "image_url": "/images/_6a7021c9-1c89-41db-99e3-7b5014fc6e15.jpg",
+    "category": "Tall Plants",
+    "height": "Tall (3-6 feet)",
+    "light_requirements": "Moderate to bright indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Air-purifying properties",
+      "Adds vertical interest to interiors"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast77",
+        "rating": 5,
+        "comment": "Absolutely love my Dragon Tree! It's a beautiful statement plant."
+      },
+      {
+        "username": "GardeningFanatic123",
+        "rating": 4,
+        "comment": "Gorgeous plant but requires some attention. Worth it for its unique appearance."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Ficus elastica (Rubber Plant)",
+        "image_url": "https://example.com/images/rubber_plant.jpg",
+        "price": 30
+      },
+      {
+        "name": "Yucca elephantipes (Spineless Yucca)",
+        "image_url": "https://example.com/images/yucca.jpg",
+        "price": 35
+      }
+    ]
+  },
+  {
+    "name": "Begonia rex (Rex Begonia)",
+    "quantity_in_stock": 10,
+    "description": "Begonia rex, also known as Rex Begonia, is a striking and colorful indoor plant prized for its ornamental foliage. It features large, textured leaves with intricate patterns in shades of green, silver, pink, and burgundy. Rex Begonias thrive in bright indirect light and require consistently moist soil.",
+    "price": 30,
+    "image_url": "/images/_b64a80f4-3a08-45ab-8da6-b8244c914bee.jpg",
+    "category": "Decorative Foliage",
+    "height": "Medium (8-12 inches)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Moderate",
+    "benefits": [
+      "Colorful and ornamental foliage",
+      "Adds a pop of color to indoor spaces"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": false,
+      "low_maintenance": false
+    },
+    "reviews": [
+      {
+        "username": "PlantEnthusiast123",
+        "rating": 5,
+        "comment": "My Rex Begonia is absolutely stunning! Love the vibrant colors."
+      },
+      {
+        "username": "GardenLover456",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor garden. Requires a bit of attention but worth it."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea orbifolia",
+        "image_url": "https://example.com/images/calathea_orbifolia.jpg",
+        "price": 35
+      },
+      {
+        "name": "Peperomia polybotrya (Raindrop Peperomia)",
+        "image_url": "https://example.com/images/peperomia_polybotrya.jpg",
+        "price": 25
+      }
+    ]
+  },
+  {
+    "name": "Aspidistra elatior (Cast Iron Plant)",
+    "quantity_in_stock": 8,
+    "description": "Aspidistra elatior, also known as the Cast Iron Plant, is a hardy and low-maintenance indoor plant with dark green, leathery leaves. It's well-suited for low-light conditions and can tolerate neglect, earning its nickname as the 'Cast Iron' plant. Perfect for adding greenery to dim corners.",
+    "price": 25,
+    "image_url": "/images/_69f3daff-a412-4eb8-aea4-86c89674a614.jpg",
+    "category": "Low-Light Plants",
+    "height": "Medium (12-24 inches)",
+    "light_requirements": "Low to moderate indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Tolerant of low-light conditions",
+      "Low-maintenance and hardy"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover789",
+        "rating": 5,
+        "comment": "My Cast Iron Plant is thriving in a dark corner!"
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Great addition to my low-light plant collection. Requires very little care."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Snake Plant (Sansevieria trifasciata)",
+        "image_url": "https://example.com/images/snake_plant.jpg",
+        "price": 20
+      },
+      {
+        "name": "ZZ Plant (Zamioculcas zamiifolia)",
+        "image_url": "https://example.com/images/zz_plant.jpg",
+        "price": 35
+      }
+    ]
+  },
+  {
+    "name": "Aloe Vera",
+    "quantity_in_stock": 15,
+    "description": "Aloe Vera is a popular succulent known for its medicinal properties. It has thick, fleshy leaves that contain a gel with various health benefits.",
+    "price": 10,
+    "image_url": "/images/_1a16d159-4cf5-4c7a-9291-bf8772482b23.jpg",
+    "category": "Succulent",
+    "height": "Small to Medium (1-2 feet)",
+    "light_requirements": "Bright, indirect light",
+    "care_difficulty": "Easy",
+    "benefits": ["Medicinal gel for skin care", "Air-purifying properties"],
+    "features": {
+      "indoor": true,
+      "outdoor": true,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "NatureLover99",
+        "rating": 5,
+        "comment": "Love my Aloe Vera! I use the gel for sunburn relief and it's thriving indoors."
+      },
+      {
+        "username": "PlantEnthusiast123",
+        "rating": 4,
+        "comment": "Great addition to my plant collection. Low maintenance and useful for skincare."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Echeveria",
+        "image_url": "https://example.com/images/echeveria.jpg",
+        "price": 12
+      },
+      {
+        "name": "Haworthia",
+        "image_url": "https://example.com/images/haworthia.jpg",
+        "price": 8
+      }
+    ]
+  },
+  {
+    "name": "Parlor Palm",
+    "quantity_in_stock": 12,
+    "description": "The Parlor Palm, also known as Chamaedorea elegans, is a classic indoor palm plant with feathery, arching fronds. It's well-suited for low light conditions and adds a tropical touch to any space.",
+    "price": 30,
+    "image_url": "/images/_190d30ce-4f0a-49db-8637-dd1e0dc156f5.jpg",
+    "category": "Palm",
+    "height": "Medium (2-4 feet)",
+    "light_requirements": "Low to moderate indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Adds tropical vibes to interiors",
+      "Air-purifying properties"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover456",
+        "rating": 5,
+        "comment": "Absolutely love my Parlor Palm! It's thriving in my living room."
+      },
+      {
+        "username": "GardeningEnthusiast",
+        "rating": 4,
+        "comment": "Great addition to my indoor garden. Low maintenance and looks beautiful."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Areca Palm",
+        "image_url": "https://example.com/images/areca_palm.jpg",
+        "price": 35
+      },
+      {
+        "name": "Kentia Palm",
+        "image_url": "https://example.com/images/kentia_palm.jpg",
+        "price": 40
+      }
+    ]
+  },
+
+  {
+    "name": "Tradescantia spathacea (Moses-in-the-cradle)",
+    "quantity_in_stock": 12,
+    "description": "Tradescantia spathacea, also known as Moses-in-the-cradle or Boat Lily, is an attractive and low-maintenance tropical plant with glossy, dark green leaves and contrasting purple undersides. It produces small white flowers nestled in boat-shaped bracts. This plant thrives in bright indirect light and requires regular watering.",
+    "price": 22,
+    "image_url": "/images/_58f6530b-0482-41f1-a9b3-3e7701f7dc51.jpg",
+    "category": "Tropical Foliage",
+    "height": "Medium (12-18 inches)",
+    "light_requirements": "Bright indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Attractive foliage with contrasting colors",
+      "Low-maintenance and adaptable"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "TropicalPlantEnthusiast",
+        "rating": 5,
+        "comment": "Love my Moses-in-the-cradle! It's thriving in my living room."
+      },
+      {
+        "username": "GardenGuru123",
+        "rating": 4,
+        "comment": "Beautiful addition to my indoor garden. Requires minimal care."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Calathea ornata (Pinstripe Calathea)",
+        "image_url": "https://example.com/images/calathea_ornata.jpg",
+        "price": 30
+      },
+      {
+        "name": "Peperomia obtusifolia (Baby Rubber Plant)",
+        "image_url": "https://example.com/images/peperomia_obtusifolia.jpg",
+        "price": 20
+      }
+    ]
+  },
+  {
+    "name": "Syngonium podophyllum (Arrowhead Plant)",
+    "quantity_in_stock": 20,
+    "description": "Syngonium podophyllum, also known as Arrowhead Plant or Arrowhead Vine, is a versatile and easy-to-care-for indoor plant with arrow-shaped leaves that vary in color and pattern. It thrives in indirect light and prefers consistently moist soil. This plant is perfect for hanging baskets or as a trailing plant.",
+    "price": 18,
+    "image_url": "/images/_86ce692c-f269-4fc1-bfb1-ac6b754f8219.jpg",
+    "category": "Trailing Plants",
+    "height": "Medium (12-18 inches)",
+    "light_requirements": "Indirect light",
+    "care_difficulty": "Easy",
+    "benefits": [
+      "Variegated foliage adds color to indoor spaces",
+      "Low-maintenance and adaptable"
+    ],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "IndoorPlantLover",
+        "rating": 5,
+        "comment": "My Arrowhead Plant is thriving and looks beautiful!"
+      },
+      {
+        "username": "GardenEnthusiast456",
+        "rating": 4,
+        "comment": "Lovely addition to my indoor jungle. Requires minimal care."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "Philodendron scandens (Heart-leaf Philodendron)",
+        "image_url": "https://example.com/images/philodendron_scandens.jpg",
+        "price": 20
+      },
+      {
+        "name": "Pothos (Epipremnum aureum)",
+        "image_url": "https://example.com/images/pothos.jpg",
+        "price": 15
+      }
+    ]
+  },
+  {
+    "name": "Snake Plant",
+    "quantity_in_stock": 20,
+    "description": "The Snake Plant, also known as Sansevieria, is a hardy and low-maintenance indoor plant with upright, sword-like leaves. It thrives in various light conditions and is known for its air-purifying properties.",
+    "price": 15,
+    "image_url": "/images/_db6e0d44-7efe-4568-9dce-dd83ef3fa025.jpg",
+    "category": "Low Maintenance",
+    "height": "Small to Medium (1-3 feet)",
+    "light_requirements": "Low to bright indirect light",
+    "care_difficulty": "Very Easy",
+    "benefits": ["Air-purifying", "Tolerates low light and neglect"],
+    "features": {
+      "indoor": true,
+      "outdoor": false,
+      "air_purifying": true,
+      "pet_friendly": true,
+      "low_maintenance": true
+    },
+    "reviews": [
+      {
+        "username": "PlantLover123",
+        "rating": 5,
+        "comment": "My Snake Plant is thriving even with minimal care. Highly recommend!"
+      },
+      {
+        "username": "GardenEnthusiast22",
+        "rating": 4,
+        "comment": "Love the sleek look of this plant. Perfect for my office space."
+      }
+    ],
+    "similar_products": [
+      {
+        "name": "ZZ Plant",
+        "image_url": "https://example.com/images/zz_plant.jpg",
+        "price": 30
+      },
+      {
+        "name": "Pothos",
+        "image_url": "https://example.com/images/pothos.jpg",
+        "price": 20
+      }
+    ]
+  }
+]

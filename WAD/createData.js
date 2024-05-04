@@ -1,4 +1,5 @@
-const data = require('./db.json')
+const fs = require('fs')
+const data = require('./generated_db.json')
 
 function generateInsertStatements(plants) {
   const insertPlantStatements = []
@@ -6,11 +7,12 @@ function generateInsertStatements(plants) {
   const insertSimilarStatements = []
 
   data.forEach(plant => {
-    const insertPlantSQL = `INSERT INTO Products (name, quantity_in_stock, description, price, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly, low_maintenance) VALUES (
+    const insertPlantSQL = `INSERT INTO Products (name, quantity_in_stock, description, price, rating, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly) VALUES (
       '${plant.name.replace(/'/g, "''")}', 
       ${plant.quantity_in_stock}, 
       '${plant.description.replace(/'/g, "''")}', 
       ${plant.price}, 
+      ${0.0}, 
       '${plant.image_url}', 
       '${plant.category}', 
       '${plant.height}', 
@@ -19,14 +21,13 @@ function generateInsertStatements(plants) {
       ${plant.features.indoor ? 1 : 0}, 
       ${plant.features.outdoor ? 1 : 0}, 
       ${plant.features.air_purifying ? 1 : 0}, 
-      ${plant.features.pet_friendly ? 1 : 0}, 
-      ${plant.features.low_maintenance ? 1 : 0}
+      ${plant.features.pet_friendly ? 1 : 0}
     );`
 
     insertPlantStatements.push(insertPlantSQL)
 
     plant.reviews.forEach(review => {
-      const insertReviewSQL = `INSERT INTO Products (name, quantity_in_stock, description, price, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly, low_maintenance) VALUES (
+      const insertReviewSQL = `INSERT INTO Products (username, quantity_in_stock, description, price, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly, low_maintenance) VALUES (
         '${review.username.replace(/'/g, "''")}', 
         ${review.rating}, 
         '${review.comment.replace(/'/g, "''")}'
@@ -62,3 +63,4 @@ function generateInsertStatements(plants) {
 
 const sqlStatements = generateInsertStatements(data)
 console.log(sqlStatements.similar)
+fs.writeFileSync('products.sql', sqlStatements.plants)

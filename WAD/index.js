@@ -15,7 +15,7 @@ app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 app.get('/', async (req, res) => {
-  const data = await getDBdata('SELECT first_name, last_name FROM test;')
+  const data = await getDBdata('SELECT * FROM products;')
   // console.log(data)
   res.render('home', { data })
 })

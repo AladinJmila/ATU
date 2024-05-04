@@ -53,11 +53,27 @@
   </button>
 </div>
 
-<h2 class='mb-3 ms-2'>Our plants collection</h2>
+<h2 class='mb-3 ms-2'>Our collection:</h2>
 
 <div class='container products'>
   <div class='row gy-4'>
-    <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+    {{#if data}}
+      {{#each data}}
+        <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+          <div data-id='1' class='product-card'>
+            <img src={{image_url}} alt='' />
+            <div class='product-info'>
+              <h4>{{name}}</h4>
+              <p>product ratings: {{rating}}</p>
+              <p>{{description}}</p>
+              <p><b>&euro;{{price}}</b></p>
+              <button class='btn btn-primary'>Add to basket</button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    {{/if}}
+    {{! <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
       <div data-id='1' class='product-card'>
         <img src='/images/_abe88abd-b164-40ad-b098-88fba00d0ef1.jpg' alt='' />
         <div class='product-info'>
@@ -152,14 +168,6 @@
           <button class='btn btn-primary'>Add to basket</button>
         </div>
       </div>
-    </div>
+    </div> }}
   </div>
 </div>
-{{#if data}}
-  {{#each data}}
-    <ul>
-      <li>{{first_name}}</li>
-      <li>{{last_name}}</li>
-    </ul>
-  {{/each}}
-{{/if}}

@@ -1,6 +1,6 @@
 // We need muliple passes to sort an array
-// In each pass, we shoul find the next smallest item and move it to the correct position in the sorted part
-// The reason it's called selection sort, is that in each pass with find, or select the next minimum value and move it to the right place
+// In each pass, we should find the next smallest item and move it to the correct position in the sorted part
+// The reason it's called selection sort, is that in each pass we find, or select the next minimum value and move it to the right place
 
 // Best case:  Array already sorted
 // Worst case: Array sorted in reverse
