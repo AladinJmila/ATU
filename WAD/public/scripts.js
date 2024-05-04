@@ -19,14 +19,13 @@ function updateBasketCount(currentCount) {
 }
 
 function displayBasketCount() {
-  const basket = JSON.parse(window.localStorage.getItem('basket')) || []
+  const basket = JSON.parse(window.localStorage.getItem('basket'))
   const basketCountElement = document.getElementById('basket-items-count')
   const plantElement = document.querySelector('.fa-pagelines')
-  const currentCount = basket.length
-  if (currentCount) {
-    basketCountElement.innerText = currentCount
+  if (basket) {
+    basketCountElement.innerText = basket.totalCount
     plantElement.classList.add('show')
-    if (currentCount >= 10) basketCountElement.classList.add('two-digits')
+    if (basket.totalCount >= 10) basketCountElement.classList.add('two-digits')
     else basketCountElement.classList.remove('two-digits')
   }
 }
@@ -39,22 +38,37 @@ addToBasketButtons.forEach(button => {
 })
 
 function addToBasket(productId) {
-  const basket = JSON.parse(window.localStorage.getItem('basket')) || []
-  basket.push(+productId)
-  updateBasketCount(basket.length)
+  const basket = JSON.parse(window.localStorage.getItem('basket')) || {
+    products: [],
+    totalCount: 0
+  }
+  const existingIndex = basket.products.findIndex(
+    item => item.productId === +productId
+  )
+  if (existingIndex >= 0) {
+    basket.products[existingIndex].count++
+  } else {
+    basket.products.push({ productId: +productId, count: 1 })
+  }
+  basket.totalCount++
+  updateBasketCount(basket.totalCount)
   window.localStorage.setItem('basket', JSON.stringify(basket))
 }
 
 function removeFromBasket(productId) {
   const basket = JSON.parse(window.localStorage.getItem('basket')) || []
-  const index = basket.indexOf(productId)
-  console.log('index ', index)
+  const existingIndex = basket.products.findIndex(
+    item => item.productId === +productId
+  )
 
-  if (index !== -1) {
-    console.log('before ', basket.length)
-    basket.splice(index, 1)
-    console.log('after ', basket.length)
-    updateBasketCount(basket.length)
+  if (existingIndex >= 0) {
+    if (basket.products[existingIndex].count > 1) {
+      basket.products[existingIndex].count--
+    } else {
+      basket.products.splice(existingIndex, 1)
+    }
+    basket.totalCount--
+    updateBasketCount(basket.totalCount)
     window.localStorage.setItem('basket', JSON.stringify(basket))
   }
 }
@@ -79,7 +93,22 @@ function handleNavLinks() {
   })
 }
 
+function showOrderCount() {
+  const orders = document.querySelectorAll('.basket-product-card')
+  const basket = JSON.parse(window.localStorage.getItem('basket'))
+  if (orders.length) {
+    orders.forEach(order => {
+      const basketItem = basket.products.find(
+        product => product.productId === +order.dataset.id
+      )
+
+      order.querySelector('.order-quantity').innerText = basketItem.count
+    })
+  }
+}
+
 window.addEventListener('load', () => {
   displayBasketCount()
   handleNavLinks()
+  showOrderCount()
 })

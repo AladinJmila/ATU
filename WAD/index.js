@@ -2,6 +2,7 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const path = require('path')
 const getDBdata = require('./src/db')
+const { copyFileSync } = require('fs')
 
 const app = express()
 const port = 7777
@@ -34,12 +35,16 @@ app.get('/basket/', async (req, res) => {
       .status(404)
       .render('error', { message: 'Please select at least one item to' })
   }
-  const ids = JSON.parse(req.query.orders)
-  console.log(ids)
+  const orders = JSON.parse(req.query.orders)
+  const productsIds = orders.products.map(product => product.productId)
+  console.log(productsIds.join(','))
+  const data = await getDBdata(
+    `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
+  )
   // console.log(id)
   // const data = await getDBdata('SELECT first_name, last_name FROM test;')
   // console.log(data)
-  res.render('basket', {})
+  res.render('basket', { data })
 })
 
 app.listen(port, () => {

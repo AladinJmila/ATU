@@ -113,7 +113,8 @@ a:active:not(nav.navbar a) {
   color: var(--custom-color-1) !important;
 }
 
-.product-card {
+.product-card,
+.basket-product-card {
   border: 3px solid var(--custom-color-2);
   border-radius: 8px;
   overflow: hidden;
