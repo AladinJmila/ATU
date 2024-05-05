@@ -97,7 +97,8 @@ a:active:not(nav.navbar a) {
   color: var(--custom-color-3);
 }
 
-.product-info button.btn {
+.btn.btn-primary {
+  color: var(--custom-color-3);
   background-color: var(--custom-color-2);
   border: none;
   transition: all 0.1s linear;
@@ -108,7 +109,7 @@ a:active:not(nav.navbar a) {
   font-weight: bold;
 }
 
-.product-info .btn:hover {
+.btn.btn-primary:hover {
   background-color: var(--custom-color-5);
   color: var(--custom-color-1) !important;
 }
@@ -127,4 +128,13 @@ a:active:not(nav.navbar a) {
 
 .nav-link.active {
   border-bottom: 2px solid var(--custom-color-3);
+}
+
+#login-form {
+  max-width: 800px;
+  margin: auto;
+}
+
+[href='/logout'] {
+  display: none;
 }
