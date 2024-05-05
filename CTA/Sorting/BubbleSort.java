@@ -13,7 +13,7 @@
 //      Total  |    O(n)   |  O(n^2)
 //                Linear    Quadratic
 
-public class BubbleSort {
+public class BubbleSort implements ArraySorter {
   public void sort(int[] array) {
     boolean isSorted;
     for (var i = 0; i < array.length; i++) {

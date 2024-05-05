@@ -12,7 +12,7 @@
 //                 Linear   Quadratic
 // => Very slow algorithm
 
-public class InsertionSort {
+public class InsertionSort implements ArraySorter {
   public void sort(int[] array) {
     for (var i = 1; i < array.length; i++) {
       var current = array[i];

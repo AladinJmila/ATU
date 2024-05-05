@@ -16,9 +16,18 @@
 // all values must be positive integers
 // ideally they are close in range (no item that is equal to 1 million)
 
-public class CountingSort {
-  public void sort(int[] array, int max) {
+import java.util.Arrays;
+
+public class CountingSort implements ArraySorter {
+  public void sort(int[] array) {
+    int max = array[0];
+        for (int num : array) {
+            if (num > max) {
+                max = num;
+            }
+        }
     int[] counts = new int[max + 1];
+
     for (var item: array)
       counts[item]++;
 

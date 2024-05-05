@@ -12,7 +12,7 @@
 //      Total  |O(n log n) |  O(n^2)
 //      Space  | O(log n)  |   O(n)
 
-public class QuickSort {
+public class QuickSort implements ArraySorter {
   public void sort(int[] array) {
     sort(array, 0, array.length - 1);
   }

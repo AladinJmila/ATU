@@ -13,7 +13,7 @@
 //               Quadratic   Quadratic
 // => Very slow algorithm
 
-public class SelectionSort {
+public class SelectionSort implements ArraySorter {
   public void sort (int[] array) {
     for (var i = 0; i < array.length; i++) {
       var minIndex = i;
