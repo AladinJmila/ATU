@@ -1,16 +1,23 @@
-<h1>Render the basket conent here</h1>
+<h1 class='mb-4'>Shopping Basket</h1>
 {{#if data}}
   {{#each data}}
-
     <div data-id={{product_id}} class='basket-product-card'>
       <img src={{image_url}} alt='' />
       <div class='product-info'>
+        <div>
         <h4>{{name}}</h4>
-        <p><b>&euro;{{price}}</b></p>
-        <p>Quantity: <b class='order-quantity'></b></p>
-        <button class='btn btn-primary'>Add to basket</button>
+        <i>Quantity in stock: {{quantity_in_stock}}</i>
+        </div>
+        <div class="order-controls">
+        <p>Quantity: <input type="number" class='order-quantity'></input></p> 
+        <button class="btn btn-primary delete-basket-product">Delete</button>
+        </div>
+      </div>
+      <div class='product-price'>
+        <p><b>&euro;<span class="unit-price">{{price}}</span></b></p>
+        <p>Subtotal <span class='items-count'></span>:
+        <b >&euro;<span class='subtotal-price'></span></b></p>
       </div>
     </div>
-
   {{/each}}
 {{/if}}

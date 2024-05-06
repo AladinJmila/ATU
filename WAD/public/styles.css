@@ -114,8 +114,7 @@ a:active:not(nav.navbar a) {
   color: var(--custom-color-1) !important;
 }
 
-.product-card,
-.basket-product-card {
+.product-card {
   border: 3px solid var(--custom-color-2);
   border-radius: 8px;
   overflow: hidden;
@@ -137,4 +136,102 @@ a:active:not(nav.navbar a) {
 
 [href='/logout'] {
   display: none;
+}
+
+.basket-product-card {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 20px;
+  /* justify-content: space-between; */
+  width: 100%;
+  border-top: 1px solid var(--custom-color-2);
+  padding: 20px 0;
+}
+
+.basket-product-card:last-of-type {
+  border-bottom: 1px solid var(--custom-color-2);
+}
+
+.basket-product-card img {
+  width: 200px;
+}
+
+.basket-product-card .product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.basket-product-card .product-info [type='number'] {
+  text-align: center;
+  font-weight: bold;
+  color: var(--custom-color-5) !important;
+  margin: 0 10px;
+  max-width: 80px;
+}
+
+.product-price {
+  position: relative;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.basket-product-card:first-of-type .product-price::before {
+  content: 'Price';
+  display: block;
+  position: absolute;
+  top: -50px;
+  right: 0;
+}
+
+.order-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.order-controls .btn.btn-primary {
+  padding: 0 4px;
+  height: 30px;
+  max-width: 80px;
+}
+
+@media screen and (max-width: 900px) {
+  .basket-product-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .basket-product-card img {
+    margin: 20px auto 30px;
+    min-width: 60%;
+  }
+
+  .basket-product-card .product-info {
+    height: 150px;
+    text-align: center;
+  }
+
+  .basket-product-card:first-of-type .product-price::before,
+  .product-price::before {
+    content: 'Price';
+    display: block;
+    width: 240px;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 120px);
+    right: initial;
+    border-bottom: 1px dashed var(--custom-color-5);
+    padding-bottom: 10px;
+  }
+
+  .product-price {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .order-controls {
+    justify-content: center;
+  }
 }

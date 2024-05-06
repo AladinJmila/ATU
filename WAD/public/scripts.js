@@ -30,7 +30,7 @@ function displayBasketCount() {
   }
 }
 
-const addToBasketButtons = document.querySelectorAll('.product-info .btn')
+const addToBasketButtons = document.querySelectorAll('.add-to-basket')
 addToBasketButtons.forEach(button => {
   button.addEventListener('click', () => {
     addToBasket(button.parentNode.parentNode.dataset.id)
@@ -53,24 +53,6 @@ function addToBasket(productId) {
   basket.totalCount++
   updateBasketCount(basket.totalCount)
   window.localStorage.setItem('basket', JSON.stringify(basket))
-}
-
-function removeFromBasket(productId) {
-  const basket = JSON.parse(window.localStorage.getItem('basket')) || []
-  const existingIndex = basket.products.findIndex(
-    item => item.productId === +productId
-  )
-
-  if (existingIndex >= 0) {
-    if (basket.products[existingIndex].count > 1) {
-      basket.products[existingIndex].count--
-    } else {
-      basket.products.splice(existingIndex, 1)
-    }
-    basket.totalCount--
-    updateBasketCount(basket.totalCount)
-    window.localStorage.setItem('basket', JSON.stringify(basket))
-  }
 }
 
 // attach get query params to basket page get request
@@ -104,7 +86,7 @@ function handleNavLinks() {
   })
 }
 
-function showOrderCount() {
+function showOrderCountAndPrice() {
   const orders = document.querySelectorAll('.basket-product-card')
   const basket = JSON.parse(window.localStorage.getItem('basket'))
   if (orders.length) {
@@ -113,7 +95,18 @@ function showOrderCount() {
         product => product.productId === +order.dataset.id
       )
 
-      order.querySelector('.order-quantity').innerText = basketItem.count
+      if (!basketItem) return
+
+      order.querySelector('.order-quantity').value = basketItem.count
+      order.querySelector('.items-count').innerText = `(${
+        basketItem.count
+      } item${basketItem.count > 1 ? 's' : ''})`
+
+      const unitPrice = parseInt(order.querySelector('.unit-price').innerText)
+      if (unitPrice) {
+        order.querySelector('.subtotal-price').innerText =
+          basketItem.count * unitPrice
+      }
     })
   }
 }
@@ -190,11 +183,84 @@ function handleLogout() {
   })
 }
 
+function updateBasket(productId, quantity) {
+  const basket = JSON.parse(window.localStorage.getItem('basket'))
+  const existingIndex = basket.products.findIndex(
+    item => item.productId === +productId
+  )
+
+  basket.products[existingIndex].count = quantity
+
+  basket.totalCount = basket.products.reduce(
+    (acc, { count }) => acc + +count,
+    0
+  )
+  updateBasketCount(basket.totalCount)
+  window.localStorage.setItem('basket', JSON.stringify(basket))
+}
+
+function handleQuantityChange() {
+  const inputs = document.querySelectorAll(
+    ".basket-product-card .product-info [type='number']"
+  )
+  if (!inputs || !inputs.length) return
+
+  const basketItems = document.querySelectorAll('.basket-product-card')
+
+  inputs.forEach((input, index) =>
+    input.addEventListener('change', () => {
+      const productId = basketItems[index].dataset.id
+      updateBasket(productId, input.value)
+      showOrderCountAndPrice()
+    })
+  )
+}
+
+function removeFromBasket(productId) {
+  const basket = JSON.parse(window.localStorage.getItem('basket'))
+  const existingIndex = basket.products.findIndex(
+    item => item.productId === +productId
+  )
+
+  basket.products.splice(existingIndex, 1)
+  console.log(basket)
+
+  basket.totalCount = basket.products.reduce(
+    (acc, { count }) => acc + +count,
+    0
+  )
+  updateBasketCount(basket.totalCount)
+  window.localStorage.setItem('basket', JSON.stringify(basket))
+}
+
+function handleDeleteFromBasket() {
+  const deleteButtons = document.querySelectorAll('.delete-basket-product')
+  if (!deleteButtons || !deleteButtons.length) return
+
+  const basketItems = document.querySelectorAll('.basket-product-card')
+
+  deleteButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const productId = basketItems[index].dataset.id
+      removeFromBasket(productId)
+      basketItems[index].remove()
+      // handleDeleteFromBasket()
+      const orders = window.localStorage.getItem('basket')
+      const currentURL = window.location.href.split('?')[0]
+      const updatedURL = currentURL + `?orders=${orders || ''}`
+
+      window.history.pushState({ path: updatedURL }, '', updatedURL)
+    })
+  })
+}
+
 window.addEventListener('load', () => {
   checkIfAuthenticated()
   displayBasketCount()
   handleNavLinks()
-  showOrderCount()
+  showOrderCountAndPrice()
   handleLogin()
   handleLogout()
+  handleQuantityChange()
+  handleDeleteFromBasket()
 })

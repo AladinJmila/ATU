@@ -65,7 +65,7 @@ app.get('/basket', async (req, res) => {
       .render('error', { message: 'Please select at least one item to' })
   }
   const orders = JSON.parse(req.query.orders)
-  const productsIds = orders.products.map(product => product.productId)
+  const productsIds = orders.products.map(product => product?.productId)
   console.log(productsIds.join(','))
   const data = await getDBdata(
     `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
