@@ -1,65 +1,62 @@
-function updateBasketCount(currentCount) {
-  const basketCountElement = document.getElementById('basket-items-count')
-  const plantElement = document.querySelector('.fa-pagelines')
+window.WAD = {
+  updateBasketCount(currentCount) {
+    const basketCountElement = document.getElementById('basket-items-count')
+    const plantElement = document.querySelector('.fa-pagelines')
 
-  if (!currentCount) {
-    basketCountElement.innerText = ''
-    plantElement.classList.remove('show')
-    window.localStorage.removeItem('basketCount')
-    return
-  }
+    if (!currentCount) {
+      basketCountElement.innerText = ''
+      plantElement.classList.remove('show')
+      window.localStorage.removeItem('basketCount')
+      return
+    }
 
-  basketCountElement.innerText = currentCount
-  window.localStorage.setItem('basketCount', currentCount)
+    basketCountElement.innerText = currentCount
+    window.localStorage.setItem('basketCount', currentCount)
 
-  if (currentCount >= 10) basketCountElement.classList.add('two-digits')
-  else basketCountElement.classList.remove('two-digits')
-
-  plantElement.classList.add('show')
-}
-
-function displayBasketCount() {
-  const basket = JSON.parse(window.localStorage.getItem('basket'))
-  const basketCountElement = document.getElementById('basket-items-count')
-  const plantElement = document.querySelector('.fa-pagelines')
-  if (basket) {
-    basketCountElement.innerText = basket.totalCount
-    plantElement.classList.add('show')
-    if (basket.totalCount >= 10) basketCountElement.classList.add('two-digits')
+    if (currentCount >= 10) basketCountElement.classList.add('two-digits')
     else basketCountElement.classList.remove('two-digits')
-  }
-}
 
-const addToBasketButtons = document.querySelectorAll('.add-to-basket')
-addToBasketButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    addToBasket(button.parentNode.parentNode.dataset.id)
-  })
-})
+    plantElement.classList.add('show')
+  },
 
-function addToBasket(productId) {
-  const basket = JSON.parse(window.localStorage.getItem('basket')) || {
-    products: [],
-    totalCount: 0
-  }
-  const existingIndex = basket.products.findIndex(
-    item => item.productId === +productId
-  )
-  if (existingIndex >= 0) {
-    basket.products[existingIndex].count++
-  } else {
-    basket.products.push({ productId: +productId, count: 1 })
-  }
-  basket.totalCount++
-  updateBasketCount(basket.totalCount)
-  window.localStorage.setItem('basket', JSON.stringify(basket))
-}
+  displayBasketCount() {
+    const basket = JSON.parse(window.localStorage.getItem('basket'))
+    const basketCountElement = document.getElementById('basket-items-count')
+    const plantElement = document.querySelector('.fa-pagelines')
+    if (basket) {
+      basketCountElement.innerText = basket.totalCount
+      plantElement.classList.add('show')
+      if (basket.totalCount >= 10) {
+        basketCountElement.classList.add('two-digits')
+      } else basketCountElement.classList.remove('two-digits')
+    }
+  },
 
-// attach get query params to basket page get request
-const basketButtons = document.querySelectorAll('[href="/basket"]')
-basketButtons.forEach(button => {
-  button.addEventListener('click', e => {
+  addToBasket(current) {
+    const { id: productId, price: productPrice } = current.dataset
+
+    const basket = JSON.parse(window.localStorage.getItem('basket')) || {
+      products: [],
+      totalCount: 0
+    }
+    const existingIndex = basket.products.findIndex(
+      item => item.productId === +productId
+    )
+    if (existingIndex >= 0) {
+      basket.products[existingIndex].count++
+    } else {
+      basket.products.push({ productId: +productId, count: 1 })
+    }
+    basket.totalCount++
+    WAD.updateBasketCount(basket.totalCount)
+    window.localStorage.setItem('basket', JSON.stringify(basket))
+  },
+
+  handleRouteToBasket(e) {
+    console.log(e)
     e.preventDefault()
+
+    console.log('here')
 
     let isAuthenticated = window.localStorage.getItem('isAuthenticated')
     if (isAuthenticated) isAuthenticated = parseInt(isAuthenticated)
@@ -74,8 +71,30 @@ basketButtons.forEach(button => {
 
     const orders = window.localStorage.getItem('basket')
     window.location.href = `/basket?orders=${orders || ''}`
-  })
-})
+  }
+}
+
+// attach get query params to basket page get request
+// const basketButtons = document.querySelectorAll('[href="/basket"]')
+// basketButtons.forEach(button => {
+//   button.addEventListener('click', e => {
+//     e.preventDefault()
+
+//     let isAuthenticated = window.localStorage.getItem('isAuthenticated')
+//     if (isAuthenticated) isAuthenticated = parseInt(isAuthenticated)
+
+//     console.log(isAuthenticated)
+
+//     if (!isAuthenticated) {
+//       window.location.href = '/login'
+//       window.localStorage.setItem('goToBasket', 1)
+//       return
+//     }
+
+//     const orders = window.localStorage.getItem('basket')
+//     window.location.href = `/basket?orders=${orders || ''}`
+//   })
+// })
 
 function handleNavLinks() {
   const navLinks = document.querySelectorAll('.nav-link')
@@ -256,7 +275,7 @@ function handleDeleteFromBasket() {
 
 window.addEventListener('load', () => {
   checkIfAuthenticated()
-  displayBasketCount()
+  WAD.displayBasketCount()
   handleNavLinks()
   showOrderCountAndPrice()
   handleLogin()

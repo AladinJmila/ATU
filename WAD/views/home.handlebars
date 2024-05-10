@@ -67,7 +67,12 @@
               <p>product ratings: {{rating}}</p>
               <p>{{description}}</p>
               <p><b>&euro;{{price}}</b></p>
-              <button class='btn btn-primary add-to-basket'>Add to basket</button>
+              <button
+                onclick='WAD.addToBasket(this)'
+                data-id={{product_id}}
+                data-price={{price}}
+                class='btn btn-primary add-to-basket'
+              >Add to basket</button>
             </div>
           </div>
         </div>
