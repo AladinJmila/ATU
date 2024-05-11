@@ -1,7 +1,7 @@
 /* globals WAD */
 
 window.WAD = {
-  init() {
+  init () {
     WAD.checkIfAuthenticated()
     WAD.displayBasketCount()
     WAD.handleNavLinks()
@@ -12,7 +12,7 @@ window.WAD = {
     WAD.handleDeleteFromBasket()
   },
 
-  updateBasketCount(currentCount) {
+  updateBasketCount (currentCount) {
     const basketCountElement = document.getElementById('basket-items-count')
     const plantElement = document.querySelector('.fa-pagelines')
 
@@ -32,7 +32,7 @@ window.WAD = {
     plantElement.classList.add('show')
   },
 
-  displayBasketCount() {
+  displayBasketCount () {
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     const basketCountElement = document.getElementById('basket-items-count')
     const plantElement = document.querySelector('.fa-pagelines')
@@ -45,7 +45,7 @@ window.WAD = {
     }
   },
 
-  addToBasket(current) {
+  addToBasket (current) {
     const { id: productId, price: productPrice } = current.dataset
     const productCard = document.getElementById(productId)
 
@@ -77,7 +77,7 @@ window.WAD = {
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 
-  showInfoPopup(parentElement, message, displayDuration) {
+  showInfoPopup (parentElement, message, displayDuration) {
     const infoPopup = document.createElement('div')
     infoPopup.classList.add('info-popup')
 
@@ -107,7 +107,7 @@ window.WAD = {
     setTimeout(() => infoPopup.remove(), displayDuration)
   },
 
-  handleRouteToBasket(e) {
+  handleRouteToBasket (e) {
     console.log(e)
     e.preventDefault()
 
@@ -128,7 +128,7 @@ window.WAD = {
     window.location.href = `/basket?orders=${orders || ''}`
   },
 
-  handleNavLinks() {
+  handleNavLinks () {
     const navLinks = document.querySelectorAll('.nav-link')
     navLinks.forEach(function (link) {
       if (window.location.href.split('?')[0] === link.href) {
@@ -137,7 +137,7 @@ window.WAD = {
     })
   },
 
-  showOrderCountAndPrice() {
+  showOrderCountAndPrice () {
     const orders = document.querySelectorAll('.basket-product-card')
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     if (orders.length) {
@@ -153,16 +153,13 @@ window.WAD = {
           basketItem.count
         } item${basketItem.count > 1 ? 's' : ''})`
 
-        const unitPrice = parseInt(order.querySelector('.unit-price').innerText)
-        if (unitPrice) {
-          order.querySelector('.subtotal-price').innerText =
-            basketItem.count * unitPrice
-        }
+        const subtotalPrice = (basketItem.count * basketItem.productPrice).toFixed(2)
+        order.querySelector('.subtotal-price').innerText = subtotalPrice
       })
     }
   },
 
-  handleLogin() {
+  handleLogin () {
     const loginForm = document.getElementById('login-form')
     if (!loginForm) return
     loginForm.addEventListener('submit', async e => {
@@ -205,7 +202,7 @@ window.WAD = {
     })
   },
 
-  checkIfAuthenticated() {
+  checkIfAuthenticated () {
     const isAuthenticated = window.localStorage.getItem('isAuthenticated')
 
     if (window.location.href.includes('/basket') && !isAuthenticated) {
@@ -213,7 +210,7 @@ window.WAD = {
     }
   },
 
-  handleLogout() {
+  handleLogout () {
     const logoutElement = document.querySelector("[href='/logout']")
     const loginElement = document.querySelector("[href='/login']")
 
@@ -234,7 +231,7 @@ window.WAD = {
     })
   },
 
-  updateBasket(productId, quantity) {
+  updateBasket (productId, quantity) {
     const basket = JSON.parse(window.localStorage.getItem('basket')) || []
     const existingIndex = basket.findIndex(
       item => item.productId === +productId
@@ -245,7 +242,7 @@ window.WAD = {
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 
-  handleQuantityChange() {
+  handleQuantityChange () {
     const inputs = document.querySelectorAll(
       ".basket-product-card .product-info [type='number']"
     )
@@ -262,7 +259,7 @@ window.WAD = {
     )
   },
 
-  removeFromBasket(productId) {
+  removeFromBasket (productId) {
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     const existingIndex = basket.findIndex(
       item => item.productId === +productId
@@ -274,7 +271,7 @@ window.WAD = {
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 
-  handleDeleteFromBasket() {
+  handleDeleteFromBasket () {
     const deleteButtons = document.querySelectorAll('.delete-basket-product')
     if (!deleteButtons || !deleteButtons.length) return
 
