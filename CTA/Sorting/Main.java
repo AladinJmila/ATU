@@ -50,10 +50,33 @@ public class Main {
     // return String.format("%.3f", total) ;
     return String.format("%.3f", average) ;
   }
+
+  public void plotRow(String label, String[] array) {
+    String format = "%-16s";
+    for (int i = 0; i < array.length; i++) {
+      format += "%-8s";
+    }
+
+    Object[] args = new Object[array.length + 1];
+    args[0] = label;
+
+    System.arraycopy(array, 0, args, 1, array.length);
+    
+    System.out.printf(format + "%n", args);
+  }
+
+  public void plotRow(String label, int[] array) {
+    String[] stringArray = new String[array.length];
+    for (int i = 0; i < array.length; i++) {
+      stringArray[i] = String.valueOf(array[i]);
+    }
+
+    plotRow(label, stringArray);
+  }
   public static void main(String[] args) {
     Main m = new Main();
     int [] inputSizes = new int[]{100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000};
-    String [] selectionortResults = new String[inputSizes.length];
+    String [] selectionSortResults = new String[inputSizes.length];
     String [] bubbleSortResults = new String[inputSizes.length];
     String [] insertionSortResults = new String[inputSizes.length];
     String [] countingSortResults = new String[inputSizes.length];
@@ -61,16 +84,19 @@ public class Main {
     
     for (int i = 0; i < inputSizes.length; i++) {
       bubbleSortResults[i] = m.benchmark(10, inputSizes[i], new BubbleSort());
-      selectionortResults[i] = m.benchmark(10,inputSizes[i], new SelectionSort());
+      selectionSortResults[i] = m.benchmark(10,inputSizes[i], new SelectionSort());
       insertionSortResults[i] = m.benchmark(10, inputSizes[i], new InsertionSort());
       quickSortResults[i] = m.benchmark(10,inputSizes[i], new QuickSort());
       countingSortResults[i] = m.benchmark(10,inputSizes[i], new CountingSort());
     }
-
-    System.out.println(Arrays.toString(bubbleSortResults));
-    System.out.println(Arrays.toString(selectionortResults));
-    System.out.println(Arrays.toString(insertionSortResults));
-    System.out.println(Arrays.toString(quickSortResults));
-    System.out.println(Arrays.toString(countingSortResults));
+  
+    System.out.println();
+    m.plotRow("Size", inputSizes);
+    m.plotRow("Bubble Sort", bubbleSortResults);
+    m.plotRow("Selection Sort", selectionSortResults);
+    m.plotRow("Insertion Sort", insertionSortResults);
+    m.plotRow("Quick Sort", quickSortResults);
+    m.plotRow("Counting Sort", countingSortResults);
+    System.out.println();
   } 
 }
