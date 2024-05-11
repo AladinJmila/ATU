@@ -36,10 +36,10 @@ window.WAD = {
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     const basketCountElement = document.getElementById('basket-items-count')
     const plantElement = document.querySelector('.fa-pagelines')
-    if (basket) {
-      basketCountElement.innerText = basket.totalCount
+    if (basket.length) {
+      basketCountElement.innerText = basket.length
       plantElement.classList.add('show')
-      if (basket.totalCount >= 10) {
+      if (basket.length >= 10) {
         basketCountElement.classList.add('two-digits')
       } else basketCountElement.classList.remove('two-digits')
     }
@@ -47,22 +47,64 @@ window.WAD = {
 
   addToBasket(current) {
     const { id: productId, price: productPrice } = current.dataset
+    const productCard = document.getElementById(productId)
 
-    const basket = JSON.parse(window.localStorage.getItem('basket')) || {
-      products: [],
-      totalCount: 0
-    }
-    const existingIndex = basket.products.findIndex(
+    const basket = JSON.parse(window.localStorage.getItem('basket')) || []
+    const existingIndex = basket.findIndex(
       item => item.productId === +productId
     )
     if (existingIndex >= 0) {
-      basket.products[existingIndex].count++
+      console.log(productCard)
+      WAD.showInfoPopup(
+        productCard,
+        '<p style="font-size: 40px;">⛔</p><p>This item is already in the basket</p>',
+        2000
+      )
     } else {
-      basket.products.push({ productId: +productId, count: 1 })
+      basket.push({
+        count: 1,
+        productId: +productId,
+        productPrice: +productPrice
+      })
+      WAD.showInfoPopup(
+        productCard,
+        '<p style="font-size: 40px;">✅</p><p>Item added to basket</p>',
+        2000
+      )
     }
-    basket.totalCount++
-    WAD.updateBasketCount(basket.totalCount)
+
+    WAD.updateBasketCount(basket.length)
     window.localStorage.setItem('basket', JSON.stringify(basket))
+  },
+
+  showInfoPopup(parentElement, message, displayDuration) {
+    const infoPopup = document.createElement('div')
+    infoPopup.classList.add('info-popup')
+
+    const styles = {
+      position: 'absolute',
+      backgroundColor: 'rgba(0, 0, 0, .7)',
+      color: 'var(--custom-color-1)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'end',
+      alignItems: 'center',
+      padding: '100px 20px',
+      zIndex: '10',
+      top: '0',
+      right: '0',
+      width: '100%',
+      height: '100%',
+      fontWeight: 'bold',
+      fontSize: '20px',
+      textAlign: 'center'
+    }
+
+    Object.assign(infoPopup.style, styles)
+    infoPopup.innerHTML = `${message}`
+
+    parentElement.appendChild(infoPopup)
+    setTimeout(() => infoPopup.remove(), displayDuration)
   },
 
   handleRouteToBasket(e) {
@@ -100,7 +142,7 @@ window.WAD = {
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     if (orders.length) {
       orders.forEach(order => {
-        const basketItem = basket.products.find(
+        const basketItem = basket.find(
           product => product.productId === +order.dataset.id
         )
 
@@ -193,18 +235,13 @@ window.WAD = {
   },
 
   updateBasket(productId, quantity) {
-    const basket = JSON.parse(window.localStorage.getItem('basket'))
-    const existingIndex = basket.products.findIndex(
+    const basket = JSON.parse(window.localStorage.getItem('basket')) || []
+    const existingIndex = basket.findIndex(
       item => item.productId === +productId
     )
 
-    basket.products[existingIndex].count = quantity
+    basket[existingIndex].count = quantity
 
-    basket.totalCount = basket.products.reduce(
-      (acc, { count }) => acc + +count,
-      0
-    )
-    WAD.updateBasketCount(basket.totalCount)
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 
@@ -227,18 +264,13 @@ window.WAD = {
 
   removeFromBasket(productId) {
     const basket = JSON.parse(window.localStorage.getItem('basket'))
-    const existingIndex = basket.products.findIndex(
+    const existingIndex = basket.findIndex(
       item => item.productId === +productId
     )
 
-    basket.products.splice(existingIndex, 1)
-    console.log(basket)
+    basket.splice(existingIndex, 1)
 
-    basket.totalCount = basket.products.reduce(
-      (acc, { count }) => acc + +count,
-      0
-    )
-    WAD.updateBasketCount(basket.totalCount)
+    WAD.updateBasketCount(basket.length)
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 

@@ -118,6 +118,7 @@ a:active:not(nav.navbar a) {
   border: 3px solid var(--custom-color-2);
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .nav-link {
