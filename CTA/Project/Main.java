@@ -75,8 +75,8 @@ public class Main {
   public static void main(String[] args) {
     Main m = new Main();
     int [] inputSizes = new int[]{100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000};
-    String [] selectionSortResults = new String[inputSizes.length];
     String [] bubbleSortResults = new String[inputSizes.length];
+    String [] selectionSortResults = new String[inputSizes.length];
     String [] insertionSortResults = new String[inputSizes.length];
     String [] countingSortResults = new String[inputSizes.length];
     String [] quickSortResults = new String[inputSizes.length];
