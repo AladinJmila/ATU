@@ -1,3 +1,9 @@
+/*
+ * This implementation is inspired by the "Data Structures & Algorithms" course
+ * by Mosh Hamedani on codewithmosh.com.
+ * Adaptations and comments were added for clarity and understanding.
+ */
+
 public class InsertionSort implements ArraySorter {
   public void sort(int[] array) {
     for (var i = 1; i < array.length; i++) {
