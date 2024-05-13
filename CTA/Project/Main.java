@@ -1,6 +1,6 @@
 import java.util.concurrent.ThreadLocalRandom;
 
-// Interface to enable reusing the benachmark method with all sorting algorithm classes
+// Interface to enable reusing the benchmark method with all sorting algorithm classes
 @FunctionalInterface
 interface ArraySorter {
   void sort(int[] array);
@@ -33,7 +33,7 @@ public class Main {
     return output;
   }
 
-  // Benchmark a given sorting algorithm and return average execution time of n repitions
+  // Benchmark a given sorting algorithm and return average execution time of n repetitions
   public String benchmark(int reps, int length, ArraySorter sorter) {
     double total = 0;
     int[] array = genRandomArray(length);
@@ -88,7 +88,8 @@ public class Main {
   public static void main(String[] args) {
     Main m = new Main();
     // Define input sizes for benchmarking
-    int [] inputSizes = new int[]{100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000};
+    // int [] inputSizes = new int[]{100, 250, 500, 750, 1000, 1250, 2500, 3750, 5000, 6250, 7500, 8750, 10000};
+    int [] inputSizes = new int[]{1000, 5000, 10000, 25000, 50000, 75000, 100000, 150000, 200000, 300000};
 
     // Initialize arrays to store the benchmark results for each algorithm
     String [] bubbleSortResults = new String[inputSizes.length];

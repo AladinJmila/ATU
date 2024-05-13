@@ -45,7 +45,8 @@ window.WAD = {
     }
   },
 
-  addToBasket (current) {
+  addToBasket (current, e) {
+    e.stopPropagation()
     const { id: productId, price: productPrice } = current.dataset
     const productCard = document.getElementById(productId)
 
@@ -290,6 +291,35 @@ window.WAD = {
         window.history.pushState({ path: updatedURL }, '', updatedURL)
       })
     })
+  },
+
+  getProductDetails (current) {
+    const productId = current.id
+    window.location.href = `/plants/${productId}`
+  },
+
+  openPurchaseModal () {
+    console.log('clicked')
+    const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
+
+    purchaseSummaryModal.classList.add('show')
+    purchaseSummaryModal.scrollIntoView('center', 'center')
+    WAD.bodyFreezeScroll()
+  },
+
+  closePurchaseModal () {
+    const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
+
+    purchaseSummaryModal.classList.remove('show')
+    WAD.bodyUnfreezeScroll()
+  },
+
+  bodyFreezeScroll () {
+    document.body.style.overflow = 'hidden'
+  },
+
+  bodyUnfreezeScroll () {
+    document.body.style.overflow = ''
   }
 }
 

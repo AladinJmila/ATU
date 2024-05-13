@@ -51,11 +51,9 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/plants/:id', async (req, res) => {
-  // const id = req.params.id
-  // console.log(id)
-  // const data = await getDBdata('SELECT first_name, last_name FROM test;')
-  // console.log(data)
-  res.render('plant', {})
+  const id = req.params.id
+  const data = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
+  res.render('plant', { data: data[0] })
 })
 
 app.get('/basket', async (req, res) => {
@@ -71,6 +69,12 @@ app.get('/basket', async (req, res) => {
     `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
   )
   res.render('basket', { data })
+})
+
+app.use((req, res) => {
+  res
+    .status(404)
+    .render('error', { message: 'Invalid route' })
 })
 
 app.listen(port, () => {

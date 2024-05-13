@@ -21,3 +21,11 @@
     </div>
   {{/each}}
 {{/if}}
+<button onclick="WAD.openPurchaseModal()" class="btn btn-primary buy-now">Buy Now</button>
+<div id="purchase-summary-modal">
+  <div id="purchase-summary-container">
+    <button onclick="WAD.closePurchaseModal()" class="close-purchase-modal"></button>
+    <div id="purchase-summary-container"></div>
+    <button class="btn btn-primary pay">Pay</button>
+  </div>
+</div>
