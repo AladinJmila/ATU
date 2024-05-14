@@ -351,6 +351,19 @@ button.pay {
   display: block;
 }
 
+.thank-you {
+  align-self: center;
+  display: flex;
+  margin-top: 40px;
+  height: 30%;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--custom-color-2);
+  color: var(--custom-color-3);
+  border-radius: 8px;
+  font-size: 3em;
+}
+
 @media screen and (max-width: 900px) {
   .basket-product-card {
     display: flex;

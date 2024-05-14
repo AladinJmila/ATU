@@ -21,7 +21,7 @@ app.set('views', './views')
 
 app.get('/home', async (req, res) => {
   const data = await getDBdata('SELECT * FROM products;')
-  // console.log(data)
+
   res.render('home', { data })
 })
 
@@ -32,7 +32,6 @@ app.get('/login', async (req, res) => {
 app.post('/login', async (req, res) => {
   let isAuthenticated = false
   const { username, password } = req.body
-  console.log(username, password)
 
   try {
     const data = await getDBdata(
@@ -64,7 +63,6 @@ app.get('/basket', async (req, res) => {
   }
   const orders = JSON.parse(req.query.orders)
   const productsIds = orders.map(product => product?.productId)
-  console.log(productsIds.join(','))
   const data = await getDBdata(
     `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
   )

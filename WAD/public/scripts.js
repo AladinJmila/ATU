@@ -299,7 +299,6 @@ window.WAD = {
   },
 
   openPurchaseModal () {
-    console.log('clicked')
     const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
     const purchaseSummary = document.getElementById('purchase-summary')
     const basketItems = document.querySelectorAll('.basket-product-card')
@@ -318,7 +317,6 @@ window.WAD = {
       SummaryHTML += summaryItemHTML
     })
 
-    console.log(totalPrice)
     SummaryHTML += `<h3 class="total-price">Total Price:<span>&euro;${totalPrice.toFixed(2)}<span></h3>`
     purchaseSummary.insertAdjacentHTML('afterbegin', SummaryHTML)
 
@@ -336,15 +334,22 @@ window.WAD = {
 
   confirmPurchase (current) {
     const confirmPurchaseContainer = document.getElementById('confirm-purchase')
+    const shoppingBasketContainer = document.getElementById('shopping-basket-container')
     confirmPurchaseContainer.classList.add('show')
     confirmPurchaseContainer.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 
-    if (current.innerText === 'Confrim purchase') {
+    if (current.innerText === 'Confirm purchase') {
       confirmPurchaseContainer.classList.remove('show')
+      console.log(shoppingBasketContainer)
+      shoppingBasketContainer.innerHTML = '<h1 class="thank-you">Thank you for shopping with us!</h1>'
+      setTimeout(() => {
+        shoppingBasketContainer.innerHTML = ''
+        window.location.href = '/home'
+      }, 3000)
       WAD.closePurchaseModal()
       current.innerText = 'Pay'
     } else {
-      current.innerText = 'Confrim purchase'
+      current.innerText = 'Confirm purchase'
     }
   },
 
