@@ -1,7 +1,5 @@
 /*
- * This implementation is inspired by the "Data Structures & Algorithms" course
- * by Mosh Hamedani on codewithmosh.com.
- * Adaptations and comments were added for clarity and understanding.
+ * This implementation was informed by material from codewithmosh.com
  */
 
 public class CountingSort implements ArraySorter {
