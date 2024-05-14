@@ -14,18 +14,50 @@
         </div>
       </div>
       <div class='product-price'>
-        <p><b>&euro;<span class="unit-price">{{price}}</span></b></p>
-        <p>Subtotal <span class='items-count'></span>:
-        <b >&euro;<span class='subtotal-price'></span></b></p>
+        <p>Unit price: <b>&euro;<span class="unit-price">{{price}}</span></b></p>
+        <p>Subtotal <span class='items-count'>
+        </span>:
+        <b >&euro;<span class='subtotal-price'></span></b>
+        </p>
       </div>
     </div>
   {{/each}}
 {{/if}}
-<button onclick="WAD.openPurchaseModal()" class="btn btn-primary buy-now">Buy Now</button>
+<button onclick="WAD.openPurchaseModal()" class="btn btn-primary buy-now">Check out</button>
 <div id="purchase-summary-modal">
   <div id="purchase-summary-container">
     <button onclick="WAD.closePurchaseModal()" class="close-purchase-modal"></button>
-    <div id="purchase-summary-container"></div>
-    <button class="btn btn-primary pay">Pay</button>
+    <div id="purchase-summary">
+      <form id="confirm-purchase">
+        <h4 class="mb-3">Chose a payment method</h4>
+        <fieldset  class="d-flex justify-content-around mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paypal" id="paypal">
+            <label class="form-check-label" for="paypal">
+              Paypal
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="debit-card" id="debit-card" checked>
+            <label class="form-check-label" for="debit-card">
+              Debit Card
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="credit-card" id="credit-card" >
+            <label class="form-check-label" for="credit-card">
+              Credit Card
+            </label>
+          </div>
+        </fieldset>
+        <h4 class="mb-3">Email me a purchase summary (optional)</h4>
+        <div class="mb-5">
+          <label for="email-purchase" class="form-label">Email address</label>
+          <input onchange="WAD.validateEmail(this)" type="email" class="form-control" id="email-purchase" aria-describedby="email-help">
+          <div id="email-help" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+      </form>
+    </div>
+    <button onclick="WAD.confirmPurchase(this)" class="btn btn-primary pay">Pay</button>
   </div>
 </div>

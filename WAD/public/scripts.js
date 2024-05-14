@@ -301,9 +301,29 @@ window.WAD = {
   openPurchaseModal () {
     console.log('clicked')
     const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
+    const purchaseSummary = document.getElementById('purchase-summary')
+    const basketItems = document.querySelectorAll('.basket-product-card')
+    let SummaryHTML = "<h2>Here's your order summary</h2>"
+    let totalPrice = 0
+
+    basketItems.forEach(item => {
+      const summaryItemHTML = `
+      <div class="summary-item">
+        ${item.querySelector('img').outerHTML}
+        <h5>${item.querySelector('h4').innerText}</h5>
+        ${item.querySelector('.product-price').outerHTML}
+      </div>`
+      const subtotalPrice = +item.querySelector('.subtotal-price').innerText
+      totalPrice += subtotalPrice
+      SummaryHTML += summaryItemHTML
+    })
+
+    console.log(totalPrice)
+    SummaryHTML += `<h3 class="total-price">Total Price:<span>&euro;${totalPrice.toFixed(2)}<span></h3>`
+    purchaseSummary.insertAdjacentHTML('afterbegin', SummaryHTML)
 
     purchaseSummaryModal.classList.add('show')
-    purchaseSummaryModal.scrollIntoView('center', 'center')
+    purchaseSummaryModal.scrollIntoView()
     WAD.bodyFreezeScroll()
   },
 
@@ -314,12 +334,40 @@ window.WAD = {
     WAD.bodyUnfreezeScroll()
   },
 
+  confirmPurchase (current) {
+    const confirmPurchaseContainer = document.getElementById('confirm-purchase')
+    confirmPurchaseContainer.classList.add('show')
+    confirmPurchaseContainer.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+
+    if (current.innerText === 'Confrim purchase') {
+      confirmPurchaseContainer.classList.remove('show')
+      WAD.closePurchaseModal()
+      current.innerText = 'Pay'
+    } else {
+      current.innerText = 'Confrim purchase'
+    }
+  },
+
   bodyFreezeScroll () {
     document.body.style.overflow = 'hidden'
   },
 
   bodyUnfreezeScroll () {
     document.body.style.overflow = ''
+  },
+
+  validateEmail (current) {
+    const isValid = String(current.value)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+
+    if (isValid) {
+      current.style.color = 'green'
+    } else {
+      current.style.color = 'red'
+    }
   }
 }
 
