@@ -24,7 +24,7 @@
       </div>
     {{/each}}
   {{/if}}
-<button onclick="WAD.openPurchaseModal()" class="btn btn-primary buy-now">Check out</button>
+<button onclick="WAD.openPurchaseModal()" class="btn btn-primary checkout-btn">Checkout</button>
 </div>
 <div id="purchase-summary-modal">
   <div id="purchase-summary-container">
@@ -58,6 +58,7 @@
           <input onchange="WAD.validateEmail(this)" type="email" class="form-control" id="email-purchase" aria-describedby="email-help">
           <div id="email-help" class="form-text">We'll never share your email with anyone else.</div>
         </div>
+        <input type="submit" id="trigger-form-validation" style="display: none" />
       </form>
     </div>
     <button onclick="WAD.confirmPurchase(this)" class="btn btn-primary pay">Pay</button>

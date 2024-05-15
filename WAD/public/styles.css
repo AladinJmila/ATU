@@ -220,7 +220,7 @@ a:active:not(nav.navbar a) {
   text-shadow: 5px 5px 8px var(--custom-color-5);
 }
 
-.buy-now {
+.checkout-btn {
   margin: 30px auto;
   display: block;
   min-width: 200px;
@@ -347,14 +347,19 @@ button.pay {
 .thank-you {
   align-self: center;
   display: flex;
+  flex-direction: column;
   margin-top: 40px;
   height: 30%;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background-color: var(--custom-color-2);
   color: var(--custom-color-3);
   border-radius: 8px;
   font-size: 3em;
+}
+
+.thank-you * {
+  color: var(--custom-color-3);
 }
 
 @media screen and (max-width: 900px) {

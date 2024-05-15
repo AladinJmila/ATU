@@ -1,13 +1,22 @@
 /* globals WAD */
 
 window.WAD = {
+  // Function to initialize the application by executing essential setup tasks
   init () {
+    // Check if the user is authenticated and redirect if necessary
     WAD.checkIfAuthenticated()
+
+    // Display the current basket count in the UI
     WAD.displayBasketCount()
+
+    // Handle navigation links to highlight the active link based on the current page
     WAD.handleNavLinks()
+
+    // Update and display the order count and prices in the basket
     WAD.showOrderCountAndPrice()
+
+    // Configure logout functionality and update UI accordingly
     WAD.handleLogout()
-    // WAD.handleDeleteFromBasket()
   },
 
   // Function to update the basket count displayed on the navigation bar
@@ -368,97 +377,167 @@ window.WAD = {
     window.localStorage.setItem('basket', JSON.stringify(basket))
   },
 
+  // Function to handle deletion of a product from the basket
   handleDeleteFromBasket (current) {
+    // Retrieve the productId from the dataset of the current element
     const productId = current.dataset.id
+
+    // Remove the product from the basket by productId
     WAD.removeFromBasket(productId)
+
+    // Remove the corresponding basket product card element from the DOM
     document.getElementById(productId).remove()
+
+    // Retrieve basket orders from localStorage
     const orders = window.localStorage.getItem('basket')
+
+    // Get the current URL and remove query parameters to prepare for history update
     const currentURL = window.location.href.split('?')[0]
+
+    // Construct the updated URL with the updated basket orders as query parameter
     const updatedURL = currentURL + `?orders=${orders || ''}`
 
+    // Update the browser history state and URL without reloading the page
     window.history.pushState({ path: updatedURL }, '', updatedURL)
   },
 
+  // Function to navigate to the product page to retrieve product details
   getProductDetails (current) {
+    // Retrieve the productId from the id attribute of the current element
     const productId = current.id
+
+    // Redirect to the product details page for the specified productId
     window.location.href = `/plants/${productId}`
   },
 
+  // Function to open the purchase summary modal with order details
   openPurchaseModal () {
+    // Retrieve elements related to the purchase summary modal and basket items
     const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
     const purchaseSummary = document.getElementById('purchase-summary')
     const basketItems = document.querySelectorAll('.basket-product-card')
+
+    // Initialize HTML content for the purchase summary modal
     let SummaryHTML = "<h2>Here's your order summary</h2>"
+
+    // Initialize totalPrice for the purchase total sum
     let totalPrice = 0
 
+    // Loop through each basket item to construct summary information
     basketItems.forEach(item => {
+      // Construct HTML for each item in the order summary
       const summaryItemHTML = `
       <div class="summary-item">
         ${item.querySelector('img').outerHTML}
         <h5>${item.querySelector('h4').innerText}</h5>
         ${item.querySelector('.product-price').outerHTML}
       </div>`
+
+      // Retrieve subtotal price for the current item and update total price
       const subtotalPrice = +item.querySelector('.subtotal-price').innerText
       totalPrice += subtotalPrice
+
+      // Append the item HTML to the summary content
       SummaryHTML += summaryItemHTML
     })
 
+    // Append total price information to the summary HTML
     SummaryHTML += `<h3 class="total-price">Total Price:<span>&euro;${totalPrice.toFixed(2)}<span></h3>`
+
+    // Insert the summary HTML into the purchase summary element
     purchaseSummary.insertAdjacentHTML('afterbegin', SummaryHTML)
 
+    // Add 'show' class to display the purchase summary modal
     purchaseSummaryModal.classList.add('show')
+
+    // Scroll the purchase summary modal into view
     purchaseSummaryModal.scrollIntoView()
+
+    // Freeze scrolling on the body to prevent background scrolling when modal is open
     WAD.bodyFreezeScroll()
   },
 
+  // Function to close the purchase summary modal
   closePurchaseModal () {
+    // Retrieve the purchase summary modal element
     const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
 
+    // Remove the 'show' class to hide the purchase summary modal
     purchaseSummaryModal.classList.remove('show')
+
+    // Unfreeze scrolling on the body to restore normal scrolling behavior
     WAD.bodyUnfreezeScroll()
   },
 
+  // Function to confirm the purchase and update the UI accordingly
   confirmPurchase (current) {
+    // Retrieve necessary DOM elements
     const confirmPurchaseContainer = document.getElementById('confirm-purchase')
     const shoppingBasketContainer = document.getElementById('shopping-basket-container')
+    const purchaseForm = document.getElementById('confirm-purchase')
+    const triggerFormValidation = document.getElementById('trigger-form-validation')
+
+    // Validate the purchase form before proceeding
+    if (!purchaseForm.checkValidity()) {
+      // Trigger the browser's built-in form validation error display
+      triggerFormValidation.click()
+      return // Exit the function if form validation fails
+    }
+    // Show the confirm purchase container and scroll into view smoothly
     confirmPurchaseContainer.classList.add('show')
     confirmPurchaseContainer.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 
+    // Check the current button text to determine action
     if (current.innerText === 'Confirm purchase') {
+      // Hide the confirm purchase container
       confirmPurchaseContainer.classList.remove('show')
-      console.log(shoppingBasketContainer)
-      shoppingBasketContainer.innerHTML = '<h1 class="thank-you">Thank you for shopping with us!</h1>'
-      setTimeout(() => {
-        shoppingBasketContainer.innerHTML = ''
-        window.location.href = '/home'
-      }, 3000)
+
+      // Create thank you message and countdown elements
+      const thankYou = document.createElement('h1')
+      const countdown = document.createElement('div')
+      thankYou.classList.add('thank-you')
+      thankYou.innerText = 'Thank you for shopping with us!'
+      countdown.innerText = '3'
+
+      // Clear the shopping basket container and add thank you message
+      shoppingBasketContainer.innerHTML = ''
+      shoppingBasketContainer.appendChild(thankYou)
+      thankYou.appendChild(countdown)
+
+      // Initialize countdown timer
+      let counter = 2
+      const countdownInterval = setInterval(() => {
+        if (counter >= 0) {
+          countdown.innerHTML = counter
+          counter -= 1
+        } else {
+          clearInterval(countdownInterval)
+          // Redirect to home page after delay
+          setTimeout(() => {
+            window.location.href = '/home'
+          }, 500)
+        }
+      }, 1000)
+
+      // Close the purchase modal and update button text
       WAD.closePurchaseModal()
       current.innerText = 'Pay'
     } else {
+      // Update button text to 'Confirm purchase'
       current.innerText = 'Confirm purchase'
     }
   },
 
+  // Function to freeze scrolling on the body
   bodyFreezeScroll () {
+    // Set the body overflow property to 'hidden' to disable scrolling
     document.body.style.overflow = 'hidden'
   },
 
+  // Function to unfreeze scrolling on the body
   bodyUnfreezeScroll () {
+    // Reset the body overflow property to empty string to enable scrolling
     document.body.style.overflow = ''
-  },
-
-  validateEmail (current) {
-    const isValid = String(current.value)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-
-    if (isValid) {
-      current.style.color = 'green'
-    } else {
-      current.style.color = 'red'
-    }
   }
 }
 
