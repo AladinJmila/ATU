@@ -56,16 +56,24 @@ app.get('/plants/:id', async (req, res) => {
 })
 
 app.get('/basket', async (req, res) => {
-  if (!req.query?.orders) {
+  if (!req.query?.orders || !JSON.parse(req.query.orders).length) {
     return res
       .status(404)
-      .render('error', { message: 'Please select at least one item to' })
+      .render('error', { message: 'Please select at least one item' })
   }
   const orders = JSON.parse(req.query.orders)
   const productsIds = orders.map(product => product?.productId)
   const data = await getDBdata(
     `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
   )
+  data.forEach(product => {
+    orders.forEach(order => {
+      if (order.productId === product.product_id) {
+        product.quantity = order.count
+      }
+    })
+  })
+
   res.render('basket', { data })
 })
 

@@ -1,86 +1,101 @@
-<div
-  id='carouselExampleIndicators'
-  class='carousel slide mb-5 ms-2 me-2'
-  data-bs-ride='carousel'
->
-  <div class='carousel-indicators'>
-    <button
-      type='button'
-      data-bs-target='#carouselExampleIndicators'
-      data-bs-slide-to='0'
-      class='active'
-      aria-current='true'
-      aria-label='Slide 1'
-    ></button>
-    <button
-      type='button'
-      data-bs-target='#carouselExampleIndicators'
-      data-bs-slide-to='1'
-      aria-label='Slide 2'
-    ></button>
-    <button
-      type='button'
-      data-bs-target='#carouselExampleIndicators'
-      data-bs-slide-to='2'
-      aria-label='Slide 3'
-    ></button>
-  </div>
-  <div class='carousel-inner'>
-    <div class='carousel-item active'>
-    </div>
-    <div class='carousel-item'>
-    </div>
-    <div class='carousel-item'>
-    </div>
-  </div>
-  <button
-    class='carousel-control-prev'
-    type='button'
-    data-bs-target='#carouselExampleIndicators'
-    data-bs-slide='prev'
+<div class='home'>
+  <h1 class='mb-4'>Welcome to Planet Plants!</h1>
+  <div
+    id='carouselExampleIndicators'
+    class='carousel slide mb-5 ms-2 me-2'
+    data-bs-ride='carousel'
   >
-    <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-    <span class='visually-hidden'>Previous</span>
-  </button>
-  <button
-    class='carousel-control-next'
-    type='button'
-    data-bs-target='#carouselExampleIndicators'
-    data-bs-slide='next'
-  >
-    <span class='carousel-control-next-icon' aria-hidden='true'></span>
-    <span class='visually-hidden'>Next</span>
-  </button>
-</div>
+    <div class='carousel-indicators'>
+      <button
+        type='button'
+        data-bs-target='#carouselExampleIndicators'
+        data-bs-slide-to='0'
+        class='active'
+        aria-current='true'
+        aria-label='Slide 1'
+      ></button>
+      <button
+        type='button'
+        data-bs-target='#carouselExampleIndicators'
+        data-bs-slide-to='1'
+        aria-label='Slide 2'
+      ></button>
+      <button
+        type='button'
+        data-bs-target='#carouselExampleIndicators'
+        data-bs-slide-to='2'
+        aria-label='Slide 3'
+      ></button>
+      <button
+        type='button'
+        data-bs-target='#carouselExampleIndicators'
+        data-bs-slide-to='3'
+        aria-label='Slide 4'
+      ></button>
+    </div>
+    <div class='carousel-inner'>
+      <div class='carousel-item active'>
+        <img src='/images/carousel1.jpg' />
+      </div>
+      <div class='carousel-item'>
+        <img src='/images/carousel2.jpg' />
+      </div>
+      <div class='carousel-item'>
+        <img src='/images/carousel3.jpg' />
+      </div>
+      <div class='carousel-item'>
+        <img src='/images/carousel2.jpg' />
+      </div>
+    </div>
+    <button
+      class='carousel-control-prev'
+      type='button'
+      data-bs-target='#carouselExampleIndicators'
+      data-bs-slide='prev'
+    >
+      <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+      <span class='visually-hidden'>Previous</span>
+    </button>
+    <button
+      class='carousel-control-next'
+      type='button'
+      data-bs-target='#carouselExampleIndicators'
+      data-bs-slide='next'
+    >
+      <span class='carousel-control-next-icon' aria-hidden='true'></span>
+      <span class='visually-hidden'>Next</span>
+    </button>
+  </div>
 
-<h2 class='mb-3 ms-2'>Our collection:</h2>
+  <h1 class='mb-4 ms-2'>Our collection:</h1>
 
-<div class='container products'>
-  <div class='row gy-4'>
-    {{#if data}}
-      {{#each data}}
-        <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
-          <div
-            onclick='WAD.getProductDetails(this)'
-            id='{{product_id}}'
-            class='product-card'
-          >
-            <img src={{image_url}} alt='' />
-            <div class='product-info'>
-              <h4>{{name}}</h4>
-              <p>product ratings: {{rating}}</p>
-              <p>{{description}}</p>
-              <p><b>&euro;{{price}}</b></p>
-              <button
-                onclick='WAD.addToBasket(this, event)'
-                data-id={{product_id}}
-                data-price={{price}}
-                class='btn btn-primary add-to-basket'
-              >Add to basket</button>
+  <div class='container products'>
+    <div class='row gy-4'>
+      {{#if data}}
+        {{#each data}}
+          <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+            <div
+              onclick='WAD.getProductDetails(this)'
+              id='{{product_id}}'
+              class='product-card'
+            >
+              <img src={{image_url}} alt='' />
+              <div class='product-info'>
+                <h4>{{name}}</h4>
+                <p>product ratings: {{rating}}</p>
+                <p>{{description}}</p>
+                <p><b>&euro;{{price}}</b></p>
+                <button
+                  onclick='WAD.addToBasket(this, event)'
+                  data-id={{product_id}}
+                  data-price={{price}}
+                  class='btn btn-primary add-to-basket'
+                >Add to basket</button>
+              </div>
             </div>
           </div>
-        </div>
-      {{/each}}
-    {{/if}}
+        {{/each}}
+      {{/if}}
+    </div>
   </div>
 </div>

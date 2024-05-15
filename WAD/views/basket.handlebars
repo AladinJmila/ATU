@@ -2,7 +2,7 @@
 <div id="shopping-basket-container">
   {{#if data}}
     {{#each data}}
-      <div data-id={{product_id}} class='basket-product-card'>
+      <div id={{product_id}} class='basket-product-card'>
         <img src={{image_url}} alt='' />
         <div class='product-info'>
           <div>
@@ -10,8 +10,8 @@
           <i>Quantity in stock: {{quantity_in_stock}}</i>
           </div>
           <div class="order-controls">
-          <p>Quantity: <input type="number" class='order-quantity'></input></p> 
-          <button class="btn btn-primary delete-basket-product">Delete</button>
+          <p>Quantity: <input onchange="WAD.handleQuantityChange(this)" data-id={{product_id}} type="number" class='order-quantity' value="{{quantity}}"></input></p> 
+          <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
           </div>
         </div>
         <div class='product-price'>
