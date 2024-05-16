@@ -1,7 +1,7 @@
 <div class='plant-details-view'>
   {{#if data}}
     <h1 class='mb-4'>{{data.product.name}}</h1>
-    <div class='details-container row justify-content-between'>
+    <div class='details-container row gap-4 justify-content-between'>
       <img
         class='col-sm-12 col-md-12 col-lg-12 col-xl-3'
         src='{{data.product.image_url}}'
@@ -30,11 +30,11 @@
           <span class='boolean-value'>{{data.product.pet_friendly}}</span></p>
       </div>
     </div>
-    <div class='reviews-container'>
-      <h1 class='mb-4 mt-4'>Reviews</h1>
+    <h1 class='mb-4 mt-4'>Reviews</h1>
+    <div class='reviews-container row gap-4'>
       {{#if data.reviews}}
         {{#each data.reviews}}
-          <div class='customer-review'>
+          <div class='customer-review col-sm-12 col-md-6 col-lg-4 col-xl-3'>
             <h6>{{username}}</h6>
             <div class='rating'>{{rating}}</div>
             <p>{{comment}}</p>
@@ -42,12 +42,14 @@
         {{/each}}
       {{/if}}
     </div>
-    <div class='similar-container'>
-      <h1 class='mb-4 mt-4'>Similar Products</h1>
+    <h1 class='mb-4 mt-4'>Similar Products</h1>
+    <div class='similar-container row gap-4 justify-content-around'>
       {{#if data.similar}}
         {{#each data.similar}}
-          <div class='similar-product'>
-            <img src='{{image_url}}' alt='' />
+          <div class='similar-product col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+            <a href='/plants/{{product_id}}'>
+              <img src='{{image_url}}' alt='' />
+            </a>
             <h4>{{name}}</h4>
             <div class='price'>Price: <span>{{price}}</span></div>
           </div>

@@ -53,7 +53,7 @@ app.get('/plants/:id', async (req, res) => {
   const id = req.params.id
   const products = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
   const reviews = await getDBdata(`SELECT * FROM reviews WHERE product_id = '${id}';`)
-  const similar = await getDBdata(`SELECT p.name, p.image_url, p.price FROM products p
+  const similar = await getDBdata(`SELECT p.name, p.image_url, p.price, p.product_id FROM products p
                                   JOIN products_similar_products ps ON ps.product_id = '${id}'
                                   WHERE p.product_id = ps.similar_product_id;`)
   res.render('plant', { data: { product: products[0], reviews, similar } })

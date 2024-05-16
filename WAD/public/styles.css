@@ -365,10 +365,6 @@ button.pay {
 
 /********** Plant details page **********/
 
-.plant-details-view .details-container {
-  gap: 20px;
-}
-
 .plant-details-view .details-container > * {
   border: 2px solid var(--custom-color-2);
   padding: 30px;
@@ -386,6 +382,29 @@ button.pay {
     max-width: 600px;
     margin: 0 auto;
   }
+}
+
+.plant-details-view .reviews-container > * {
+  flex-grow: 1;
+  background-color: var(--custom-color-1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.plant-details-view .reviews-container * {
+  color: var(--custom-color-3);
+  font-size: 18px;
+  margin: 0;
+}
+
+.plant-details-view .similar-container img {
+  width: 300px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 /********** Media queries **********/
