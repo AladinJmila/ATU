@@ -1,14 +1,58 @@
-<h1>Plant details view</h1>
-{{#if data}}
-  <h2>{{data.product.name}}</h2>
-  {{#if data.reviews}}
-    {{#each data.reviews}}
-      <p>{{comment}}</p>
-    {{/each}}
+<div class='plant-details-view'>
+  {{#if data}}
+    <h1 class='mb-4'>{{data.product.name}}</h1>
+    <div class='details-container row justify-content-between'>
+      <img
+        class='col-sm-12 col-md-12 col-lg-12 col-xl-3'
+        src='{{data.product.image_url}}'
+        alt=''
+      />
+      <div class='details-overview col-sm-12 col-md-5 col-lg-5 col-xl-3'>
+        <h4>Description:</h4>
+        <p>{{data.product.description}}</p>
+        <p>Price: <span>{{data.product.price}}</span></p>
+        <p>Quantitiy in stock:
+          <span>{{data.product.quantity_in_stock}}</span></p>
+        <p>rating: <span>{{data.product.rating}}</span></p>
+      </div>
+      <div class='details-granular col-sm-12 col-md-5 col-lg-5 col-xl-3'>
+        <p>Category: {{data.product.category}}</p>
+        <p>Height: {{data.product.height}}</p>
+        <p>Light requirements: {{data.product.light_requirements}}</p>
+        <p>Care difficulty: {{data.product.care_difficulty}}</p>
+        <p>Indoor:
+          <span class='boolean-value'>{{data.product.indoor}}</span></p>
+        <p>Outdoor:
+          <span class='boolean-value'>{{data.product.outdoor}}</span></p>
+        <p>Air purifying:
+          <span class='boolean-value'>{{data.product.air_purifying}}</span></p>
+        <p>Pet friendly:
+          <span class='boolean-value'>{{data.product.pet_friendly}}</span></p>
+      </div>
+    </div>
+    <div class='reviews-container'>
+      <h1 class='mb-4 mt-4'>Reviews</h1>
+      {{#if data.reviews}}
+        {{#each data.reviews}}
+          <div class='customer-review'>
+            <h6>{{username}}</h6>
+            <div class='rating'>{{rating}}</div>
+            <p>{{comment}}</p>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
+    <div class='similar-container'>
+      <h1 class='mb-4 mt-4'>Similar Products</h1>
+      {{#if data.similar}}
+        {{#each data.similar}}
+          <div class='similar-product'>
+            <img src='{{image_url}}' alt='' />
+            <h4>{{name}}</h4>
+            <div class='price'>Price: <span>{{price}}</span></div>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
   {{/if}}
-  {{#if data.similar}}
-    {{#each data.similar}}
-      <h4>{{name}}</h4>
-    {{/each}}
-  {{/if}}
-{{/if}}
+</div>

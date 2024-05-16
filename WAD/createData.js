@@ -48,13 +48,13 @@ function generateInsertStatements (plants) {
   })
 
   return {
-    // plants: insertPlantStatements.join('\n'),
+    plants: insertPlantStatements.join('\n'),
     reviews: insertReviewStatements.join('\n'),
     similar: insertSimilarStatements.join('\n')
   }
 }
 
 const sqlStatements = generateInsertStatements(data)
-// fs.writeFileSync('products.sql', sqlStatements.plants)
+fs.writeFileSync('products.sql', sqlStatements.plants)
 fs.writeFileSync('reviews.sql', sqlStatements.reviews)
 fs.writeFileSync('similar.sql', sqlStatements.similar)

@@ -49,6 +49,20 @@
 * refer to the document to see how comments should be added
 
 
+JavaScript documentation:
+Lines of comments should relate to the line of code directly underneath and should provide a
+brief description of the purpose of the line of code
+
+Example:
+// Declare variable to record product code
+var choice;
+
+// Function to save value in inbox to choice variable
+function specifyProduct () {
+  // Make choice variable equal to value in input box with id of 'inbox'
+  choice = document.getElementById('inbox').value
+}
+
 
 
 

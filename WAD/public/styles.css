@@ -29,7 +29,8 @@ a:active:not(nav.navbar a) {
   color: var(--custom-color-4) !important;
 }
 
-.home h1 {
+.home h1,
+.plant-details-view h1 {
   border-bottom: 3px solid var(--custom-color-2);
   padding-bottom: 10px;
 }
@@ -362,6 +363,32 @@ button.pay {
   color: var(--custom-color-3);
 }
 
+/********** Plant details page **********/
+
+.plant-details-view .details-container {
+  gap: 20px;
+}
+
+.plant-details-view .details-container > * {
+  border: 2px solid var(--custom-color-2);
+  padding: 30px;
+  border-radius: 8px;
+  flex-grow: 1;
+}
+
+.plant-details-view .details-container img {
+  max-width: 400px;
+  padding: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .plant-details-view .details-container img {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/********** Media queries **********/
 @media screen and (max-width: 900px) {
   .basket-product-card {
     display: flex;
