@@ -51,8 +51,12 @@ app.post('/login', async (req, res) => {
 
 app.get('/plants/:id', async (req, res) => {
   const id = req.params.id
-  const data = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
-  res.render('plant', { data: data[0] })
+  const products = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
+  const reviews = await getDBdata(`SELECT * FROM reviews WHERE product_id = '${id}';`)
+  const similar = await getDBdata(`SELECT p.name, p.image_url, p.price FROM products p
+                                  JOIN products_similar_products ps ON ps.product_id = '${id}'
+                                  WHERE p.product_id = ps.similar_product_id;`)
+  res.render('plant', { data: { product: products[0], reviews, similar } })
 })
 
 app.get('/basket', async (req, res) => {

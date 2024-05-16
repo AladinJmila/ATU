@@ -1,4 +1,14 @@
 <h1>Plant details view</h1>
 {{#if data}}
-  <h2>{{data.name}}</h2>
+  <h2>{{data.product.name}}</h2>
+  {{#if data.reviews}}
+    {{#each data.reviews}}
+      <p>{{comment}}</p>
+    {{/each}}
+  {{/if}}
+  {{#if data.similar}}
+    {{#each data.similar}}
+      <h4>{{name}}</h4>
+    {{/each}}
+  {{/if}}
 {{/if}}

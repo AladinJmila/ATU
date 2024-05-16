@@ -541,4 +541,5 @@ window.WAD = {
   }
 }
 
+// Event listener to execute the WAD initialization function when the window finishes loading
 window.addEventListener('load', WAD.init)

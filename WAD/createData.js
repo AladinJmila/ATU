@@ -1,12 +1,12 @@
 const fs = require('fs')
 const data = require('./generated_db.json')
 
-function generateInsertStatements(plants) {
+function generateInsertStatements (plants) {
   const insertPlantStatements = []
   const insertReviewStatements = []
   const insertSimilarStatements = []
 
-  data.forEach(plant => {
+  plants.forEach(plant => {
     const insertPlantSQL = `INSERT INTO Products (name, quantity_in_stock, description, price, rating, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly) VALUES (
       '${plant.name.replace(/'/g, "''")}', 
       ${plant.quantity_in_stock}, 
@@ -27,40 +27,34 @@ function generateInsertStatements(plants) {
     insertPlantStatements.push(insertPlantSQL)
 
     plant.reviews.forEach(review => {
-      const insertReviewSQL = `INSERT INTO Products (username, quantity_in_stock, description, price, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly, low_maintenance) VALUES (
+      const insertReviewSQL = `INSERT INTO reviews (username, rating, comment, product_id) VALUES (
         '${review.username.replace(/'/g, "''")}', 
         ${review.rating}, 
-        '${review.comment.replace(/'/g, "''")}'
+        '${review.comment.replace(/'/g, "''")}',
+        ${plant.id}
       );`
 
-      insertReviewStatements.push({
-        insertReviewSQL,
-        name: plant.name.split('(')[0].trim()
-      })
+      insertReviewStatements.push(insertReviewSQL)
     })
 
     plant.similar_products.forEach(similar => {
-      // const insertSimilarSQL = `INSERT INTO Products (name, quantity_in_stock, description, price, image_url, category, height, light_requirements, care_difficulty, indoor, outdoor, air_purifying, pet_friendly, low_maintenance) VALUES (
-      //   '${similar.username.replace(/'/g, "''")}',
-      //   ${similar.rating},
-      //   '${similar.comment.replace(/'/g, "''")}'
-      // );`
+      const insertSimilarSQL = `INSERT INTO products_similar_products (product_id, similar_product_id) VALUES (
+        ${plant.id},
+        ${Math.floor(Math.random() * 27) + 1}
+      );`
 
-      insertSimilarStatements.push({
-        insertSimilarSQL: '',
-        name: plant.name.split('(')[0].trim(),
-        similar: similar.name.split('(')[0].trim()
-      })
+      insertSimilarStatements.push(insertSimilarSQL)
     })
   })
 
   return {
-    plants: insertPlantStatements.join('\n'),
-    review: insertReviewStatements,
-    similar: insertSimilarStatements
+    // plants: insertPlantStatements.join('\n'),
+    reviews: insertReviewStatements.join('\n'),
+    similar: insertSimilarStatements.join('\n')
   }
 }
 
 const sqlStatements = generateInsertStatements(data)
-console.log(sqlStatements.similar)
-fs.writeFileSync('products.sql', sqlStatements.plants)
+// fs.writeFileSync('products.sql', sqlStatements.plants)
+fs.writeFileSync('reviews.sql', sqlStatements.reviews)
+fs.writeFileSync('similar.sql', sqlStatements.similar)

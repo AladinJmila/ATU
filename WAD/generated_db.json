@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Monstera Deliciosa",
     "quantity_in_stock": 15,
     "description": "The Monstera Deliciosa, also known as the Swiss Cheese Plant, is a popular tropical houseplant with large, glossy leaves that develop iconic splits and holes as they mature.",
@@ -43,6 +44,7 @@
     ]
   },
   {
+    "id": 2,
     "name": "Tradescantia zebrina (Wandering Jew)",
     "quantity_in_stock": 20,
     "description": "Tradescantia zebrina, also known as Wandering Jew or Inch Plant, is a vibrant and fast-growing trailing plant with striking purple and silver striped leaves. It thrives in bright indirect light and requires regular watering to keep its soil evenly moist.",
@@ -86,6 +88,7 @@
     ]
   },
   {
+    "id": 3,
     "name": "Fiddle Leaf Fig",
     "quantity_in_stock": 8,
     "description": "The Fiddle Leaf Fig is a popular indoor tree with large, glossy fiddle-shaped leaves. It makes a striking statement as a focal point in any room and prefers bright, indirect light.",
@@ -132,6 +135,7 @@
     ]
   },
   {
+    "id": 4,
     "name": "Caladium (Caladium bicolor)",
     "quantity_in_stock": 15,
     "description": "Caladium, particularly Caladium bicolor varieties, are tropical plants prized for their colorful and uniquely patterned arrow-shaped leaves. They thrive in indirect light and require consistently moist soil to maintain their vibrant appearance.",
@@ -178,6 +182,7 @@
     ]
   },
   {
+    "id": 5,
     "name": "String of Pearls",
     "quantity_in_stock": 12,
     "description": "The String of Pearls is a unique and eye-catching succulent with trailing stems adorned with spherical, bead-like leaves. It's an ideal choice for hanging baskets or elevated planters.",
@@ -221,6 +226,7 @@
     ]
   },
   {
+    "id": 6,
     "name": "Epipremnum aureum (Golden Pothos)",
     "quantity_in_stock": 20,
     "description": "Epipremnum aureum, also known as Golden Pothos or Devil's Ivy, is a popular and versatile indoor plant with heart-shaped, glossy leaves marbled in green and yellow. It's easy to care for and can thrive in various light conditions.",
@@ -264,6 +270,7 @@
     ]
   },
   {
+    "id": 7,
     "name": "Fittonia spp. (Nerve Plant)",
     "quantity_in_stock": 15,
     "description": "Fittonia spp., also known as Nerve plants, are eye-catching indoor plants with vibrant, veined leaves that come in various colors like green, pink, and red. They thrive in medium to bright indirect light and require consistently moist soil to stay healthy.",
@@ -310,6 +317,7 @@
     ]
   },
   {
+    "id": 8,
     "name": "Calathea Orbifolia",
     "quantity_in_stock": 7,
     "description": "The Calathea Orbifolia is a stunning indoor plant known for its large, round leaves with silver-green stripes. It's prized for its decorative foliage and prefers bright, indirect light.",
@@ -353,6 +361,7 @@
     ]
   },
   {
+    "id": 9,
     "name": "Pilea Peperomioides",
     "quantity_in_stock": 10,
     "description": "The Pilea Peperomioides, also known as the Chinese Money Plant or Pancake Plant, is a charming and easy-to-care-for indoor plant characterized by its round, coin-shaped leaves on upright stems.",
@@ -396,6 +405,7 @@
     ]
   },
   {
+    "id": 10,
     "name": "Strelitzia reginae (Bird of Paradise)",
     "quantity_in_stock": 5,
     "description": "Strelitzia reginae, also known as Bird of Paradise, is a stunning tropical plant with large, banana-like leaves and striking orange and blue bird-shaped flowers. It thrives in bright indirect light and requires regular watering to keep its soil evenly moist during the growing season.",
@@ -442,6 +452,7 @@
     ]
   },
   {
+    "id": 11,
     "name": "Calathea spp. (Calathea varieties)",
     "quantity_in_stock": 12,
     "description": "Calathea spp., including varieties like Calathea orbifolia and Calathea medallion, are beautiful and unique indoor plants known for their ornate and colorful foliage patterns. These plants prefer bright, indirect light and moderate humidity.",
@@ -488,6 +499,7 @@
     ]
   },
   {
+    "id": 12,
     "name": "Philodendron spp. (Various Types)",
     "quantity_in_stock": 18,
     "description": "Philodendron spp., including varieties like Philodendron Brasil and Philodendron Micans, are versatile and attractive indoor plants known for their lush foliage and easy-care nature. These plants thrive in medium to bright indirect light and are perfect for adding greenery to any space.",
@@ -534,6 +546,7 @@
     ]
   },
   {
+    "id": 13,
     "name": "Spider Plant (Chlorophytum comosum)",
     "quantity_in_stock": 25,
     "description": "The Spider Plant, scientifically known as Chlorophytum comosum, is a popular and easy-to-care-for indoor plant characterized by its arching, narrow leaves with white variegation. It's known for its air-purifying properties and ability to produce 'spiderettes' or baby plants on long, wiry stems.",
@@ -580,6 +593,7 @@
     ]
   },
   {
+    "id": 14,
     "name": "Alocasia amazonica",
     "quantity_in_stock": 15,
     "description": "Alocasia amazonica, also known as African Mask Plant, is a stunning indoor plant featuring large, arrow-shaped leaves with prominent veins and striking dark green foliage contrasted by silver-white veins. It thrives in bright, indirect light and adds a dramatic touch to any indoor space.",
@@ -623,6 +637,7 @@
     ]
   },
   {
+    "id": 15,
     "name": "Maranta leuconeura (Prayer Plant)",
     "quantity_in_stock": 20,
     "description": "Maranta leuconeura, also known as the Prayer Plant, is a captivating indoor plant with unique, patterned leaves that fold upward in the evening resembling hands in prayer. It thrives in low to moderate indirect light and requires consistent moisture.",
@@ -665,8 +680,8 @@
       }
     ]
   },
-
   {
+    "id": 16,
     "name": "Pothos (Epipremnum aureum varieties)",
     "quantity_in_stock": 25,
     "description": "Pothos (Epipremnum aureum) is a versatile and popular indoor plant known for its trailing vines and easy care. Varieties like Marble Queen and Neon feature variegated leaves that add color and interest to any space. Pothos plants thrive in low to moderate indirect light and require minimal maintenance.",
@@ -713,6 +728,7 @@
     ]
   },
   {
+    "id": 17,
     "name": "Hoya carnosa (Wax Plant)",
     "quantity_in_stock": 15,
     "description": "Hoya carnosa, also known as the Wax Plant or Hindu Rope Plant, is a beautiful and unique indoor plant prized for its waxy, succulent leaves and clusters of star-shaped flowers. It thrives in bright indirect light and requires minimal care, making it an ideal choice for any indoor setting.",
@@ -759,6 +775,7 @@
     ]
   },
   {
+    "id": 18,
     "name": "Peperomia obtusifolia (Baby Rubber Plant)",
     "quantity_in_stock": 15,
     "description": "Peperomia obtusifolia, also known as the Baby Rubber Plant, is a compact and attractive indoor plant with glossy, rounded leaves that have a rubbery texture. It's easy to care for and thrives in moderate indoor light conditions, making it a perfect choice for tabletops or shelves.",
@@ -802,6 +819,7 @@
     ]
   },
   {
+    "id": 19,
     "name": "Anthurium (Flamingo Flower)",
     "quantity_in_stock": 12,
     "description": "Anthurium, also known as Flamingo Flower or Laceleaf, is a stunning tropical plant prized for its glossy, heart-shaped leaves and vibrant, long-lasting flowers. It thrives in bright indirect light and requires regular watering to keep its soil consistently moist.",
@@ -848,6 +866,7 @@
     ]
   },
   {
+    "id": 20,
     "name": "Dracaena marginata (Dragon Tree)",
     "quantity_in_stock": 15,
     "description": "Dracaena marginata, also known as the Dragon Tree, is a striking indoor plant with thin, upright stems and narrow, sword-shaped leaves that have a reddish edge. It's an excellent air-purifying plant and can thrive in various light conditions.",
@@ -894,6 +913,7 @@
     ]
   },
   {
+    "id": 21,
     "name": "Begonia rex (Rex Begonia)",
     "quantity_in_stock": 10,
     "description": "Begonia rex, also known as Rex Begonia, is a striking and colorful indoor plant prized for its ornamental foliage. It features large, textured leaves with intricate patterns in shades of green, silver, pink, and burgundy. Rex Begonias thrive in bright indirect light and require consistently moist soil.",
@@ -940,6 +960,7 @@
     ]
   },
   {
+    "id": 22,
     "name": "Aspidistra elatior (Cast Iron Plant)",
     "quantity_in_stock": 8,
     "description": "Aspidistra elatior, also known as the Cast Iron Plant, is a hardy and low-maintenance indoor plant with dark green, leathery leaves. It's well-suited for low-light conditions and can tolerate neglect, earning its nickname as the 'Cast Iron' plant. Perfect for adding greenery to dim corners.",
@@ -986,6 +1007,7 @@
     ]
   },
   {
+    "id": 23,
     "name": "Aloe Vera",
     "quantity_in_stock": 15,
     "description": "Aloe Vera is a popular succulent known for its medicinal properties. It has thick, fleshy leaves that contain a gel with various health benefits.",
@@ -1029,6 +1051,7 @@
     ]
   },
   {
+    "id": 24,
     "name": "Parlor Palm",
     "quantity_in_stock": 12,
     "description": "The Parlor Palm, also known as Chamaedorea elegans, is a classic indoor palm plant with feathery, arching fronds. It's well-suited for low light conditions and adds a tropical touch to any space.",
@@ -1074,8 +1097,8 @@
       }
     ]
   },
-
   {
+    "id": 25,
     "name": "Tradescantia spathacea (Moses-in-the-cradle)",
     "quantity_in_stock": 12,
     "description": "Tradescantia spathacea, also known as Moses-in-the-cradle or Boat Lily, is an attractive and low-maintenance tropical plant with glossy, dark green leaves and contrasting purple undersides. It produces small white flowers nestled in boat-shaped bracts. This plant thrives in bright indirect light and requires regular watering.",
@@ -1122,6 +1145,7 @@
     ]
   },
   {
+    "id": 26,
     "name": "Syngonium podophyllum (Arrowhead Plant)",
     "quantity_in_stock": 20,
     "description": "Syngonium podophyllum, also known as Arrowhead Plant or Arrowhead Vine, is a versatile and easy-to-care-for indoor plant with arrow-shaped leaves that vary in color and pattern. It thrives in indirect light and prefers consistently moist soil. This plant is perfect for hanging baskets or as a trailing plant.",
@@ -1168,6 +1192,7 @@
     ]
   },
   {
+    "id": 27,
     "name": "Snake Plant",
     "quantity_in_stock": 20,
     "description": "The Snake Plant, also known as Sansevieria, is a hardy and low-maintenance indoor plant with upright, sword-like leaves. It thrives in various light conditions and is known for its air-purifying properties.",
