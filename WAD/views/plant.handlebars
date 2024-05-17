@@ -10,10 +10,13 @@
       <div class='details-overview col-sm-12 col-md-5 col-lg-5 col-xl-3'>
         <h4>Description:</h4>
         <p>{{data.product.description}}</p>
-        <p>Price: <span>{{data.product.price}}</span></p>
+        <p>Price: <b>&euro;{{data.product.price}}</b></p>
         <p>Quantitiy in stock:
           <span>{{data.product.quantity_in_stock}}</span></p>
-        <p>rating: <span>{{data.product.rating}}</span></p>
+        <p>
+          <span class='rating-stars-{{data.product.stars}}'></span>
+          {{data.product.rating}}
+        </p>
       </div>
       <div class='details-granular col-sm-12 col-md-5 col-lg-5 col-xl-3'>
         <p>Category: {{data.product.category}}</p>
@@ -50,8 +53,12 @@
             <a href='/plants/{{product_id}}'>
               <img src='{{image_url}}' alt='' />
             </a>
-            <h4>{{name}}</h4>
-            <div class='price'>Price: <span>{{price}}</span></div>
+            <h4 class='product-name' title='{{name}}'>{{name}}</h4>
+            <p>
+              <span class='rating-stars-{{stars}}'></span>
+              {{rating}}
+            </p>
+            <p><b>&euro;{{price}}</b></p>
           </div>
         {{/each}}
       {{/if}}

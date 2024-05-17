@@ -107,12 +107,42 @@ a:active:not(nav.navbar a) {
   color: var(--custom-color-1) !important;
 }
 
-.product-card {
+.home .product-card {
   cursor: pointer;
   border: 3px solid var(--custom-color-2);
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+}
+
+.home .product-card .product-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home .product-card .product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rating-stars-1::after {
+  content: '⭐';
+}
+.rating-stars-2::after {
+  content: '⭐⭐';
+}
+.rating-stars-3::after {
+  content: '⭐⭐⭐';
+}
+.rating-stars-4::after {
+  content: '⭐⭐⭐⭐';
+}
+.rating-stars-5::after {
+  content: '⭐⭐⭐⭐⭐';
 }
 
 .nav-link {
@@ -407,6 +437,30 @@ button.pay {
   margin-bottom: 10px;
 }
 
+.plant-details-view .similar-product {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.plant-details-view .similar-product .product-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/********** Error page **********/
+.error-page a.btn.btn-primary {
+  margin-top: 10px;
+  min-width: 200px;
+  color: var(--custom-color-3) !important;
+}
+
+.error-page a.btn.btn-primary:hover {
+  color: var(--custom-color-1) !important;
+}
+
 /********** Media queries **********/
 @media screen and (max-width: 900px) {
   .basket-product-card {
@@ -461,4 +515,37 @@ button.pay {
 
 ::-webkit-scrollbar-thumb {
   background: var(--custom-color-5);
+}
+
+@media screen and (max-width: 990px) {
+  [class='navbar-nav float-end me-4'] {
+    float: initial !important;
+    margin: 0 !important;
+  }
+
+  .fa.fa-pagelines {
+    left: 17px;
+  }
+
+  #basket-items-count {
+    left: 36px;
+  }
+
+  #basket-items-count.two-digits {
+    right: 44px;
+  }
+
+  .navbar-collapse a {
+    margin: 6px 0;
+    padding: 6px 10px !important;
+  }
+
+  .navbar-collapse a:hover {
+    background-color: var(--custom-color-5);
+    color: var(--custom-color-1) !important;
+  }
+
+  .navbar-collapse a:hover #basket-items-count {
+    color: var(--custom-color-1) !important;
+  }
 }

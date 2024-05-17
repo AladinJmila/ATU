@@ -81,9 +81,12 @@
             >
               <img src={{image_url}} alt='' />
               <div class='product-info'>
-                <h4>{{name}}</h4>
-                <p>product ratings: {{rating}}</p>
-                <p>{{description}}</p>
+                <h4 class='product-name' title='{{name}}'>{{name}}</h4>
+                <p>
+                  <span class='rating-stars-{{stars}}'></span>
+                  {{rating}}
+                </p>
+                <p class='product-description'>{{description}}</p>
                 <p><b>&euro;{{price}}</b></p>
                 <button
                   onclick='WAD.addToBasket(this, event)'

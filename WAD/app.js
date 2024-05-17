@@ -20,7 +20,8 @@ app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 app.get('/home', async (req, res) => {
-  const data = await getDBdata('SELECT * FROM products;')
+  let data = await getDBdata('SELECT * FROM products;')
+  data = data.map(product => ({ ...product, stars: Math.floor(product.rating) }))
 
   res.render('home', { data })
 })
@@ -53,17 +54,23 @@ app.get('/plants/:id', async (req, res) => {
   const id = req.params.id
   const products = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
   const reviews = await getDBdata(`SELECT * FROM reviews WHERE product_id = '${id}';`)
-  const similar = await getDBdata(`SELECT p.name, p.image_url, p.price, p.product_id FROM products p
+  const similar = await getDBdata(`SELECT p.name, p.image_url, p.price, p.rating, p.product_id FROM products p
                                   JOIN products_similar_products ps ON ps.product_id = '${id}'
                                   WHERE p.product_id = ps.similar_product_id;`)
-  res.render('plant', { data: { product: products[0], reviews, similar } })
+  res.render('plant', {
+    data: {
+      product: { ...products[0], stars: Math.floor(products[0].rating) },
+      reviews,
+      similar: similar.map(product => ({ ...product, stars: Math.floor(product.rating) }))
+    }
+  })
 })
 
 app.get('/basket', async (req, res) => {
   if (!req.query?.orders || !JSON.parse(req.query.orders).length) {
     return res
       .status(404)
-      .render('error', { message: 'Please select at least one item' })
+      .render('error', { message: 'Your basket is empty' })
   }
   const orders = JSON.parse(req.query.orders)
   const productsIds = orders.map(product => product?.productId)
