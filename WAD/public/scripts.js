@@ -12,11 +12,69 @@ window.WAD = {
     // Handle navigation links to highlight the active link based on the current page
     WAD.handleNavLinks()
 
+    // Render home carousel
+    WAD.renderCarousel()
+
     // Update and display the order count and prices in the basket
     WAD.showOrderCountAndPrice()
 
     // Configure logout functionality and update UI accordingly
     WAD.handleLogout()
+  },
+
+  renderCarousel () {
+    const carouselContainer = document.getElementById('home-carousel')
+    if (!carouselContainer) return
+
+    const imagesURLs = ['/images/carousel1.jpg', '/images/carousel2.jpg', '/images/carousel3.jpg']
+    let buttonsHTML = ''
+    let cardsHTML = ''
+    imagesURLs.forEach((url, index) => {
+      buttonsHTML += `<button type='button'
+                          data-bs-target='#carouselExampleIndicators'
+                          data-bs-slide-to='${index}'
+                          class= ${index === 0 ? 'active' : 'custom'}
+                          aria-current= ${index === 0 ? 'true' : 'false'}
+                          aria-label='Slide ${index + 1}'
+                        ></button>`
+
+      cardsHTML += `<div class='carousel-item ${index === 0 ? 'active' : 'custom'}'>
+                          <img src=${url} />
+                        </div>`
+    })
+
+    const carousel = document.createElement('div')
+    carousel.innerHTML = `<div
+    id='carouselExampleIndicators'
+    class='carousel slide mb-5 ms-2 me-2'
+    data-bs-ride='carousel'
+  >
+    <div class='carousel-indicators'>
+      ${buttonsHTML}
+    </div>
+    <div class='carousel-inner'>
+      ${cardsHTML}
+    </div>
+    <button
+      class='carousel-control-prev'
+      type='button'
+      data-bs-target='#carouselExampleIndicators'
+      data-bs-slide='prev'
+    >
+      <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+      <span class='visually-hidden'>Previous</span>
+    </button>
+    <button
+      class='carousel-control-next'
+      type='button'
+      data-bs-target='#carouselExampleIndicators'
+      data-bs-slide='next'
+    >
+      <span class='carousel-control-next-icon' aria-hidden='true'></span>
+      <span class='visually-hidden'>Next</span>
+    </button>
+  </div>`
+    carouselContainer.appendChild(carousel)
   },
 
   // Function to update the basket count displayed on the navigation bar
@@ -62,7 +120,7 @@ window.WAD = {
     const plantElement = document.querySelector('.fa-pagelines')
 
     // Check if basket array is not empty
-    if (basket.length) {
+    if (basket?.length) {
       // Update the text content of the basket count element with the length of basket array
       basketCountElement.innerText = basket.length
       // Display the plant icon by adding the 'show' class to the plant element
@@ -155,7 +213,7 @@ window.WAD = {
     infoPopup.innerHTML = `${message}`
 
     // Append the info popup to the specified parent element
-    parentElement.appendChild(infoPopup)
+    parentElement?.appendChild(infoPopup)
 
     // Automatically remove the info popup after the specified display duration
     setTimeout(() => infoPopup.remove(), displayDuration)
@@ -372,6 +430,12 @@ window.WAD = {
 
     // Update the basket count displayed on the webpage
     WAD.updateBasketCount(basket.length)
+
+    // If the basket is empty, remove the checkout button and offer navigation to the home page
+    if (!basket.length) {
+      document.querySelector('[onclick="WAD.openPurchaseModal()"]')
+        .outerHTML = '<a class="btn btn-primary explore-collection" href="/home">Explore our collection</a>'
+    }
 
     // Update the basket items in localStorage with the modified basket array
     window.localStorage.setItem('basket', JSON.stringify(basket))

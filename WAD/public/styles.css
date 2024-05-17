@@ -451,13 +451,18 @@ button.pay {
 }
 
 /********** Error page **********/
-.error-page a.btn.btn-primary {
-  margin-top: 10px;
+a.btn.btn-primary.explore-collection {
+  margin: 10px auto;
+  display: block;
   min-width: 200px;
   color: var(--custom-color-3) !important;
 }
 
-.error-page a.btn.btn-primary:hover {
+#shopping-basket-container .explore-collection {
+  margin-top: 100px !important;
+}
+
+a.btn.btn-primary.explore-collection:hover {
   color: var(--custom-color-1) !important;
 }
 

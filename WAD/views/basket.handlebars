@@ -10,7 +10,7 @@
           <i>Quantity in stock: {{quantity_in_stock}}</i>
           </div>
           <div class="order-controls">
-          <p>Quantity: <input onchange="WAD.handleQuantityChange(this)" min='1' data-id={{product_id}} type="number" class='order-quantity' value="{{quantity}}"></input></p> 
+          <p>Quantity: <input onchange="WAD.handleQuantityChange(this)" min="1" max="100" data-id={{product_id}} type="number" class='order-quantity' value="{{quantity}}"></input></p> 
           <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
           </div>
         </div>

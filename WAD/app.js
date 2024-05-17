@@ -77,7 +77,8 @@ app.get('/basket', async (req, res) => {
   const data = await getDBdata(
     `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
   )
-  data.forEach(product => {
+
+  data && data.forEach(product => {
     orders.forEach(order => {
       if (order.productId === product.product_id) {
         product.quantity = order.count
