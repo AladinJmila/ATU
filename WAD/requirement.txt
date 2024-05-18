@@ -63,6 +63,17 @@ function specifyProduct () {
   choice = document.getElementById('inbox').value
 }
 
+/* Red border calss for input box on pages 2 and 3 */
+.inputBoxBorder {
+  border: thin slid red;
+}
+
+/* Type class for paragraphs on all pages */
+#setTypeRed {
+  font-weight: bold;
+  color: red;
+}
+
 
 
 
