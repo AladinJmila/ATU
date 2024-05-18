@@ -1,3 +1,4 @@
+// Notify the linter that WAD is a global variable
 /* globals WAD */
 
 window.WAD = {
@@ -22,7 +23,7 @@ window.WAD = {
     WAD.handleLogout()
   },
 
-  // (inspired by a stackoverflow implementation)
+  // Function to shuffle the elements of an array using the Fisher-Yates shuffle algorithm
   shuffleArray (array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -31,21 +32,36 @@ window.WAD = {
     return array
   },
 
+  // Function to randomize the images displayed in a carousel
   randomizeCarousel () {
+    // Retrieve all carousel images from the DOM
     const carouselImages = document.querySelectorAll('.carousel-item img')
+
+    // Check if there are any carousel images available
     if (!carouselImages.length) return
 
+    // Retrieve the URL of the most recently displayed first image in the carousel
     const recentFirstImageURL = window.localStorage.getItem('recentFirstImageURL')
 
+    // Define an array containing URLs of images to be displayed in the carousel
     let imagesURLs = ['/images/carousel1.jpg', '/images/carousel2.jpg', '/images/carousel3.jpg']
+
+    // Shuffle the array of image URLs to randomize their order
     imagesURLs = WAD.shuffleArray(imagesURLs)
 
+    // Update the src attribute of each carousel image with the shuffled URLs
     carouselImages.forEach((image, index) => {
       image.src = imagesURLs[index]
     })
 
-    if (carouselImages[0].src === recentFirstImageURL) WAD.randomizeCarousel()
-    else window.localStorage.setItem('recentFirstImageURL', carouselImages[0].src)
+    // Check if the first image URL after shuffling matches the most recent first image URL
+    if (carouselImages[0].src === recentFirstImageURL) {
+      // If the first image URL matches, recursively call the function to ensure randomness
+      WAD.randomizeCarousel()
+    } else {
+      // If the first image URL is different, update the most recent first image URL in local storage
+      window.localStorage.setItem('recentFirstImageURL', carouselImages[0].src)
+    }
   },
 
   // Function to update the basket count displayed on the navigation bar
@@ -309,6 +325,9 @@ window.WAD = {
         const loginElment = document.querySelector("[href='/login']")
         logoutElement.style.display = 'block'
         loginElment.style.display = 'none'
+      } else {
+        // Show error message if credential are incorrect
+        document.getElementById('invalid-login').innerText = 'Incorrect username or password'
       }
     } catch (error) {
       // Log any errors that occur during the login process
@@ -380,8 +399,11 @@ window.WAD = {
   handleQuantityChange (current, command) {
     // Retrieve the productId from the dataset of the current element
     const productId = current.dataset.id
+
+    // Retrieve the input field element corresponding to the quantity for the productId
     const inputField = document.getElementById(`quantity-${productId}`)
 
+    // Increment or decrement the quantity based on the command
     if (command === 'increment') {
       if (inputField.value < 100) inputField.value = +inputField.value + 1
     } else {
@@ -391,7 +413,9 @@ window.WAD = {
     // Update the basket with the new quantity for the specified productId
     WAD.updateBasket(productId, inputField.value)
 
+    // Retrieve the current basket orders from local storage
     const orders = window.localStorage.getItem('basket')
+
     // Get the current URL and remove query parameters to prepare for history update
     const currentURL = window.location.href.split('?')[0]
 
@@ -550,6 +574,9 @@ window.WAD = {
       thankYou.classList.add('thank-you')
       thankYou.innerText = 'Thank you for shopping with us!'
       countdown.innerText = '3'
+
+      // Clear the shopping basket in localStorage
+      window.localStorage.removeItem('basket')
 
       // Clear the shopping basket container and add thank you message
       shoppingBasketContainer.innerHTML = ''

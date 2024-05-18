@@ -63,6 +63,7 @@ function specifyProduct () {
   choice = document.getElementById('inbox').value
 }
 
+CSS documentation:
 /* Red border calss for input box on pages 2 and 3 */
 .inputBoxBorder {
   border: thin slid red;
@@ -74,7 +75,7 @@ function specifyProduct () {
   color: red;
 }
 
-
+HTML documentation:
 <!-- Bootstrap "Card" component for Movie Purchase -->
 <!-- shadow-lg class added to add shadow to card -->
 <div class="card collapse shadow-lg" id="myCard" style="width: 30%;">
