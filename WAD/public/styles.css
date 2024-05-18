@@ -30,6 +30,7 @@ a:active:not(nav.navbar a) {
 }
 
 .home h1,
+.about h1,
 .plant-details-view h1 {
   border-bottom: 3px solid var(--custom-color-2);
   padding-bottom: 10px;
@@ -177,7 +178,7 @@ a:active:not(nav.navbar a) {
   border-bottom: 1px solid var(--custom-color-2);
 }
 
-.basket-product-card img {
+.basket-product-card a img {
   width: 200px;
   border-radius: 8px;
 }
@@ -215,7 +216,12 @@ a:active:not(nav.navbar a) {
 
 .order-controls {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
+}
+.order-controls p {
+  margin: 0;
 }
 
 .order-controls .btn.btn-primary {
@@ -235,7 +241,6 @@ a:active:not(nav.navbar a) {
   left: 0;
   background-image: url('/images/error.jpg');
   background-repeat: no-repeat;
-  /* background-size: 100%; */
   background-size: cover;
   background-position: center;
 }
@@ -473,9 +478,13 @@ a.btn.btn-primary.explore-collection:hover {
     flex-direction: column;
   }
 
-  .basket-product-card img {
+  .basket-product-card a img {
+    /* max-width: 60%; */
+    width: 100%;
+  }
+  .basket-product-card a {
     margin: 20px auto 30px;
-    min-width: 60%;
+    max-width: 60%;
   }
 
   .basket-product-card .product-info {
@@ -522,6 +531,12 @@ a.btn.btn-primary.explore-collection:hover {
   background: var(--custom-color-5);
 }
 
+@media screen and (max-width: 570px) {
+  .basket-product-card a {
+    max-width: 90%;
+  }
+}
+
 @media screen and (max-width: 990px) {
   [class='navbar-nav float-end me-4'] {
     float: initial !important;
@@ -553,4 +568,54 @@ a.btn.btn-primary.explore-collection:hover {
   .navbar-collapse a:hover #basket-items-count {
     color: var(--custom-color-1) !important;
   }
+}
+
+.order-quantity input {
+  transform: translateY(2px);
+  margin: 0 !important;
+}
+
+.btn.btn-primary.decrement-product-count,
+.btn.btn-primary.increment-product-count {
+  margin: 10px;
+  max-width: 30px !important;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  background-color: var(--custom-color-5) !important;
+}
+
+.btn.btn-primary.decrement-product-count::after,
+.btn.btn-primary.increment-product-count::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 26px;
+  height: 28px;
+  filter: invert(1);
+}
+
+.decrement-product-count::after {
+  background-image: url('/svg/minus-btn.svg');
+}
+.increment-product-count::after {
+  background-image: url('/svg/plus-btn.svg');
+}
+
+.order-quantity {
+  white-space: nowrap;
+}
+
+/* For Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

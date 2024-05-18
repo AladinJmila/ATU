@@ -12,8 +12,8 @@ window.WAD = {
     // Handle navigation links to highlight the active link based on the current page
     WAD.handleNavLinks()
 
-    // Render home carousel
-    WAD.renderCarousel()
+    // Render a random order of carousel images
+    WAD.randomizeCarousel()
 
     // Update and display the order count and prices in the basket
     WAD.showOrderCountAndPrice()
@@ -22,59 +22,30 @@ window.WAD = {
     WAD.handleLogout()
   },
 
-  renderCarousel () {
-    const carouselContainer = document.getElementById('home-carousel')
-    if (!carouselContainer) return
+  // (inspired by a stackoverflow implementation)
+  shuffleArray (array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
+  },
 
-    const imagesURLs = ['/images/carousel1.jpg', '/images/carousel2.jpg', '/images/carousel3.jpg']
-    let buttonsHTML = ''
-    let cardsHTML = ''
-    imagesURLs.forEach((url, index) => {
-      buttonsHTML += `<button type='button'
-                          data-bs-target='#carouselExampleIndicators'
-                          data-bs-slide-to='${index}'
-                          class= ${index === 0 ? 'active' : 'custom'}
-                          aria-current= ${index === 0 ? 'true' : 'false'}
-                          aria-label='Slide ${index + 1}'
-                        ></button>`
+  randomizeCarousel () {
+    const carouselImages = document.querySelectorAll('.carousel-item img')
+    if (!carouselImages.length) return
 
-      cardsHTML += `<div class='carousel-item ${index === 0 ? 'active' : 'custom'}'>
-                          <img src=${url} />
-                        </div>`
+    const recentFirstImageURL = window.localStorage.getItem('recentFirstImageURL')
+
+    let imagesURLs = ['/images/carousel1.jpg', '/images/carousel2.jpg', '/images/carousel3.jpg']
+    imagesURLs = WAD.shuffleArray(imagesURLs)
+
+    carouselImages.forEach((image, index) => {
+      image.src = imagesURLs[index]
     })
 
-    const carousel = document.createElement('div')
-    carousel.innerHTML = `<div
-    id='carouselExampleIndicators'
-    class='carousel slide mb-5 ms-2 me-2'
-    data-bs-ride='carousel'
-  >
-    <div class='carousel-indicators'>
-      ${buttonsHTML}
-    </div>
-    <div class='carousel-inner'>
-      ${cardsHTML}
-    </div>
-    <button
-      class='carousel-control-prev'
-      type='button'
-      data-bs-target='#carouselExampleIndicators'
-      data-bs-slide='prev'
-    >
-      <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-      <span class='visually-hidden'>Previous</span>
-    </button>
-    <button
-      class='carousel-control-next'
-      type='button'
-      data-bs-target='#carouselExampleIndicators'
-      data-bs-slide='next'
-    >
-      <span class='carousel-control-next-icon' aria-hidden='true'></span>
-      <span class='visually-hidden'>Next</span>
-    </button>
-  </div>`
-    carouselContainer.appendChild(carousel)
+    if (carouselImages[0].src === recentFirstImageURL) WAD.randomizeCarousel()
+    else window.localStorage.setItem('recentFirstImageURL', carouselImages[0].src)
   },
 
   // Function to update the basket count displayed on the navigation bar
@@ -406,12 +377,29 @@ window.WAD = {
   },
 
   // Function to handle quantity change for a specific product
-  handleQuantityChange (current) {
+  handleQuantityChange (current, command) {
     // Retrieve the productId from the dataset of the current element
     const productId = current.dataset.id
+    const inputField = document.getElementById(`quantity-${productId}`)
+
+    if (command === 'increment') {
+      if (inputField.value < 100) inputField.value = +inputField.value + 1
+    } else {
+      if (inputField.value > 1) inputField.value = +inputField.value - 1
+    }
 
     // Update the basket with the new quantity for the specified productId
-    WAD.updateBasket(productId, current.value)
+    WAD.updateBasket(productId, inputField.value)
+
+    const orders = window.localStorage.getItem('basket')
+    // Get the current URL and remove query parameters to prepare for history update
+    const currentURL = window.location.href.split('?')[0]
+
+    // Construct the updated URL with the updated basket orders as query parameter
+    const updatedURL = currentURL + `?orders=${orders || ''}`
+
+    // Update the browser history state and URL without reloading the page
+    window.history.pushState({ path: updatedURL }, '', updatedURL)
 
     // Update the displayed order count and subtotal price after basket update
     WAD.showOrderCountAndPrice()
@@ -541,18 +529,18 @@ window.WAD = {
     const purchaseForm = document.getElementById('confirm-purchase')
     const triggerFormValidation = document.getElementById('trigger-form-validation')
 
-    // Validate the purchase form before proceeding
-    if (!purchaseForm.checkValidity()) {
-      // Trigger the browser's built-in form validation error display
-      triggerFormValidation.click()
-      return // Exit the function if form validation fails
-    }
     // Show the confirm purchase container and scroll into view smoothly
     confirmPurchaseContainer.classList.add('show')
     confirmPurchaseContainer.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 
     // Check the current button text to determine action
     if (current.innerText === 'Confirm purchase') {
+      // Validate the purchase form before proceeding
+      if (!purchaseForm.checkValidity()) {
+      // Trigger the browser's built-in form validation error display
+        triggerFormValidation.click()
+        return // Exit the function if form validation fails
+      }
       // Hide the confirm purchase container
       confirmPurchaseContainer.classList.remove('show')
 

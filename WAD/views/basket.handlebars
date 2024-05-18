@@ -10,8 +10,12 @@
           <i>Quantity in stock: {{quantity_in_stock}}</i>
           </div>
           <div class="order-controls">
-          <p>Quantity: <input onchange="WAD.handleQuantityChange(this)" min="1" max="100" data-id={{product_id}} type="number" class='order-quantity' value="{{quantity}}"></input></p> 
-          <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
+          <p class="order-quantity">Quantity: 
+              <button onclick="WAD.handleQuantityChange(this, 'decrement')" data-id={{product_id}}  class="decrement-product-count btn btn-primary"></button>
+              <input id="quantity-{{product_id}}" min="1" max="100" type="number"  value="{{quantity}}"></input>
+              <button onclick="WAD.handleQuantityChange(this, 'increment')" data-id={{product_id}}  class="increment-product-count btn btn-primary"></button>
+              </p> 
+            <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
           </div>
         </div>
         <div class='product-price'>
@@ -52,10 +56,14 @@
             </label>
           </div>
         </fieldset>
-        <h4 class="mb-3">Email me a purchase summary (optional)</h4>
+        <h4 class="mb-3">Email me a purchase summary &amp; comment</h4>
+        <div class="mb-2">
+          <label for="comment-purchase" class="form-label">Comment</label>
+          <input type="text" class="form-control" id="comment-purchase" aria-describedby="email-help" required>
+        </div>
         <div class="mb-5">
           <label for="email-purchase" class="form-label">Email address</label>
-          <input onchange="WAD.validateEmail(this)" type="email" class="form-control" id="email-purchase" aria-describedby="email-help">
+          <input type="email" class="form-control" id="email-purchase" aria-describedby="email-help" required>
           <div id="email-help" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <input type="submit" id="trigger-form-validation" style="display: none" />
