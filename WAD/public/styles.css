@@ -559,6 +559,37 @@ input[type='number'] {
   overflow: hidden;
 }
 
+/* Styling for boolean values in the plant details view */
+.plant-details-view .boolean-value-0,
+.plant-details-view .boolean-value-1 {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+/* Styling for the pseudo-elements after boolean values */
+.plant-details-view .boolean-value-0::after,
+.plant-details-view .boolean-value-1::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  top: -24px;
+  right: 60%;
+  filter: invert(0.9);
+}
+
+/* Styling for the 'false' boolean value */
+.plant-details-view .boolean-value-0::after {
+  background-image: url('svg/close-line.svg');
+}
+
+/* Styling for the 'true' boolean value */
+.plant-details-view .boolean-value-1::after {
+  background-image: url('svg/check-line.svg');
+}
+
 /********** Error page **********/
 
 /* Container for the error page */

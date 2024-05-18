@@ -1,5 +1,9 @@
+<!-- Container for the home page content -->
 <div class='home'>
+  <!-- Main heading for the home page -->
   <h1 class='mb-4'>Welcome to Planet Plants!</h1>
+
+  <!-- Bootstrap carousel for displaying images -->
   <div
     id='carouselExampleIndicators'
     class='carousel slide mb-5 ms-2 me-2'
@@ -58,27 +62,38 @@
     </button>
   </div>
 
+  <!-- Subheading for the collection -->
   <h1 class='mb-4 ms-2'>Our collection:</h1>
 
+  <!-- Container for the product cards -->
   <div class='container products'>
+    <!-- Boostrap responsive flex box layout -->
     <div class='row gy-4'>
       {{#if data}}
         {{#each data}}
           <div class='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+            <!-- Product card container with onclick to trigger getProductDetails() function -->
             <div
               onclick='WAD.getProductDetails(this)'
               id='{{product_id}}'
               class='product-card'
             >
+              <!-- Product image -->
               <img src={{image_url}} alt='' />
+              <!-- Product information container -->
               <div class='product-info'>
+                <!-- Product name -->
                 <h4 class='product-name' title='{{name}}'>{{name}}</h4>
+                <!-- Product rating -->
                 <p>
                   <span class='rating-stars-{{stars}}'></span>
                   {{rating}}
                 </p>
+                <!-- Product description -->
                 <p class='product-description'>{{description}}</p>
+                <!-- Product price -->
                 <p><b>&euro;{{price}}</b></p>
+                <!-- Add to basket button onclick to trigger addToBasket() function-->
                 <button
                   onclick='WAD.addToBasket(this, event)'
                   data-id={{product_id}}
@@ -87,6 +102,7 @@
                 >Add to basket</button>
               </div>
             </div>
+            <!-- end of Product card container-->
           </div>
         {{/each}}
       {{/if}}

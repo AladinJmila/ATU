@@ -1,45 +1,61 @@
+<!-- Container for plant details view -->
 <div class='plant-details-view'>
+  <!-- Check if data exists -->
   {{#if data}}
+    <!-- Heading for product name with add to basket button -->
     <h1 class='mb-4 d-flex justify-content-between'>{{data.product.name}}
+      <!-- Add to basket button with onclick to trigger addToBasket() function -->
       <button
         onclick='WAD.addToBasket(this, event)'
         data-id={{data.product.product_id}}
         data-price={{data.product.price}}
         class='btn btn-primary add-to-basket'
       >Add to basket</button></h1>
+
+    <!-- Details container for product overview - Bootstrap responsive flex layout -->
     <div class='details-container row gap-4 justify-content-between'>
+      <!-- Product image -->
       <img
         class='col-sm-12 col-md-12 col-lg-12 col-xl-3'
         src='{{data.product.image_url}}'
         alt=''
       />
+      <!-- Details overview section -->
       <div class='details-overview col-sm-12 col-md-5 col-lg-5 col-xl-3'>
+        <!-- Description -->
         <h4>Description:</h4>
         <p>{{data.product.description}}</p>
+        <!-- Price -->
         <p>Price: <b>&euro;{{data.product.price}}</b></p>
+        <!-- Quantity in stock -->
         <p>Quantitiy in stock:
-          <span>{{data.product.quantity_in_stock}}</span></p>
+          <span>{{data.product.quantity_in_stock}}</span>
+        </p>
+        <!-- Rating -->
         <p>
           <span class='rating-stars-{{data.product.stars}}'></span>
           {{data.product.rating}}
         </p>
       </div>
+      <!-- Granular details section -->
       <div class='details-granular col-sm-12 col-md-5 col-lg-5 col-xl-3'>
         <p>Category: {{data.product.category}}</p>
         <p>Height: {{data.product.height}}</p>
         <p>Light requirements: {{data.product.light_requirements}}</p>
         <p>Care difficulty: {{data.product.care_difficulty}}</p>
         <p>Indoor:
-          <span class='boolean-value'>{{data.product.indoor}}</span></p>
+          <span class='boolean-value-{{data.product.indoor}}'></span></p>
         <p>Outdoor:
-          <span class='boolean-value'>{{data.product.outdoor}}</span></p>
+          <span class='boolean-value-{{data.product.outdoor}}'></span></p>
         <p>Air purifying:
-          <span class='boolean-value'>{{data.product.air_purifying}}</span></p>
+          <span class='boolean-value-{{data.product.air_purifying}}'></span></p>
         <p>Pet friendly:
-          <span class='boolean-value'>{{data.product.pet_friendly}}</span></p>
+          <span class='boolean-value-{{data.product.pet_friendly}}'></span></p>
       </div>
     </div>
+    <!-- Heading for reviews -->
     <h1 class='mb-4 mt-4'>Reviews</h1>
+    <!-- Reviews container Bootstrap responsive flex layout -->
     <div class='reviews-container row gap-4'>
       {{#if data.reviews}}
         {{#each data.reviews}}
@@ -52,6 +68,7 @@
       {{/if}}
     </div>
     <h1 class='mb-4 mt-4'>Similar Products</h1>
+    <!-- Similar products Bootstrap responsive flex layout -->
     <div class='similar-container row gap-4 justify-content-around'>
       {{#if data.similar}}
         {{#each data.similar}}

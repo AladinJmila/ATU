@@ -1,25 +1,42 @@
+<!-- Heading for the shopping basket -->
 <h1 class='mb-4'>Shopping Basket</h1>
+
+<!-- Container for the shopping basket content -->
 <div id="shopping-basket-container">
+  <!-- Check if data exists -->
   {{#if data}}
+  <!-- Loop through each data item -->
     {{#each data}}
+    <!-- Basket product card -->
       <div id={{product_id}} class='basket-product-card'>
+        <!-- Link to the product page -->
         <a href="/plants/{{product_id}}"><img src={{image_url}} alt='' /></a>
+         <!-- Product information container -->
         <div class='product-info'>
           <div>
-          <h4>{{name}}</h4>
-          <i>Quantity in stock: {{quantity_in_stock}}</i>
-          </div>
-          <div class="order-controls">
-          <p class="order-quantity">Quantity: 
-              <button onclick="WAD.handleQuantityChange(this, 'decrement')" data-id={{product_id}}  class="decrement-product-count btn btn-primary"></button>
-              <input id="quantity-{{product_id}}" min="1" max="100" type="number"  value="{{quantity}}"></input>
-              <button onclick="WAD.handleQuantityChange(this, 'increment')" data-id={{product_id}}  class="increment-product-count btn btn-primary"></button>
+            <!-- Product name -->
+            <h4>{{name}}</h4>
+            <!-- Quantity in stock -->
+            <i>Quantity in stock: {{quantity_in_stock}}</i>
+            </div>
+            <!-- Quantity control buttons -->
+            <div class="order-controls">
+              <p class="order-quantity">Quantity: 
+                <!-- Decrement button for removing product from basket with onclick to trigger handleQuantityChange() function -->
+                <button onclick="WAD.handleQuantityChange(this, 'decrement')" data-id={{product_id}}  class="decrement-product-count btn btn-primary"></button>
+                <input id="quantity-{{product_id}}" min="1" max="100" type="number"  value="{{quantity}}"></input>
+                <!-- Increment button for removing product from basket with onclick to trigger handleQuantityChange() function -->
+                <button onclick="WAD.handleQuantityChange(this, 'increment')" data-id={{product_id}}  class="increment-product-count btn btn-primary"></button>
               </p> 
-            <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
+              <!-- Delete button for removing product from basket with onclick to trigger handleDeleteFromBasket() function -->
+              <button onclick="WAD.handleDeleteFromBasket(this)" data-id={{product_id}} class="btn btn-primary">Delete</button>
           </div>
         </div>
+        <!-- Product price container -->
         <div class='product-price'>
+          <!-- Unit price -->
           <p>Unit price: <b>&euro;<span class="unit-price">{{price}}</span></b></p>
+          <!-- Subtotal price -->
           <p>Subtotal <span class='items-count'>
           </span>:
           <b >&euro;<span class='subtotal-price'></span></b>
@@ -28,27 +45,37 @@
       </div>
     {{/each}}
   {{/if}}
-<button onclick="WAD.openPurchaseModal()" class="btn btn-primary checkout-btn">Checkout</button>
+  <!-- Checkout button with onclick to trigger openPurchaseModal() function-->
+  <button onclick="WAD.openPurchaseModal()" class="btn btn-primary checkout-btn">Checkout</button>
 </div>
+
+<!-- Purchase summary modal -->
 <div id="purchase-summary-modal">
+  <!-- Container for the purchase summary content -->
   <div id="purchase-summary-container">
+    <!-- Close button for the purchase summary modal with onclick to trigger closePurchaseModal() function-->
     <button onclick="WAD.closePurchaseModal()" class="close-purchase-modal"></button>
     <div id="purchase-summary">
+      <!-- Purchase summary Bootstrap form -->
       <form id="confirm-purchase">
+        <!-- Payment method selection -->
         <h4 class="mb-3">Chose a payment method</h4>
         <fieldset  class="d-flex justify-content-around mb-4">
+          <!-- PayPal payment option -->
           <div class="form-check">
             <input class="form-check-input" type="radio" name="paypal" id="paypal">
             <label class="form-check-label" for="paypal">
               Paypal
             </label>
           </div>
+          <!-- Debit card payment option -->
           <div class="form-check">
             <input class="form-check-input" type="radio" name="debit-card" id="debit-card" checked>
             <label class="form-check-label" for="debit-card">
               Debit Card
             </label>
           </div>
+          <!-- Credit card payment option -->
           <div class="form-check">
             <input class="form-check-input" type="radio" name="credit-card" id="credit-card" >
             <label class="form-check-label" for="credit-card">
@@ -57,18 +84,22 @@
           </div>
         </fieldset>
         <h4 class="mb-3">Email me a purchase summary &amp; comment</h4>
+        <!-- Comment input field -->
         <div class="mb-2">
           <label for="comment-purchase" class="form-label">Comment</label>
           <input type="text" class="form-control" id="comment-purchase" aria-describedby="email-help" required>
         </div>
+        <!-- Email input field -->
         <div class="mb-5">
           <label for="email-purchase" class="form-label">Email address</label>
           <input type="email" class="form-control" id="email-purchase" aria-describedby="email-help" required>
           <div id="email-help" class="form-text">We'll never share your email with anyone else.</div>
         </div>
+        <!-- Submit button to trigger HTML form validation (hidden) -->
         <input type="submit" id="trigger-form-validation" style="display: none" />
       </form>
     </div>
+     <!-- Pay button with onclick to trigger confirmPurchase() function -->
     <button onclick="WAD.confirmPurchase(this)" class="btn btn-primary pay">Pay</button>
   </div>
 </div>

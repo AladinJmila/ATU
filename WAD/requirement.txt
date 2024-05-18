@@ -75,5 +75,16 @@ function specifyProduct () {
 }
 
 
-
+<!-- Bootstrap "Card" component for Movie Purchase -->
+<!-- shadow-lg class added to add shadow to card -->
+<div class="card collapse shadow-lg" id="myCard" style="width: 30%;">
+<img src="cloud.JPG" class="card-img-top" >
+<div class ="card-body">
+<h5 class ="card-title">Purchase </h5>
+<p class ="card-text">Purchase Movie</p>
+<!-- Card button, with onlclick event to trigger purchaseMovie() function -->
+<a href="#" class="btn btn-primary" onclick="purchaseMovie()">Save</a>
+</div>
+</div>
+<!-- END OF Bootstrap "Card" component -->
 
