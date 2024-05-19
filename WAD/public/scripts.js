@@ -76,16 +76,12 @@ window.WAD = {
       basketCountElement.innerText = ''
       // Remove the 'show' class from the plant icon
       plantElement.classList.remove('show')
-      // Remove the 'basketCount' key from localStorage
-      window.localStorage.removeItem('basketCount')
       // Exit the function early
       return
     }
 
     // Update the text content of the basket count element with currentCount
     basketCountElement.innerText = currentCount
-    // Store the currentCount in localStorage under the 'basketCount' key
-    window.localStorage.setItem('basketCount', currentCount)
 
     // Add the 'two-digits' class to the basket count element if currentCount is 10 or more
     if (currentCount >= 10) basketCountElement.classList.add('two-digits')
