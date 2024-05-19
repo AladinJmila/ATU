@@ -4,11 +4,10 @@
 window.WAD = {
   // Function to initialize the application by executing essential setup tasks
   init () {
-    // Check if the user is authenticated and redirect if necessary
-    WAD.checkIfAuthenticated()
-
     // Display the current basket count in the UI
     WAD.displayBasketCount()
+
+    WAD.reopenPurchaseModal()
 
     // Handle navigation links to highlight the active link based on the current page
     WAD.handleNavLinks()
@@ -211,20 +210,6 @@ window.WAD = {
     // Prevent the default behavior of the event (following the clicked link)
     e.preventDefault()
 
-    // Retrieve the authentication status from localStorage and parse as integer if present
-    let isAuthenticated = window.localStorage.getItem('isAuthenticated')
-    if (isAuthenticated) isAuthenticated = parseInt(isAuthenticated)
-
-    // If user is not authenticated
-    if (!isAuthenticated) {
-      // Redirect to the login page
-      window.location.href = '/login'
-      // Set a localStorage flag to indicate redirect to basket after login
-      window.localStorage.setItem('goToBasket', 1)
-      // Exit the function early
-      return
-    }
-
     // Retrieve basket orders from localStorage
     const orders = window.localStorage.getItem('basket')
 
@@ -332,18 +317,6 @@ window.WAD = {
     } catch (error) {
       // Log any errors that occur during the login process
       console.log(error)
-    }
-  },
-
-  // Function to check if user is authenticated and redirect to login if accessing basket page
-  checkIfAuthenticated () {
-    // Retrieve the authentication status from localStorage
-    const isAuthenticated = window.localStorage.getItem('isAuthenticated')
-
-    // Check if the current URL includes '/basket' and user is not authenticated
-    if (window.location.href.includes('/basket') && !isAuthenticated) {
-      // Redirect to the login page
-      window.location.href = '/login'
     }
   },
 
@@ -493,6 +466,22 @@ window.WAD = {
     const purchaseSummary = document.getElementById('purchase-summary')
     const basketItems = document.querySelectorAll('.basket-product-card')
 
+    // Retrieve the authentication status from localStorage and parse as integer if present
+    let isAuthenticated = window.localStorage.getItem('isAuthenticated')
+    if (isAuthenticated) isAuthenticated = parseInt(isAuthenticated)
+
+    // If user is not authenticated
+    if (!isAuthenticated) {
+      // Set a localStorage flag to reopen the purchace modal after login
+      window.localStorage.setItem('reopenPurchaceModal', 1)
+      // Set a localStorage flag to indicate redirect to basket after login
+      window.localStorage.setItem('goToBasket', 1)
+      // Redirect to the login page
+      window.location.href = '/login'
+      // Exit the function early
+      return
+    }
+
     // Initialize HTML content for the purchase summary modal
     let SummaryHTML = "<h2>Here's your order summary</h2>"
 
@@ -531,6 +520,20 @@ window.WAD = {
 
     // Freeze scrolling on the body to prevent background scrolling when modal is open
     WAD.bodyFreezeScroll()
+  },
+
+  // Function to reopen the purchase summary modal
+  reopenPurchaseModal () {
+    // Retrieve the 'reopenPurchaceModal' flag from localStorage
+    const reopen = window.localStorage.getItem('reopenPurchaceModal')
+
+    // Check if the flag is set and the current URL includes '/basket'
+    if (reopen && window.location.href.includes('/basket')) {
+      // Open the purchase summary modal
+      WAD.openPurchaseModal()
+      // Remove the 'reopenPurchaceModal' flag from localStorage
+      window.localStorage.removeItem('reopenPurchaceModal')
+    }
   },
 
   // Function to close the purchase summary modal
