@@ -3,7 +3,7 @@
 
 window.WAD = {
   // Function to initialize the application by executing essential setup tasks
-  init () {
+  init() {
     // Display the current basket count in the UI
     WAD.displayBasketCount()
 
@@ -23,16 +23,16 @@ window.WAD = {
   },
 
   // Function to shuffle the elements of an array using the Fisher-Yates shuffle algorithm
-  shuffleArray (array) {
+  shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
     }
     return array
   },
 
   // Function to randomize the images displayed in a carousel
-  randomizeCarousel () {
+  randomizeCarousel() {
     // Retrieve all carousel images from the DOM
     const carouselImages = document.querySelectorAll('.carousel-item img')
 
@@ -40,10 +40,16 @@ window.WAD = {
     if (!carouselImages.length) return
 
     // Retrieve the URL of the most recently displayed first image in the carousel
-    const recentFirstImageURL = window.localStorage.getItem('recentFirstImageURL')
+    const recentFirstImageURL = window.localStorage.getItem(
+      'recentFirstImageURL'
+    )
 
     // Define an array containing URLs of images to be displayed in the carousel
-    let imagesURLs = ['/images/carousel1.jpg', '/images/carousel2.jpg', '/images/carousel3.jpg']
+    let imagesURLs = [
+      '/images/carousel1.jpg',
+      '/images/carousel2.jpg',
+      '/images/carousel3.jpg'
+    ]
 
     // Shuffle the array of image URLs to randomize their order
     imagesURLs = WAD.shuffleArray(imagesURLs)
@@ -64,7 +70,7 @@ window.WAD = {
   },
 
   // Function to update the basket count displayed on the navigation bar
-  updateBasketCount (currentCount) {
+  updateBasketCount(currentCount) {
     // Retrieve the HTML element displaying the basket count
     const basketCountElement = document.getElementById('basket-items-count')
     // Retrieve the HTML element representing the basket icon
@@ -93,7 +99,7 @@ window.WAD = {
   },
 
   // Function to display the basket count on the navigation bar
-  displayBasketCount () {
+  displayBasketCount() {
     // Retrieve the basket items from localStorage and parse them as JSON
     const basket = JSON.parse(window.localStorage.getItem('basket'))
     // Retrieve the HTML element displaying the basket count
@@ -115,7 +121,7 @@ window.WAD = {
   },
 
   // Function to add a product to the basket
-  addToBasket (current, e) {
+  addToBasket(current, e) {
     // Prevent event propagation to parent elements
     e.stopPropagation()
 
@@ -129,7 +135,9 @@ window.WAD = {
     const basket = JSON.parse(window.localStorage.getItem('basket')) || []
 
     // Check if the product already exists in the basket
-    const existingIndex = basket.findIndex(item => item.productId === +productId)
+    const existingIndex = basket.findIndex(
+      item => item.productId === +productId
+    )
 
     // If product exists in the basket
     if (existingIndex >= 0) {
@@ -163,7 +171,7 @@ window.WAD = {
   },
 
   // Function to display an information popup message on a specified element
-  showInfoPopup (parentElement, message, displayDuration) {
+  showInfoPopup(parentElement, message, displayDuration) {
     // Create a new div element for the info popup
     const infoPopup = document.createElement('div')
     infoPopup.classList.add('info-popup')
@@ -202,7 +210,7 @@ window.WAD = {
   },
 
   // Function to handle routing to the basket page
-  handleRouteToBasket (e) {
+  handleRouteToBasket(e) {
     // Prevent the default behavior of the event (following the clicked link)
     e.preventDefault()
 
@@ -214,7 +222,7 @@ window.WAD = {
   },
 
   // Function to handle navigation link styling based on current URL
-  handleNavLinks () {
+  handleNavLinks() {
     // Retrieve all navigation links with class 'nav-link'
     const navLinks = document.querySelectorAll('.nav-link')
 
@@ -229,7 +237,7 @@ window.WAD = {
   },
 
   // Function to display order count and subtotal price for each basket product card
-  showOrderCountAndPrice () {
+  showOrderCountAndPrice() {
     // Retrieve all basket product cards from the DOM
     const orders = document.querySelectorAll('.basket-product-card')
 
@@ -257,14 +265,16 @@ window.WAD = {
         } item${basketItem.count > 1 ? 's' : ''})`
 
         // Calculate and display the subtotal price for the basket item
-        const subtotalPrice = (basketItem.count * basketItem.productPrice).toFixed(2)
+        const subtotalPrice = (
+          basketItem.count * basketItem.productPrice
+        ).toFixed(2)
         order.querySelector('.subtotal-price').innerText = subtotalPrice
       })
     }
   },
 
   // Async function to handle user login process
-  async handleLogin (current, e) {
+  async handleLogin(current, e) {
     // Prevent the default form submission behavior (page reload)
     e.preventDefault()
 
@@ -308,7 +318,8 @@ window.WAD = {
         loginElment.style.display = 'none'
       } else {
         // Show error message if credential are incorrect
-        document.getElementById('invalid-login').innerText = 'Incorrect username or password'
+        document.getElementById('invalid-login').innerText =
+          'Incorrect username or password'
       }
     } catch (error) {
       // Log any errors that occur during the login process
@@ -317,7 +328,7 @@ window.WAD = {
   },
 
   // Function to handle user logout functionality
-  handleLogout () {
+  handleLogout() {
     // Retrieve logout and login elements from the DOM
     const logoutElement = document.querySelector("[href='/logout']")
     const loginElement = document.querySelector("[href='/login']")
@@ -350,12 +361,14 @@ window.WAD = {
   },
 
   // Function to update the quantity of a product in the basket
-  updateBasket (productId, quantity) {
+  updateBasket(productId, quantity) {
     // Retrieve basket items from localStorage or initialize as an empty array
     const basket = JSON.parse(window.localStorage.getItem('basket')) || []
 
     // Find the index of the product in the basket array based on productId
-    const existingIndex = basket.findIndex(item => item.productId === +productId)
+    const existingIndex = basket.findIndex(
+      item => item.productId === +productId
+    )
 
     // Update the quantity of the product in the basket
     basket[existingIndex].count = quantity
@@ -365,7 +378,7 @@ window.WAD = {
   },
 
   // Function to handle quantity change for a specific product
-  handleQuantityChange (current, command) {
+  handleQuantityChange(current, command) {
     // Retrieve the productId from the dataset of the current element
     const productId = current.dataset.id
 
@@ -399,12 +412,14 @@ window.WAD = {
   },
 
   // Function to remove a product from the basket
-  removeFromBasket (productId) {
+  removeFromBasket(productId) {
     // Retrieve basket items from localStorage
     const basket = JSON.parse(window.localStorage.getItem('basket'))
 
     // Find the index of the product in the basket array based on productId
-    const existingIndex = basket.findIndex(item => item.productId === +productId)
+    const existingIndex = basket.findIndex(
+      item => item.productId === +productId
+    )
 
     // Remove the product from the basket array at the found index
     basket.splice(existingIndex, 1)
@@ -414,8 +429,8 @@ window.WAD = {
 
     // If the basket is empty, remove the checkout button and offer navigation to the home page
     if (!basket.length) {
-      document.querySelector('[onclick="WAD.openPurchaseModal()"]')
-        .outerHTML = '<a class="btn btn-primary explore-collection" href="/home">Explore our collection</a>'
+      document.querySelector('[onclick="WAD.openPurchaseModal()"]').outerHTML =
+        '<a class="btn btn-primary explore-collection" href="/home">Explore our collection</a>'
     }
 
     // Update the basket items in localStorage with the modified basket array
@@ -423,7 +438,7 @@ window.WAD = {
   },
 
   // Function to handle deletion of a product from the basket
-  handleDeleteFromBasket (current) {
+  handleDeleteFromBasket(current) {
     // Retrieve the productId from the dataset of the current element
     const productId = current.dataset.id
 
@@ -447,7 +462,7 @@ window.WAD = {
   },
 
   // Function to navigate to the product page to retrieve product details
-  getProductDetails (current) {
+  getProductDetails(current) {
     // Retrieve the productId from the id attribute of the current element
     const productId = current.id
 
@@ -456,10 +471,12 @@ window.WAD = {
   },
 
   // Function to open the purchase summary modal with order details
-  openPurchaseModal () {
+  openPurchaseModal() {
     // Retrieve elements related to the purchase summary modal and basket items
-    const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
-    const purchaseSummary = document.getElementById('purchase-summary')
+    const purchaseSummaryModal = document.getElementById(
+      'purchase-summary-modal'
+    )
+    const purchaseSummaryList = document.getElementById('purchase-summary-list')
     const basketItems = document.querySelectorAll('.basket-product-card')
 
     // Retrieve the authentication status from localStorage and parse as integer if present
@@ -503,10 +520,12 @@ window.WAD = {
     })
 
     // Append total price information to the summary HTML
-    SummaryHTML += `<h3 class="total-price">Total Price:<span>&euro;${totalPrice.toFixed(2)}<span></h3>`
+    SummaryHTML += `<h3 class="total-price">Total Price:<span>&euro;${totalPrice.toFixed(
+      2
+    )}<span></h3>`
 
     // Insert the summary HTML into the purchase summary element
-    purchaseSummary.insertAdjacentHTML('afterbegin', SummaryHTML)
+    purchaseSummaryList.innerHTML = SummaryHTML
 
     // Add 'show' class to display the purchase summary modal
     purchaseSummaryModal.classList.add('show')
@@ -519,23 +538,25 @@ window.WAD = {
   },
 
   // Function to reopen the purchase summary modal
-  reopenPurchaseModal () {
+  reopenPurchaseModal() {
     // Retrieve the 'reopenPurchaceModal' flag from localStorage
     const reopen = window.localStorage.getItem('reopenPurchaceModal')
 
     // Check if the flag is set and the current URL includes '/basket'
     if (reopen && window.location.href.includes('/basket')) {
       // Open the purchase summary modal
-      WAD.openPurchaseModal()
+      setTimeout(WAD.openPurchaseModal, 500)
       // Remove the 'reopenPurchaceModal' flag from localStorage
       window.localStorage.removeItem('reopenPurchaceModal')
     }
   },
 
   // Function to close the purchase summary modal
-  closePurchaseModal () {
+  closePurchaseModal() {
     // Retrieve the purchase summary modal element
-    const purchaseSummaryModal = document.getElementById('purchase-summary-modal')
+    const purchaseSummaryModal = document.getElementById(
+      'purchase-summary-modal'
+    )
 
     // Remove the 'show' class to hide the purchase summary modal
     purchaseSummaryModal.classList.remove('show')
@@ -545,22 +566,29 @@ window.WAD = {
   },
 
   // Function to confirm the purchase and update the UI accordingly
-  confirmPurchase (current) {
+  confirmPurchase(current) {
     // Retrieve necessary DOM elements
     const confirmPurchaseContainer = document.getElementById('confirm-purchase')
-    const shoppingBasketContainer = document.getElementById('shopping-basket-container')
+    const shoppingBasketContainer = document.getElementById(
+      'shopping-basket-container'
+    )
     const purchaseForm = document.getElementById('confirm-purchase')
-    const triggerFormValidation = document.getElementById('trigger-form-validation')
+    const triggerFormValidation = document.getElementById(
+      'trigger-form-validation'
+    )
 
     // Show the confirm purchase container and scroll into view smoothly
     confirmPurchaseContainer.classList.add('show')
-    confirmPurchaseContainer.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    confirmPurchaseContainer.scrollIntoView({
+      block: 'nearest',
+      behavior: 'smooth'
+    })
 
     // Check the current button text to determine action
     if (current.innerText === 'Confirm purchase') {
       // Validate the purchase form before proceeding
       if (!purchaseForm.checkValidity()) {
-      // Trigger the browser's built-in form validation error display
+        // Trigger the browser's built-in form validation error display
         triggerFormValidation.click()
         return // Exit the function if form validation fails
       }
@@ -607,13 +635,13 @@ window.WAD = {
   },
 
   // Function to freeze scrolling on the body
-  bodyFreezeScroll () {
+  bodyFreezeScroll() {
     // Set the body overflow property to 'hidden' to disable scrolling
     document.body.style.overflow = 'hidden'
   },
 
   // Function to unfreeze scrolling on the body
-  bodyUnfreezeScroll () {
+  bodyUnfreezeScroll() {
     // Reset the body overflow property to empty string to enable scrolling
     document.body.style.overflow = ''
   }

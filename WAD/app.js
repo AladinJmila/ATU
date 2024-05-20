@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 // Define the port number for the server
-const port = 7777
+const port = 4388
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')))
@@ -27,7 +27,10 @@ app.set('views', './views')
 app.get('/home', async (req, res) => {
   // Fetch data from the database and map it to include 'stars' based on 'rating'
   let data = await getDBdata('SELECT * FROM products;')
-  data = data.map(product => ({ ...product, stars: Math.floor(product.rating) }))
+  data = data.map(product => ({
+    ...product,
+    stars: Math.floor(product.rating)
+  }))
 
   // Render the 'home' template with the retrieved data
   res.render('home', { data })
@@ -45,7 +48,9 @@ app.post('/login', async (req, res) => {
 
   try {
     // Check if the provided username and password match the database records
-    const data = await getDBdata(`SELECT password FROM users WHERE username = '${username}'`)
+    const data = await getDBdata(
+      `SELECT password FROM users WHERE username = '${username}'`
+    )
 
     // If a matching user is found, set isAuthenticated to true
     if (data.length && data[0].password === password) isAuthenticated = true
@@ -63,9 +68,14 @@ app.post('/login', async (req, res) => {
 app.get('/plants/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const products = await getDBdata(`SELECT * FROM products WHERE product_id = '${id}';`)
-    const reviews = await getDBdata(`SELECT * FROM reviews WHERE product_id = '${id}';`)
-    const similar = await getDBdata(`SELECT p.name, p.image_url, p.price, p.rating, p.product_id FROM products p
+    const products = await getDBdata(
+      `SELECT * FROM products WHERE product_id = '${id}';`
+    )
+    const reviews = await getDBdata(
+      `SELECT * FROM reviews WHERE product_id = '${id}';`
+    )
+    const similar =
+      await getDBdata(`SELECT p.name, p.image_url, p.price, p.rating, p.product_id FROM products p
                                   JOIN products_similar_products ps ON ps.product_id = '${id}'
                                   WHERE p.product_id = ps.similar_product_id;`)
 
@@ -74,7 +84,10 @@ app.get('/plants/:id', async (req, res) => {
       data: {
         product: { ...products[0], stars: Math.floor(products[0].rating) },
         reviews,
-        similar: similar.map(product => ({ ...product, stars: Math.floor(product.rating) }))
+        similar: similar.map(product => ({
+          ...product,
+          stars: Math.floor(product.rating)
+        }))
       }
     })
   } catch (error) {
@@ -88,9 +101,7 @@ app.get('/plants/:id', async (req, res) => {
 app.get('/basket', async (req, res) => {
   // Check if the 'orders' query parameter is provided and not empty
   if (!req.query?.orders || !JSON.parse(req.query.orders).length) {
-    return res
-      .status(404)
-      .render('error', { message: 'Your basket is empty' })
+    return res.status(404).render('error', { message: 'Your basket is empty' })
   }
 
   // Retrieve the orders from the query parameter and fetch corresponding product data
@@ -99,17 +110,18 @@ app.get('/basket', async (req, res) => {
 
   try {
     const data = await getDBdata(
-    `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
+      `SELECT * FROM products WHERE product_id IN (${productsIds.join(',')});`
     )
 
     // Add 'quantity' property to product data based on the orders
-    data && data.forEach(product => {
-      orders.forEach(order => {
-        if (order.productId === product.product_id) {
-          product.quantity = order.count
-        }
+    data &&
+      data.forEach(product => {
+        orders.forEach(order => {
+          if (order.productId === product.product_id) {
+            product.quantity = order.count
+          }
+        })
       })
-    })
 
     // Render the 'basket' template with the retrieved product data
     res.render('basket', { data })
@@ -122,9 +134,7 @@ app.get('/basket', async (req, res) => {
 
 // Middleware to handle invalid routes
 app.use((req, res) => {
-  res
-    .status(404)
-    .render('error', { message: '404 - Page not found!' })
+  res.status(404).render('error', { message: '404 - Page not found!' })
 })
 
 // Start the server and listen on the specified port

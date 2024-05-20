@@ -253,7 +253,8 @@ nav.navbar {
 }
 
 /* Flexbox layout for product price section */
-.basket-product-card .product-price {
+.basket-product-card .product-price,
+.summary-item .product-price {
   position: relative;
   text-align: right;
   display: flex;
