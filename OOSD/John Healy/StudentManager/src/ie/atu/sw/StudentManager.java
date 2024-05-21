@@ -20,18 +20,52 @@ public class StudentManager {
 	}
 	
 	public boolean delete(String sid) {
+		for (int i = 0; i < student.length; i++) {
+			if(student[i] != null && student[i].sid().equals(sid)) {
+				student[i] = null;
+				return true;
+			}
+		}
 		return false;
 	}
 	
 	public Student getStudentByID(String sid) {
+		for (int i = 0; i < student.length; i++) {
+			if(student[i] != null && student[i].sid().equals(sid)) {
+				return student[i];
+			}
+		}
 		return null;
 	}
 	
 	public Student[] getStudentsByFirstname(String firstname) {
-		return null;
+		// find the number of matches
+		int matches = 0;
+		for (int i = 0; i < student.length; i++) {
+			if(student[i] != null && student[i].firstname().equals(firstname)) {
+				matches++;
+			}
+		}
+		
+		// create array of length equals to matches
+		Student[] temp = new Student[matches];
+		
+		// copy all matches to the new array
+		int index = 0;
+		for (int i = 0; i < student.length; i++) {
+			if(student[i] != null && student[i].firstname().equals(firstname)) {
+				temp[index++] = student[i];
+			}
+		}
+		
+		return temp;
 	}
 	
 	public int size() {
-		return 0;
+		int total = 0;
+		for(int i = 0; i < student.length; i++) {
+			if(student[i] != null) total++;
+		}
+		return total;
 	}
 }
