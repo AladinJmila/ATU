@@ -15,40 +15,50 @@ public class Menu {
 		while(keepRunning) {
 			showOptions();
 			
-			
+			int choice = Integer.parseInt(s.next());
+			switch (choice) {
+				case 1 -> add();
+				case 2 -> delete();
+				case 3 -> findByID();
+				case 4 -> findStudentsByFirstname();
+				case 5 -> getTotal();
+				case 6 -> keepRunning = false;
+				default -> out.println("[Error] Invalid Selection");
+			}
 		}
+		out.print("[Info] Exiting...Bye!");
 	}
 
 	private void add() {
-
+		out.println("[Info] Add a Student");
 	}
 
 	private void delete() {
-
+		out.println("[Info] Delete a Student");
 	}
 
 	private void findByID() {
-
+		out.println("[Info] Find Student by ID");
 	}
 
-	private void findStudentByFirstname() {
-
+	private void findStudentsByFirstname() {
+		out.println("[Info] Find Student by Firstname");
 	}
 
 	private void getTotal() {
-
+		out.println("[Info] Total Number of Students");
 	}
 
 	private void showOptions() {
-		out.print("*************************************");
-		out.print("******   Student Manager 1.0   ******");
-		out.print("(1) Add a Student");
-		out.print("(2) Delete a Student");
-		out.print("(3) Find Student by ID");
-		out.print("(4) Find Students by Firstname");
-		out.print("(5) Get Total Student Number");
-		out.print("(6) Quit");
-		out.print("Select an Option [1-6]>");
+		out.println("*************************************");
+		out.println("******   Student Manager 1.0   ******");
+		out.println("(1) Add a Student");
+		out.println("(2) Delete a Student");
+		out.println("(3) Find Student by ID");
+		out.println("(4) Find Students by Firstname");
+		out.println("(5) Get Total Student Number");
+		out.println("(6) Quit");
+		out.println("Select an Option [1-6]>");
 
 	}
 }
