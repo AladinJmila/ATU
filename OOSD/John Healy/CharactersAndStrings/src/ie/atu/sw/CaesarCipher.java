@@ -8,25 +8,25 @@ public class CaesarCipher {
 	}
 
 	public String encrypt(String plainText) {
-		String enc = "";
-
-		for (int i = 0; i < plainText.length(); i++) {
-			char ch = (char) (plainText.codePointAt(i) + key);
-			enc += ch;
-		}
-
-		return enc;
+		return encryptDecrypt(plainText, true);
 	}
 
 	public String decrypt(String cipherText) {
-		String dec = "";
+		return encryptDecrypt(cipherText, false);
+	}
 
-		for (int i = 0; i < cipherText.length(); i++) {
-			char ch = (char) (cipherText.codePointAt(i) - key);
-			dec += ch;
+	private String encryptDecrypt(String s, boolean encrypt) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < s.length(); i++) {
+			if (encrypt) {
+				sb.append((char)(s.codePointAt(i) + key));
+			} else {
+				sb.append((char)(s.codePointAt(i) - key));
+			}
 		}
 
-		return dec;
+		return sb.toString();
 	}
 
 }
