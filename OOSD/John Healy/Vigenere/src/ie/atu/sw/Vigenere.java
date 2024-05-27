@@ -11,14 +11,36 @@ public class Vigenere {
 		this.key = key.trim().toUpperCase().toCharArray();
 	}
 	
-	public String encrypt(String plainText) {
+
+	private String cipher(String s, boolean encrpyt) {
+		char[] localKey = s.length() > key.length ? getPaddedKey(s) : key;
 		StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < plainText.length(); i++) {
-			sb.append(getEncyptedCharacter(key[i], plainText.charAt(i)));
+		for (int i = 0; i < s.length(); i++) {
+			if (encrpyt) {
+				sb.append(getEncyptedCharacter(localKey[i], s.charAt(i)));	
+			} else {
+				sb.append(getDecyptedCharacter(localKey[i], s.charAt(i)));
+			}
+			
 		}
 		
 		return sb.toString();
+	}
+	
+	private char[] getPaddedKey(String s) {
+		char[] padded = new char[s.length()];
+		
+		int index = 0;
+		for (int i = 0; i < s.length(); i++) {
+			padded[i] = key[index++];
+			if (index == key.length) index = 0;
+		}
+		
+		return padded;
+	}
+	
+	public String encrypt(String plainText) {
+		return cipher(plainText, true);
 	}
 	
 	private char getEncyptedCharacter(char key, char plain) {
@@ -35,13 +57,7 @@ public class Vigenere {
 	}
 	
 	public String decrypt(String cipherText) {
-		StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < cipherText.length(); i++) {
-			sb.append(getDecyptedCharacter(key[i], cipherText.charAt(i)));
-		}
-
-		return sb.toString();
+		return cipher(cipherText, false);
 	}
 	
 	private char getDecyptedCharacter(char key, char cipher) {
