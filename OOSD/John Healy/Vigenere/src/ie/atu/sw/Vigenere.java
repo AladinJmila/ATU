@@ -22,7 +22,16 @@ public class Vigenere {
 	}
 	
 	private char getEncyptedCharacter(char key, char plain) {
-		return 0;
+		for (int row = 0; row < TABULA_RECTA.length; row++) {
+			if (TABULA_RECTA[row][0] == key) {
+				for (int col = 0; col < TABULA_RECTA[row].length; col++) {
+					if (TABULA_RECTA[0][col] == plain) {
+						return TABULA_RECTA[row][col];
+					}
+				}
+			}
+		}
+		return plain;
 	}
 	
 	public String decrypt(String cipherText) {
@@ -36,7 +45,16 @@ public class Vigenere {
 	}
 	
 	private char getDecyptedCharacter(char key, char cipher) {
-		return 0;
+		for (int col = 0; col < TABULA_RECTA[0].length; col++) {
+			if (TABULA_RECTA[0][col] == key) {
+				for (int row = 0; row < TABULA_RECTA.length; row++) {
+					if (TABULA_RECTA[row][col] == cipher) {
+						return TABULA_RECTA[row][0];
+					}
+				}
+			}
+		}
+		return cipher;
 	}
 	
 	
