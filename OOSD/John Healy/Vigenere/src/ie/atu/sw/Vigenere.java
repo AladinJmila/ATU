@@ -10,7 +10,9 @@ public class Vigenere {
 	}
 	
 	public void setKey(String key) throws Exception {
-		this.validateKey(key);
+		validateKey(key);
+		checkBounds(key);
+		
 		this.key = key.trim().toUpperCase().toCharArray();
 	}
 	
@@ -23,6 +25,20 @@ public class Vigenere {
 		}
 	}
 	
+	private void checkBounds (String s) throws Exception {
+		boolean isValid = true;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			
+			if ((c < 'A' || c > 'Z') && c != 0x20) {
+				isValid = false;
+				break;
+			}
+		}
+		
+		if (!isValid) throw new Exception("Invalid character in key or text.");
+	}
+	
 	private void validateText(String text) throws Exception {
 		if (key == null || text.length() < MIN_KEY_SIZE) {
 			throw new Exception("Vigenere error: invalid text. " 
@@ -31,7 +47,9 @@ public class Vigenere {
 		}
 	}
 
-	private String cipher(String s, boolean encrpyt) {
+	private String cipher(String s, boolean encrpyt) throws Exception {
+		validateText(s);
+		checkBounds(s);
 		char[] localKey = s.length() > key.length ? getPaddedKey(s) : key;
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
@@ -59,7 +77,6 @@ public class Vigenere {
 	}
 	
 	public String encrypt(String plainText) throws Exception {
-		validateText(plainText);
 		return cipher(plainText, true);
 	}
 	
@@ -77,7 +94,6 @@ public class Vigenere {
 	}
 	
 	public String decrypt(String cipherText) throws Exception {
-		validateText(cipherText);
 		return cipher(cipherText, false);
 	}
 	

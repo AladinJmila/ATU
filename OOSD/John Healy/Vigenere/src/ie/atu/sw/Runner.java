@@ -7,7 +7,7 @@ public class Runner {
 		
 		try {
 			Vigenere cipher = new Vigenere(key);
-			String cipherText = cipher.encrypt("plainText");
+			String cipherText = cipher.encrypt(plainText);
 			System.out.println(cipherText);
 			System.out.println(cipher.decrypt(cipherText));
 		} catch (Exception e) {
