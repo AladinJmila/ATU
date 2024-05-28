@@ -1,16 +1,35 @@
 package ie.atu.sw;
 
 public class Vigenere {
+	public static final int MIN_KEY_SIZE = 10;
+	public static final int MAX_KEY_SIZE = 100;
 	private char[] key = null;
 	
-	public Vigenere(String key) {
+	public Vigenere(String key) throws Exception {
 		setKey(key);
 	}
 	
-	public void setKey(String key) {
+	public void setKey(String key) throws Exception {
+		this.validateKey(key);
 		this.key = key.trim().toUpperCase().toCharArray();
 	}
 	
+	private void validateKey(String key) throws Exception{
+		if (key == null) {
+			throw new Exception("Vigenere error: key cannot be null");
+		} else if (key.length() < MIN_KEY_SIZE || key.length() > MAX_KEY_SIZE) {
+			throw new Exception("Vigenere error: key must be between "
+					+ MIN_KEY_SIZE + " and " + MAX_KEY_SIZE + " characters.");
+		}
+	}
+	
+	private void validateText(String text) throws Exception {
+		if (key == null || text.length() < MIN_KEY_SIZE) {
+			throw new Exception("Vigenere error: invalid text. " 
+					+ "The minimum size of plain and cipher text is " 
+					+ MIN_KEY_SIZE + " characters.");
+		}
+	}
 
 	private String cipher(String s, boolean encrpyt) {
 		char[] localKey = s.length() > key.length ? getPaddedKey(s) : key;
@@ -39,7 +58,8 @@ public class Vigenere {
 		return padded;
 	}
 	
-	public String encrypt(String plainText) {
+	public String encrypt(String plainText) throws Exception {
+		validateText(plainText);
 		return cipher(plainText, true);
 	}
 	
@@ -56,7 +76,8 @@ public class Vigenere {
 		return plain;
 	}
 	
-	public String decrypt(String cipherText) {
+	public String decrypt(String cipherText) throws Exception {
+		validateText(cipherText);
 		return cipher(cipherText, false);
 	}
 	
