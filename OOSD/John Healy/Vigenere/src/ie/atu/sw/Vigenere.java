@@ -49,7 +49,7 @@ public class Vigenere {
 
 	private String cipher(String s, boolean encrpyt) throws Exception {
 		validateText(s);
-		checkBounds(s);
+//		checkBounds(s);
 		char[] localKey = s.length() > key.length ? getPaddedKey(s) : key;
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
