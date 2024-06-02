@@ -8,15 +8,18 @@ public class Runner {
 //		MainMenu mm = new MainMenu();
 //		mm.init();
 		
-		String file = "./static/word-embeddings.txt";
-		FileProcessor fp = new FileProcessor(file);
-		String[] words = fp.getWordsArray();
-		double[][] embeddings = fp.getEmbeddingsArray();
+//		String file = "./static/word-embeddings.txt";
+//		FileProcessor fp = new FileProcessor(file);
+//		String[] words = fp.getWordsArray();
+//		double[][] embeddings = fp.getEmbeddingsArray();
+//		
+//		for (int i = 0; i < words.length; i++) {
+//			System.out.println(words[i]);
+//			System.out.println(Arrays.toString(embeddings[i]));
+//		}
 		
-		for (int i = 0; i < words.length; i++) {
-			System.out.println(words[i]);
-			System.out.println(Arrays.toString(embeddings[i]));
-		}
+		Searcher s = new Searcher();
+		s.cosineDistance();
 		
 //		//You may want to include a progress meter in you assignment!
 //		System.out.print(ConsoleColour.CYAN);	//Change the colour of the console text
