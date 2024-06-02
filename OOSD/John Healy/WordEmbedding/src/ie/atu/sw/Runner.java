@@ -1,15 +1,22 @@
 package ie.atu.sw;
 
+import java.util.Arrays;
+
 public class Runner {
 
 	public static void main(String[] args) throws Exception {
 //		MainMenu mm = new MainMenu();
 //		mm.init();
 		
-		FileProcessor fp = new FileProcessor();
-		fp.processFile();
+		String file = "./static/word-embeddings.txt";
+		FileProcessor fp = new FileProcessor(file);
+		String[] words = fp.getWordsArray();
+		double[][] embeddings = fp.getEmbeddingsArray();
 		
-		
+		for (int i = 0; i < words.length; i++) {
+			System.out.println(words[i]);
+			System.out.println(Arrays.toString(embeddings[i]));
+		}
 		
 //		//You may want to include a progress meter in you assignment!
 //		System.out.print(ConsoleColour.CYAN);	//Change the colour of the console text

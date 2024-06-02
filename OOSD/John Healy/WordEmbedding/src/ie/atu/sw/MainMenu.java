@@ -26,7 +26,12 @@ public class MainMenu {
 				case 4 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("4");}
 				case 5 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("5");}
 				case 6 	-> keepRunning = false;
-				default -> {out.println(""); out.print(ConsoleColour.RED_BOLD); out.println("[ERROR] Invalid Selection");}
+				default -> {
+					out.println(""); 
+					out.print(ConsoleColour.RED_BOLD); 
+					out.println("[ERROR] Invalid Selection"); 
+					out.print(ConsoleColour.RESET);
+					}
 			}
 		}
 	}

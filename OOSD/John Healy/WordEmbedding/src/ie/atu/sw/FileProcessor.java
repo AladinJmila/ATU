@@ -1,24 +1,32 @@
 package ie.atu.sw;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import static java.lang.System.out;
+
+import java.io.*;
 
 public class FileProcessor {
 	private static final int WORDS_COUNT = 10;
 	private static final int FEATURES_COUNT = 50;
+	private boolean createdArrays;
 	
-	private String file = "./static/word-embeddings.txt";
+	private String file;
 	private String[] words = new String[WORDS_COUNT];
 	private double[][] embeddings = new double[WORDS_COUNT][FEATURES_COUNT];
-	private String[][] embeddingsTest = new String[WORDS_COUNT][FEATURES_COUNT];
 	
-	public void processFile() {
+	FileProcessor(String filePath) {
+		file = filePath;
+	}
+	
+	private void generateArrays() {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String line = null;
 			int index = 0;
+			
+			out.println(""); 
+			out.print(ConsoleColour.GREEN_BOLD); 
+			out.println("[INFO] Processing input..."); 
+			out.print(ConsoleColour.RESET);
 			
 			while ((line = br.readLine()) != null) {
 				String[] items = line.split(",");
@@ -34,17 +42,22 @@ public class FileProcessor {
 				if (index++ >= 9) break;
 			}
 			
-			for (int i = 0; i < WORDS_COUNT; i++) {
-				System.out.println(words[i]);
-				System.out.println(Arrays.toString(embeddings[i]));
-			}
-			
-
+			createdArrays = true;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 	
+	public String[] getWordsArray() {
+		if (!createdArrays) generateArrays();
+		
+		return words;
+	}
 	
+	public double[][] getEmbeddingsArray() {
+		if (!createdArrays) generateArrays();
+		
+		return embeddings;
+	}
 	
 }
