@@ -7,7 +7,7 @@ public class Runner {
 //		mm.init();
 		
 		FileProcessor fp = new FileProcessor();
-		fp.loadFile();
+		fp.processFile();
 		
 		
 		
