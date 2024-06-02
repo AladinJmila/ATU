@@ -3,8 +3,11 @@ package ie.atu.sw;
 public class Runner {
 
 	public static void main(String[] args) throws Exception {
-		MainMenu mm = new MainMenu();
-		mm.init();
+//		MainMenu mm = new MainMenu();
+//		mm.init();
+		
+		FileProcessor fp = new FileProcessor();
+		fp.loadFile();
 		
 		
 		
