@@ -1,14 +1,17 @@
 package ie.atu.sw;
 
 public class Searcher {
-
-	public double cosineDistance(double[] v1, double[] v2) {
-//		System.out.println("Product: " + computeProduct(v1, v2));
-//		System.out.println("Dot Product: " + computeDotProduct(v1, v2));
-		return computeProduct(v1, v2) / computeDotProduct(v1, v2);
+	private double searchTermSquaredSum;
+	public double cosineDistance(double[] searchTermVector, double[] compareToVector) {
+		if (searchTermSquaredSum == 0.0d) {
+			searchTermSquaredSum = computeSquaredSum(searchTermVector);
+			System.out.println("coputed this");
+		}
+		
+		return computeDotProduct(searchTermVector, compareToVector) / computeDotProductSquared(searchTermSquaredSum, compareToVector);
 	}
 	
-	private double computeProduct(double[] v1, double[] v2) {
+	private double computeDotProduct(double[] v1, double[] v2) {
 		double result = 0.0d;
 		
 		for (int i = 0; i < v1.length; i++) {
@@ -18,15 +21,21 @@ public class Searcher {
 		return result;
 	}
 	
-	private double computeDotProduct(double[] v1, double[] v2) {
-		double v1SquareSum = 0.0d;
-		double v2SquareSum = 0.0d;
+	private double computeDotProductSquared(double searchTermSquaredSum, double[] compareToVector) {
+		double result = 0.0d;
 		
-		for (int i = 0; i < v1.length; i++) {
-			v1SquareSum += Math.pow(v1[i], 2);
-			v2SquareSum += Math.pow(v2[i], 2);
+		for (int i = 0; i < compareToVector.length; i++) {
+			result += Math.pow(compareToVector[i], 2);
 		}
 		
-		return Math.sqrt(v1SquareSum * v2SquareSum);
+		return Math.sqrt(searchTermSquaredSum * result);
+	}
+	
+	private double computeSquaredSum(double[] array) {
+		double result = 0.0d;
+		for (int i = 0; i < array.length; i++) {
+			result += Math.pow(array[i], 2);
+		}
+		return result;
 	}
 }

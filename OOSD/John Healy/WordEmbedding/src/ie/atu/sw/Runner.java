@@ -46,18 +46,18 @@ public class Runner {
 		
 		Searcher s = new Searcher();
 		
-		System.out.println(s.cosineDistance(embeddings[searchTermIndex], embeddings[searchTermIndex2]));
+//		System.out.println(s.cosineDistance(embeddings[searchTermIndex], embeddings[searchTermIndex2]));
 		
-//		for (int i = 0; i < words.length; i++) {
-//			if (i == searchTermIndex) continue;
-//			double result = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
-////			if (result >= 0.68d && result <= 1.0d ) {
-//				if (result >= 0.68d ) {
-//				System.out.println(words[i]);
-//				System.out.println(result);
-//			}
-//			
-//		}
+		for (int i = 0; i < words.length; i++) {
+			if (i == searchTermIndex) continue;
+			double result = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
+//			if (result >= 0.68d && result <= 1.0d ) {
+				if (result >= 0.68d ) {
+				System.out.println(words[i]);
+				System.out.println(result);
+			}
+			
+		}
 		
 		
 //		//You may want to include a progress meter in you assignment!
