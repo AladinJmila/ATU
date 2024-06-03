@@ -5,8 +5,8 @@ import static java.lang.System.out;
 import java.io.*;
 
 public class FileProcessor {
-	private static final int WORDS_COUNT = 59_602;
-	private static final int FEATURES_COUNT = 50;
+	public static final int WORDS_COUNT = 59_602;
+	public static final int FEATURES_COUNT = 50;
 	private boolean createdArrays;
 	
 	private String file;
