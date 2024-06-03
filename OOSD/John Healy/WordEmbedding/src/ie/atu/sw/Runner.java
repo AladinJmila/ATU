@@ -1,9 +1,10 @@
 package ie.atu.sw;
 
-import java.util.Arrays;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Runner {
-
+	
 	public static void main(String[] args) throws Exception {
 //		MainMenu mm = new MainMenu();
 //		mm.init();
@@ -12,20 +13,10 @@ public class Runner {
 		FileProcessor fp = new FileProcessor(file);
 		String[] words = fp.getWordsArray();
 		double[][] embeddings = fp.getEmbeddingsArray();
-//		
-//		for (int i = 0; i < words.length; i++) {
-//			System.out.println(words[i]);
-//			System.out.println(Arrays.toString(embeddings[i]));
-//		}
 		
-		System.out.println(Arrays.toString(words));
-		System.out.println(words.length);
-		
+		long startTime = System.currentTimeMillis();
 		String searchTerm = "prince";
 		int searchTermIndex = 0;
-		
-		String searchTerm2 = "monkey";
-		int searchTermIndex2 = 0;
 		
 		for (int i = 0; i < words.length; i++) {
 			if (words[i].equals(searchTerm.toLowerCase())) {
@@ -35,9 +26,6 @@ public class Runner {
 			
 		}
 		
-		
-		
-
 		Searcher s = new Searcher();
 		double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
 		
@@ -50,12 +38,26 @@ public class Runner {
 		QuickSort qs = new QuickSort();
 		qs.sort(result);
 		
+		FileWriter out = new FileWriter("out.txt");
+		PrintWriter print = new PrintWriter(out);
+		
+		print.printf("|    Result    |  Score(%%)  |%n");
+		print.printf("---------------+-------------%n");
 		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 12; i--) {
 			System.out.println(result[i][1]);
+			double score = result[i][1] * 100;
 			int wordIndex = (int) result[i][0];
+			String word = words[wordIndex];
 			System.out.println(words[wordIndex]);
+			print.printf("| %-12s |    %-8.1f|%n", word, score);
+			if (i != FileProcessor.WORDS_COUNT - 11)
+			print.printf("---------------+-------------%n");
 		}
+		print.printf("-----------------------------%n");
 		
+		print.close();
+		
+		System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
 		
 //		//You may want to include a progress meter in you assignment!
 //		System.out.print(ConsoleColour.CYAN);	//Change the colour of the console text
