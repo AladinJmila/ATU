@@ -1,18 +1,11 @@
 package ie.atu.sw;
 
 public class Searcher {
-	double product;
-	public void cosineDistance() {
-		System.out.println(product);
-		double[] v1 = {1.0, 2.0, 3.0};
-		double[] v2 = {4.0, 5.0, 6.0};
-		
-		
-		if (product == 0.0) {
-			product = computeProduct(v1, v2);
-		}
-		
-		System.out.println(product);
+
+	public double cosineDistance(double[] v1, double[] v2) {
+//		System.out.println("Product: " + computeProduct(v1, v2));
+//		System.out.println("Dot Product: " + computeDotProduct(v1, v2));
+		return computeProduct(v1, v2) / computeDotProduct(v1, v2);
 	}
 	
 	private double computeProduct(double[] v1, double[] v2) {
@@ -23,5 +16,17 @@ public class Searcher {
 		}
 		
 		return result;
+	}
+	
+	private double computeDotProduct(double[] v1, double[] v2) {
+		double v1SquareSum = 0.0d;
+		double v2SquareSum = 0.0d;
+		
+		for (int i = 0; i < v1.length; i++) {
+			v1SquareSum += Math.pow(v1[i], 2);
+			v2SquareSum += Math.pow(v2[i], 2);
+		}
+		
+		return Math.sqrt(v1SquareSum * v2SquareSum);
 	}
 }

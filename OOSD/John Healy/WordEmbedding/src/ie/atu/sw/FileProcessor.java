@@ -5,7 +5,7 @@ import static java.lang.System.out;
 import java.io.*;
 
 public class FileProcessor {
-	private static final int WORDS_COUNT = 10;
+	private static final int WORDS_COUNT = 59_602;
 	private static final int FEATURES_COUNT = 50;
 	private boolean createdArrays;
 	
@@ -38,8 +38,8 @@ public class FileProcessor {
 					}
 					
 				}
-				
-				if (index++ >= 9) break;
+
+				if (index++ >= WORDS_COUNT - 1) break;
 			}
 			
 			createdArrays = true;

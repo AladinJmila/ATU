@@ -8,18 +8,57 @@ public class Runner {
 //		MainMenu mm = new MainMenu();
 //		mm.init();
 		
-//		String file = "./static/word-embeddings.txt";
-//		FileProcessor fp = new FileProcessor(file);
-//		String[] words = fp.getWordsArray();
-//		double[][] embeddings = fp.getEmbeddingsArray();
+		String file = "./static/word-embeddings.txt";
+		FileProcessor fp = new FileProcessor(file);
+		String[] words = fp.getWordsArray();
+		double[][] embeddings = fp.getEmbeddingsArray();
 //		
 //		for (int i = 0; i < words.length; i++) {
 //			System.out.println(words[i]);
 //			System.out.println(Arrays.toString(embeddings[i]));
 //		}
 		
+		System.out.println(Arrays.toString(words));
+		System.out.println(words.length);
+		
+		String searchTerm = "horse";
+		int searchTermIndex = 0;
+		
+		String searchTerm2 = "monkey";
+		int searchTermIndex2 = 0;
+		
+		for (int i = 0; i < words.length; i++) {
+			if (words[i].equals(searchTerm.toLowerCase())) {
+				searchTermIndex = i;
+//				break;
+			}
+			
+			if (words[i].equals(searchTerm2.toLowerCase())) {
+				searchTermIndex2 = i;
+//				break;
+			}
+		}
+		
+		
+		
+//		double[] v1 = {1.0, 2.0, 3.0};
+//		double[] v2 = {4.0, 5.0, 6.0};
+		
 		Searcher s = new Searcher();
-		s.cosineDistance();
+		
+		System.out.println(s.cosineDistance(embeddings[searchTermIndex], embeddings[searchTermIndex2]));
+		
+//		for (int i = 0; i < words.length; i++) {
+//			if (i == searchTermIndex) continue;
+//			double result = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
+////			if (result >= 0.68d && result <= 1.0d ) {
+//				if (result >= 0.68d ) {
+//				System.out.println(words[i]);
+//				System.out.println(result);
+//			}
+//			
+//		}
+		
 		
 //		//You may want to include a progress meter in you assignment!
 //		System.out.print(ConsoleColour.CYAN);	//Change the colour of the console text
