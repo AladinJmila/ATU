@@ -5,7 +5,6 @@ public class Searcher {
 	public double cosineDistance(double[] searchTermVector, double[] compareToVector) {
 		if (searchTermSquaredSum == 0.0d) {
 			searchTermSquaredSum = computeSquaredSum(searchTermVector);
-			System.out.println("coputed this");
 		}
 		
 		return computeDotProduct(searchTermVector, compareToVector) / computeDotProductSquared(searchTermSquaredSum, compareToVector);

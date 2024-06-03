@@ -21,7 +21,7 @@ public class Runner {
 		System.out.println(Arrays.toString(words));
 		System.out.println(words.length);
 		
-		String searchTerm = "horse";
+		String searchTerm = "prince";
 		int searchTermIndex = 0;
 		
 		String searchTerm2 = "monkey";
@@ -30,33 +30,30 @@ public class Runner {
 		for (int i = 0; i < words.length; i++) {
 			if (words[i].equals(searchTerm.toLowerCase())) {
 				searchTermIndex = i;
-//				break;
+				break;
 			}
 			
-			if (words[i].equals(searchTerm2.toLowerCase())) {
-				searchTermIndex2 = i;
-//				break;
-			}
 		}
 		
 		
 		
-//		double[] v1 = {1.0, 2.0, 3.0};
-//		double[] v2 = {4.0, 5.0, 6.0};
-		
+
 		Searcher s = new Searcher();
+		double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
 		
-//		System.out.println(s.cosineDistance(embeddings[searchTermIndex], embeddings[searchTermIndex2]));
-		
-		for (int i = 0; i < words.length; i++) {
+		for (int i = 0; i < words.length - 1; i++) {
 			if (i == searchTermIndex) continue;
-			double result = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
-//			if (result >= 0.68d && result <= 1.0d ) {
-				if (result >= 0.68d ) {
-				System.out.println(words[i]);
-				System.out.println(result);
-			}
-			
+			result[i][0]  = (double) i;
+			result[i][1]  = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
+		}
+		
+		QuickSort qs = new QuickSort();
+		qs.sort(result);
+		
+		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 12; i--) {
+			System.out.println(result[i][1]);
+			int wordIndex = (int) result[i][0];
+			System.out.println(words[wordIndex]);
 		}
 		
 		
