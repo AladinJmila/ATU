@@ -1,9 +1,34 @@
 package ie.atu.sw;
 
 import java.io.FileWriter;
+
+import static java.lang.System.out;
+
 import java.io.PrintWriter;
 
 public class Runner {
+	
+	private static void launchFile(String filePath) {
+		String os = System.getProperty("os.name").toLowerCase();
+		Runtime runtime = Runtime.getRuntime();
+		
+		try {
+			if(os.contains("win")) {
+				runtime.exec(new String[]{"cmd.exe", "/c", "start", filePath});
+			} else if (os.contains("mac")) {
+				runtime.exec(new String[] {"open", filePath});
+			} else if (os.contains("nix") || os.contains("nux")) {
+				runtime.exec(new String[] {"xdg-open", filePath});
+			} else {
+				System.out.print(ConsoleColour.YELLOW_BOLD);
+				System.out.println("[WARNING] Unsupported operating system: " + os);
+				System.out.println("Please open the file manually.");
+				System.out.print(ConsoleColour.RESET);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 	
 	public static void main(String[] args) throws Exception {
 //		MainMenu mm = new MainMenu();
@@ -56,6 +81,8 @@ public class Runner {
 		print.printf("-----------------------------%n");
 		
 		print.close();
+		
+//		Runner.launchFile("out.txt");
 		
 		System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
 		
