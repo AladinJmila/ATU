@@ -1,14 +1,11 @@
 package ie.atu.sw;
 
-import java.io.FileWriter;
-
 import static java.lang.System.out;
 
-import java.io.PrintWriter;
 
 public class Runner {
 	
-	private static void launchFile(String filePath) {
+	public static void launchFile(String filePath) {
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime runtime = Runtime.getRuntime();
 		
@@ -31,60 +28,8 @@ public class Runner {
 	}
 	
 	public static void main(String[] args) throws Exception {
-//		MainMenu mm = new MainMenu();
-//		mm.init();
-		
-		String file = "./static/word-embeddings.txt";
-		FileProcessor fp = new FileProcessor(file);
-		String[] words = fp.getWordsArray();
-		double[][] embeddings = fp.getEmbeddingsArray();
-		
-		long startTime = System.currentTimeMillis();
-		String searchTerm = "prince";
-		int searchTermIndex = 0;
-		
-		for (int i = 0; i < words.length; i++) {
-			if (words[i].equals(searchTerm.toLowerCase())) {
-				searchTermIndex = i;
-				break;
-			}
-			
-		}
-		
-		Searcher s = new Searcher();
-		double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
-		
-		for (int i = 0; i < words.length - 1; i++) {
-			if (i == searchTermIndex) continue;
-			result[i][0]  = (double) i;
-			result[i][1]  = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
-		}
-		
-		QuickSort qs = new QuickSort();
-		qs.sort(result);
-		
-		FileWriter out = new FileWriter("out.txt");
-		PrintWriter print = new PrintWriter(out);
-		
-		print.printf("|    Result    |  Score(%%)  |%n");
-		print.printf("---------------+-------------%n");
-		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 12; i--) {
-			System.out.println(result[i][1]);
-			double score = result[i][1] * 100;
-			int wordIndex = (int) result[i][0];
-			String word = words[wordIndex];
-			System.out.println(words[wordIndex]);
-			print.printf("| %-12s |    %-8.1f|%n", word, score);
-			if (i != FileProcessor.WORDS_COUNT - 11)
-			print.printf("---------------+-------------%n");
-		}
-		print.printf("-----------------------------%n");
-		
-		print.close();
-		
-//		Runner.launchFile("out.txt");
-		
-		System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
+		MainMenu mm = new MainMenu();
+		mm.init();
 		
 //		//You may want to include a progress meter in you assignment!
 //		System.out.print(ConsoleColour.CYAN);	//Change the colour of the console text

@@ -1,8 +1,8 @@
+package ie.atu.sw;
+
 /*
  * This implementation was informed by material from codewithmosh.com
  */
-
-package ie.atu.sw;
 
 public class QuickSort {
 	// Public method that takes only the array to sort as input
