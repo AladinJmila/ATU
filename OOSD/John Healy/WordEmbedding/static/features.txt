@@ -1,0 +1,4 @@
+- Enable comparing similarity/difference of two terms
+- Allow search of a short sentence of which you will concatenate the results of each
+separate word and compute the sum of similarity percentage. This will require hard work
+to determine the best way to display the result in a table
