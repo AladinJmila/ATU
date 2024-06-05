@@ -1,6 +1,7 @@
 package ie.atu.sw;
 
 import static java.lang.System.out;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,61 +72,82 @@ public class MainMenu {
 	
 	
 	
-	private void doSearch(String searchTerm) throws IOException {
+	private void doSearch(String searchText) throws IOException {
 		FileProcessor fp = new FileProcessor(inputFile);
 		String[] words = fp.getWordsArray();
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
-		long startTime = System.currentTimeMillis();
-		int searchTermIndex = 0;
+//		long startTime = System.currentTimeMillis();
 		
-		for (int i = 0; i < words.length; i++) {
-			if (words[i].equals(searchTerm.toLowerCase())) {
-				searchTermIndex = i;
-				break;
+		String[] searchTerms = searchText.split(" ");
+		int[] searchTermIndexs = new int[searchTerms.length];
+		
+		
+		for (int i = 0; i < searchTerms.length; i++) {
+			for (int j = 0; j < words.length; j++) {
+				if (words[j].equals(searchTerms[i].toLowerCase())) {
+					searchTermIndexs[i] = j;
+					break;
+				}
+
 			}
 			
+			out.println(Arrays.toString(searchTerms));
+			out.println(Arrays.toString(searchTermIndexs));
+
+			Searcher s = new Searcher();
+			double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
+
+			for (int j = 0; j < words.length - 1; j++) {
+				if (j == searchTermIndexs[i]) {
+					out.println(searchTermIndexs[i]);
+					continue; 
+				}
+				result[j][0] = (double) j;
+				result[j][1] = s.cosineDistance(embeddings[searchTermIndexs[i]], embeddings[j]);
+			}
+
+			new QuickSort().sort(result);
+//			System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
+			generateOutputFile(generateSearchResults(result, words, totalWordsToOutput));
 		}
-		
-		Searcher s = new Searcher();
-		double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
-		
-		for (int i = 0; i < words.length - 1; i++) {
-			if (i == searchTermIndex) continue;
-			result[i][0]  = (double) i;
-			result[i][1]  = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
-		}
-		
-		new QuickSort().sort(result);
-		
-		generateOutput(result, words, totalWordsToOutput);
-		
+
 	}
 	
-	private void generateOutput(double[][] searchResult, String[] words, int totalWordsToOutput) {
-
-		FileWriter out = new FileWriter(outputFile);
-		PrintWriter print = new PrintWriter(out);
+	private String[][] generateSearchResults(double[][] searchResult, String[] words, int totalWordsToOutput){
+		String[][] result = new String[totalWordsToOutput][2];
+		int index = 0;
 		
-		print.printf("|    Result    |  Score(%%)  |%n");
-		print.printf("---------------+-------------%n");
 		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 2 - totalWordsToOutput; i--) {
-//			System.out.println(result[i][1]);
 			double score = searchResult[i][1] * 100;
 			int wordIndex = (int) searchResult[i][0];
 			String word = words[wordIndex];
-//			System.out.println(words[wordIndex]);
-			print.printf("| %-12s |    %-8.1f|%n", word, score);
-			if (i != FileProcessor.WORDS_COUNT - 11)
-			print.printf("---------------+-------------%n");
+			result[index++] = new String[]{word, String.format("%.1f", score)};
+		}
+		
+		return result;
+	}
+	
+	private void generateOutputFile(String[][] searchResult) throws IOException {
+
+	
+		FileWriter out = new FileWriter(searchResult[0][0] + ".txt");
+		PrintWriter print = new PrintWriter(out);
+
+		print.printf("|    Result    |  Score(%%)  |%n");
+		print.printf("---------------+-------------%n");
+		for (int i = 0; i < searchResult.length; i++) {
+			print.printf("| %-12s |    %-5s   |%n", searchResult[i][0], searchResult[i][1]);
+			System.out.println(Arrays.toString(searchResult[i]));
+			if (i != searchResult.length - 1) {
+				print.printf("---------------+-------------%n");
+			}
 		}
 		print.printf("-----------------------------%n");
-		
+
 		print.close();
-		
-		Runner.launchFile(outputFile);
-		
-		System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
+
+		Runner.launchFile(searchResult[0][0] + ".txt");
 	}
 	
 	
