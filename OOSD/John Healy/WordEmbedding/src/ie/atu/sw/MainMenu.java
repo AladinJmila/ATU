@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 	private String inputFile = "./static/word-embeddings.txt";
+	private int totalWordsToOutput = 10;
 	private Scanner s;
 	private ConsoleLogger cLogger;
 	private boolean keepRunning = true;
@@ -43,7 +44,6 @@ public class MainMenu {
 					out.println("Enter the search term or a phrase of 10 words maximum: ");
 					out.print(ConsoleColour.WHITE_BOLD);
 					doSearch(getUserInput());
-//					getUserInput();
 					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
 					}
 				case 4 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("4");}
@@ -77,7 +77,6 @@ public class MainMenu {
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
 		long startTime = System.currentTimeMillis();
-//		String searchTerm = "prince";
 		int searchTermIndex = 0;
 		
 		for (int i = 0; i < words.length; i++) {
@@ -97,18 +96,23 @@ public class MainMenu {
 			result[i][1]  = s.cosineDistance(embeddings[searchTermIndex], embeddings[i]);
 		}
 		
-		QuickSort qs = new QuickSort();
-		qs.sort(result);
+		new QuickSort().sort(result);
 		
+		generateOutput(result, words, totalWordsToOutput);
+		
+	}
+	
+	private void generateOutput(double[][] searchResult, String[] words, int totalWordsToOutput) {
+
 		FileWriter out = new FileWriter(outputFile);
 		PrintWriter print = new PrintWriter(out);
 		
 		print.printf("|    Result    |  Score(%%)  |%n");
 		print.printf("---------------+-------------%n");
-		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 12; i--) {
+		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 2 - totalWordsToOutput; i--) {
 //			System.out.println(result[i][1]);
-			double score = result[i][1] * 100;
-			int wordIndex = (int) result[i][0];
+			double score = searchResult[i][1] * 100;
+			int wordIndex = (int) searchResult[i][0];
 			String word = words[wordIndex];
 //			System.out.println(words[wordIndex]);
 			print.printf("| %-12s |    %-8.1f|%n", word, score);
@@ -122,7 +126,6 @@ public class MainMenu {
 		Runner.launchFile(outputFile);
 		
 		System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
-		
 	}
 	
 	
