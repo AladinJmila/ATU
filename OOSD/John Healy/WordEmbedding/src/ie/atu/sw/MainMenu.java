@@ -4,7 +4,7 @@ import static java.lang.System.out;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -39,8 +39,11 @@ public class MainMenu {
 					cLogger.log(LogLevel.INFO, "Output file path succesfully added");
 					}
 				case 3 	-> {
-					out.println("Enter search term or phrase");
-					doSearch(s.next());
+					out.print(ConsoleColour.YELLOW_BOLD);
+					out.println("Enter the search term or a phrase of 10 words maximum: ");
+					out.print(ConsoleColour.WHITE_BOLD);
+					doSearch(getUserInput());
+//					getUserInput();
 					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
 					}
 				case 4 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("4");}
@@ -51,6 +54,22 @@ public class MainMenu {
 			}
 		}
 	}
+	
+	private String getUserInput() {
+		String input = "";
+		int counter = 0;
+		
+		while(s.hasNextLine()) {
+			input = s.nextLine();
+			counter++;
+			if (counter != 0 && input.length() != 0) {
+				break;
+			}
+		}
+		return input;
+	}
+	
+	
 	
 	private void doSearch(String searchTerm) throws IOException {
 		FileProcessor fp = new FileProcessor(inputFile);
@@ -136,15 +155,15 @@ public class MainMenu {
 		out.print(ConsoleColour.WHITE_BOLD);
 		out.println("(1) Specify Embedding File");
 		out.println("(2) Specify an Output File (default: ./out.txt)");
-		out.println("(3) Enter a Word or Text");
-		out.println("(4) Configure Options");
-		out.println("(5) Optional Extras...");
-		out.println("(6) Quit");
+		out.println("(3) Enter a word or a sentence");
+		out.println("(5) Configure Options");
+		out.println("(6) Optional Extras...");
+		out.println("(7) Quit");
 		
 		out.println();
 		out.print(ConsoleColour.YELLOW_BOLD);
 		out.print("Select Option [1-6]> ");
-		out.print(ConsoleColour.CYAN_BOLD);
+		out.print(ConsoleColour.WHITE_BOLD);
 		isFirstRun = false;
 	}
 }
