@@ -12,9 +12,11 @@ public class FileProcessor {
 	private String file;
 	private String[] words = new String[WORDS_COUNT];
 	private double[][] embeddings = new double[WORDS_COUNT][FEATURES_COUNT];
+	private ConsoleLogger cLogger;
 	
 	FileProcessor(String filePath) {
 		file = filePath;
+		cLogger = new ConsoleLogger();
 	}
 	
 	private void generateArrays() {
@@ -23,10 +25,7 @@ public class FileProcessor {
 			String line = null;
 			int index = 0;
 			
-			out.println(""); 
-			out.print(ConsoleColour.GREEN_BOLD); 
-			out.println("[INFO] Processing input..."); 
-			out.print(ConsoleColour.RESET);
+			cLogger.log(LogLevel.INFO, "Processing the input file");
 			
 			while ((line = br.readLine()) != null) {
 				String[] items = line.split(",");

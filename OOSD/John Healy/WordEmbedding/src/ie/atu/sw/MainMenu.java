@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class MainMenu {
 	private String inputFile = "./static/word-embeddings.txt";
 	private Scanner s;
+	private ConsoleLogger cLogger;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
 	
@@ -17,6 +18,7 @@ public class MainMenu {
 	
 	public MainMenu() {
 		s = new Scanner(System.in);
+		cLogger = new ConsoleLogger();
 	}
 	
 	public void init() throws IOException {
@@ -27,34 +29,25 @@ public class MainMenu {
 			
 			switch(choice) {
 				case 1 	-> {
-					out.println("Enter path");
+					out.println("Enter input file path");
 					inputFile = s.next();
-					out.println(inputFile);
-					out.println(""); 
-					out.print(ConsoleColour.GREEN_BOLD); 
-					out.println("[INFO] Input file succesfully updated");
+					cLogger.log(LogLevel.INFO, "Input file path succesfully added");
 					}
 				case 2 	-> {
+					out.println("Enter output file path");
 					outputFile = s.next();
-					out.println(""); 
-					out.print(ConsoleColour.GREEN_BOLD); 
-					out.println("[INFO] Output file succesfully updated");
+					cLogger.log(LogLevel.INFO, "Output file path succesfully added");
 					}
 				case 3 	-> {
+					out.println("Enter search term or phrase");
 					doSearch(s.next());
-					out.println(""); 
-					out.print(ConsoleColour.WHITE); 
-					out.println("[INFO] Results file will launch automatically");
+					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
 					}
 				case 4 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("4");}
 				case 5 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("5");}
 				case 6 	-> keepRunning = false;
-				default -> {
-					out.println(""); 
-					out.print(ConsoleColour.RED_BOLD); 
-					out.println("[ERROR] Invalid Selection"); 
-					out.print(ConsoleColour.RESET);
-					}
+				default -> cLogger.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 6.");
+					
 			}
 		}
 	}
@@ -150,9 +143,8 @@ public class MainMenu {
 		
 		out.println();
 		out.print(ConsoleColour.YELLOW_BOLD);
-		out.print("Select Option [1-6]>");
+		out.print("Select Option [1-6]> ");
 		out.print(ConsoleColour.CYAN_BOLD);
-		out.println();
 		isFirstRun = false;
 	}
 }

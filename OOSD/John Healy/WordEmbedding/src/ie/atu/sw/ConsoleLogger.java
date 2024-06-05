@@ -14,18 +14,21 @@ public class ConsoleLogger {
 
 	private void logInfo(LogLevel level, String message) {
 		out.print(ConsoleColour.GREEN_BOLD);
+		out.println("");
 		out.println(level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
 	private void logWarning(LogLevel level, String message) {
 		out.print(ConsoleColour.YELLOW_BOLD);
+		out.println("");
 		out.println(level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
 	private void logError(LogLevel level, String message) {
 		out.print(ConsoleColour.RED_BOLD);
+		out.println("");
 		out.println(level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
