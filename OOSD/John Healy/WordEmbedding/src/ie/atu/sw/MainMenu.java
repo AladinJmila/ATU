@@ -77,10 +77,12 @@ public class MainMenu {
 		String[] words = fp.getWordsArray();
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
+		
 //		long startTime = System.currentTimeMillis();
 		
 		String[] searchTerms = searchText.split(" ");
 		int[] searchTermIndexs = new int[searchTerms.length];
+		String[][][] allSearchResults =  new String[searchTerms.length][totalWordsToOutput][2];
 		
 		
 		for (int i = 0; i < searchTerms.length; i++) {
@@ -109,9 +111,9 @@ public class MainMenu {
 
 			new QuickSort().sort(result);
 //			System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
-			generateOutputFile(generateSearchResults(result, words, totalWordsToOutput));
+			allSearchResults[i] = generateSearchResults(result, words, totalWordsToOutput);
 		}
-
+		generateOutputFile(allSearchResults);
 	}
 	
 	private String[][] generateSearchResults(double[][] searchResult, String[] words, int totalWordsToOutput){
@@ -128,26 +130,29 @@ public class MainMenu {
 		return result;
 	}
 	
-	private void generateOutputFile(String[][] searchResult) throws IOException {
+	private void generateOutputFile(String[][][] searchResults) throws IOException {
 
 	
-		FileWriter out = new FileWriter(searchResult[0][0] + ".txt");
+		FileWriter out = new FileWriter("out.txt");
 		PrintWriter print = new PrintWriter(out);
-
-		print.printf("|    Result    |  Score(%%)  |%n");
-		print.printf("---------------+-------------%n");
-		for (int i = 0; i < searchResult.length; i++) {
-			print.printf("| %-12s |    %-5s   |%n", searchResult[i][0], searchResult[i][1]);
-			System.out.println(Arrays.toString(searchResult[i]));
-			if (i != searchResult.length - 1) {
-				print.printf("---------------+-------------%n");
+		
+		for (int i = 0; i < searchResults.length; i++) {
+			print.printf("|    Result    |  Score(%%)  |%n");
+			print.printf("---------------+-------------%n");
+			for (int j = 0; j < searchResults[i].length; j++) {
+				print.printf("| %-12s |    %-5s   |%n", searchResults[i][j][0], searchResults[i][j][1]);
+				System.out.println(Arrays.toString(searchResults[i][j]));
+				if (j != searchResults[i].length - 1) {
+					print.printf("---------------+-------------%n");
+				}
 			}
+			print.printf("-----------------------------%n");
+			print.println();
 		}
-		print.printf("-----------------------------%n");
 
 		print.close();
 
-		Runner.launchFile(searchResult[0][0] + ".txt");
+		Runner.launchFile("out.txt");
 	}
 	
 	
