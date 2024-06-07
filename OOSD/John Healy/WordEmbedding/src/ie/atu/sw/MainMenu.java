@@ -80,29 +80,29 @@ public class MainMenu {
 		
 //		long startTime = System.currentTimeMillis();
 		
-		String[] searchTerms = searchText.split(" ");
+		String[] searchTerms = searchText.toLowerCase().split(" ");
 		int[] searchTermIndexs = new int[searchTerms.length];
 		String[][][] allSearchResults =  new String[searchTerms.length][totalWordsToOutput][2];
 		
 		
 		for (int i = 0; i < searchTerms.length; i++) {
 			for (int j = 0; j < words.length; j++) {
-				if (words[j].equals(searchTerms[i].toLowerCase())) {
+				if (words[j].equals(searchTerms[i])) {
 					searchTermIndexs[i] = j;
 					break;
 				}
 
 			}
 			
-			out.println(Arrays.toString(searchTerms));
-			out.println(Arrays.toString(searchTermIndexs));
+//			out.println(Arrays.toString(searchTerms));
+//			out.println(Arrays.toString(searchTermIndexs));
 
 			Searcher s = new Searcher();
 			double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
 
 			for (int j = 0; j < words.length - 1; j++) {
 				if (j == searchTermIndexs[i]) {
-					out.println(searchTermIndexs[i]);
+//					out.println(searchTermIndexs[i]);
 					continue; 
 				}
 				result[j][0] = (double) j;
@@ -113,7 +113,8 @@ public class MainMenu {
 //			System.out.println("It took this long: " + (System.currentTimeMillis() - startTime));
 			allSearchResults[i] = generateSearchResults(result, words, totalWordsToOutput);
 		}
-		generateOutputFile(allSearchResults);
+//		generateOutputFile(allSearchResults);
+		generateResultPhrases(searchTerms, allSearchResults);
 	}
 	
 	private String[][] generateSearchResults(double[][] searchResult, String[] words, int totalWordsToOutput){
@@ -128,6 +129,27 @@ public class MainMenu {
 		}
 		
 		return result;
+	}
+	
+	private void generateResultPhrases(String[] searchTerms, String[][][] searchResults) {
+		String[] noMatchResults = new String[]{"another", "an", "one", "the", "same", "is", 
+											"whose", "comes", "with", "on", "this", "as", "s",
+											"for", "first", "it", "which", "of", "turned", "but", 
+											"i", "you"};
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < searchTerms.length; i++) {
+			if (
+				Arrays.asList(noMatchResults).contains(searchTerms[i]) || 
+				Arrays.asList(noMatchResults).contains(searchResults[i][0][0])
+				) {
+				sb.append(searchTerms[i] + " ");
+			} else {
+				sb.append(searchResults[i][0][0] + " ");
+			}		
+		}
+		out.println(sb.toString().trim());
+		
 	}
 	
 	private void generateOutputFile(String[][][] searchResults) throws IOException {
