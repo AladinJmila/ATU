@@ -137,7 +137,7 @@ public class MainMenu {
 											"for", "first", "it", "which", "of", "turned", "but", 
 											"i", "you"};
 		
-		String[] resultPhrases = new String[searchResults[0].length];
+		String[][] resultPhrases = new String[searchResults[0].length][2];
 		
 		for (int i = 0; i < searchTerms.length; i++) {
 			
@@ -145,25 +145,25 @@ public class MainMenu {
 				StringBuilder sb = new StringBuilder();
 				if (Arrays.asList(noMatchResults).contains(searchTerms[i])
 						|| Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
-//					sb.append(searchTerms[i] + " ");
-					if (resultPhrases[j] == null) {
-						resultPhrases[j] = sb.append(searchTerms[i]).toString().trim();
+					if (resultPhrases[j][0] == null) {
+						resultPhrases[j][0] = sb.append(searchTerms[i]).toString().trim();
 					} else {
-						resultPhrases[j] = sb.append(resultPhrases[j]).append(" " + searchTerms[i]).toString().trim();
+						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchTerms[i]).toString().trim();
 					}
 					
 				} else {
-//					sb.append(searchResults[i][j][0] + " ");
-					if (resultPhrases[j] == null) {
-						resultPhrases[j] = sb.append(searchResults[i][j][0]).toString().trim();
+					if (resultPhrases[j][0] == null) {
+						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();
+						resultPhrases[j][1] = searchResults[i][j][1];
 					} else {
-						resultPhrases[j] = sb.append(resultPhrases[j]).append(" " + searchResults[i][j][0]).toString().trim();
+						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchResults[i][j][0]).toString().trim();
+						float scoreAverage = (Float.parseFloat(resultPhrases[j][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
+						resultPhrases[j][1] = String.format("%.1f", scoreAverage);
 					}
 				}
 			}
-//			out.println(sb.toString().trim());
 		}
-		out.println(Arrays.toString(resultPhrases));
+		out.println(Arrays.toString(resultPhrases[0]));
 		
 		
 	}
