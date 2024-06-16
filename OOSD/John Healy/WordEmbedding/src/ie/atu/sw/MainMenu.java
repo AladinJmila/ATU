@@ -136,19 +136,35 @@ public class MainMenu {
 											"whose", "comes", "with", "on", "this", "as", "s",
 											"for", "first", "it", "which", "of", "turned", "but", 
 											"i", "you"};
-		StringBuilder sb = new StringBuilder();
+		
+		String[] resultPhrases = new String[searchResults[0].length];
 		
 		for (int i = 0; i < searchTerms.length; i++) {
-			if (
-				Arrays.asList(noMatchResults).contains(searchTerms[i]) || 
-				Arrays.asList(noMatchResults).contains(searchResults[i][0][0])
-				) {
-				sb.append(searchTerms[i] + " ");
-			} else {
-				sb.append(searchResults[i][0][0] + " ");
-			}		
+			
+			for (int j = 0; j < searchResults[i].length; j++) {
+				StringBuilder sb = new StringBuilder();
+				if (Arrays.asList(noMatchResults).contains(searchTerms[i])
+						|| Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
+//					sb.append(searchTerms[i] + " ");
+					if (resultPhrases[j] == null) {
+						resultPhrases[j] = sb.append(searchTerms[i]).toString().trim();
+					} else {
+						resultPhrases[j] = sb.append(resultPhrases[j]).append(" " + searchTerms[i]).toString().trim();
+					}
+					
+				} else {
+//					sb.append(searchResults[i][j][0] + " ");
+					if (resultPhrases[j] == null) {
+						resultPhrases[j] = sb.append(searchResults[i][j][0]).toString().trim();
+					} else {
+						resultPhrases[j] = sb.append(resultPhrases[j]).append(" " + searchResults[i][j][0]).toString().trim();
+					}
+				}
+			}
+//			out.println(sb.toString().trim());
 		}
-		out.println(sb.toString().trim());
+		out.println(Arrays.toString(resultPhrases));
+		
 		
 	}
 	
