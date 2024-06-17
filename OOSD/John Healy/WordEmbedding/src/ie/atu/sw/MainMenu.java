@@ -131,7 +131,7 @@ public class MainMenu {
 		return result;
 	}
 	
-	private void generateResultPhrases(String[] searchTerms, String[][][] searchResults) {
+	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) {
 		String[] noMatchResults = new String[]{"another", "an", "one", "the", "same", "is", 
 											"whose", "comes", "with", "on", "this", "as", "s",
 											"for", "first", "it", "which", "of", "turned", "but", 
@@ -164,8 +164,21 @@ public class MainMenu {
 			}
 		}
 		out.println(Arrays.toString(resultPhrases[0]));
+		dynamicPlotTemplate(resultPhrases);
+		return resultPhrases;
+	}
+	
+	private void dynamicPlotTemplate(String[][] data) {
+		int longestResultLength = 0;
 		
+		for (String [] entry : data) {
+			if (entry[0].length() > longestResultLength) {
+				longestResultLength = entry[0].length();
+			}
+		}
 		
+		String resultRowFormat = "| %-" + longestResultLength + "s |";
+		out.println(resultRowFormat);
 	}
 	
 	private void generateOutputFile(String[][][] searchResults) throws IOException {
