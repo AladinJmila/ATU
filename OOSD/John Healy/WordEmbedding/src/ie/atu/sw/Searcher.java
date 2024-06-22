@@ -96,8 +96,6 @@ public class Searcher {
 			}
 		}
 
-//		String[] formats = dynamicPlotTemplate(resultPhrases);
-//		generateOutputFile(resultPhrases, formats);
 		return resultPhrases;
 	}
 }
