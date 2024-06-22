@@ -159,16 +159,12 @@ public class MainMenu {
 
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchResults[i][j][0]).toString().trim();
-						out.println(resultPhrases[j][0]);
-						out.println(resultPhrases[j][1]);
-						out.println(searchResults[i][j][0]);
 						float scoreAverage = 0.0f;
 						if (resultPhrases[j][1].equals("0.0")) {
 							scoreAverage = Float.parseFloat(searchResults[i][j][1]);
 						} else {
 							scoreAverage = (Float.parseFloat(resultPhrases[j][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
 						}
-						out.println(scoreAverage);
 						resultPhrases[j][1] = String.format("%.1f", scoreAverage);
 					}
 				}
@@ -181,7 +177,8 @@ public class MainMenu {
 	}
 	
 	private String[] dynamicPlotTemplate(String[][] data) {
-		int longestResultLength = 0;
+		// Initialize the length to 7 to cover short words
+		int longestResultLength = 7;
 		String[] formats = new String[5];
 		
 		for (String [] entry : data) {
