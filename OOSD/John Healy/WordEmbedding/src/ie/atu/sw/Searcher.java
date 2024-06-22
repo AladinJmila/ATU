@@ -75,7 +75,10 @@ public class Searcher {
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchTerms[i]).toString().trim();
 					}
-					resultPhrases[j][1] = "0.0";
+					
+					if (resultPhrases[j][1] == null) {
+						resultPhrases[j][1] = "0.0";
+					}
 				} else {
 					if (resultPhrases[j][0] == null) {
 						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();

@@ -29,7 +29,6 @@ public class Plotter {
 		formats[2] = "|-%-" + longestResultLength + "s-+----%-5s---|%n";
 		formats[3] = "--%-" + longestResultLength + "s------%-5s----%n";
 		formats[4] = "-".repeat(longestResultLength);
-		out.println(Arrays.toString(formats));
 		return formats;
 	}
 	
