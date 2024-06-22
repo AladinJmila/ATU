@@ -150,14 +150,25 @@ public class MainMenu {
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchTerms[i]).toString().trim();
 					}
-					
+					resultPhrases[j][1] = "0.0";
 				} else {
 					if (resultPhrases[j][0] == null) {
 						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();
+						out.println(searchResults[i][j][1]);
 						resultPhrases[j][1] = searchResults[i][j][1];
+
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchResults[i][j][0]).toString().trim();
-						float scoreAverage = (Float.parseFloat(resultPhrases[j][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
+						out.println(resultPhrases[j][0]);
+						out.println(resultPhrases[j][1]);
+						out.println(searchResults[i][j][0]);
+						float scoreAverage = 0.0f;
+						if (resultPhrases[j][1].equals("0.0")) {
+							scoreAverage = Float.parseFloat(searchResults[i][j][1]);
+						} else {
+							scoreAverage = (Float.parseFloat(resultPhrases[j][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
+						}
+						out.println(scoreAverage);
 						resultPhrases[j][1] = String.format("%.1f", scoreAverage);
 					}
 				}
