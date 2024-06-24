@@ -55,7 +55,7 @@ public class Main {
     double average = total / reps;
 
     // Foramt and return result    
-    return String.format("%.3f", average) ;
+    return String.format("%.3f", average);
   }
 
   // Plot a row of a given label and array of results in a tabel format

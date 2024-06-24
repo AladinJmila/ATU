@@ -6,39 +6,56 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Searcher {
+	// Perform the search functionality using all the helper methods defined below
 	public String[][] search(String searchText, String inputFile, int totalWordsToOutput) throws IOException {
+		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
+		// Load the words array from the file
 		String[] words = fp.getWordsArray();
+		// Load the embeddings matrix from the file
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
+		// Convert the search text to lowercase and split into search terms
 		String[] searchTerms = searchText.toLowerCase().split(" ");
-		int[] searchTermIndexs = new int[searchTerms.length];
+		// Array to hold the indices of the search terms in the words array
+		int[] searchTermIndices = new int[searchTerms.length];
+		// Array to hold all search results for search terms
 		String[][][] allSearchResults =  new String[searchTerms.length][totalWordsToOutput][2];
 		
-		
+		// Iterate through each search term 
 		for (int i = 0; i < searchTerms.length; i++) {
+			// Find the index of the current search term in the words array
 			for (int j = 0; j < words.length; j++) {
 				if (words[j].equals(searchTerms[i])) {
-					searchTermIndexs[i] = j;
-					break;
+					// Update the searchTermIndices array with the current index
+					searchTermIndices[i] = j;
+					break; // Leave early when the word is found
 				}
 
 			}
 			
+			// Instantiate the CosineDistance class
 			CosineDistance s = new CosineDistance();
+			// Array to hold the word index and the cosine distance
 			double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
 
+			// Compute the cosine distance between the current word and the search term
 			for (int j = 0; j < words.length - 1; j++) {
-				if (j == searchTermIndexs[i]) {
-					continue; 
+				if (j == searchTermIndices[i]) {
+					continue; // Skip if the search term and the word are the same
 				}
-				result[j][0] = (double) j;
-				result[j][1] = s.getDistance(embeddings[searchTermIndexs[i]], embeddings[j]);
+				
+				// Save the word index and the cosine distance
+				result[j][0] = (double) j; 
+				result[j][1] = s.getDistance(embeddings[searchTermIndices[i]], embeddings[j]);
 			}
 
+			// Sort the search result using QuickSort
 			new QuickSort().sort(result);
+			// Generate search results from the sorted results
 			allSearchResults[i] = generateSearchResults(result, words, totalWordsToOutput);
 		}
+		// Generate and return the final result phrases
 		return generateResultPhrases(searchTerms, allSearchResults);
 	}
 	
