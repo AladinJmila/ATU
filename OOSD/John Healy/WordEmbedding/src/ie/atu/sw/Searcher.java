@@ -59,44 +59,59 @@ public class Searcher {
 		return generateResultPhrases(searchTerms, allSearchResults);
 	}
 	
+	// Generate search results from the result array
 	private String[][] generateSearchResults(double[][] searchResult, String[] words, int totalWordsToOutput){
 		String[][] result = new String[totalWordsToOutput][2];
 		int index = 0;
 		
+		// Iterate through the search results to generate the final result array
 		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 2 - totalWordsToOutput; i--) {
+			// Calculate the score as a percentage
 			double score = searchResult[i][1] * 100;
+			// Get the word index from the search result
 			int wordIndex = (int) searchResult[i][0];
+			// Get the word corresponding to the word index
 			String word = words[wordIndex];
+			// Save the word and its score to the result array
 			result[index++] = new String[]{word, String.format("%.1f", score)};
 		}
 		
+		// Return the final search results
 		return result;
 	}
 	
+	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
+		// List of words to be ignored in the search results
 		String[] noMatchResults = new String[]{"another", "an", "one", "the", "same", "is", 
 											"whose", "comes", "with", "on", "this", "as", "s",
 											"for", "first", "it", "which", "of", "turned", "but", 
 											"i", "you"};
 		
+		// Array to hold the final result phrases
 		String[][] resultPhrases = new String[searchResults[0].length][2];
 		
+		// Iterate through the search terms and search results to generate the result phrases
 		for (int i = 0; i < searchTerms.length; i++) {
-			
 			for (int j = 0; j < searchResults[i].length; j++) {
 				StringBuilder sb = new StringBuilder();
+				
+				// Check if the search term or the search result word is in the no-match list
 				if (Arrays.asList(noMatchResults).contains(searchTerms[i])
 						|| Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
+					// Append the search term to the result phrase
 					if (resultPhrases[j][0] == null) {
 						resultPhrases[j][0] = sb.append(searchTerms[i]).toString().trim();
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchTerms[i]).toString().trim();
 					}
 					
+					// Set the score to 0.0 for no-match results
 					if (resultPhrases[j][1] == null) {
 						resultPhrases[j][1] = "0.0";
 					}
 				} else {
+					// Append the search result word to the result phrase
 					if (resultPhrases[j][0] == null) {
 						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();
 						out.println(searchResults[i][j][1]);
@@ -104,6 +119,7 @@ public class Searcher {
 
 					} else {
 						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchResults[i][j][0]).toString().trim();
+						// Calculate the average score for the combined results
 						float scoreAverage = 0.0f;
 						if (resultPhrases[j][1].equals("0.0")) {
 							scoreAverage = Float.parseFloat(searchResults[i][j][1]);
@@ -116,6 +132,7 @@ public class Searcher {
 			}
 		}
 
+		// Return the final result phrases
 		return resultPhrases;
 	}
 }
