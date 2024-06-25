@@ -15,6 +15,7 @@ public class SubMenu {
 	}
 	
 	public void init() {
+		keepRunning = true;
 		while(keepRunning) {
 			showOptions();
 			
@@ -22,22 +23,26 @@ public class SubMenu {
 			
 			switch(choice) {
 				case 1 -> {
-					out.println("Enter a number between 1 and 100: ");
+					out.print("\tEnter a number between 1 and 100: ");
+					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of option is updated successfully");
 				}
 				case 2 -> {
-					out.println("Enter a number between 1 and 100: ");
+					out.print("\tEnter a number between 1 and 100: ");
+					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of words is updated successfully");
 				}
 				case 3 -> {
-					out.println("Enter A or B: ");
+					out.print("\tEnter A or B: ");
+					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println(scanner.next());
 					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
 				}
 				case 4 -> {
-					out.println("Enter \"yes\" or \"no\": ");
+					out.print("\tEnter \"yes\" or \"no\": ");
+					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println(scanner.next());
 					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
 				}
@@ -48,20 +53,18 @@ public class SubMenu {
 	}
 	
 	private void showOptions() {
-		out.println();
 		out.print(ConsoleColour.RESET);
-		
-		out.print(ConsoleColour.WHITE_BOLD);
+		out.println(ConsoleColour.WHITE_BOLD);
 		out.println("\t(1) Specify the number of results to return (default: 10)");
 		out.println("\t(2) Specify the maximum number of words to process at once (default: 10)");
 		out.println("\t(3) Choose search mode: whole sentence (A, default) or individual words (B)");
-		out.println("\t(4) Ignore unmatched results (yes/no) - (default: no) \"yes\" is recommended if you chose individual words (option B) above");
+		out.println("\t(4) Ignore unmatched results (yes/no) - (default: no)\n\t    Selecting \"yes\" is recommended if you chose individual words (option B) above");
 		out.println("\t(5) Return to the main menu");
 		
 		
 		out.println();
 		out.print(ConsoleColour.YELLOW_BOLD);
-		out.print("Select Option [1-5]> ");
+		out.print("\tSelect Option [1-5]> ");
 		out.print(ConsoleColour.WHITE_BOLD);
 	}
 }

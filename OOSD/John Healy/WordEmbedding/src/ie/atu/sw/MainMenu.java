@@ -15,6 +15,7 @@ public class MainMenu {
 	private Searcher searcher;
 	private Plotter plotter;
 	private ConsoleLogger cLogger;
+	private SubMenu subMenu;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
 	
@@ -25,6 +26,7 @@ public class MainMenu {
 		searcher = new Searcher();
 		plotter = new Plotter();
 		cLogger = new ConsoleLogger();
+		subMenu = new SubMenu();
 	}
 	
 	public void init() throws IOException {
@@ -52,7 +54,12 @@ public class MainMenu {
 					plotter.plot(result);
 					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
 					}
-				case 4 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("4");}
+				case 4 	-> {
+					out.println();
+					out.println("\tYou entered the Options Configuration menu");
+					out.print(ConsoleColour.WHITE); 
+					subMenu.init();
+					}
 				case 5 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("5");}
 				case 6 	-> keepRunning = false;
 				default -> cLogger.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 6.");
@@ -106,9 +113,9 @@ public class MainMenu {
 		out.println("(1) Specify Embedding File");
 		out.println("(2) Specify an Output File (default: ./out.txt)");
 		out.println("(3) Enter a word or a sentence");
-		out.println("(5) Configure Options");
-		out.println("(6) Optional Extras...");
-		out.println("(7) Quit");
+		out.println("(4) Configure Options");
+		out.println("(5) Optional Extras...");
+		out.println("(6) Quit");
 		
 		out.println();
 		out.print(ConsoleColour.YELLOW_BOLD);
