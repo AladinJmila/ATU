@@ -9,6 +9,12 @@ public class SubMenu {
 	private ConsoleLogger cLogger;
 	private boolean keepRunning = true;
 	
+	private int totalWordsToOutput = 10;
+	private int wordsToProcessCount = 10;
+	private char searchMode = 'A';
+	private boolean ignoreUnmachted = true;
+	
+	
 	public SubMenu() {
 		scanner = new Scanner(System.in);
 		cLogger = new ConsoleLogger();
@@ -25,25 +31,26 @@ public class SubMenu {
 				case 1 -> {
 					out.print("\tEnter a number between 1 and 100: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
-					out.println(scanner.next());
+					totalWordsToOutput = Integer.parseInt(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of option is updated successfully");
 				}
 				case 2 -> {
 					out.print("\tEnter a number between 1 and 100: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
-					out.println(scanner.next());
+					wordsToProcessCount = Integer.parseInt(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of words is updated successfully");
 				}
 				case 3 -> {
 					out.print("\tEnter A or B: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
-					out.println(scanner.next());
+					searchMode = scanner.next().toUpperCase().charAt(0);
 					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
 				}
 				case 4 -> {
 					out.print("\tEnter \"yes\" or \"no\": ");
 					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println(scanner.next());
+					ignoreUnmachted = scanner.next().toLowerCase().trim() == "yes" ? true : false;
 					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
 				}
 				case 5 -> keepRunning = false;
@@ -66,5 +73,21 @@ public class SubMenu {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		out.print("\tSelect Option [1-5]> ");
 		out.print(ConsoleColour.WHITE_BOLD);
+	}
+	
+	public int getTotalWordsToOutput() {
+		return totalWordsToOutput;
+	}
+
+	public int getWordsToProcessCount() {
+		return wordsToProcessCount;
+	}
+
+	public char getSearchMode() {
+		return searchMode;
+	}
+
+	public boolean getIgnoreUnmachted() {
+		return ignoreUnmachted;
 	}
 }
