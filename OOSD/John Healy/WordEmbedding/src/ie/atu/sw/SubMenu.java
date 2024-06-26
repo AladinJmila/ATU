@@ -34,12 +34,7 @@ public class SubMenu {
 					totalWordsToOutput = Integer.parseInt(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of option is updated successfully");
 				}
-				case 2 -> {
-					out.print("\tEnter a number between 1 and 20: ");
-					out.print(ConsoleColour.YELLOW_BOLD);
-					wordsToProcessCount = Integer.parseInt(scanner.next());
-					cLogger.log(LogLevel.INFO, "Number of words is updated successfully");
-				}
+				case 2 -> setWordsToProcessCount();
 				case 3 -> {
 					out.print("\tEnter A or B: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
@@ -75,12 +70,22 @@ public class SubMenu {
 		out.print(ConsoleColour.WHITE_BOLD);
 	}
 	
+	
+	
 	public int getTotalWordsToOutput() {
 		return totalWordsToOutput;
 	}
 
 	public int getWordsToProcessCount() {
 		return wordsToProcessCount;
+	}
+	
+	public void setWordsToProcessCount() {
+		out.print("\tEnter a number between 1 and 20: ");
+		out.print(ConsoleColour.YELLOW_BOLD);
+		wordsToProcessCount = Integer.parseInt(scanner.next());
+		out.println("here "+wordsToProcessCount);
+		cLogger.log(LogLevel.INFO, "Number of words is updated successfully");
 	}
 
 	public char getSearchMode() {

@@ -18,6 +18,7 @@ public class MainMenu {
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
 	private String[] searchTerms;
+	private int wordsToProcessCount;
 	
 	public static String outputFile = "out.txt";
 	
@@ -27,6 +28,7 @@ public class MainMenu {
 		plotter = new Plotter();
 		cLogger = new ConsoleLogger();
 		subMenu = new SubMenu();
+		wordsToProcessCount = subMenu.getTotalWordsToOutput();
 	}
 	
 	public void init() throws IOException {
@@ -50,10 +52,12 @@ public class MainMenu {
 					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println("Enter the search term or a phrase of 10 words maximum: ");
 					out.print(ConsoleColour.WHITE_BOLD);
-					getUserInput();
-					String [][] result = searcher.search(searchTerms, inputFile, subMenu.getTotalWordsToOutput());
-					plotter.plot(result);
-					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
+					boolean proceed = getUserInput();
+					if (proceed) {
+						String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
+						plotter.plot(result);
+						cLogger.log(LogLevel.INFO, "Results file will launch automatically");
+						}
 					}
 				case 4 	-> {
 					out.println();
@@ -69,10 +73,9 @@ public class MainMenu {
 		}
 	}
 	
-	private void getUserInput() {
+	private boolean getUserInput() {
 		String input = "";
 		int counter = 0;
-		int wordsToProcessCount = subMenu.getWordsToProcessCount();
 		boolean proceed = false;
 		
 		
@@ -98,11 +101,19 @@ public class MainMenu {
 			
 			switch (choice) {
 				case 1 -> proceed = true;
+				case 2 -> proceed = false;
+				case 3 -> { 
+					out.println(wordsToProcessCount);
+					subMenu.setWordsToProcessCount(); 
+					wordsToProcessCount = subMenu.getWordsToProcessCount();
+					out.println("Updated: " + wordsToProcessCount);
+					proceed = true; 
+					}
 			}
 			
 		}
 		
-		
+		return proceed;
 	}
 	
 
