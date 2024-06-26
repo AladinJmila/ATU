@@ -35,7 +35,7 @@ public class SubMenu {
 					cLogger.log(LogLevel.INFO, "Number of option is updated successfully");
 				}
 				case 2 -> {
-					out.print("\tEnter a number between 1 and 100: ");
+					out.print("\tEnter a number between 1 and 20: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
 					wordsToProcessCount = Integer.parseInt(scanner.next());
 					cLogger.log(LogLevel.INFO, "Number of words is updated successfully");

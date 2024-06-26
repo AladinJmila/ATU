@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class MainMenu {
 	private String inputFile = "./static/word-embeddings.txt";
-	private int totalWordsToOutput = 10;
 	private Scanner scanner;
 	private Searcher searcher;
 	private Plotter plotter;
@@ -18,6 +17,7 @@ public class MainMenu {
 	private SubMenu subMenu;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
+	private String[] searchTerms;
 	
 	public static String outputFile = "out.txt";
 	
@@ -50,7 +50,8 @@ public class MainMenu {
 					out.print(ConsoleColour.YELLOW_BOLD);
 					out.println("Enter the search term or a phrase of 10 words maximum: ");
 					out.print(ConsoleColour.WHITE_BOLD);
-					String [][] result = searcher.search(getUserInput(), inputFile, totalWordsToOutput);
+					getUserInput();
+					String [][] result = searcher.search(searchTerms, inputFile, subMenu.getTotalWordsToOutput());
 					plotter.plot(result);
 					cLogger.log(LogLevel.INFO, "Results file will launch automatically");
 					}
@@ -68,9 +69,12 @@ public class MainMenu {
 		}
 	}
 	
-	private String getUserInput() {
+	private void getUserInput() {
 		String input = "";
 		int counter = 0;
+		int wordsToProcessCount = subMenu.getWordsToProcessCount();
+		boolean proceed = false;
+		
 		
 		while(scanner.hasNextLine()) {
 			input = scanner.nextLine();
@@ -79,7 +83,26 @@ public class MainMenu {
 				break;
 			}
 		}
-		return input;
+		
+		// Convert the search text to lowercase and split into search terms
+		searchTerms = input.toLowerCase().split(" ");
+		
+		if (searchTerms.length > wordsToProcessCount) {
+			out.println("Your sentence is longer than the maximum allowed number of words");
+			out.println("Only " + wordsToProcessCount + " will be processed");
+			out.println("(1) Continue anyway");
+			out.println("(2) Enter a new sentence");
+			out.println("(3) Increace the number of words to process");
+			
+			int choice = Integer.parseInt(scanner.next());
+			
+			switch (choice) {
+				case 1 -> proceed = true;
+			}
+			
+		}
+		
+		
 	}
 	
 

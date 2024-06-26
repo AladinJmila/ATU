@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Searcher {
 	// Perform the search functionality using all the helper methods defined below
-	public String[][] search(String searchText, String inputFile, int totalWordsToOutput) throws IOException {
+	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput) throws IOException {
 		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
 		// Load the words array from the file
@@ -15,8 +15,6 @@ public class Searcher {
 		// Load the embeddings matrix from the file
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
-		// Convert the search text to lowercase and split into search terms
-		String[] searchTerms = searchText.toLowerCase().split(" ");
 		// Array to hold the indices of the search terms in the words array
 		int[] searchTermIndices = new int[searchTerms.length];
 		// Array to hold all search results for search terms
