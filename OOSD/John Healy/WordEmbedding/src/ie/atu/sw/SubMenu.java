@@ -25,7 +25,20 @@ public class SubMenu {
 		while(keepRunning) {
 			showOptions();
 			
-			int choice = Integer.parseInt(scanner.next());
+			int choice = 0;
+			boolean validInput = false;
+			
+			while (!validInput) {
+				try {
+					choice = Integer.parseInt(scanner.next());
+					validInput = true;
+				} catch (NumberFormatException e) {
+					cLogger.log(LogLevel.ERROR, "Invalid input, please enter a valid number.");
+					showOptions();	
+				}
+								
+			}
+			
 			
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
