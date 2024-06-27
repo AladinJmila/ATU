@@ -12,7 +12,7 @@ public class SubMenu {
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
 	private char searchMode = 'A';
-	private boolean ignoreUnmachted = true;
+	private boolean returnUnmachted = true;
 	
 	
 	public SubMenu() {
@@ -28,26 +28,10 @@ public class SubMenu {
 			int choice = Integer.parseInt(scanner.next());
 			
 			switch(choice) {
-				case 1 -> {
-					out.print("\tEnter a number between 1 and 100: ");
-					out.print(ConsoleColour.YELLOW_BOLD);
-					totalWordsToOutput = Integer.parseInt(scanner.next());
-					cLogger.log(LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
-				}
+				case 1 -> setTotalWordsToOutput();
 				case 2 -> setWordsToProcessCount();
-				case 3 -> {
-					out.print("\tEnter A or B: ");
-					out.print(ConsoleColour.YELLOW_BOLD);
-					searchMode = scanner.next().toUpperCase().charAt(0);
-					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
-				}
-				case 4 -> {
-					out.print("\tEnter \"yes\" or \"no\": ");
-					out.print(ConsoleColour.YELLOW_BOLD);
-					out.println(scanner.next());
-					ignoreUnmachted = scanner.next().toLowerCase().trim() == "yes" ? true : false;
-					cLogger.log(LogLevel.INFO, "You preference is updated successfully");
-				}
+				case 3 -> setSearchMode();
+				case 4 -> setReturnUnmached();
 				case 5 -> keepRunning = false;
 				default -> cLogger.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 5.");
 			}
@@ -60,7 +44,7 @@ public class SubMenu {
 		out.println("\t(1) Specify the number of results to return (default: 10)");
 		out.println("\t(2) Specify the maximum number of words to process at once (default: 10)");
 		out.println("\t(3) Choose search mode: whole sentence (A, default) or individual words (B)");
-		out.println("\t(4) Ignore unmatched results (yes/no) - (default: no)\n\t    Selecting \"yes\" is recommended if you chose individual words (option B) above");
+		out.println("\t(4) Ignore unmatched results (yes/no) - (default: yes)\n\t    Selecting \"yes\" is recommended if you chose individual words (option B) above");
 		out.println("\t(5) Return to the main menu");
 		
 		
@@ -74,6 +58,13 @@ public class SubMenu {
 	
 	public int getTotalWordsToOutput() {
 		return totalWordsToOutput;
+	}
+	
+	private void setTotalWordsToOutput() {
+		out.print("\tEnter a number between 1 and 100: ");
+		out.print(ConsoleColour.YELLOW_BOLD);
+		totalWordsToOutput = Integer.parseInt(scanner.next());
+		cLogger.log(LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 
 	public int getWordsToProcessCount() {
@@ -91,8 +82,23 @@ public class SubMenu {
 	public char getSearchMode() {
 		return searchMode;
 	}
+	
+	private void setSearchMode() {
+		out.print("\tEnter A or B: ");
+		out.print(ConsoleColour.YELLOW_BOLD);
+		searchMode = scanner.next().toUpperCase().charAt(0);
+		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + searchMode);
+	}
 
-	public boolean getIgnoreUnmachted() {
-		return ignoreUnmachted;
+	public boolean getReturnUnmachted() {
+		return returnUnmachted;
+	}
+	
+	private void setReturnUnmached() {
+		out.print("\tEnter \"yes\" or \"no\": ");
+		out.print(ConsoleColour.YELLOW_BOLD);
+		out.println(scanner.next());
+		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
+		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + returnUnmachted);
 	}
 }
