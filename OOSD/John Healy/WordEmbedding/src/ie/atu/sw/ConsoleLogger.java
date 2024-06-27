@@ -3,9 +3,19 @@ package ie.atu.sw;
 import static java.lang.System.out;
 
 public class ConsoleLogger {
+	private String prefix = "";
 
 	// Log a message with a given log level
 	public void log(LogLevel level, String message) {
+		switch (level) {
+		case INFO -> logInfo(level, message);
+		case WARN -> logWarning(level, message);
+		case ERROR -> logError(level, message);
+		}
+	}
+	
+	public void log(LogLevel level, String message, String prefix) {
+		this.prefix = prefix;
 		switch (level) {
 		case INFO -> logInfo(level, message);
 		case WARN -> logWarning(level, message);
@@ -17,7 +27,7 @@ public class ConsoleLogger {
 	private void logInfo(LogLevel level, String message) {
 		out.print(ConsoleColour.GREEN_BOLD);
 		out.println("");
-		out.println(level.getMessage() + " " + message);
+		out.println(prefix + level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
@@ -25,7 +35,7 @@ public class ConsoleLogger {
 	private void logWarning(LogLevel level, String message) {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println("");
-		out.println(level.getMessage() + " " + message);
+		out.println(prefix + level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
@@ -33,7 +43,7 @@ public class ConsoleLogger {
 	private void logError(LogLevel level, String message) {
 		out.print(ConsoleColour.RED_BOLD);
 		out.println("");
-		out.println(level.getMessage() + " " + message);
+		out.println(prefix + level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 }

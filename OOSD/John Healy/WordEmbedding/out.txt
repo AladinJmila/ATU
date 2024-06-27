@@ -1,23 +1,33 @@
-| Result          |  Score(%)  |
-|-----------------+------------|
-| me boy          |    83.7    |
-|-----------------+------------|
-| think girl      |    82.6    |
-|-----------------+------------|
-| maybe pregnant  |    80.9    |
-|-----------------+------------|
-| m toddler       |    80.5    |
-|-----------------+------------|
-| everybody child |    80.2    |
-|-----------------+------------|
-| yes mother      |    75.0    |
-|-----------------+------------|
-| yes infant      |    74.8    |
-|-----------------+------------|
-| nothing cat     |    79.4    |
-|-----------------+------------|
-| anything dog    |    78.7    |
-|-----------------+------------|
-| know pet        |    78.6    |
---------------------------------
+| Result                                                              |  Score(%)  |
+|---------------------------------------------------------------------+------------|
+| one three four three six five five six seven twenty thirteen        |    95.8    |
+|---------------------------------------------------------------------+------------|
+| one four five six seven four nine seven eight eleven fourteen       |    95.7    |
+|---------------------------------------------------------------------+------------|
+| one five two five three eight six nine five eight fifteen           |    95.2    |
+|---------------------------------------------------------------------+------------|
+| one six six eight four seven eight five six five sixteen            |    94.8    |
+|---------------------------------------------------------------------+------------|
+| one seven seven seven eight three four four four twelve twelve      |    94.2    |
+|---------------------------------------------------------------------+------------|
+| one eight eight two nine nine three three three four twenty         |    93.6    |
+|---------------------------------------------------------------------+------------|
+| one nine nine nine two two two two two seven seventeen              |    92.8    |
+|---------------------------------------------------------------------+------------|
+| one two ten ten ten ten ten ten ten nine ten                        |    89.9    |
+|---------------------------------------------------------------------+------------|
+| one two three four only least least eleven eleven three thirty      |    87.8    |
+|---------------------------------------------------------------------+------------|
+| one several three four least only eleven least least six eighteen   |    86.8    |
+|---------------------------------------------------------------------+------------|
+| one both only only five six seven twenty twenty fifteen nineteen    |    85.4    |
+|---------------------------------------------------------------------+------------|
+| one while several least five six days twelve number number forty    |    84.7    |
+|---------------------------------------------------------------------+------------|
+| one only three four five six only number were sixteen nine          |    84.1    |
+|---------------------------------------------------------------------+------------|
+| one other while several while days twenty only fifteen thirty fifty |    83.6    |
+|---------------------------------------------------------------------+------------|
+| one two each number number last last eight only fourteen eight      |    83.2    |
+------------------------------------------------------------------------------------
 

@@ -33,7 +33,7 @@ public class SubMenu {
 					choice = Integer.parseInt(scanner.next());
 					validInput = true;
 				} catch (NumberFormatException e) {
-					cLogger.log(LogLevel.ERROR, "Invalid input, please enter a valid number.");
+					cLogger.log(LogLevel.ERROR, "Invalid input, please enter a valid number.", "\t");
 					showOptions();	
 				}
 								
@@ -46,7 +46,7 @@ public class SubMenu {
 				case 3 -> setSearchMode();
 				case 4 -> setReturnUnmached();
 				case 5 -> keepRunning = false;
-				default -> cLogger.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 5.");
+				default -> cLogger.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 5.", "\t");
 			}
 		}
 	}
@@ -77,7 +77,7 @@ public class SubMenu {
 		out.print("\tEnter a number between 1 and 100: ");
 		out.print(ConsoleColour.YELLOW_BOLD);
 		totalWordsToOutput = Integer.parseInt(scanner.next());
-		cLogger.log(LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
+		cLogger.log(LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput, "\t");
 	}
 
 	public int getWordsToProcessCount() {
@@ -89,7 +89,7 @@ public class SubMenu {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		wordsToProcessCount = Integer.parseInt(scanner.next());
 		out.println("here "+wordsToProcessCount);
-		cLogger.log(LogLevel.INFO, "Number of words is updated successfully: " + wordsToProcessCount);
+		cLogger.log(LogLevel.INFO, "Number of words is updated successfully: " + wordsToProcessCount, "\t");
 	}
 
 	public char getSearchMode() {
@@ -100,7 +100,7 @@ public class SubMenu {
 		out.print("\tEnter A or B: ");
 		out.print(ConsoleColour.YELLOW_BOLD);
 		searchMode = scanner.next().toUpperCase().charAt(0);
-		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + searchMode);
+		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + searchMode, "\t");
 	}
 
 	public boolean getReturnUnmachted() {
@@ -112,6 +112,6 @@ public class SubMenu {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println(scanner.next());
 		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
-		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + returnUnmachted);
+		cLogger.log(LogLevel.INFO, "You preference is updated successfully: " + returnUnmachted, "\t");
 	}
 }
