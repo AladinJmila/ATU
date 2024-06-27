@@ -32,7 +32,7 @@ public class SubMenu {
 					out.print("\tEnter a number between 1 and 100: ");
 					out.print(ConsoleColour.YELLOW_BOLD);
 					totalWordsToOutput = Integer.parseInt(scanner.next());
-					cLogger.log(LogLevel.INFO, "Number of option is updated successfully");
+					cLogger.log(LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
 				}
 				case 2 -> setWordsToProcessCount();
 				case 3 -> {
@@ -85,7 +85,7 @@ public class SubMenu {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		wordsToProcessCount = Integer.parseInt(scanner.next());
 		out.println("here "+wordsToProcessCount);
-		cLogger.log(LogLevel.INFO, "Number of words is updated successfully");
+		cLogger.log(LogLevel.INFO, "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
 	public char getSearchMode() {

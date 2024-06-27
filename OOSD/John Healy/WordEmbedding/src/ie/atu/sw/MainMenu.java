@@ -17,6 +17,7 @@ public class MainMenu {
 	private SubMenu subMenu;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
+	private boolean isAlreadyInvoked;
 	private String[] searchTerms;
 	private int wordsToProcessCount;
 	
@@ -48,17 +49,7 @@ public class MainMenu {
 					outputFile = scanner.next();
 					cLogger.log(LogLevel.INFO, "Output file path succesfully added");
 					}
-				case 3 	-> {
-					out.print(ConsoleColour.YELLOW_BOLD);
-					out.println("Enter the search term or a phrase of 10 words maximum: ");
-					out.print(ConsoleColour.WHITE_BOLD);
-					boolean proceed = getUserInput();
-					if (proceed) {
-						String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
-						plotter.plot(result);
-						cLogger.log(LogLevel.INFO, "Results file will launch automatically");
-						}
-					}
+				case 3 	-> handleSearchInput();
 				case 4 	-> {
 					out.println();
 					out.println("\tYou entered the Options Configuration menu");
@@ -73,11 +64,25 @@ public class MainMenu {
 		}
 	}
 	
-	private boolean getUserInput() {
+	private void handleSearchInput() throws IOException {
+		
+		out.print(ConsoleColour.YELLOW_BOLD);
+		out.println("Enter the search term or a phrase of 10 words maximum: ");
+		out.print(ConsoleColour.WHITE_BOLD);
+
+		getUserInput();
+		if (!isAlreadyInvoked) {
+			String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
+			plotter.plot(result);
+			cLogger.log(LogLevel.INFO, "Results file will launch automatically");
+			isAlreadyInvoked = true;
+		}
+	}
+	
+	private void getUserInput() throws IOException {
+		isAlreadyInvoked = false;
 		String input = "";
 		int counter = 0;
-		boolean proceed = false;
-		
 		
 		while(scanner.hasNextLine()) {
 			input = scanner.nextLine();
@@ -90,7 +95,7 @@ public class MainMenu {
 		// Convert the search text to lowercase and split into search terms
 		searchTerms = input.toLowerCase().split(" ");
 		
-		if (searchTerms.length > wordsToProcessCount) {
+		while (searchTerms.length > wordsToProcessCount) {
 			out.println("Your sentence is longer than the maximum allowed number of words");
 			out.println("Only " + wordsToProcessCount + " will be processed");
 			out.println("(1) Continue anyway");
@@ -100,20 +105,17 @@ public class MainMenu {
 			int choice = Integer.parseInt(scanner.next());
 			
 			switch (choice) {
-				case 1 -> proceed = true;
-				case 2 -> proceed = false;
+				case 1 -> {}
+				case 2 -> handleSearchInput();
 				case 3 -> { 
-					out.println(wordsToProcessCount);
 					subMenu.setWordsToProcessCount(); 
 					wordsToProcessCount = subMenu.getWordsToProcessCount();
 					out.println("Updated: " + wordsToProcessCount);
-					proceed = true; 
 					}
 			}
 			
 		}
 		
-		return proceed;
 	}
 	
 

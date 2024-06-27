@@ -112,7 +112,6 @@ public class Searcher {
 					// Append the search result word to the result phrase
 					if (resultPhrases[j][0] == null) {
 						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();
-						out.println(searchResults[i][j][1]);
 						resultPhrases[j][1] = searchResults[i][j][1];
 
 					} else {
