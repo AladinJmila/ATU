@@ -66,7 +66,7 @@ public class MainMenu {
 	
 	private void handleSearchInput() throws IOException {
 		
-		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ");
+		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ", true);
 
 		getUserInput();
 		if (!isAlreadyInvoked) {
@@ -143,7 +143,7 @@ public class MainMenu {
 			out.println("************************************************************");
 		} 
 
-		log.cyanBoldTitle("| Main Menu:");
+		log.cyanBoldTitle(" Main Menu:", true);
 		out.println("---------------------------------------------------");
 		out.println("| 1 | Specify Embedding File");
 		out.println("| 2 | Specify an Output File (default: ./out.txt)");

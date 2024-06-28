@@ -53,18 +53,15 @@ public class SubMenu {
 	}
 	
 	private void showOptions() {
-		log.cyanBoldTitle(TAB + "| Configure Options Menu: ");
+		log.cyanBoldTitle(TAB + " Configure Options Menu: ", true);
 		out.println(TAB + "-----------------------------------------------------------------------------------------");
 		out.println(TAB + "| 1 | Specify the number of results to return (default: 10)");
 		out.println(TAB + "| 2 | Specify the maximum number of words to process at once (default: 10)");
-		out.println(TAB + "| 3 |Choose search mode: whole sentence (A, default) or individual words (B)");
-		out.println(TAB + "| 4 |Ignore unmatched results (yes/no) - (default: yes)");
-		out.println(TAB + "|   |-->  Selecting \"yes\" is recommended if you chose individual words (option B) above");
-		out.println(TAB + "| 5 |Return to the Main Menu");
+		out.println(TAB + "| 3 | Choose search mode: whole sentence (A, default) or individual words (B)");
+		out.println(TAB + "| 4 | Ignore unmatched results (yes/no) - (default: yes)");
+		out.println(TAB + "|   | -->  Selecting \"yes\" is recommended if you chose individual words (option B) above");
+		out.println(TAB + "| 5 | Return to the Main Menu");
 		out.println(TAB + "-----------------------------------------------------------------------------------------");
-		
-		
-		out.println();
 		log.cyanBoldTitle(TAB + "Select Option [1-5]> ");
 	}
 	
@@ -75,8 +72,7 @@ public class SubMenu {
 	}
 	
 	private void setTotalWordsToOutput() {
-		out.print(TAB + "Enter a number between 1 and 100: ");
-		out.print(ConsoleColour.CYAN_BOLD);
+		log.cyanBoldTitle(TAB + "Enter a number between 1 and 100: ");
 		totalWordsToOutput = Integer.parseInt(scanner.next());
 		log.info(TAB, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
@@ -86,8 +82,7 @@ public class SubMenu {
 	}
 	
 	public void setWordsToProcessCount() {
-		out.print(TAB + "Enter a number between 1 and 20: ");
-		out.print(ConsoleColour.CYAN_BOLD);
+		log.cyanBoldTitle(TAB + "Enter a number between 1 and 20: ");
 		wordsToProcessCount = Integer.parseInt(scanner.next());
 		log.info(TAB, "Number of words is updated successfully: " + wordsToProcessCount);
 	}
@@ -97,8 +92,7 @@ public class SubMenu {
 	}
 	
 	private void setSearchMode() {
-		out.print(TAB + "Enter A or B: ");
-		out.print(ConsoleColour.CYAN_BOLD);
+		log.cyanBoldTitle(TAB + "Enter A or B: ");
 		searchMode = scanner.next().toUpperCase().charAt(0);
 		log.info(TAB, "You preference is updated successfully: " + searchMode);
 	}
@@ -108,8 +102,7 @@ public class SubMenu {
 	}
 	
 	private void setReturnUnmached() {
-		out.print(TAB + "Enter \"yes\" or \"no\": ");
-		out.print(ConsoleColour.CYAN_BOLD);
+		log.cyanBoldTitle(TAB + "Enter \"yes\" or \"no\": ");
 		out.println(scanner.next());
 		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
 		log.info(TAB,"You preference is updated successfully: " + returnUnmachted);
