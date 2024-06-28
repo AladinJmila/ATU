@@ -55,18 +55,18 @@ public class SubMenu {
 	private void showOptions() {
 		out.print(ConsoleColour.RESET);
 		out.print(ConsoleColour.WHITE_BOLD);
-		out.println(TAB + "----------------------");
+		out.println(TAB + "-----------------------------------------------------------------------------------------");
 		out.println(TAB + "| 1 | Specify the number of results to return (default: 10)");
 		out.println(TAB + "| 2 | Specify the maximum number of words to process at once (default: 10)");
 		out.println(TAB + "| 3 |Choose search mode: whole sentence (A, default) or individual words (B)");
 		out.println(TAB + "| 4 |Ignore unmatched results (yes/no) - (default: yes)");
 		out.println(TAB + "|   |-->  Selecting \"yes\" is recommended if you chose individual words (option B) above");
-		out.println(TAB + "| 5 |Return to the main menu");
-		out.println(TAB + "----------------------");
+		out.println(TAB + "| 5 |Return to the Main Menu");
+		out.println(TAB + "-----------------------------------------------------------------------------------------");
 		
 		
 		out.println();
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		out.print(TAB + "Select Option [1-5]> ");
 		out.print(ConsoleColour.WHITE_BOLD);
 	}
@@ -79,7 +79,7 @@ public class SubMenu {
 	
 	private void setTotalWordsToOutput() {
 		out.print(TAB + "Enter a number between 1 and 100: ");
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		totalWordsToOutput = Integer.parseInt(scanner.next());
 		cLogger.log(TAB , LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
@@ -90,7 +90,7 @@ public class SubMenu {
 	
 	public void setWordsToProcessCount() {
 		out.print(TAB + "Enter a number between 1 and 20: ");
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		wordsToProcessCount = Integer.parseInt(scanner.next());
 		cLogger.log(TAB , LogLevel.INFO, "Number of words is updated successfully: " + wordsToProcessCount);
 	}
@@ -101,7 +101,7 @@ public class SubMenu {
 	
 	private void setSearchMode() {
 		out.print(TAB + "Enter A or B: ");
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		searchMode = scanner.next().toUpperCase().charAt(0);
 		cLogger.log(TAB , LogLevel.INFO, "You preference is updated successfully: " + searchMode);
 	}
@@ -112,7 +112,7 @@ public class SubMenu {
 	
 	private void setReturnUnmached() {
 		out.print(TAB + "Enter \"yes\" or \"no\": ");
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		out.println(scanner.next());
 		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
 		cLogger.log(TAB , LogLevel.INFO, "You preference is updated successfully: " + returnUnmachted);

@@ -52,7 +52,7 @@ public class MainMenu {
 				case 3 	-> handleSearchInput();
 				case 4 	-> {
 					out.println();
-					out.println("   ) Configure Options: ");
+					out.println("   | Configure Options Menu: ");
 					out.print(ConsoleColour.WHITE); 
 					subMenu.init();
 					}
@@ -66,7 +66,7 @@ public class MainMenu {
 	
 	private void handleSearchInput() throws IOException {
 		
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		out.println("Enter the search term or a phrase of 10 words maximum: ");
 		out.print(ConsoleColour.WHITE_BOLD);
 
@@ -96,11 +96,18 @@ public class MainMenu {
 		searchTerms = input.toLowerCase().split(" ");
 		
 		while (searchTerms.length > wordsToProcessCount) {
-			out.println("Your sentence is longer than the maximum allowed number of words");
-			out.println("Only " + wordsToProcessCount + " will be processed");
-			out.println("(1) Continue anyway");
-			out.println("(2) Enter a new sentence");
-			out.println("(3) Increace the number of words to process");
+			out.println(SubMenu.TAB + "Your sentence is longer than the maximum allowed number of words");
+			out.println(SubMenu.TAB + "Only " + wordsToProcessCount + " will be processed");
+			out.println(SubMenu.TAB + "---------------------------------------------------------------");
+			out.println(SubMenu.TAB + "| 1 | Continue anyway");
+			out.println(SubMenu.TAB + "| 2 | Enter a new sentence");
+			out.println(SubMenu.TAB + "| 3 | Increace the number of words to process");
+			out.println(SubMenu.TAB + "---------------------------------------------------------------");
+			
+			out.println();
+			out.print(ConsoleColour.CYAN_BOLD);
+			out.print("Select Option [1-3]> ");
+			out.print(ConsoleColour.WHITE_BOLD);
 			
 			int choice = Integer.parseInt(scanner.next());
 			
@@ -146,15 +153,18 @@ public class MainMenu {
 		}
 		
 		out.print(ConsoleColour.WHITE_BOLD);
-		out.println("(1) Specify Embedding File");
-		out.println("(2) Specify an Output File (default: ./out.txt)");
-		out.println("(3) Enter a word or a sentence");
-		out.println("(4) Configure Options");
-		out.println("(5) Optional Extras...");
-		out.println("(6) Quit");
+		out.println("| Main Menu:");
+		out.println("---------------------------------------------------");
+		out.println("| 1 | Specify Embedding File");
+		out.println("| 2 | Specify an Output File (default: ./out.txt)");
+		out.println("| 3 | Enter a word or a sentence");
+		out.println("| 4 | Configure Options");
+		out.println("| 5 | Optional Extras...");
+		out.println("| 6 | Quit");
+		out.println("---------------------------------------------------");
 		
 		out.println();
-		out.print(ConsoleColour.YELLOW_BOLD);
+		out.print(ConsoleColour.CYAN_BOLD);
 		out.print("Select Option [1-6]> ");
 		out.print(ConsoleColour.WHITE_BOLD);
 		isFirstRun = false;
