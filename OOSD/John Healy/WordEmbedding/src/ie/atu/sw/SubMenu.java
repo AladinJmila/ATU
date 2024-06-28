@@ -53,8 +53,7 @@ public class SubMenu {
 	}
 	
 	private void showOptions() {
-		out.print(ConsoleColour.RESET);
-		out.print(ConsoleColour.WHITE_BOLD);
+		cLogger.cyanBoldTitle(TAB + "| Configure Options Menu: ");
 		out.println(TAB + "-----------------------------------------------------------------------------------------");
 		out.println(TAB + "| 1 | Specify the number of results to return (default: 10)");
 		out.println(TAB + "| 2 | Specify the maximum number of words to process at once (default: 10)");
@@ -66,9 +65,7 @@ public class SubMenu {
 		
 		
 		out.println();
-		out.print(ConsoleColour.CYAN_BOLD);
-		out.print(TAB + "Select Option [1-5]> ");
-		out.print(ConsoleColour.WHITE_BOLD);
+		cLogger.cyanBoldTitle(TAB + "Select Option [1-5]> ");
 	}
 	
 	

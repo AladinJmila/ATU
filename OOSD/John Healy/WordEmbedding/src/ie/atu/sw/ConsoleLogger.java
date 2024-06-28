@@ -9,7 +9,7 @@ public class ConsoleLogger {
 	public void log(LogLevel level, String message) {
 		switch (level) {
 		case INFO -> logInfo(level, message);
-		case WARN -> logWarning(level, message);
+//		case WARN -> logWarning(level, message);
 		case ERROR -> logError(level, message);
 		}
 	}
@@ -18,9 +18,16 @@ public class ConsoleLogger {
 		this.prefix = prefix;
 		switch (level) {
 		case INFO -> logInfo(level, message);
-		case WARN -> logWarning(level, message);
+//		case WARN -> logWarning(level, message);
 		case ERROR -> logError(level, message);
 		}
+	}
+	
+	public void cyanBoldTitle (String message) {
+		out.println();
+		out.print(ConsoleColour.CYAN_BOLD);
+		out.println(message);
+		out.print(ConsoleColour.WHITE_BOLD);
 	}
 
 	// Log informational messages in green
@@ -32,12 +39,21 @@ public class ConsoleLogger {
 	}
 	
 	// Log warning messages in yellow
-	private void logWarning(LogLevel level, String message) {
+	public void warn(String message) {
 		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println("");
-		out.println(prefix + level.getMessage() + " " + message);
+		out.println(prefix + LogLevel.WARN.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
+	
+	public void warn(String prefix, String message) {
+		this.prefix = prefix;
+		out.print(ConsoleColour.YELLOW_BOLD);
+		out.println("");
+		out.println(prefix + LogLevel.WARN.getMessage() + " " + message);
+		out.print(ConsoleColour.RESET);
+	}
+	
 	
 	// log error messages in red
 	private void logError(LogLevel level, String message) {
@@ -46,4 +62,5 @@ public class ConsoleLogger {
 		out.println(prefix + level.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
+	
 }
