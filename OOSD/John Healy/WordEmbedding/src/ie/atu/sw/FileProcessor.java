@@ -18,12 +18,12 @@ public class FileProcessor {
 	// 2D array to store the embeddings
 	private double[][] embeddings = new double[WORDS_COUNT][FEATURES_COUNT];
 	// Instance of ConsoleLogger to log messages
-	private ConsoleLogger cLogger;
+	private ConsoleLogger log;
 	
 	// Constructor initializing the file path and ConsoleLogger instance
 	FileProcessor(String filePath) {
 		file = filePath;
-		cLogger = new ConsoleLogger();
+		log = new ConsoleLogger();
 	}
 	
 	// Generate arrays from the embeddings file
@@ -35,7 +35,7 @@ public class FileProcessor {
 			int index = 0;
 			
 			// Log the start of file processing
-			cLogger.log(LogLevel.INFO, "Processing the input file");
+			log.info("Processing the input file");
 			
 			// Read each line from the file
 			while ((line = br.readLine()) != null) {

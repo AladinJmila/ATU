@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class SubMenu {
 	private Scanner scanner;
-	private ConsoleLogger cLogger;
+	private ConsoleLogger log;
 	private boolean keepRunning = true;
 	
 	private int totalWordsToOutput = 10;
@@ -18,7 +18,7 @@ public class SubMenu {
 	
 	public SubMenu() {
 		scanner = new Scanner(System.in);
-		cLogger = new ConsoleLogger();
+		log = new ConsoleLogger();
 	}
 	
 	public void init() {
@@ -34,7 +34,7 @@ public class SubMenu {
 					choice = Integer.parseInt(scanner.next());
 					validInput = true;
 				} catch (NumberFormatException e) {
-					cLogger.log(TAB , LogLevel.ERROR, "Invalid input, please enter a valid number.");
+					log.error(TAB , "Invalid input, please enter a valid number.");
 					showOptions();	
 				}
 								
@@ -47,13 +47,13 @@ public class SubMenu {
 				case 3 -> setSearchMode();
 				case 4 -> setReturnUnmached();
 				case 5 -> keepRunning = false;
-				default -> cLogger.log(TAB , LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 5.");
+				default -> log.error(TAB, "Invalid Selection, choose a number from 1 to 5.");
 			}
 		}
 	}
 	
 	private void showOptions() {
-		cLogger.cyanBoldTitle(TAB + "| Configure Options Menu: ");
+		log.cyanBoldTitle(TAB + "| Configure Options Menu: ");
 		out.println(TAB + "-----------------------------------------------------------------------------------------");
 		out.println(TAB + "| 1 | Specify the number of results to return (default: 10)");
 		out.println(TAB + "| 2 | Specify the maximum number of words to process at once (default: 10)");
@@ -65,7 +65,7 @@ public class SubMenu {
 		
 		
 		out.println();
-		cLogger.cyanBoldTitle(TAB + "Select Option [1-5]> ");
+		log.cyanBoldTitle(TAB + "Select Option [1-5]> ");
 	}
 	
 	
@@ -78,7 +78,7 @@ public class SubMenu {
 		out.print(TAB + "Enter a number between 1 and 100: ");
 		out.print(ConsoleColour.CYAN_BOLD);
 		totalWordsToOutput = Integer.parseInt(scanner.next());
-		cLogger.log(TAB , LogLevel.INFO, "Number of results is updated successfully: " + totalWordsToOutput);
+		log.info(TAB, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 
 	public int getWordsToProcessCount() {
@@ -89,7 +89,7 @@ public class SubMenu {
 		out.print(TAB + "Enter a number between 1 and 20: ");
 		out.print(ConsoleColour.CYAN_BOLD);
 		wordsToProcessCount = Integer.parseInt(scanner.next());
-		cLogger.log(TAB , LogLevel.INFO, "Number of words is updated successfully: " + wordsToProcessCount);
+		log.info(TAB, "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
 	public char getSearchMode() {
@@ -100,7 +100,7 @@ public class SubMenu {
 		out.print(TAB + "Enter A or B: ");
 		out.print(ConsoleColour.CYAN_BOLD);
 		searchMode = scanner.next().toUpperCase().charAt(0);
-		cLogger.log(TAB , LogLevel.INFO, "You preference is updated successfully: " + searchMode);
+		log.info(TAB, "You preference is updated successfully: " + searchMode);
 	}
 
 	public boolean getReturnUnmachted() {
@@ -112,6 +112,6 @@ public class SubMenu {
 		out.print(ConsoleColour.CYAN_BOLD);
 		out.println(scanner.next());
 		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
-		cLogger.log(TAB , LogLevel.INFO, "You preference is updated successfully: " + returnUnmachted);
+		log.info(TAB,"You preference is updated successfully: " + returnUnmachted);
 	}
 }

@@ -42,12 +42,12 @@ public class MainMenu {
 				case 1 	-> {
 					out.println("Enter input file path");
 					inputFile = scanner.next();
-					log.log(LogLevel.INFO, "Input file path succesfully added");
+					log.info("Input file path succesfully added");
 					}
 				case 2 	-> {
 					out.println("Enter output file path");
 					outputFile = scanner.next();
-					log.log(LogLevel.INFO, "Output file path succesfully added");
+					log.info("Output file path succesfully added");
 					}
 				case 3 	-> handleSearchInput();
 				case 4 	-> {
@@ -58,7 +58,7 @@ public class MainMenu {
 					}
 				case 5 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("5");}
 				case 6 	-> keepRunning = false;
-				default -> log.log(LogLevel.ERROR, "Invalid Selection, choose a number from 1 to 6.");
+				default -> log.error("Invalid Selection, choose a number from 1 to 6.");
 					
 			}
 		}
@@ -72,7 +72,7 @@ public class MainMenu {
 		if (!isAlreadyInvoked) {
 			String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
 			plotter.plot(result);
-			log.log(LogLevel.INFO, "Results file will launch automatically");
+			log.info("Results file will launch automatically");
 			isAlreadyInvoked = true;
 		}
 	}

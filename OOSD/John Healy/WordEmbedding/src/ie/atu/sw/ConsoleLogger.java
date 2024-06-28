@@ -3,25 +3,6 @@ package ie.atu.sw;
 import static java.lang.System.out;
 
 public class ConsoleLogger {
-	private String prefix = "";
-
-	// Log a message with a given log level
-	public void log(LogLevel level, String message) {
-		switch (level) {
-		case INFO -> logInfo(level, message);
-//		case WARN -> logWarning(level, message);
-		case ERROR -> logError(level, message);
-		}
-	}
-	
-	public void log(String prefix, LogLevel level, String message) {
-		this.prefix = prefix;
-		switch (level) {
-		case INFO -> logInfo(level, message);
-//		case WARN -> logWarning(level, message);
-		case ERROR -> logError(level, message);
-		}
-	}
 	
 	public void cyanBoldTitle (String message) {
 		out.println();
@@ -31,35 +12,48 @@ public class ConsoleLogger {
 	}
 
 	// Log informational messages in green
-	private void logInfo(LogLevel level, String message) {
-		out.print(ConsoleColour.GREEN_BOLD);
+	public void info(String message) {
 		out.println("");
-		out.println(prefix + level.getMessage() + " " + message);
+		out.print(ConsoleColour.GREEN_BOLD);
+		out.println(LogLevel.INFO.getMessage() + " " + message);
+		out.print(ConsoleColour.RESET);
+	}
+	
+	public void info(String prefix, String message) {
+		out.println("");
+		out.print(ConsoleColour.GREEN_BOLD);
+		out.println(prefix + LogLevel.INFO.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
 	// Log warning messages in yellow
 	public void warn(String message) {
-		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println("");
-		out.println(prefix + LogLevel.WARN.getMessage() + " " + message);
+		out.print(ConsoleColour.YELLOW_BOLD);
+		out.println(LogLevel.WARN.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
 	public void warn(String prefix, String message) {
-		this.prefix = prefix;
-		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println("");
+		out.print(ConsoleColour.YELLOW_BOLD);
 		out.println(prefix + LogLevel.WARN.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
 	
 	// log error messages in red
-	private void logError(LogLevel level, String message) {
-		out.print(ConsoleColour.RED_BOLD);
+	public void error(String message) {
 		out.println("");
-		out.println(prefix + level.getMessage() + " " + message);
+		out.print(ConsoleColour.RED_BOLD);
+		out.println(LogLevel.ERROR.getMessage() + " " + message);
+		out.print(ConsoleColour.RESET);
+	}
+	
+	public void error(String prefix, String message) {
+		out.println("");
+		out.print(ConsoleColour.RED_BOLD);
+		out.println(prefix + LogLevel.ERROR.getMessage() + " " + message);
 		out.print(ConsoleColour.RESET);
 	}
 	
