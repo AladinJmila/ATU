@@ -14,7 +14,7 @@ public class ConsoleLogger {
 		}
 	}
 	
-	public void log(LogLevel level, String message, String prefix) {
+	public void log(String prefix, LogLevel level, String message) {
 		this.prefix = prefix;
 		switch (level) {
 		case INFO -> logInfo(level, message);

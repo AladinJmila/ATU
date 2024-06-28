@@ -52,7 +52,7 @@ public class MainMenu {
 				case 3 	-> handleSearchInput();
 				case 4 	-> {
 					out.println();
-					out.println("\tYou entered the Options Configuration menu");
+					out.println("   ) Configure Options: ");
 					out.print(ConsoleColour.WHITE); 
 					subMenu.init();
 					}
