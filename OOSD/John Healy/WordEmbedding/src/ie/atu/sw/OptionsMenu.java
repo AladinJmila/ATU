@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class OptionsMenu {
 	private Scanner scanner;
 	private ConsoleLogger log;
+	private Utilities utilites;
 	private boolean keepRunning = true;
 	
 	private int totalWordsToOutput = 10;
@@ -19,14 +20,15 @@ public class OptionsMenu {
 	public OptionsMenu() {
 		scanner = new Scanner(System.in);
 		log = new ConsoleLogger();
+		utilites = new Utilities(scanner);
 	}
 	
 	public void init() {
 		keepRunning = true;
 		while(keepRunning) {
 			showOptions();
-			
-			int choice = Utilities.validateNumericInput(scanner, () -> showOptions());
+			int [] range = {1, 5};
+			int choice = utilites.validateNumericInput(() -> showOptions(), range);
 
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
@@ -59,8 +61,10 @@ public class OptionsMenu {
 	}
 	
 	private void setTotalWordsToOutput() {
-		log.cyanBoldTitle(TAB + "Enter a number between 1 and 100: ");
-		totalWordsToOutput = Integer.parseInt(scanner.next());
+		int [] range = {1, 100};
+		String prompt = "Enter a number between "+ range[0] + " and " + range[1] + ": ";
+		log.cyanBoldTitle(TAB + prompt);
+		totalWordsToOutput = utilites.validateNumericInput(() -> log.cyanBoldTitle(TAB + prompt), range);
 		log.info(TAB, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 

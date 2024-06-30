@@ -8,23 +8,39 @@ interface Prompter {
 }
 
 public class Utilities {
-	private static ConsoleLogger log = new ConsoleLogger();
+	private ConsoleLogger log;
+	private Scanner scanner;
 	
-	public static int validateNumericInput(Scanner scanner, Prompter showPrompt) {
+	Utilities(Scanner scanner) {
+		log = new ConsoleLogger();
+		this.scanner = scanner;
+	}
+	
+	public int validateNumericInput(Prompter showPrompt, int[] range) {
 		int input = 0;
 		boolean validInput = false;
 		
-		while (!validInput) {
-			try {
-				input = Integer.parseInt(scanner.next());
-				validInput = true;
-			} catch (NumberFormatException e) {
-				log.error(OptionsMenu.TAB , "Invalid input, please enter a valid number.");
-				showPrompt.prompt();	
+
+			while (!validInput) {
+				try {
+					input = Integer.parseInt(scanner.next());
+					
+					if (input < range[0] || input > range[1]) {
+						log.error(OptionsMenu.TAB , "Input out of range, please enter a valid number.");
+						showPrompt.prompt();
+					} else {
+						validInput = true;	
+					}
+					
+				} catch (NumberFormatException e) {
+					log.error(OptionsMenu.TAB , "Invalid input, please enter a valid number.");
+					showPrompt.prompt();	
+				}
+				
 			}
-							
-		}
-		
+			
 		return input;
 	}
+	
+
 }
