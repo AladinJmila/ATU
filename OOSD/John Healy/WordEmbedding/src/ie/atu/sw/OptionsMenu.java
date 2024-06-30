@@ -4,7 +4,7 @@ import static java.lang.System.out;
 
 import java.util.Scanner;
 
-public class SubMenu {
+public class OptionsMenu {
 	private Scanner scanner;
 	private ConsoleLogger log;
 	private boolean keepRunning = true;
@@ -16,7 +16,7 @@ public class SubMenu {
 	public static final String TAB = "   ";
 	
 	
-	public SubMenu() {
+	public OptionsMenu() {
 		scanner = new Scanner(System.in);
 		log = new ConsoleLogger();
 	}

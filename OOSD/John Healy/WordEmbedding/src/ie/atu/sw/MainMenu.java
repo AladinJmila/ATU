@@ -14,7 +14,7 @@ public class MainMenu {
 	private Searcher searcher;
 	private Plotter plotter;
 	private ConsoleLogger log;
-	private SubMenu subMenu;
+	private OptionsMenu optionsMenu;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
 	private boolean isAlreadyInvoked;
@@ -28,8 +28,8 @@ public class MainMenu {
 		searcher = new Searcher();
 		plotter = new Plotter();
 		log = new ConsoleLogger();
-		subMenu = new SubMenu();
-		wordsToProcessCount = subMenu.getTotalWordsToOutput();
+		optionsMenu = new OptionsMenu();
+		wordsToProcessCount = optionsMenu.getTotalWordsToOutput();
 	}
 	
 	public void init() throws IOException {
@@ -39,36 +39,41 @@ public class MainMenu {
 			int choice = Integer.parseInt(scanner.next());
 			
 			switch(choice) {
-				case 1 	-> {
-					out.println("Enter input file path");
-					inputFile = scanner.next();
-					log.info("Input file path succesfully added");
-					}
-				case 2 	-> {
-					out.println("Enter output file path");
-					outputFile = scanner.next();
-					log.info("Output file path succesfully added");
-					}
+				case 1 	-> setInputFilePath();
+				case 2 	-> setOutputFilePath();
 				case 3 	-> handleSearchInput();
-				case 4 	-> {
-					out.println();
-					out.println("   | Configure Options Menu: ");
-					out.print(ConsoleColour.WHITE); 
-					subMenu.init();
-					}
-				case 5 	-> {out.println(""); out.print(ConsoleColour.WHITE); out.println("5");}
-				case 6 	-> keepRunning = false;
-				default -> log.error("Invalid Selection, choose a number from 1 to 6.");
+				case 4 	-> configureOptions();
+				case 5 	-> keepRunning = false;
+				default -> log.error("Invalid Selection, choose a number from 1 to 5.");
 					
 			}
 		}
 	}
 	
+	private void setInputFilePath() {
+		out.println("Enter input file path");
+		inputFile = scanner.next();
+		log.info("Input file path succesfully added");
+	}
+	
+	private void setOutputFilePath() {
+		out.println("Enter output file path");
+		outputFile = scanner.next();
+		log.info("Output file path succesfully added");
+	}
+	
+	private void configureOptions() {
+		out.println();
+		out.println("   | Configure Options Menu: ");
+		out.print(ConsoleColour.WHITE);
+		optionsMenu.init();
+	}
+	
 	private void handleSearchInput() throws IOException {
-		
 		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ", true);
 
 		getUserInput();
+		
 		if (!isAlreadyInvoked) {
 			String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
 			plotter.plot(result);
@@ -95,13 +100,13 @@ public class MainMenu {
 		
 		while (searchTerms.length > wordsToProcessCount) {
 //			cLogger.log(subMenu.Tab, input);
-			log.warn(SubMenu.TAB, "Your sentence is longer than the maximum allowed number of words!\n" +
+			log.warn(OptionsMenu.TAB, "Your sentence is longer than the maximum allowed number of words!\n" +
 					"             Only " + wordsToProcessCount + " will be processed.");
-			out.println(SubMenu.TAB + "---------------------------------------------------------------");
-			out.println(SubMenu.TAB + "| 1 | Continue anyway");
-			out.println(SubMenu.TAB + "| 2 | Enter a new sentence");
-			out.println(SubMenu.TAB + "| 3 | Increace the number of words to process");
-			out.println(SubMenu.TAB + "---------------------------------------------------------------");
+			out.println(OptionsMenu.TAB + "---------------------------------------------------------------");
+			out.println(OptionsMenu.TAB + "| 1 | Continue anyway");
+			out.println(OptionsMenu.TAB + "| 2 | Enter a new sentence");
+			out.println(OptionsMenu.TAB + "| 3 | Increace the number of words to process");
+			out.println(OptionsMenu.TAB + "---------------------------------------------------------------");
 			log.cyanBoldTitle("Select Option [1-3]> ");
 			
 			int choice = Integer.parseInt(scanner.next());
@@ -110,9 +115,8 @@ public class MainMenu {
 				case 1 -> {}
 				case 2 -> handleSearchInput();
 				case 3 -> { 
-					subMenu.setWordsToProcessCount(); 
-					wordsToProcessCount = subMenu.getWordsToProcessCount();
-					out.println("Updated: " + wordsToProcessCount);
+					optionsMenu.setWordsToProcessCount(); 
+					wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 					}
 			}
 			
@@ -149,10 +153,9 @@ public class MainMenu {
 		out.println("| 2 | Specify an Output File (default: ./out.txt)");
 		out.println("| 3 | Enter a word or a sentence");
 		out.println("| 4 | Configure Options");
-		out.println("| 5 | Optional Extras...");
-		out.println("| 6 | Quit");
+		out.println("| 5 | Quit");
 		out.println("---------------------------------------------------");
-		log.cyanBoldTitle("Select Option [1-6]> ");
+		log.cyanBoldTitle("Select Option [1-5]> ");
 		
 		isFirstRun = false;
 	}
