@@ -16,7 +16,7 @@ public class Utilities {
 		this.scanner = scanner;
 	}
 	
-	public int validateNumericInput(Prompter showPrompt, int[] range) {
+	public int validateNumericInput(Prompter showPrompt, int[] range, String tab) {
 		int input = 0;
 		boolean validInput = false;
 		
@@ -26,14 +26,14 @@ public class Utilities {
 					input = Integer.parseInt(scanner.next());
 					
 					if (input < range[0] || input > range[1]) {
-						log.error(OptionsMenu.TAB , "Input out of range, please enter a valid number.");
+						log.error(tab , "Input out of range, please enter a valid number.");
 						showPrompt.prompt();
 					} else {
 						validInput = true;	
 					}
 					
 				} catch (NumberFormatException e) {
-					log.error(OptionsMenu.TAB , "Invalid input, please enter a valid number.");
+					log.error(tab , "Invalid input, please enter a valid number.");
 					showPrompt.prompt();	
 				}
 				
@@ -43,4 +43,7 @@ public class Utilities {
 	}
 	
 
+	public int validateNumericInput(Prompter showPrompt, int[] range) {
+		return validateNumericInput(showPrompt, range, "");
+	}
 }

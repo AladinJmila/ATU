@@ -4,7 +4,7 @@ import static java.lang.System.out;
 
 public class ConsoleLogger {
 	
-
+	public static final String TAB = "   ";
 	
 	public void cyanBoldTitle (String message, boolean newLine) {
 		out.println();

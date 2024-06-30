@@ -15,11 +15,13 @@ public class MainMenu {
 	private Plotter plotter;
 	private ConsoleLogger log;
 	private OptionsMenu optionsMenu;
+	private Utilities utilites;
 	private boolean keepRunning = true;
 	private boolean isFirstRun = true;
 	private boolean isAlreadyInvoked;
 	private String[] searchTerms;
 	private int wordsToProcessCount;
+	private String tab = ConsoleLogger.TAB;
 	
 	public static String outputFile = "out.txt";
 	
@@ -28,7 +30,8 @@ public class MainMenu {
 		searcher = new Searcher();
 		plotter = new Plotter();
 		log = new ConsoleLogger();
-		optionsMenu = new OptionsMenu();
+		optionsMenu = new OptionsMenu(scanner);
+		utilites = new Utilities(scanner);
 		wordsToProcessCount = optionsMenu.getTotalWordsToOutput();
 	}
 	
@@ -36,7 +39,8 @@ public class MainMenu {
 		while(keepRunning) {
 			showOptions();
 			
-			int choice = Integer.parseInt(scanner.next());
+			int [] range = {1, 5};
+			int choice = utilites.validateNumericInput(() -> showOptions(), range);
 			
 			switch(choice) {
 				case 1 	-> setInputFilePath();
@@ -100,29 +104,35 @@ public class MainMenu {
 		searchTerms = input.toLowerCase().split(" ");
 		
 		while (searchTerms.length > wordsToProcessCount) {
-//			cLogger.log(subMenu.Tab, input);
-			log.warn(OptionsMenu.TAB, "Your sentence is longer than the maximum allowed number of words!\n" +
-					"             Only " + wordsToProcessCount + " will be processed.");
-			out.println(OptionsMenu.TAB + "---------------------------------------------------------------");
-			out.println(OptionsMenu.TAB + "| 1 | Continue anyway");
-			out.println(OptionsMenu.TAB + "| 2 | Enter a new sentence");
-			out.println(OptionsMenu.TAB + "| 3 | Increace the number of words to process");
-			out.println(OptionsMenu.TAB + "---------------------------------------------------------------");
-			log.cyanBoldTitle("Select Option [1-3]> ");
+			showMaxWordsOptions();
 			
-			int choice = Integer.parseInt(scanner.next());
+			int [] range = {1, 3};
+			int choice = utilites.validateNumericInput(() -> showMaxWordsOptions(), range, tab);
 			
 			switch (choice) {
 				case 1 -> {}
 				case 2 -> handleSearchInput();
-				case 3 -> { 
-					optionsMenu.setWordsToProcessCount(); 
-					wordsToProcessCount = optionsMenu.getWordsToProcessCount();
-					}
+				case 3 -> updateWordsCount();
 			}
 			
 		}
 		
+	}
+	
+	private void updateWordsCount() {
+		optionsMenu.setWordsToProcessCount(); 
+		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
+	}
+	
+	private void showMaxWordsOptions() {
+		log.warn(tab , "Your sentence is longer than the maximum allowed number of words!\n" +
+				"             Only " + wordsToProcessCount + " will be processed.");
+		out.println(tab + "---------------------------------------------------------------");
+		out.println(tab + "| 1 | Continue anyway");
+		out.println(tab + "| 2 | Enter a new sentence");
+		out.println(tab + "| 3 | Increace the number of words to process");
+		out.println(tab + "---------------------------------------------------------------");
+		log.cyanBoldTitle("Select Option [1-3]> ");
 	}
 	
 
