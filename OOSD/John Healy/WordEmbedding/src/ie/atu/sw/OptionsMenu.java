@@ -26,21 +26,8 @@ public class OptionsMenu {
 		while(keepRunning) {
 			showOptions();
 			
-			int choice = 0;
-			boolean validInput = false;
-			
-			while (!validInput) {
-				try {
-					choice = Integer.parseInt(scanner.next());
-					validInput = true;
-				} catch (NumberFormatException e) {
-					log.error(TAB , "Invalid input, please enter a valid number.");
-					showOptions();	
-				}
-								
-			}
-			
-			
+			int choice = Utilities.validateNumericInput(scanner, () -> showOptions());
+
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
 				case 2 -> setWordsToProcessCount();

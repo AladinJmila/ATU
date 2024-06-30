@@ -62,12 +62,6 @@ public class MainMenu {
 		log.info("Output file path succesfully added");
 	}
 	
-	private void configureOptions() {
-		out.println();
-		out.println("   | Configure Options Menu: ");
-		out.print(ConsoleColour.WHITE);
-		optionsMenu.init();
-	}
 	
 	private void handleSearchInput() throws IOException {
 		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ", true);
@@ -80,6 +74,13 @@ public class MainMenu {
 			log.info("Results file will launch automatically");
 			isAlreadyInvoked = true;
 		}
+	}
+	
+	private void configureOptions() {
+		out.println();
+		out.println("   | Configure Options Menu: ");
+		out.print(ConsoleColour.WHITE);
+		optionsMenu.init();
 	}
 	
 	private void getUserInput() throws IOException {
