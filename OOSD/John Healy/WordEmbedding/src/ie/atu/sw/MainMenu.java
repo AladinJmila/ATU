@@ -12,6 +12,7 @@ public class MainMenu {
 	private String inputFile = "./static/word-embeddings.txt";
 	private Scanner scanner;
 	private Searcher searcher;
+	private MenuHandler menuHandler;
 	private Plotter plotter;
 	private ConsoleLogger log;
 	private OptionsMenu optionsMenu;
@@ -28,6 +29,7 @@ public class MainMenu {
 	public MainMenu() {
 		scanner = new Scanner(System.in);
 		searcher = new Searcher();
+		menuHandler = new MenuHandler();
 		plotter = new Plotter();
 		log = new ConsoleLogger();
 		optionsMenu = new OptionsMenu(scanner);
@@ -37,10 +39,11 @@ public class MainMenu {
 	
 	public void init() throws IOException {
 		while(keepRunning) {
-			showOptions();
+			menuHandler.showMainMenu(isFirstRun);
 			
 			int [] range = {1, 5};
-			int choice = utilites.validateNumericInput(() -> showOptions(), range);
+			int choice = utilites.validateNumericInput(
+					() -> menuHandler.showMainMenu(isFirstRun), range);
 			
 			switch(choice) {
 				case 1 	-> setInputFilePath();
@@ -104,10 +107,11 @@ public class MainMenu {
 		searchTerms = input.toLowerCase().split(" ");
 		
 		while (searchTerms.length > wordsToProcessCount) {
-			showMaxWordsOptions();
+			menuHandler.showMaxWordsOptions(wordsToProcessCount);
 			
 			int [] range = {1, 3};
-			int choice = utilites.validateNumericInput(() -> showMaxWordsOptions(), range, tab);
+			int choice = utilites.validateNumericInput(
+					() -> menuHandler.showMaxWordsOptions(wordsToProcessCount), range, tab);
 			
 			switch (choice) {
 				case 1 -> {}
@@ -124,50 +128,4 @@ public class MainMenu {
 		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 	}
 	
-	private void showMaxWordsOptions() {
-		log.warn(tab , "Your sentence is longer than the maximum allowed number of words!\n" +
-				"             Only " + wordsToProcessCount + " will be processed.");
-		out.println(tab + "---------------------------------------------------------------");
-		out.println(tab + "| 1 | Continue anyway");
-		out.println(tab + "| 2 | Enter a new sentence");
-		out.println(tab + "| 3 | Increace the number of words to process");
-		out.println(tab + "---------------------------------------------------------------");
-		log.cyanBoldTitle("Select Option [1-3]> ");
-	}
-	
-
-	private void showOptions() {
-		out.println();
-		out.print(ConsoleColour.RESET);
-		if (isFirstRun) {
-			out.print(ConsoleColour.YELLOW_BOLD);
-			out.println("************************************************************");
-			out.print("*     ");
-			out.print(ConsoleColour.CYAN_BOLD);
-			out.print("ATU - Dept. of Computer Science & Applied Physics");
-			out.print(ConsoleColour.YELLOW_BOLD);
-			out.println("    *");
-			out.println("*                                                          *");
-			out.print("*          ");
-			out.print(ConsoleColour.CYAN_UNDERLINED);
-			out.print("Similarity Search with Word Embeddings");
-			out.print(ConsoleColour.RESET);
-			out.print(ConsoleColour.YELLOW_BOLD);
-			out.println("          *");
-			out.println("*                                                          *");
-			out.println("************************************************************");
-		} 
-
-		log.cyanBoldTitle(" Main Menu:", true);
-		out.println("---------------------------------------------------");
-		out.println("| 1 | Specify Embedding File");
-		out.println("| 2 | Specify an Output File (default: ./out.txt)");
-		out.println("| 3 | Enter a word or a sentence");
-		out.println("| 4 | Configure Options");
-		out.println("| 5 | Quit");
-		out.println("---------------------------------------------------");
-		log.cyanBoldTitle("Select Option [1-5]> ");
-		
-		isFirstRun = false;
-	}
 }

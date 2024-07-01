@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class OptionsMenu {
 	private Scanner scanner;
+	private MenuHandler menuHandler;
 	private ConsoleLogger log;
 	private Utilities utilites;
 	private boolean keepRunning = true;
@@ -18,6 +19,7 @@ public class OptionsMenu {
 	
 	
 	public OptionsMenu(Scanner scanner) {
+		menuHandler = new MenuHandler();
 		this.scanner = scanner;
 		utilites = new Utilities(scanner);
 		log = new ConsoleLogger();
@@ -26,9 +28,9 @@ public class OptionsMenu {
 	public void init() {
 		keepRunning = true;
 		while(keepRunning) {
-			showOptions();
+			menuHandler.showOptionsMenu();
 			int [] range = {1, 5};
-			int choice = utilites.validateNumericInput(() -> showOptions(), range, tab);
+			int choice = utilites.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
 
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
@@ -41,21 +43,7 @@ public class OptionsMenu {
 		}
 	}
 	
-	private void showOptions() {
-		log.cyanBoldTitle(tab + " Configure Options Menu: ", true);
-		out.println(tab + "-----------------------------------------------------------------------------------------");
-		out.println(tab + "| 1 | Specify the number of results to return (default: 10)");
-		out.println(tab + "| 2 | Specify the maximum number of words to process at once (default: 10)");
-		out.println(tab + "| 3 | Choose search mode: whole sentence (A, default) or individual words (B)");
-		out.println(tab + "| 4 | Ignore unmatched results (yes/no) - (default: yes)");
-		out.println(tab + "|   | -->  Selecting \"yes\" is recommended if you chose individual words (option B) above");
-		out.println(tab + "| 5 | Return to the Main Menu");
-		out.println(tab + "-----------------------------------------------------------------------------------------");
-		log.cyanBoldTitle(tab+ "Select Option [1-5]> ");
-	}
-	
-	
-	
+
 	public int getTotalWordsToOutput() {
 		return totalWordsToOutput;
 	}
