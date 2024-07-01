@@ -8,20 +8,20 @@ public class OptionsMenu {
 	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private ConsoleLogger log;
-	private Utilities utilites;
+	private Utilities utilities;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
 	
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
-	private char searchMode = 'A';
+	private String searchMode = "A";
 	private boolean returnUnmachted = true;
 	
 	
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
 		this.scanner = scanner;
-		utilites = new Utilities(scanner);
+		utilities = new Utilities(scanner);
 		log = new ConsoleLogger();
 	}
 	
@@ -30,7 +30,7 @@ public class OptionsMenu {
 		while(keepRunning) {
 			menuHandler.showOptionsMenu();
 			int [] range = {1, 5};
-			int choice = utilites.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
+			int choice = utilities.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
 
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
@@ -50,9 +50,9 @@ public class OptionsMenu {
 	
 	private void setTotalWordsToOutput() {
 		int [] range = {1, 100};
-		String prompt = "Enter a number between "+ range[0] + " and " + range[1] + ": ";
-		log.cyanBoldTitle(tab + prompt);
-		totalWordsToOutput = utilites.validateNumericInput(() -> log.cyanBoldTitle(tab + prompt), range, tab);
+		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
+		log.cyanBoldTitle(prompt);
+		totalWordsToOutput = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 
@@ -62,19 +62,21 @@ public class OptionsMenu {
 	
 	public void setWordsToProcessCount() {
 		int [] range = {1, 20};
-		String prompt = "Enter a number between "+ range[0] + " and " + range[1] + ": ";
-		log.cyanBoldTitle(tab + prompt);
-		wordsToProcessCount = utilites.validateNumericInput(() -> log.cyanBoldTitle(tab + prompt), range, tab);
+		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
+		log.cyanBoldTitle(prompt);
+		wordsToProcessCount = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
-	public char getSearchMode() {
+	public String getSearchMode() {
 		return searchMode;
 	}
 	
 	private void setSearchMode() {
-		log.cyanBoldTitle(tab + "Enter A or B: ");
-		searchMode = scanner.next().toUpperCase().charAt(0);
+		String[] options = {"A", "B"};
+		String prompt = tab + "Enter " + options[1] + " or " + options[2] + ": ";
+		log.cyanBoldTitle(prompt);
+		searchMode = utilities.validateOptionInput(() -> log.cyanBoldTitle(prompt), options, tab);
 		log.info(tab , "You preference is updated successfully: " + searchMode);
 	}
 
@@ -83,9 +85,11 @@ public class OptionsMenu {
 	}
 	
 	private void setReturnUnmached() {
-		log.cyanBoldTitle(tab + "Enter \"yes\" or \"no\": ");
-		out.println(scanner.next());
-		returnUnmachted = scanner.next().toLowerCase().trim().equals("yes") ? true : false;
+		String[] options = {"yes", "no"};
+		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
+		log.cyanBoldTitle(prompt);
+		String input = utilities.validateOptionInput(() -> log.cyanBoldTitle(prompt), options, tab);
+		returnUnmachted = input.equals("yes") ? true : false;
 		log.info(tab ,"You preference is updated successfully: " + returnUnmachted);
 	}
 }

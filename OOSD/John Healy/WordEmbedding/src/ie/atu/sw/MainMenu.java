@@ -34,7 +34,7 @@ public class MainMenu {
 		log = new ConsoleLogger();
 		optionsMenu = new OptionsMenu(scanner);
 		utilites = new Utilities(scanner);
-		wordsToProcessCount = optionsMenu.getTotalWordsToOutput();
+		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 	}
 	
 	public void init() throws IOException {
@@ -76,7 +76,7 @@ public class MainMenu {
 		getUserInput();
 		
 		if (!isAlreadyInvoked) {
-			String[][] result = searcher.search(searchTerms, inputFile, wordsToProcessCount);
+			String[][] result = searcher.search(searchTerms, inputFile, optionsMenu.getTotalWordsToOutput());
 			plotter.plot(result);
 			log.info("Results file will launch automatically");
 			isAlreadyInvoked = true;

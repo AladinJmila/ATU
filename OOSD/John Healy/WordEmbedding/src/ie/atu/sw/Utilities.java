@@ -1,5 +1,6 @@
 package ie.atu.sw;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 @FunctionalInterface
@@ -45,5 +46,29 @@ public class Utilities {
 
 	public int validateNumericInput(Prompter showPrompt, int[] range) {
 		return validateNumericInput(showPrompt, range, "");
+	}
+	
+	public String validateOptionInput(Prompter showPrompt, String[] options, String tab) {
+		String input = "";
+		boolean validInput = false;
+		
+		for (int i = 0; i < options.length; i++) {
+			options[i] = options[i].toLowerCase();
+		}
+		
+		while (!validInput) {
+			input = scanner.next().trim().toLowerCase();
+			
+			if (Arrays.asList(options).contains(input)) {
+				validInput = true;
+			} else {
+				log.error(tab, "Invalid input, please enter a valid option.");
+				showPrompt.prompt();
+			}
+			
+			
+		}
+		
+		return input;
 	}
 }
