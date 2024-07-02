@@ -14,7 +14,7 @@ public class OptionsMenu {
 	
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
-	private String searchMode = "A";
+	private char searchMode = 'A';
 	private boolean returnUnmachted = true;
 	
 	
@@ -68,7 +68,7 @@ public class OptionsMenu {
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
-	public String getSearchMode() {
+	public char getSearchMode() {
 		return searchMode;
 	}
 	

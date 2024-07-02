@@ -6,12 +6,22 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Searcher {
-	private int totalWordsToOutput = 10;
-	private String searchMode = "A";
-	private boolean returnUnmachted = true;
+	private int totalWordsToOutput;
+	private char searchMode;
+	private boolean returnUnmachted;
+	// List of words to be ignored in the search results
+	private String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
+			"whose", "comes", "with", "on", "this", "as", "s",
+			"for", "first", "it", "which", "of", "turned", "but", 
+			"i", "you"};
 	
 	// Perform the search functionality using all the helper methods defined below
-	public String[][] search(String[] searchTerms, String inputFile) throws IOException {
+	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput, 
+							char searchMode, boolean returnUnmatched) throws IOException {
+		this.totalWordsToOutput = totalWordsToOutput;
+		this.searchMode = searchMode;
+		this.returnUnmachted = returnUnmatched;
+		
 		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
 		// Load the words array from the file
@@ -57,6 +67,7 @@ public class Searcher {
 			// Generate search results from the sorted results
 			allSearchResults[i] = generateSearchResults(result, words);
 		}
+		filterUnmachet(searchTerms, allSearchResults);
 		// Generate and return the final result phrases
 		return generateResultPhrases(searchTerms, allSearchResults);
 	}
@@ -82,14 +93,37 @@ public class Searcher {
 		return result;
 	}
 	
+	private String[][][] filterUnmachet(String[] searchTerms, String[][][] searchResults) {
+		int counter = 0;
+		boolean matched = false;
+		String[] tempMatchedTerms = new String[searchTerms.length];
+		String[][][] tempMatchedSearchResults = new String[searchResults[0].length][searchResults[0][0].length][2];
+		for (int i = 0; i < searchTerms.length; i++) {
+			matched = false;
+			for (int j = 0; j < searchResults[i].length; j++) {
+				if (!Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
+					tempMatchedTerms[counter] = searchTerms[i];
+					tempMatchedSearchResults[counter] = searchResults[i];
+					matched = true;
+				}
+			}
+			if (matched) counter++;
+		}
+		
+		String[] matchedTerms = new String[counter];
+		String[][][] matchedSearchResults = new String[counter][searchResults[0][0].length][2];
+		
+		for (int i = 0; i < counter; i++) {
+			matchedTerms[i] = tempMatchedTerms[i];
+			matchedSearchResults[i] = tempMatchedSearchResults[i];
+		}
+		
+		System.out.println("Filtered list: ");
+		System.out.println(Arrays.toString(matchedTerms));
+		return matchedSearchResults;
+	}
 	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
-		// List of words to be ignored in the search results
-		String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
-									"whose", "comes", "with", "on", "this", "as", "s",
-									"for", "first", "it", "which", "of", "turned", "but", 
-									"i", "you"};
-		
 		// Array to hold the final result phrases
 		String[][] resultPhrases = new String[searchResults[0].length][2];
 		

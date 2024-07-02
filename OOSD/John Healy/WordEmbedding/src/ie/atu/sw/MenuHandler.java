@@ -5,12 +5,13 @@ import static java.lang.System.out;
 public class MenuHandler {
 	ConsoleLogger log;
 	String tab = ConsoleLogger.TAB;
+	private boolean isFirstRun = true;
 	
 	MenuHandler() {
 		log = new ConsoleLogger();
 	}
 
-	public void showMainMenu(boolean isFirstRun) {
+	public void showMainMenu() {
 		out.println();
 		out.print(ConsoleColour.RESET);
 		if (isFirstRun) {

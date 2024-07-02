@@ -18,7 +18,6 @@ public class MainMenu {
 	private OptionsMenu optionsMenu;
 	private Utilities utilites;
 	private boolean keepRunning = true;
-	private boolean isFirstRun = true;
 	private boolean isAlreadyInvoked;
 	private String[] searchTerms;
 	private int wordsToProcessCount;
@@ -39,11 +38,11 @@ public class MainMenu {
 	
 	public void init() throws IOException {
 		while(keepRunning) {
-			menuHandler.showMainMenu(isFirstRun);
+			menuHandler.showMainMenu();
 			
 			int [] range = {1, 5};
 			int choice = utilites.validateNumericInput(
-					() -> menuHandler.showMainMenu(isFirstRun), range);
+					() -> menuHandler.showMainMenu(), range);
 			
 			switch(choice) {
 				case 1 	-> setInputFilePath();
@@ -76,7 +75,8 @@ public class MainMenu {
 		getUserInput();
 		
 		if (!isAlreadyInvoked) {
-			String[][] result = searcher.search(searchTerms, inputFile);
+			String[][] result = searcher.search(searchTerms, inputFile, optionsMenu.getTotalWordsToOutput(), 
+												optionsMenu.getSearchMode(), optionsMenu.getReturnUnmachted());
 			plotter.plot(result);
 			log.info("Results file will launch automatically");
 			isAlreadyInvoked = true;
