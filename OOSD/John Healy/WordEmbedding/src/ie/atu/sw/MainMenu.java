@@ -76,7 +76,7 @@ public class MainMenu {
 		getUserInput();
 		
 		if (!isAlreadyInvoked) {
-			String[][] result = searcher.search(searchTerms, inputFile, optionsMenu.getTotalWordsToOutput());
+			String[][] result = searcher.search(searchTerms, inputFile);
 			plotter.plot(result);
 			log.info("Results file will launch automatically");
 			isAlreadyInvoked = true;

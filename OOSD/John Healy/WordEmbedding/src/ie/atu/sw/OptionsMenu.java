@@ -74,9 +74,10 @@ public class OptionsMenu {
 	
 	private void setSearchMode() {
 		String[] options = {"A", "B"};
-		String prompt = tab + "Enter " + options[1] + " or " + options[2] + ": ";
+		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
 		log.cyanBoldTitle(prompt);
-		searchMode = utilities.validateOptionInput(() -> log.cyanBoldTitle(prompt), options, tab);
+		char searchMode = utilities.validateOptionInput(
+				() -> log.cyanBoldTitle(prompt), options, tab).charAt(0);
 		log.info(tab , "You preference is updated successfully: " + searchMode);
 	}
 
@@ -88,8 +89,9 @@ public class OptionsMenu {
 		String[] options = {"yes", "no"};
 		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
 		log.cyanBoldTitle(prompt);
-		String input = utilities.validateOptionInput(() -> log.cyanBoldTitle(prompt), options, tab);
-		returnUnmachted = input.equals("yes") ? true : false;
-		log.info(tab ,"You preference is updated successfully: " + returnUnmachted);
+		String input = utilities.validateOptionInput(
+				() -> log.cyanBoldTitle(prompt), options, tab);
+		returnUnmachted = input.equals("YES") ? true : false;
+		log.info(tab ,"You preference is updated successfully: " + input);
 	}
 }

@@ -53,11 +53,11 @@ public class Utilities {
 		boolean validInput = false;
 		
 		for (int i = 0; i < options.length; i++) {
-			options[i] = options[i].toLowerCase();
+			options[i] = options[i].toUpperCase();
 		}
 		
 		while (!validInput) {
-			input = scanner.next().trim().toLowerCase();
+			input = scanner.next().trim().toUpperCase();
 			
 			if (Arrays.asList(options).contains(input)) {
 				validInput = true;

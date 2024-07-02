@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Searcher {
+	private int totalWordsToOutput = 10;
+	private String searchMode = "A";
+	private boolean returnUnmachted = true;
+	
 	// Perform the search functionality using all the helper methods defined below
-	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput) throws IOException {
+	public String[][] search(String[] searchTerms, String inputFile) throws IOException {
 		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
 		// Load the words array from the file
@@ -51,14 +55,14 @@ public class Searcher {
 			// Sort the search result using QuickSort
 			new QuickSort().sort(result);
 			// Generate search results from the sorted results
-			allSearchResults[i] = generateSearchResults(result, words, totalWordsToOutput);
+			allSearchResults[i] = generateSearchResults(result, words);
 		}
 		// Generate and return the final result phrases
 		return generateResultPhrases(searchTerms, allSearchResults);
 	}
 	
 	// Generate search results from the result array
-	private String[][] generateSearchResults(double[][] searchResult, String[] words, int totalWordsToOutput){
+	private String[][] generateSearchResults(double[][] searchResult, String[] words){
 		String[][] result = new String[totalWordsToOutput][2];
 		int index = 0;
 		
@@ -81,10 +85,10 @@ public class Searcher {
 	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
 		// List of words to be ignored in the search results
-		String[] noMatchResults = new String[]{"another", "an", "one", "the", "same", "is", 
-											"whose", "comes", "with", "on", "this", "as", "s",
-											"for", "first", "it", "which", "of", "turned", "but", 
-											"i", "you"};
+		String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
+									"whose", "comes", "with", "on", "this", "as", "s",
+									"for", "first", "it", "which", "of", "turned", "but", 
+									"i", "you"};
 		
 		// Array to hold the final result phrases
 		String[][] resultPhrases = new String[searchResults[0].length][2];
