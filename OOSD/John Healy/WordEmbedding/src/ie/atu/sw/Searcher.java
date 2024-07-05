@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Searcher {
 	private int totalWordsToOutput;
-	private char searchMode;
+	private String searchMode;
 	private boolean returnUnmachted;
 	// List of words to be ignored in the search results
 	private String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
@@ -17,7 +17,7 @@ public class Searcher {
 	
 	// Perform the search functionality using all the helper methods defined below
 	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput, 
-							char searchMode, boolean returnUnmatched) throws IOException {
+							String searchMode, boolean returnUnmatched) throws IOException {
 		this.totalWordsToOutput = totalWordsToOutput;
 		this.searchMode = searchMode;
 		this.returnUnmachted = returnUnmatched;
@@ -67,9 +67,19 @@ public class Searcher {
 			// Generate search results from the sorted results
 			allSearchResults[i] = generateSearchResults(result, words);
 		}
-		filterUnmachet(searchTerms, allSearchResults);
-		// Generate and return the final result phrases
-		return generateResultPhrases(searchTerms, allSearchResults);
+		
+		generateGroupedResults(searchTerms, allSearchResults);
+		
+		if (!returnUnmatched) {
+			filterUnmached(searchTerms, allSearchResults);
+		}
+
+		if (searchMode.equals("whole sentence")) {
+			// Generate and return the final result phrases
+			return generateResultPhrases(searchTerms, allSearchResults);
+		} else {
+			return generateGroupedResults(searchTerms, allSearchResults);
+		}
 	}
 	
 	// Generate search results from the result array
@@ -93,7 +103,7 @@ public class Searcher {
 		return result;
 	}
 	
-	private String[][][] filterUnmachet(String[] searchTerms, String[][][] searchResults) {
+	private void filterUnmached(String[] searchTerms, String[][][] searchResults) {
 		int counter = 0;
 		boolean matched = false;
 		String[] tempMatchedTerms = new String[searchTerms.length];
@@ -118,10 +128,31 @@ public class Searcher {
 			matchedSearchResults[i] = tempMatchedSearchResults[i];
 		}
 		
+		searchTerms = matchedTerms;
+		searchResults = matchedSearchResults;
 		System.out.println("Filtered list: ");
 		System.out.println(Arrays.toString(matchedTerms));
-		return matchedSearchResults;
 	}
+	
+	private String[][] generateGroupedResults(String[] searchTerms, String[][][] searchResults) {
+		String[][] result = new String[searchTerms.length + (searchResults.length * searchResults[0].length)][2];
+		int index = 0;
+		
+		for (int i = 0; i < searchTerms.length; i++) {
+			result[index][0] = searchTerms[i];
+			result[index][1] = "input";
+			index++;
+			
+			
+			for (int j = 0; j < searchResults[i].length; j++) {
+				result[index++] = searchResults[i][j];
+			}
+		}
+		
+		System.out.println(Arrays.deepToString(result));
+		return result;
+	}
+	
 	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
 		// Array to hold the final result phrases

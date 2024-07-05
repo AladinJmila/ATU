@@ -14,7 +14,7 @@ public class OptionsMenu {
 	
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
-	private char searchMode = 'A';
+	private String searchMode = "whole sentence";
 	private boolean returnUnmachted = true;
 	
 	
@@ -68,7 +68,7 @@ public class OptionsMenu {
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
-	public char getSearchMode() {
+	public String getSearchMode() {
 		return searchMode;
 	}
 	
@@ -76,9 +76,10 @@ public class OptionsMenu {
 		String[] options = {"A", "B"};
 		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
 		log.cyanBoldTitle(prompt);
-		char searchMode = utilities.validateOptionInput(
+		char input = utilities.validateOptionInput(
 				() -> log.cyanBoldTitle(prompt), options, tab).charAt(0);
-		log.info(tab , "You preference is updated successfully: " + searchMode);
+		searchMode = input == 'A' ? "whole sentence" : "individual words";
+		log.info(tab , "You preference is updated successfully: " + input);
 	}
 
 	public boolean getReturnUnmachted() {
