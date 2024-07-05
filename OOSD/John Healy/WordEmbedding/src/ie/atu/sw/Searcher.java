@@ -130,8 +130,8 @@ public class Searcher {
 		
 		searchTerms = matchedTerms;
 		searchResults = matchedSearchResults;
-		System.out.println("Filtered list: ");
-		System.out.println(Arrays.toString(matchedTerms));
+//		System.out.println("Filtered list: ");
+//		System.out.println(Arrays.toString(matchedTerms));
 	}
 	
 	private String[][] generateGroupedResults(String[] searchTerms, String[][][] searchResults) {
@@ -149,7 +149,7 @@ public class Searcher {
 			}
 		}
 		
-		System.out.println(Arrays.deepToString(result));
+//		System.out.println(Arrays.deepToString(result));
 		return result;
 	}
 	

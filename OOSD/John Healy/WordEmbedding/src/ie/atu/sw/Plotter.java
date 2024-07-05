@@ -8,12 +8,12 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 public class Plotter {
-	public void plot(String[][] resultPhrases, String searchMode) throws IOException {
+	public void plot(String[][] resultPhrases, String searchMode, int totalWordsToOutput) throws IOException {
+		String[] formats = dynamicPlotTemplate(resultPhrases);
 		if (searchMode.equals("whole sentence")) {
-			String[] formats = dynamicPlotTemplate(resultPhrases);
 			generateOutputFile(resultPhrases, formats);	
 		} else {
-			
+			linesToPlot(resultPhrases, formats, totalWordsToOutput);
 		}
 	}
 	
@@ -28,7 +28,7 @@ public class Plotter {
 			}
 		}
 		
-		formats[0] = "Search input: %-" + longestResultLength  + "s   %n%n";
+		formats[0] = "Search input: %-" + longestResultLength  + "s   "; // %n%n
 		formats[1] = "| Result%-" + (longestResultLength - 6) + "s |  Score(%%)  |%n";
 		formats[2] = "| %-" + longestResultLength + "s |    %-5s   |%n";
 		formats[3] = "|-%-" + longestResultLength + "s-+----%-5s---|%n";
@@ -60,17 +60,20 @@ public class Plotter {
 	}
 	
 	
-	private String[] linesToPlot(String[][] searchResults, String[] formats) {
-		String[] result = new String[searchResults.length + 2];
-		StringBuilder builder = new StringBuilder();
+	private String[] linesToPlot(String[][] searchResults, String[] formats, int totalWordsToOutput) {
+		String[] result = new String[totalWordsToOutput + 2];
 		int index = 0;
 		
 		for (int i = 0; i < searchResults.length; i++) {
+			StringBuilder builder = new StringBuilder();
 			if (searchResults[i][1].equals("input")) {
-				
+				index = 0;
+				if (result[index] == null) result[i] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[0], searchResults[i][0])).toString();
 			}
 		}
 		
+		System.out.println(Arrays.toString(result));
 		return result;
 	}
 }

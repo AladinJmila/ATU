@@ -14,7 +14,7 @@ public class OptionsMenu {
 	
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
-	private String searchMode = "whole sentence";
+	private String searchMode = "no";
 	private boolean returnUnmachted = true;
 	
 	
