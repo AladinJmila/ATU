@@ -156,43 +156,52 @@ public class Searcher {
 	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
 		// Array to hold the final result phrases
-		String[][] resultPhrases = new String[searchResults[0].length][2];
+		String[][] resultPhrases = new String[searchResults[0].length + 1][2];
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i < searchTerms.length; i++) {
+			builder.append(searchTerms[i] + " ");
+		}
+		
+		resultPhrases[0][0] = builder.toString().trim();	
+		resultPhrases[0][1] = "input";
 		
 		// Iterate through the search terms and search results to generate the result phrases
 		for (int i = 0; i < searchTerms.length; i++) {
 			for (int j = 0; j < searchResults[i].length; j++) {
 				StringBuilder sb = new StringBuilder();
 				
+				int index = j + 1;
 				// Check if the search term or the search result word is in the no-match list
 				if (Arrays.asList(noMatchResults).contains(searchTerms[i])
 						|| Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
 					// Append the search term to the result phrase
-					if (resultPhrases[j][0] == null) {
-						resultPhrases[j][0] = sb.append(searchTerms[i]).toString().trim();
+					if (resultPhrases[index][0] == null) {
+						resultPhrases[index][0] = sb.append(searchTerms[i]).toString().trim();
 					} else {
-						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchTerms[i]).toString().trim();
+						resultPhrases[index][0] = sb.append(resultPhrases[index][0]).append(" " + searchTerms[i]).toString().trim();
 					}
 					
 					// Set the score to 0.0 for no-match results
-					if (resultPhrases[j][1] == null) {
-						resultPhrases[j][1] = "0.0";
+					if (resultPhrases[index][1] == null) {
+						resultPhrases[index][1] = "0.0";
 					}
 				} else {
 					// Append the search result word to the result phrase
-					if (resultPhrases[j][0] == null) {
-						resultPhrases[j][0] = sb.append(searchResults[i][j][0]).toString().trim();
-						resultPhrases[j][1] = searchResults[i][j][1];
+					if (resultPhrases[index][0] == null) {
+						resultPhrases[index][0] = sb.append(searchResults[i][j][0]).toString().trim();
+						resultPhrases[index][1] = searchResults[i][j][1];
 
 					} else {
-						resultPhrases[j][0] = sb.append(resultPhrases[j][0]).append(" " + searchResults[i][j][0]).toString().trim();
+						resultPhrases[index][0] = sb.append(resultPhrases[index][0]).append(" " + searchResults[i][j][0]).toString().trim();
 						// Calculate the average score for the combined results
 						float scoreAverage = 0.0f;
-						if (resultPhrases[j][1].equals("0.0")) {
+						if (resultPhrases[index][1].equals("0.0")) {
 							scoreAverage = Float.parseFloat(searchResults[i][j][1]);
 						} else {
-							scoreAverage = (Float.parseFloat(resultPhrases[j][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
+							scoreAverage = (Float.parseFloat(resultPhrases[index][1]) + Float.parseFloat(searchResults[i][j][1])) / 2;
 						}
-						resultPhrases[j][1] = String.format("%.1f", scoreAverage);
+						resultPhrases[index][1] = String.format("%.1f", scoreAverage);
 					}
 				}
 			}
