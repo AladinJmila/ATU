@@ -5,7 +5,6 @@ import static java.lang.System.out;
 import java.util.Scanner;
 
 public class OptionsMenu {
-	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private ConsoleLogger log;
 	private Utilities utilities;
@@ -20,7 +19,6 @@ public class OptionsMenu {
 	
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
-		this.scanner = scanner;
 		utilities = new Utilities(scanner);
 		log = new ConsoleLogger();
 	}

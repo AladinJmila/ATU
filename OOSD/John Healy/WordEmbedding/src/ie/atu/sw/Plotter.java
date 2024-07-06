@@ -43,22 +43,18 @@ public class Plotter {
 				index = 0;
 				if (result[index] == null) result[index] = "";
 				result[index] = builder.append(result[index]).append(String.format(formats[0], searchResults[i][0])).append("    ").toString();
-				out.println(result[index]);
 				builder = new StringBuilder();
 				index++;
 				if (result[index] == null) result[index] = "";
 				result[index] = builder.append(result[index]).append(String.format(formats[1], "")).append("    ").toString();
-				out.println(result[index]);
 			}  else {
 				builder = new StringBuilder();
 				if (result[index] == null) result[index] = "";
 				result[index] = builder.append(result[index]).append(String.format(formats[3], formats[5], "-----")).append("    ").toString();
-				out.println(result[index]);
 				index++;
 				builder = new StringBuilder();
 				if (result[index] == null) result[index] = "";
 				result[index] = builder.append(result[index]).append(String.format(formats[2], searchResults[i][0], searchResults[i][1])).append("    ").toString();
-				out.println(result[index]);
 			}	
 			index++;
 			
@@ -66,12 +62,10 @@ public class Plotter {
 				builder = new StringBuilder();
 				if (result[index ] == null) result[index] = "";
 				result[index] = builder.append(result[index]).append(String.format(formats[4], formats[5], "-----")).append("    ").toString();
-				out.println(result[index]);
 			}
 			
 		}
 		
-		System.out.println(Arrays.toString(result));
 		return result;
 	}
 	

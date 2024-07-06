@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Searcher {
 	private int totalWordsToOutput;
-	private String searchMode;
-	private boolean returnUnmachted;
+	String[] searchTerms;
+	String[][][] searchResults;
 	// List of words to be ignored in the search results
 	private String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
 			"whose", "comes", "with", "on", "this", "as", "s",
@@ -19,8 +19,7 @@ public class Searcher {
 	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput, 
 							String searchMode, boolean returnUnmatched) throws IOException {
 		this.totalWordsToOutput = totalWordsToOutput;
-		this.searchMode = searchMode;
-		this.returnUnmachted = returnUnmatched;
+		this.searchTerms = searchTerms;
 		
 		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
@@ -30,15 +29,15 @@ public class Searcher {
 		double[][] embeddings = fp.getEmbeddingsArray();
 		
 		// Array to hold the indices of the search terms in the words array
-		int[] searchTermIndices = new int[searchTerms.length];
+		int[] searchTermIndices = new int[this.searchTerms.length];
 		// Array to hold all search results for search terms
-		String[][][] allSearchResults =  new String[searchTerms.length][totalWordsToOutput][2];
+		this.searchResults =  new String[this.searchTerms.length][totalWordsToOutput][2];
 		
 		// Iterate through each search term 
-		for (int i = 0; i < searchTerms.length; i++) {
+		for (int i = 0; i < this.searchTerms.length; i++) {
 			// Find the index of the current search term in the words array
 			for (int j = 0; j < words.length; j++) {
-				if (words[j].equals(searchTerms[i])) {
+				if (words[j].equals(this.searchTerms[i])) {
 					// Update the searchTermIndices array with the current index
 					searchTermIndices[i] = j;
 					break; // Leave early when the word is found
@@ -65,20 +64,20 @@ public class Searcher {
 			// Sort the search result using QuickSort
 			new QuickSort().sort(result);
 			// Generate search results from the sorted results
-			allSearchResults[i] = generateSearchResults(result, words);
+			this.searchResults[i] = generateSearchResults(result, words);
 		}
 		
-		generateGroupedResults(searchTerms, allSearchResults);
+		generateGroupedResults(this.searchTerms, this.searchResults);
 		
 		if (!returnUnmatched) {
-			filterUnmached(searchTerms, allSearchResults);
+			filterUnmached(this.searchTerms, this.searchResults);
 		}
 
 		if (searchMode.equals("whole sentence")) {
 			// Generate and return the final result phrases
-			return generateResultPhrases(searchTerms, allSearchResults);
+			return generateResultPhrases(this.searchTerms, this.searchResults);
 		} else {
-			return generateGroupedResults(searchTerms, allSearchResults);
+			return generateGroupedResults(this.searchTerms , this.searchResults);
 		}
 	}
 	
@@ -128,10 +127,8 @@ public class Searcher {
 			matchedSearchResults[i] = tempMatchedSearchResults[i];
 		}
 		
-		searchTerms = matchedTerms;
-		searchResults = matchedSearchResults;
-//		System.out.println("Filtered list: ");
-//		System.out.println(Arrays.toString(matchedTerms));
+		this.searchTerms = matchedTerms;
+		this.searchResults = matchedSearchResults;
 	}
 	
 	private String[][] generateGroupedResults(String[] searchTerms, String[][][] searchResults) {
