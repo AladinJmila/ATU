@@ -10,11 +10,7 @@ import java.util.Arrays;
 public class Plotter {
 	public void plot(String[][] resultPhrases, String searchMode, int totalWordsToOutput) throws IOException {
 		String[] formats = dynamicPlotTemplate(resultPhrases);
-		if (searchMode.equals("whole sentence")) {
-			generateOutputFile(resultPhrases, formats);	
-		} else {
-			linesToPlot(resultPhrases, formats, totalWordsToOutput);
-		}
+		generateOutputFile(linesToPlot(resultPhrases, formats, totalWordsToOutput));
 	}
 	
 	private String[] dynamicPlotTemplate(String[][] data) {
@@ -36,29 +32,6 @@ public class Plotter {
 		formats[5] = "-".repeat(longestResultLength);
 		return formats;
 	}
-	
-	private void generateOutputFile(String[][] searchResults, String[] formats) throws IOException {
-		FileWriter out = new FileWriter("out.txt");
-		PrintWriter print = new PrintWriter(out);
-		
-		print.printf(formats[0], searchResults[0][0]);
-		print.printf(formats[1], "");
-		print.printf(formats[3], formats[5], "-----");
-		for (int i = 1; i < searchResults.length; i++) {
-				print.printf(formats[2], searchResults[i][0], searchResults[i][1]);
-				if (i != searchResults.length - 1) {
-					print.printf(formats[3], formats[5], "-----");
-				} else {		
-					print.printf(formats[4], formats[5], "-----");
-				}
-		}
-		print.println();
-
-		print.close();
-
-		Runner.launchFile("out.txt");
-	}
-	
 	
 	private String[] linesToPlot(String[][] searchResults, String[] formats, int totalWordsToOutput) {
 		String[] result = new String[totalWordsToOutput * 2 + 3];
@@ -100,5 +73,24 @@ public class Plotter {
 		
 		System.out.println(Arrays.toString(result));
 		return result;
+	}
+	
+	private void generateOutputFile(String[] linesToPlot) throws IOException {
+		FileWriter out = new FileWriter("out.txt");
+		PrintWriter print = new PrintWriter(out);
+		
+		for (int i = 0; i < linesToPlot.length; i++) {
+			if (i == 0) {
+				print.printf("%s%n%n", linesToPlot[i]);
+			} else {
+				print.printf("%s%n", linesToPlot[i]);
+			}
+		}
+		
+		print.println();
+
+		print.close();
+
+		Runner.launchFile("out.txt");
 	}
 }
