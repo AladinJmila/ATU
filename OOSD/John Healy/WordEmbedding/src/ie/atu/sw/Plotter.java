@@ -28,11 +28,11 @@ public class Plotter {
 			}
 		}
 		
-		formats[0] = "Search input: %-" + longestResultLength  + "s   "; // %n%n
-		formats[1] = "| Result%-" + (longestResultLength - 6) + "s |  Score(%%)  |%n";
-		formats[2] = "| %-" + longestResultLength + "s |    %-5s   |%n";
-		formats[3] = "|-%-" + longestResultLength + "s-+----%-5s---|%n";
-		formats[4] = "--%-" + longestResultLength + "s------%-5s----%n";
+		formats[0] = "Input: %-" + longestResultLength  + "s          "; // %n%n
+		formats[1] = "| Result%-" + (longestResultLength - 6) + "s |  Score(%%)  |"; // %n
+		formats[2] = "| %-" + longestResultLength + "s |    %-5s   |"; // %n
+		formats[3] = "|-%-" + longestResultLength + "s-+----%-5s---|"; // %n
+		formats[4] = "--%-" + longestResultLength + "s------%-5s----"; // %n
 		formats[5] = "-".repeat(longestResultLength);
 		return formats;
 	}
@@ -61,16 +61,41 @@ public class Plotter {
 	
 	
 	private String[] linesToPlot(String[][] searchResults, String[] formats, int totalWordsToOutput) {
-		String[] result = new String[totalWordsToOutput + 2];
+		String[] result = new String[totalWordsToOutput * 2 + 3];
 		int index = 0;
 		
 		for (int i = 0; i < searchResults.length; i++) {
 			StringBuilder builder = new StringBuilder();
 			if (searchResults[i][1].equals("input")) {
 				index = 0;
-				if (result[index] == null) result[i] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[0], searchResults[i][0])).toString();
+				if (result[index] == null) result[index] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[0], searchResults[i][0])).append("    ").toString();
+				out.println(result[index]);
+				builder = new StringBuilder();
+				index++;
+				if (result[index] == null) result[index] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[1], "")).append("    ").toString();
+				out.println(result[index]);
+			}  else {
+				builder = new StringBuilder();
+				if (result[index] == null) result[index] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[3], formats[5], "-----")).append("    ").toString();
+				out.println(result[index]);
+				index++;
+				builder = new StringBuilder();
+				if (result[index] == null) result[index] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[2], searchResults[i][0], searchResults[i][1])).append("    ").toString();
+				out.println(result[index]);
+			}	
+			index++;
+			
+			if (index == totalWordsToOutput * 2 + 2) {
+				builder = new StringBuilder();
+				if (result[index ] == null) result[index] = "";
+				result[index] = builder.append(result[index]).append(String.format(formats[4], formats[5], "-----")).append("    ").toString();
+				out.println(result[index]);
 			}
+			
 		}
 		
 		System.out.println(Arrays.toString(result));
