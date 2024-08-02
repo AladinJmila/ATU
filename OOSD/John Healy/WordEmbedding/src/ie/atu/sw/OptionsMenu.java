@@ -1,8 +1,10 @@
 package ie.atu.sw;
 
-import static java.lang.System.out;
-
 import java.util.Scanner;
+
+/*
+ * OptionsMenu class handles the configuration options for the application.
+ */
 
 public class OptionsMenu {
 	private MenuHandler menuHandler;
@@ -23,13 +25,17 @@ public class OptionsMenu {
 		log = new ConsoleLogger();
 	}
 	
+	// Initializes and runs the options menu loop.
 	public void init() {
 		keepRunning = true;
 		while(keepRunning) {
 			menuHandler.showOptionsMenu();
+			// Define the valid range for menu choices
 			int [] range = {1, 5};
+			// Validate and get user input for menu choice
 			int choice = utilities.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
 
+			// Handle the user's menu choice
 			switch(choice) {
 				case 1 -> setTotalWordsToOutput();
 				case 2 -> setWordsToProcessCount();
@@ -47,9 +53,11 @@ public class OptionsMenu {
 	}
 	
 	private void setTotalWordsToOutput() {
+		// Define the valid range for the number of words to output
 		int [] range = {1, 100};
 		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
+		// Validate and set the total words to output
 		totalWordsToOutput = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of results is updated successfully: " + totalWordsToOutput);
 	}
@@ -59,9 +67,11 @@ public class OptionsMenu {
 	}
 	
 	public void setWordsToProcessCount() {
+		// Define the valid range for the number of words to process
 		int [] range = {1, 20};
 		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
+		// Validate and set the words to process count
 		wordsToProcessCount = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
@@ -71,9 +81,11 @@ public class OptionsMenu {
 	}
 	
 	private void setSearchMode() {
+		// Define the valid options for search mode
 		String[] options = {"A", "B"};
 		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
 		log.cyanBoldTitle(prompt);
+		// Validate and set the search mode
 		char input = utilities.validateOptionInput(
 				() -> log.cyanBoldTitle(prompt), options, tab).charAt(0);
 		searchMode = input == 'A' ? "whole sentence" : "individual words";
@@ -85,9 +97,11 @@ public class OptionsMenu {
 	}
 	
 	private void setReturnUnmached() {
+		// Define the valid options for returning unmatched words
 		String[] options = {"yes", "no"};
 		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
 		log.cyanBoldTitle(prompt);
+		// Validate and set the return unmatched flag
 		String input = utilities.validateOptionInput(
 				() -> log.cyanBoldTitle(prompt), options, tab);
 		returnUnmachted = input.equals("YES") ? true : false;

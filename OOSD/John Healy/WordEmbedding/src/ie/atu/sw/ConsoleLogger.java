@@ -2,6 +2,10 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 
+/*
+ * Handles various styled logging operations
+ */
+
 public class ConsoleLogger {
 	
 	public static final String TAB = "   ";
