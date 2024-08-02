@@ -1,5 +1,9 @@
 package ie.atu.sw;
 
+/*
+ * Compute the cosine distance between two vectors
+ */
+
 public class CosineDistance {
 	private double searchTermSquaredSum;
 	

@@ -1,6 +1,6 @@
 package ie.atu.sw;
 
-/**
+/*
  * Enum representing different log levels with associated messages.
  */
 

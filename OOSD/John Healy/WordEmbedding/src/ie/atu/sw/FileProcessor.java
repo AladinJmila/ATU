@@ -1,8 +1,10 @@
 package ie.atu.sw;
-
-import static java.lang.System.out;
-
 import java.io.*;
+
+/*
+ * Processes an embeddings text file to extract the words and relevant embeddings
+ * into two separate arrays
+ */
 
 public class FileProcessor {
 	// Constants defining the number of words and features in the embeddings file
@@ -58,6 +60,7 @@ public class FileProcessor {
 			
 			// Mark arrays as created
 			createdArrays = true;
+			br.close();
 		} catch (Exception e) {
 			// Print any exceptions that occur during file processing
 			System.out.println(e);
