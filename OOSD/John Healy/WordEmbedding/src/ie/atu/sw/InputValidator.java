@@ -8,24 +8,30 @@ interface Prompter {
 	void prompt();
 }
 
-public class Utilities {
+/*
+ * Utilities class provides methods for validating user inputs.
+ */
+
+public class InputValidator {
 	private ConsoleLogger log;
 	private Scanner scanner;
 	
-	Utilities(Scanner scanner) {
+	InputValidator(Scanner scanner) {
 		log = new ConsoleLogger();
 		this.scanner = scanner;
 	}
 	
+	// Validates numeric input from the user within a specified range with a tab.
 	public int validateNumericInput(Prompter showPrompt, int[] range, String tab) {
 		int input = 0;
 		boolean validInput = false;
 		
-
+			// Loop until a valid input is provided
 			while (!validInput) {
 				try {
 					input = Integer.parseInt(scanner.next());
 					
+					// Check if the input is within the specified range
 					if (input < range[0] || input > range[1]) {
 						log.error(tab , "Input out of range, please enter a valid number.");
 						showPrompt.prompt();
@@ -34,6 +40,7 @@ public class Utilities {
 					}
 					
 				} catch (NumberFormatException e) {
+					// Handle invalid number format
 					log.error(tab , "Invalid input, please enter a valid number.");
 					showPrompt.prompt();	
 				}
@@ -43,22 +50,26 @@ public class Utilities {
 		return input;
 	}
 	
-
+	// Validates numeric input from the user within a specified range without a tab.
 	public int validateNumericInput(Prompter showPrompt, int[] range) {
 		return validateNumericInput(showPrompt, range, "");
 	}
 	
+	// Validates option input from the user against a set of valid options
 	public String validateOptionInput(Prompter showPrompt, String[] options, String tab) {
 		String input = "";
 		boolean validInput = false;
 		
+		// Convert all options to uppercase for case-insensitive comparison
 		for (int i = 0; i < options.length; i++) {
 			options[i] = options[i].toUpperCase();
 		}
 		
+		// Loop until a valid input is provided
 		while (!validInput) {
 			input = scanner.next().trim().toUpperCase();
 			
+			// Check if the input is one of the valid options
 			if (Arrays.asList(options).contains(input)) {
 				validInput = true;
 			} else {

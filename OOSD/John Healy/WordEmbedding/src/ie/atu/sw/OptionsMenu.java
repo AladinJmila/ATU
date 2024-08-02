@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class OptionsMenu {
 	private MenuHandler menuHandler;
 	private ConsoleLogger log;
-	private Utilities utilities;
+	private InputValidator validator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
 	
@@ -21,7 +21,7 @@ public class OptionsMenu {
 	
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
-		utilities = new Utilities(scanner);
+		validator = new InputValidator(scanner);
 		log = new ConsoleLogger();
 	}
 	
@@ -33,7 +33,7 @@ public class OptionsMenu {
 			// Define the valid range for menu choices
 			int [] range = {1, 5};
 			// Validate and get user input for menu choice
-			int choice = utilities.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
+			int choice = validator.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
 
 			// Handle the user's menu choice
 			switch(choice) {
@@ -58,7 +58,7 @@ public class OptionsMenu {
 		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the total words to output
-		totalWordsToOutput = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
+		totalWordsToOutput = validator.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 
@@ -72,7 +72,7 @@ public class OptionsMenu {
 		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the words to process count
-		wordsToProcessCount = utilities.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
+		wordsToProcessCount = validator.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
@@ -86,7 +86,7 @@ public class OptionsMenu {
 		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the search mode
-		char input = utilities.validateOptionInput(
+		char input = validator.validateOptionInput(
 				() -> log.cyanBoldTitle(prompt), options, tab).charAt(0);
 		searchMode = input == 'A' ? "whole sentence" : "individual words";
 		log.info(tab , "You preference is updated successfully: " + input);
@@ -102,7 +102,7 @@ public class OptionsMenu {
 		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the return unmatched flag
-		String input = utilities.validateOptionInput(
+		String input = validator.validateOptionInput(
 				() -> log.cyanBoldTitle(prompt), options, tab);
 		returnUnmachted = input.equals("YES") ? true : false;
 		log.info(tab ,"You preference is updated successfully: " + input);

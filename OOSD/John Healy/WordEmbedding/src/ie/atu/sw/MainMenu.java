@@ -16,7 +16,7 @@ public class MainMenu {
 	private Plotter plotter;
 	private ConsoleLogger log;
 	private OptionsMenu optionsMenu;
-	private Utilities utilites;
+	private InputValidator validator;
 	private boolean keepRunning = true;
 	private boolean isAlreadyInvoked;
 	private String[] searchTerms;
@@ -33,7 +33,7 @@ public class MainMenu {
 		plotter = new Plotter();
 		log = new ConsoleLogger();
 		optionsMenu = new OptionsMenu(scanner);
-		utilites = new Utilities(scanner);
+		validator = new InputValidator(scanner);
 		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 	}
 	
@@ -45,7 +45,7 @@ public class MainMenu {
 			// Define the valid range for menu choices
 			int [] range = {1, 5};
 			// Validate and get user input for menu choice
-			int choice = utilites.validateNumericInput(
+			int choice = validator.validateNumericInput(
 					() -> menuHandler.showMainMenu(), range);
 			
 			// Handle the user's menu choice
@@ -124,7 +124,7 @@ public class MainMenu {
 			// Define the valid range for choices in the max words options menu
 			int [] range = {1, 3};
 			// Validate and get user input for the choice
-			int choice = utilites.validateNumericInput(
+			int choice = validator.validateNumericInput(
 					() -> menuHandler.showMaxWordsOptions(wordsToProcessCount), range, tab);
 			
 			// Handle the user's choice
