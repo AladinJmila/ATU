@@ -1,14 +1,13 @@
 package ie.atu.sw;
 
-import static java.lang.System.out;
-
 import java.io.IOException;
 import java.util.Arrays;
 
 public class Searcher {
 	private int totalWordsToOutput;
-	String[] searchTerms;
-	String[][][] searchResults;
+	private String[] searchTerms;
+	private String[][][] searchResults;
+	private ConsoleLogger log = new ConsoleLogger(); 
 	// List of words to be ignored in the search results
 	private String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
 			"whose", "comes", "with", "on", "this", "as", "s",
@@ -33,6 +32,7 @@ public class Searcher {
 		// Array to hold all search results for search terms
 		this.searchResults =  new String[this.searchTerms.length][totalWordsToOutput][2];
 		
+		log.info("Searching...");
 		// Iterate through each search term 
 		for (int i = 0; i < this.searchTerms.length; i++) {
 			// Find the index of the current search term in the words array
@@ -146,7 +146,6 @@ public class Searcher {
 			}
 		}
 		
-//		System.out.println(Arrays.deepToString(result));
 		return result;
 	}
 	

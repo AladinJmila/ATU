@@ -9,6 +9,8 @@ import java.io.PrintWriter;
  */
 
 public class Plotter {
+	private ConsoleLogger log = new ConsoleLogger();
+	
 	// Plots the search results and generates the output file.
 	public void plot(String[][] resultPhrases, String searchMode, int totalWordsToOutput) throws IOException {
 		// Generate formats for plotting based on the result data
@@ -98,7 +100,20 @@ public class Plotter {
 
 		print.close();
 
+		log.info("Results file will launch automatically!");
+	
+		System.out.println(ConsoleColour.GREEN); // Change the colour of the console text
+		int size = 100; // The size of the meter. 100 equates to 100%
+		for (int i = 0; i < size; i++) { // The loop equates to a sequence of processing steps
+			Utilities.printProgress(i + 1, size); // After each (some) steps, update the progress meter
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // Slows things down so the animation is visible
+		}
 		// Launch the output file
-		Runner.launchFile("out.txt");
+		Utilities.launchFile("out.txt");
 	}
 }

@@ -2,6 +2,7 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.Scanner;
 
 /*
@@ -63,35 +64,70 @@ public class MainMenu {
 	
 	// Prompts the user to set the input file path.
 	private void setInputFilePath() {
-		out.println("Enter input file path");
+		log.cyanBoldTitle("Enter input file path ( Example: ./path/fileName.txt): ", true);
 		inputFile = scanner.next();
-		log.info("Input file path succesfully added");
+		
+		// Check if the provided file path exists
+		if (!fileExists(inputFile)) {
+			log.error("Invalid path.");
+			// Handle the case where the input file is missing
+			handleMissingInputFile();
+		} else {
+			log.info("Input file path succesfully added");
+		}
+	}
+	
+	// Repeatedly prompts the user to provide a valid input file path until the file exists
+	private void handleMissingInputFile() {
+		while (true) {
+			// Prompt the user to set the input file path
+			setInputFilePath();
+			if (fileExists(inputFile)) {
+				break; // Exit the loop if the file exists
+			} else {
+				log.error("The file seems to be missing. Please try again.");
+			}
+		}
+	}
+	
+	// Checks if the specified file exists
+	public static boolean fileExists(String pathString) {
+		// Convert the string path to a Path object
+		Path path = Paths.get(pathString);
+		// Check if the file exists
+		return Files.exists(path);
 	}
 	
 	// Prompts the user to set the output file path.
 	private void setOutputFilePath() {
-		out.println("Enter output file path");
+		log.cyanBoldTitle("Enter output file path: ", true);
 		outputFile = scanner.next();
 		log.info("Output file path succesfully added");
 	}
 	
 	// Handles the user's search input and performs the search operation.
 	private void handleSearchInput() throws IOException {
+		if (!fileExists(inputFile)) {
+			log.error("Embedding file is missing.");
+			handleMissingInputFile();
+		}
+
 		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ", true);
 
 		// Get search terms from the user
 		getUserInput();
-		
+
 		if (!isAlreadyInvoked) {
 			// Perform the search and plot the results
-			String[][] result = searcher.search(searchTerms, inputFile, optionsMenu.getTotalWordsToOutput(), 
-												optionsMenu.getSearchMode(), optionsMenu.getReturnUnmachted());
+			String[][] result = searcher.search(searchTerms, inputFile, optionsMenu.getTotalWordsToOutput(),
+					optionsMenu.getSearchMode(), optionsMenu.getReturnUnmachted());
 			plotter.plot(result, optionsMenu.getSearchMode(), optionsMenu.getTotalWordsToOutput());
-			log.info("Results file will launch automatically");
+
 			isAlreadyInvoked = true;
 		}
 	}
 	
+
 	// Displays and handles the options configuration menu.
 	private void configureOptions() {
 		out.println();
@@ -100,11 +136,15 @@ public class MainMenu {
 		optionsMenu.init();
 	}
 
+
 	// Reads user input for search terms and handles input validation
 	private void getUserInput() throws IOException {
 		isAlreadyInvoked = false;
 		String input = "";
 		int counter = 0;
+		
+		
+	
 		
 		while(scanner.hasNextLine()) {
 			input = scanner.nextLine();

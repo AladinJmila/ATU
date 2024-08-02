@@ -53,7 +53,7 @@ public class MenuHandler {
 		out.println(tab + "| 2 | Specify the maximum number of words to process at once (default: 10)");
 		out.println(tab + "| 3 | Choose search mode: whole sentence (A, default) or individual words (B)");
 		out.println(tab + "| 4 | Return unmatched results (yes/no) - (default: yes)");
-		out.println(tab + "|   | -->  Selecting \"yes\" is recommended if you chose individual words (option B) above");
+		out.println(tab + "|   | -->  Selecting \"no\" is recommended if you chose individual words (option B) above");
 		out.println(tab + "| 5 | Return to the Main Menu");
 		out.println(tab + "-----------------------------------------------------------------------------------------");
 		log.cyanBoldTitle(tab+ "Select Option [1-5]> ");

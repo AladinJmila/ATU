@@ -38,7 +38,7 @@ public class FileProcessor {
 			int index = 0;
 			
 			// Log the start of file processing
-			log.info("Processing the input file");
+			log.info("Processing the input file...");
 			
 			// Read each line from the file
 			while ((line = br.readLine()) != null) {
