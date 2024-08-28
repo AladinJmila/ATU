@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 
 public class MainMenu {
-	private String inputFile = "./static/word-embeddings.txt";
+	private String inputFile;
 	private Scanner scanner;
 	private Searcher searcher;
 	private MenuHandler menuHandler;
@@ -23,9 +23,8 @@ public class MainMenu {
 	private String[] searchTerms;
 	private int wordsToProcessCount;
 	private String tab = ConsoleLogger.TAB;
-	
 	public static String outputFile = "out.txt";
-	
+
 	// Constructor initializes the MainMenu with default settings.
 	public MainMenu() {
 		scanner = new Scanner(System.in);
@@ -37,14 +36,14 @@ public class MainMenu {
 		validator = new InputValidator(scanner);
 		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 	}
-	
+
 	// Initializes and runs the main menu loop.
 	public void init() throws IOException {
 		while(keepRunning) {
 			menuHandler.showMainMenu();
-			
+
 			// Define the valid range for menu choices
-			int [] range = {1, 5};
+			int[] range = { 1, 5 };
 			// Validate and get user input for menu choice
 			int choice = validator.validateNumericInput(
 					() -> menuHandler.showMainMenu(), range);
@@ -56,7 +55,8 @@ public class MainMenu {
 				case 3 	-> handleSearchInput();
 				case 4 	-> configureOptions();
 				case 5 	-> keepRunning = false;
-				default -> log.error("Invalid Selection, choose a number from 1 to 5.");
+				default -> log.error(
+						"Invalid Selection, choose a number from " + range[0] + " to " + range[1]+ ".");
 					
 			}
 		}
@@ -66,18 +66,21 @@ public class MainMenu {
 	private void setInputFilePath() {
 		log.cyanBoldTitle("Enter input file path ( Example: ./path/fileName.txt): ", true);
 		inputFile = scanner.next();
-		
+
 		// Check if the provided file path exists
-		if (!fileExists(inputFile)) {
+		if (inputFile == null) {
+			log.error("Missing Embedding file.");
+			handleMissingInputFile();
+		} else if (!fileExists(inputFile)) {
 			log.error("Invalid path.");
-			// Handle the case where the input file is missing
 			handleMissingInputFile();
 		} else {
 			log.info("Input file path succesfully added");
 		}
 	}
-	
-	// Repeatedly prompts the user to provide a valid input file path until the file exists
+
+	// Repeatedly prompts the user to provide a valid input file path until the file
+	// exists
 	private void handleMissingInputFile() {
 		while (true) {
 			// Prompt the user to set the input file path
@@ -92,9 +95,7 @@ public class MainMenu {
 	
 	// Checks if the specified file exists
 	public static boolean fileExists(String pathString) {
-		// Convert the string path to a Path object
 		Path path = Paths.get(pathString);
-		// Check if the file exists
 		return Files.exists(path);
 	}
 	
@@ -107,8 +108,11 @@ public class MainMenu {
 	
 	// Handles the user's search input and performs the search operation.
 	private void handleSearchInput() throws IOException {
-		if (!fileExists(inputFile)) {
-			log.error("Embedding file is missing.");
+		if (inputFile == null) {
+			log.error("Missing Embedding file.");
+			handleMissingInputFile();
+		} else if (!fileExists(inputFile)) {
+			log.error("Invalid path.");
 			handleMissingInputFile();
 		}
 
@@ -126,7 +130,6 @@ public class MainMenu {
 			isAlreadyInvoked = true;
 		}
 	}
-	
 
 	// Displays and handles the options configuration menu.
 	private void configureOptions() {
@@ -136,33 +139,29 @@ public class MainMenu {
 		optionsMenu.init();
 	}
 
-
 	// Reads user input for search terms and handles input validation
 	private void getUserInput() throws IOException {
 		isAlreadyInvoked = false;
 		String input = "";
 		int counter = 0;
-		
-		
-	
-		
-		while(scanner.hasNextLine()) {
+
+		while (scanner.hasNextLine()) {
 			input = scanner.nextLine();
 			counter++;
 			if (counter != 0 && input.length() != 0) {
 				break;
 			}
 		}
-		
+
 		// Convert the search text to lowercase and split into search terms
 		searchTerms = input.toLowerCase().split(" ");
-		
+
 		// Validate the number of search terms
 		while (searchTerms.length > wordsToProcessCount) {
 			menuHandler.showMaxWordsOptions(wordsToProcessCount);
-			
+
 			// Define the valid range for choices in the max words options menu
-			int [] range = {1, 3};
+			int[] range = { 1, 3 };
 			// Validate and get user input for the choice
 			int choice = validator.validateNumericInput(
 					() -> menuHandler.showMaxWordsOptions(wordsToProcessCount), range, tab);
@@ -173,15 +172,15 @@ public class MainMenu {
 				case 2 -> handleSearchInput();
 				case 3 -> updateWordsCount();
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	// Updates the number of words to process based on user input.
 	private void updateWordsCount() {
-		optionsMenu.setWordsToProcessCount(); 
+		optionsMenu.setWordsToProcessCount();
 		wordsToProcessCount = optionsMenu.getWordsToProcessCount();
 	}
-	
+
 }

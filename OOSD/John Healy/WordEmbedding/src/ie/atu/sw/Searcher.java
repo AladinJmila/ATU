@@ -10,9 +10,8 @@ public class Searcher {
 	private ConsoleLogger log = new ConsoleLogger(); 
 	// List of words to be ignored in the search results
 	private String[] noMatchResults = {"another", "an", "one", "the", "same", "is", 
-			"whose", "comes", "with", "on", "this", "as", "s",
-			"for", "first", "it", "which", "of", "turned", "but", 
-			"i", "you"};
+			"whose", "comes", "with", "on", "this", "as", "s", "for", "first", "it", 
+			"which", "of", "turned", "but", "i", "you"};
 	
 	// Perform the search functionality using all the helper methods defined below
 	public String[][] search(String[] searchTerms, String inputFile, int totalWordsToOutput, 
@@ -20,20 +19,13 @@ public class Searcher {
 		this.totalWordsToOutput = totalWordsToOutput;
 		this.searchTerms = searchTerms;
 		
-		// Create an instance of the FileProcessor class to handle loading word embeddings from an input file
 		FileProcessor fp = new FileProcessor(inputFile);
-		// Load the words array from the file
-		String[] words = fp.getWordsArray();
-		// Load the embeddings matrix from the file
-		double[][] embeddings = fp.getEmbeddingsArray();
-		
-		// Array to hold the indices of the search terms in the words array
+		String[] words = fp.getWordsArray(); // Load the words array from the file
+		double[][] embeddings = fp.getEmbeddingsArray(); // Load the embeddings matrix from the file
 		int[] searchTermIndices = new int[this.searchTerms.length];
-		// Array to hold all search results for search terms
-		this.searchResults =  new String[this.searchTerms.length][totalWordsToOutput][2];
+		this.searchResults = new String[this.searchTerms.length][totalWordsToOutput][2];
 		
 		log.info("Searching...");
-		// Iterate through each search term 
 		for (int i = 0; i < this.searchTerms.length; i++) {
 			// Find the index of the current search term in the words array
 			for (int j = 0; j < words.length; j++) {
@@ -45,7 +37,6 @@ public class Searcher {
 
 			}
 			
-			// Instantiate the CosineDistance class
 			CosineDistance s = new CosineDistance();
 			// Array to hold the word index and the cosine distance
 			double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
@@ -55,9 +46,9 @@ public class Searcher {
 				if (j == searchTermIndices[i]) {
 					continue; // Skip if the search term and the word are the same
 				}
-				
+
 				// Save the word index and the cosine distance
-				result[j][0] = (double) j; 
+				result[j][0] = (double) j;
 				result[j][1] = s.getDistance(embeddings[searchTermIndices[i]], embeddings[j]);
 			}
 
@@ -66,9 +57,9 @@ public class Searcher {
 			// Generate search results from the sorted results
 			this.searchResults[i] = generateSearchResults(result, words);
 		}
-		
+
 		generateGroupedResults(this.searchTerms, this.searchResults);
-		
+
 		if (!returnUnmatched) {
 			filterUnmached(this.searchTerms, this.searchResults);
 		}
@@ -77,15 +68,15 @@ public class Searcher {
 			// Generate and return the final result phrases
 			return generateResultPhrases(this.searchTerms, this.searchResults);
 		} else {
-			return generateGroupedResults(this.searchTerms , this.searchResults);
+			return generateGroupedResults(this.searchTerms, this.searchResults);
 		}
 	}
-	
+
 	// Generate search results from the result array
-	private String[][] generateSearchResults(double[][] searchResult, String[] words){
+	private String[][] generateSearchResults(double[][] searchResult, String[] words) {
 		String[][] result = new String[totalWordsToOutput][2];
 		int index = 0;
-		
+
 		// Iterate through the search results to generate the final result array
 		for (int i = FileProcessor.WORDS_COUNT - 2; i > FileProcessor.WORDS_COUNT - 2 - totalWordsToOutput; i--) {
 			// Calculate the score as a percentage
@@ -95,63 +86,69 @@ public class Searcher {
 			// Get the word corresponding to the word index
 			String word = words[wordIndex];
 			// Save the word and its score to the result array
-			result[index++] = new String[]{word, String.format("%.1f", score)};
+			result[index++] = new String[] { word, String.format("%.1f", score) };
 		}
-		
+
 		// Return the final search results
 		return result;
 	}
-	
+
 	private void filterUnmached(String[] searchTerms, String[][][] searchResults) {
 		int counter = 0;
 		boolean matched = false;
 		String[] tempMatchedTerms = new String[searchTerms.length];
 		String[][][] tempMatchedSearchResults = new String[searchResults[0].length][searchResults[0][0].length][2];
+
+		// Iterate through each search term to check if it matches with search results
 		for (int i = 0; i < searchTerms.length; i++) {
 			matched = false;
 			for (int j = 0; j < searchResults[i].length; j++) {
+				// Check if the result is not in the noMatchResults list
 				if (!Arrays.asList(noMatchResults).contains(searchResults[i][j][0])) {
 					tempMatchedTerms[counter] = searchTerms[i];
 					tempMatchedSearchResults[counter] = searchResults[i];
 					matched = true;
 				}
 			}
-			if (matched) counter++;
+			if (matched)
+				counter++;
 		}
-		
+
 		String[] matchedTerms = new String[counter];
 		String[][][] matchedSearchResults = new String[counter][searchResults[0][0].length][2];
-		
+
+		// Copy matched terms and results to the final arrays
 		for (int i = 0; i < counter; i++) {
 			matchedTerms[i] = tempMatchedTerms[i];
 			matchedSearchResults[i] = tempMatchedSearchResults[i];
 		}
-		
+
 		this.searchTerms = matchedTerms;
 		this.searchResults = matchedSearchResults;
 	}
 	
+	// Generate a 2D array that groups search terms and search results together
 	private String[][] generateGroupedResults(String[] searchTerms, String[][][] searchResults) {
 		String[][] result = new String[searchTerms.length + (searchResults.length * searchResults[0].length)][2];
 		int index = 0;
-		
+
+		// Iterate through search terms and append them to the result array
 		for (int i = 0; i < searchTerms.length; i++) {
 			result[index][0] = searchTerms[i];
 			result[index][1] = "input";
 			index++;
-			
-			
+
+			// Append corresponding search results for each term
 			for (int j = 0; j < searchResults[i].length; j++) {
 				result[index++] = searchResults[i][j];
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	// Generate result phrases from the search results
 	private String[][] generateResultPhrases(String[] searchTerms, String[][][] searchResults) throws IOException {
-		// Array to hold the final result phrases
 		String[][] resultPhrases = new String[searchResults[0].length + 1][2];
 		StringBuilder builder = new StringBuilder();
 		
@@ -175,7 +172,11 @@ public class Searcher {
 					if (resultPhrases[index][0] == null) {
 						resultPhrases[index][0] = sb.append(searchTerms[i]).toString().trim();
 					} else {
-						resultPhrases[index][0] = sb.append(resultPhrases[index][0]).append(" " + searchTerms[i]).toString().trim();
+						resultPhrases[index][0] = sb
+													.append(resultPhrases[index][0])
+													.append(" " + searchTerms[i])
+													.toString()
+													.trim();
 					}
 					
 					// Set the score to 0.0 for no-match results
@@ -189,7 +190,12 @@ public class Searcher {
 						resultPhrases[index][1] = searchResults[i][j][1];
 
 					} else {
-						resultPhrases[index][0] = sb.append(resultPhrases[index][0]).append(" " + searchResults[i][j][0]).toString().trim();
+						resultPhrases[index][0] = sb
+													.append(resultPhrases[index][0])
+													.append(" " + searchResults[i][j][0])
+													.toString()
+													.trim();
+						
 						// Calculate the average score for the combined results
 						float scoreAverage = 0.0f;
 						if (resultPhrases[index][1].equals("0.0")) {
@@ -203,7 +209,6 @@ public class Searcher {
 			}
 		}
 
-		// Return the final result phrases
 		return resultPhrases;
 	}
 }

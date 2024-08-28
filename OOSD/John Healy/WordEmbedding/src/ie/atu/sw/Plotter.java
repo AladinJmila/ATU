@@ -10,30 +10,30 @@ import java.io.PrintWriter;
 
 public class Plotter {
 	private ConsoleLogger log = new ConsoleLogger();
-	
+
 	// Plots the search results and generates the output file.
 	public void plot(String[][] resultPhrases, String searchMode, int totalWordsToOutput) throws IOException {
 		// Generate formats for plotting based on the result data
 		String[] formats = dynamicPlotTemplate(resultPhrases);
-		// Generate the output file with the formatted lines
+
 		generateOutputFile(linesToPlot(resultPhrases, formats, totalWordsToOutput));
 	}
-	
+
 	// Creates a dynamic plot template based on the longest result length.
 	private String[] dynamicPlotTemplate(String[][] data) {
 		// Initialize the length to 7 to cover short words
 		int longestResultLength = 7;
 		String[] formats = new String[6];
-		
+
 		// Determine the longest entry in the result data
-		for (String [] entry : data) {
+		for (String[] entry : data) {
 			if (entry[0].length() > longestResultLength) {
 				longestResultLength = entry[0].length();
 			}
 		}
-		
+
 		// Define the format strings based on the longest result length
-		formats[0] = "Input: %-" + longestResultLength  + "s          "; // %n%n
+		formats[0] = "Input: %-" + longestResultLength + "s          "; // %n%n
 		formats[1] = "| Result%-" + (longestResultLength - 6) + "s |  Score(%%)  |"; // %n
 		formats[2] = "| %-" + longestResultLength + "s |    %-5s   |"; // %n
 		formats[3] = "|-%-" + longestResultLength + "s-+----%-5s---|"; // %n
@@ -41,7 +41,7 @@ public class Plotter {
 		formats[5] = "-".repeat(longestResultLength);
 		return formats;
 	}
-	
+
 	// Converts the search results into formatted lines for plotting.
 	private String[] linesToPlot(String[][] searchResults, String[] formats, int totalWordsToOutput) {
 		// Array to store the formatted result lines
@@ -53,28 +53,63 @@ public class Plotter {
 			StringBuilder builder = new StringBuilder();
 			if (searchResults[i][1].equals("input")) {
 				index = 0;
-				if (result[index] == null) result[index] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[0], searchResults[i][0])).append("    ").toString();
-				builder = new StringBuilder();
+				if (result[index] == null)
+					result[index] = "";
+
+				result[index] = builder
+								.append(result[index])
+								.append(String.format(formats[0], searchResults[i][0]))
+								.append("    ")
+								.toString();
+				
 				index++;
-				if (result[index] == null) result[index] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[1], "")).append("    ").toString();
+				builder = new StringBuilder();
+				
+				if (result[index] == null)
+					result[index] = "";
+				
+				result[index] = builder
+								.append(result[index])
+								.append(String.format(formats[1], ""))
+								.append("    ")
+								.toString();
 			}  else {
 				builder = new StringBuilder();
-				if (result[index] == null) result[index] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[3], formats[5], "-----")).append("    ").toString();
+				if (result[index] == null)
+					result[index] = "";
+				
+				result[index] = builder
+								.append(result[index])
+								.append(String.format(formats[3], formats[5], "-----"))
+								.append("    ")
+								.toString();
+				
 				index++;
 				builder = new StringBuilder();
-				if (result[index] == null) result[index] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[2], searchResults[i][0], searchResults[i][1])).append("    ").toString();
+				
+				if (result[index] == null)
+					result[index] = "";
+				
+				result[index] = builder
+								.append(result[index])
+								.append(String.format(formats[2], searchResults[i][0], searchResults[i][1]))
+								.append("    ")
+								.toString();
 			}	
+			
 			index++;
 			
 			// Add a separator line if it's the last entry
 			if (index == totalWordsToOutput * 2 + 2) {
 				builder = new StringBuilder();
-				if (result[index ] == null) result[index] = "";
-				result[index] = builder.append(result[index]).append(String.format(formats[4], formats[5], "-----")).append("    ").toString();
+				if (result[index] == null)
+					result[index] = "";
+				
+				result[index] = builder
+								.append(result[index])
+								.append(String.format(formats[4], formats[5], "-----"))
+								.append("    ")
+								.toString();
 			}
 			
 		}
@@ -86,7 +121,7 @@ public class Plotter {
 	private void generateOutputFile(String[] linesToPlot) throws IOException {
 		FileWriter out = new FileWriter("out.txt");
 		PrintWriter print = new PrintWriter(out);
-		
+
 		// Write each line to the output file
 		for (int i = 0; i < linesToPlot.length; i++) {
 			if (i == 0) {
@@ -95,13 +130,13 @@ public class Plotter {
 				print.printf("%s%n", linesToPlot[i]);
 			}
 		}
-		
+
 		print.println();
 
 		print.close();
 
 		log.info("Results file will launch automatically!");
-	
+
 		System.out.println(ConsoleColour.GREEN); // Change the colour of the console text
 		int size = 100; // The size of the meter. 100 equates to 100%
 		for (int i = 0; i < size; i++) { // The loop equates to a sequence of processing steps

@@ -2,11 +2,15 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 
+/*
+ * MenuHandler class handles displaying the various menus used in the application.
+ */
+
 public class MenuHandler {
 	ConsoleLogger log;
 	String tab = ConsoleLogger.TAB;
 	private boolean isFirstRun = true;
-	
+
 	MenuHandler() {
 		log = new ConsoleLogger();
 	}
@@ -31,7 +35,7 @@ public class MenuHandler {
 			out.println("          *");
 			out.println("*                                                          *");
 			out.println("************************************************************");
-		} 
+		}
 
 		log.cyanBoldTitle(" Main Menu:", true);
 		out.println("---------------------------------------------------");
@@ -42,10 +46,10 @@ public class MenuHandler {
 		out.println("| 5 | Quit");
 		out.println("---------------------------------------------------");
 		log.cyanBoldTitle("Select Option [1-5]> ");
-		
+
 		isFirstRun = false;
 	}
-	
+
 	public void showOptionsMenu() {
 		log.cyanBoldTitle(tab + " Configure Options Menu: ", true);
 		out.println(tab + "-----------------------------------------------------------------------------------------");
@@ -56,12 +60,12 @@ public class MenuHandler {
 		out.println(tab + "|   | -->  Selecting \"no\" is recommended if you chose individual words (option B) above");
 		out.println(tab + "| 5 | Return to the Main Menu");
 		out.println(tab + "-----------------------------------------------------------------------------------------");
-		log.cyanBoldTitle(tab+ "Select Option [1-5]> ");
+		log.cyanBoldTitle(tab + "Select Option [1-5]> ");
 	}
-	
+
 	public void showMaxWordsOptions(int wordsToProcessCount) {
-		log.warn(tab , "Your sentence is longer than the maximum allowed number of words!\n" +
-				"             Only " + wordsToProcessCount + " will be processed.");
+		log.warn(tab, "Your sentence is longer than the maximum allowed number of words!\n" + "             Only "
+				+ wordsToProcessCount + " will be processed.");
 		out.println(tab + "---------------------------------------------------------------");
 		out.println(tab + "| 1 | Continue anyway");
 		out.println(tab + "| 2 | Enter a new sentence");
@@ -69,5 +73,5 @@ public class MenuHandler {
 		out.println(tab + "---------------------------------------------------------------");
 		log.cyanBoldTitle("Select Option [1-3]> ");
 	}
-	
+
 }

@@ -12,28 +12,27 @@ public class OptionsMenu {
 	private InputValidator validator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
-	
 	private int totalWordsToOutput = 10;
 	private int wordsToProcessCount = 10;
 	private String searchMode = "whole sentence";
 	private boolean returnUnmachted = true;
-	
 	
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
 		validator = new InputValidator(scanner);
 		log = new ConsoleLogger();
 	}
-	
+
 	// Initializes and runs the options menu loop.
 	public void init() {
 		keepRunning = true;
-		while(keepRunning) {
+		while (keepRunning) {
 			menuHandler.showOptionsMenu();
 			// Define the valid range for menu choices
-			int [] range = {1, 5};
+			int[] range = { 1, 5 };
 			// Validate and get user input for menu choice
-			int choice = validator.validateNumericInput(() -> menuHandler.showOptionsMenu(), range, tab);
+			int choice = validator.validateNumericInput(
+					() -> menuHandler.showOptionsMenu(), range, tab);
 
 			// Handle the user's menu choice
 			switch(choice) {
@@ -42,7 +41,8 @@ public class OptionsMenu {
 				case 3 -> setSearchMode();
 				case 4 -> setReturnUnmached();
 				case 5 -> keepRunning = false;
-				default -> log.error(tab, "Invalid Selection, choose a number from 1 to 5.");
+				default -> log.error(
+						tab, "Invalid Selection, choose a number from " + range[0] + " to " + range[1]+ ".");
 			}
 		}
 	}
@@ -54,12 +54,14 @@ public class OptionsMenu {
 	
 	private void setTotalWordsToOutput() {
 		// Define the valid range for the number of words to output
-		int [] range = {1, 100};
-		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
+		int[] range = { 1, 100 };
+		String prompt = tab + "Enter a number between " + range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the total words to output
-		totalWordsToOutput = validator.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
-		log.info(tab , "Number of results is updated successfully: " + totalWordsToOutput);
+		totalWordsToOutput = validator.validateNumericInput(
+				() -> log.cyanBoldTitle(prompt), range, tab);
+		
+		log.info(tab, "Number of results is updated successfully: " + totalWordsToOutput);
 	}
 
 	public int getWordsToProcessCount() {
@@ -68,11 +70,13 @@ public class OptionsMenu {
 	
 	public void setWordsToProcessCount() {
 		// Define the valid range for the number of words to process
-		int [] range = {1, 20};
-		String prompt = tab + "Enter a number between "+ range[0] + " and " + range[1] + ": ";
+		int[] range = { 1, 20 };
+		String prompt = tab + "Enter a number between " + range[0] + " and " + range[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the words to process count
-		wordsToProcessCount = validator.validateNumericInput(() -> log.cyanBoldTitle(prompt), range, tab);
+		wordsToProcessCount = validator.validateNumericInput(
+				() -> log.cyanBoldTitle(prompt), range, tab);
+		
 		log.info(tab , "Number of words is updated successfully: " + wordsToProcessCount);
 	}
 
@@ -82,7 +86,7 @@ public class OptionsMenu {
 	
 	private void setSearchMode() {
 		// Define the valid options for search mode
-		String[] options = {"A", "B"};
+		String[] options = { "A", "B" };
 		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the search mode
@@ -98,7 +102,7 @@ public class OptionsMenu {
 	
 	private void setReturnUnmached() {
 		// Define the valid options for returning unmatched words
-		String[] options = {"yes", "no"};
+		String[] options = { "yes", "no" };
 		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
 		log.cyanBoldTitle(prompt);
 		// Validate and set the return unmatched flag
