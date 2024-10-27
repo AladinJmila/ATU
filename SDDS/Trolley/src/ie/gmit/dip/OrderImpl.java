@@ -31,10 +31,11 @@ public class OrderImpl implements Order {
 	}
 
 	public boolean removeItem(LineItem item) { // Big O = O(n)
-		return items.remove(item); // Is this okay?
+		 return items.remove(item); // Is this okay?
 	}
 
 	public LineItem[] items() {
+		Collections.sort(items);
 		LineItem[] temp = new LineItem[items.size()];
 		for (int i = 0; i < items.size(); i++) {
 			temp[i] = items.get(i);

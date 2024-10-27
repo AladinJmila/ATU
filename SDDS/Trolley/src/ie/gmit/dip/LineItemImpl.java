@@ -1,5 +1,7 @@
 package ie.gmit.dip;
 
+import java.util.Objects;
+
 public class LineItemImpl implements LineItem {
 	private String number;
 	private String name;
@@ -55,5 +57,28 @@ public class LineItemImpl implements LineItem {
 	public float getItemPrice() {
 		return this.price;
 	}
+
+	public int hashCode() {
+		return Objects.hash(number);
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LineItemImpl other = (LineItemImpl) obj;
+		return Objects.equals(number, other.number);
+	}
+
+
+	public int compareTo(LineItem o) {
+		return this.number.compareTo(o.getItemNumber()); // Delegating...
+	}
+	
+	
+	
 
 }
