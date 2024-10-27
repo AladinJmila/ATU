@@ -26,12 +26,12 @@ public class OrderImpl implements Order {
 		return this.orderDate;
 	}
 
-	public boolean addItem(LineItem item) {
-		return items.add(item); // Delegate method
+	public boolean addItem(LineItem item) { // Big O = O(1)
+		return items.add(item); // Delegate method. Is this okay? Are you sure?
 	}
 
-	public boolean removeItem(LineItem item) {
-		return items.remove(item);
+	public boolean removeItem(LineItem item) { // Big O = O(n)
+		return items.remove(item); // Is this okay?
 	}
 
 	public LineItem[] items() {
@@ -46,7 +46,7 @@ public class OrderImpl implements Order {
 		float total = 0.0f;
 		for (LineItem item : this.items) {
 			total += (item.getItemQuantity() * item.getItemPrice());
-;		}
+		}
 		return total;
 	}
 
