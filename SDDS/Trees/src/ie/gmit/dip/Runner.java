@@ -13,5 +13,6 @@ public class Runner {
 		Node<String> mike = new NodeImpl<String>(anne, "Mike");
 		Node<String> cathy = new NodeImpl<String>(anne, "Cathy");
 		Node<String> emer = new NodeImpl<String>(anne, "Emer");
+		
 	}
 }
