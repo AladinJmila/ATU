@@ -1,3 +1,10 @@
-{{ g }}
+<h4 [title]="titleInforString" (dblclick)="doubleClick()">{{ g }}</h4>
+
+<h4 [hidden]="hidden">Name: {{ name }}</h4>
+<input type="text" [(ngModel)]="newName" />
+<button [disabled]="!newName.length" (click)="addName()">Add</button>
+<ul>
+  <li *ngFor="let yo of names">{{ yo }}</li>
+</ul>
 <hr />
 <app-county-details />
