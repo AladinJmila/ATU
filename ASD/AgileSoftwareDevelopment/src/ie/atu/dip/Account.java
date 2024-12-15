@@ -1,7 +1,7 @@
 package ie.atu.dip;
 
 //Represents a single bank account with account holder name, balance, and loan amount
-class Account {
+public class Account {
 	private String accountHolder; // Name of the account holder
     private double balance;       // Current account balance
     private double loan;          // Outstanding loan amount
