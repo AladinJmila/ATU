@@ -2,16 +2,20 @@ package ie.atu.dip;
 
 import static java.lang.System.out;
 import java.util.Scanner;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Runner {
 	private boolean isFirstRun = true;
 	private boolean keepRunning = true;
 	private Scanner scanner;
 	private InputValidator validator;
+	private BankingApp bank;
 	
 	Runner() {
 		scanner = new Scanner(System.in);
 		validator = new InputValidator(scanner);
+		bank = new BankingApp();	
 	}
 	
 	public void init() {
@@ -25,7 +29,7 @@ public class Runner {
 			
 			// Handle then user's menu choice
 			switch(choice) {
-				case 1 -> out.println(choice);
+				case 1 -> addNewAccount();
 				case 2 -> out.println(choice);
 				case 3 -> out.println(choice);
 				case 4 -> out.println(choice);
@@ -36,9 +40,24 @@ public class Runner {
 				case 9 -> keepRunning = false;
 				default -> out.println("Invalid Selection, choose a number from " + range[0] + " to " + range[1]+ ".");
 			}
-			
-			
 		}
+	}
+	
+	public void addNewAccount() {
+		String namePrompt = "Please enter the customer's name: ";
+		out.print(namePrompt);
+		String customerName = validator.validateNameInput(() -> out.print(namePrompt));
+		
+		int[] range = { 0, 100_000_000 };
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+		String formattedRange = numberFormat.format(range[0]) + " - " + numberFormat.format(range[1]);
+		String amountPrompt = "Please enter the initial deposit amount (" + formattedRange + "): ";
+	
+		out.print(amountPrompt);
+		int amount = validator.validateNumericInput(() -> out.print(amountPrompt), range );	
+		
+		bank.addAccount(customerName, amount);
+		out.println(bank.findAccount(customerName).toString());
 	}
 	
 	public void showMenu() {

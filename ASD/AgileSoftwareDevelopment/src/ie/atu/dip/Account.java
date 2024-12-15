@@ -51,4 +51,9 @@ public class Account {
         loan -= amount;
         return true;
     }
+    
+    @Override
+    public String toString() {
+    	return String.format("{ accountHolder: %s, balance: %.2f, loan: %.2f }", accountHolder, balance, loan);
+    }
 }

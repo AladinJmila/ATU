@@ -28,7 +28,7 @@ public class BankingApp {
      * @param accountHolder The name of the account holder.
      * @return The Account object if found, otherwise null.
      */
-    private Account findAccount(String accountHolder) {
+    public Account findAccount(String accountHolder) {
         for (Account account : accounts) {
             if (account.getAccountHolder().equals(accountHolder)) {
                 return account;

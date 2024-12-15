@@ -40,11 +40,11 @@ public class InputValidator {
 	}
 
 	// Validate name input from the user
-	public String validateNameInput(Prompter showPrompt, String input) {
+	public String validateNameInput(Prompter showPrompt) {
 		boolean validInput = false;
+		String input = scanner.next();
 
 		while (!validInput) {
-			input = scanner.next();
 
 			// Check if input is valid (letters, spaces, hyphens, and apostrophes)
 			if (input.matches("[a-zA-Z\\s'-]+")) {
