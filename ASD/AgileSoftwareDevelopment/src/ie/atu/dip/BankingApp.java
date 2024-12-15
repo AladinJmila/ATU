@@ -107,13 +107,6 @@ public class BankingApp {
         return false;
     }
 
-    /**
-     * Gets the total deposits available in the bank.
-     * @return The total deposits.
-     */
-    public double getTotalDeposits() {
-        return totalDeposits;
-    }
 
     /**
      * Gets the balance of a specific account holder.
@@ -133,6 +126,15 @@ public class BankingApp {
     public Double getLoan(String accountHolder) {
         Account account = findAccount(accountHolder);
         return account != null ? account.getLoan() : null;
+    }
+    
+
+    /**
+     * Gets the total deposits available in the bank.
+     * @return The total deposits.
+     */
+    public double getTotalDeposits() {
+        return totalDeposits;
     }
 }
 

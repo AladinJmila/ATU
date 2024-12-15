@@ -31,12 +31,12 @@ public class Runner {
 			switch(choice) {
 				case 1 -> addNewAccount();
 				case 2 -> depositMoney();
-				case 3 -> out.println(choice);
-				case 4 -> out.println(choice);
-				case 5 -> out.println(choice);
-				case 6 -> out.println(choice);
-				case 7 -> out.println(choice);
-				case 8 -> out.println(choice);
+				case 3 -> withdrawMoney();
+				case 4 -> approveLoan();
+				case 5 -> repayLoan();
+				case 6 -> getAccountBalance();
+				case 7 -> getLoanAmount();
+				case 8 -> getTotalDeposits();
 				case 9 -> keepRunning = false;
 				default -> out.println("Invalid Selection, choose a number from " + range[0] + " to " + range[1]+ ".");
 			}
@@ -48,7 +48,7 @@ public class Runner {
 		double amount = getAmountInput("Please enter the initial deposit amount");	
 		
 		bank.addAccount(customerName, amount);
-		out.println(bank.findAccount(customerName).toString());
+		out.println("Account successfully created for " + customerName + " with an initial depoist of " + amount);
 	}
 	
 	public void depositMoney() {
@@ -57,11 +57,72 @@ public class Runner {
 		
 		boolean result = bank.deposit(customerName, amount);
 		if (result) {
-			out.println("Deposit added successfully");
+			out.println("Successfull deposit of " + amount);
 		} else {
 			out.println("Customer not found. Please try again or create an account.");
 		}
-		out.println(bank.findAccount(customerName).toString());
+	}
+	
+	public void withdrawMoney() {
+		String customerName = getCustomerNameInput();
+		double amount = getAmountInput("Please enter the amout to withdraw");	
+		
+		boolean result = bank.withdraw(customerName, amount);
+		if (result) {
+			out.println("Successfull withdrwal of " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+	}
+	
+	public void approveLoan() {
+		String customerName = getCustomerNameInput();
+		double amount = getAmountInput("Please enter the laon amount");	
+		
+		boolean result = bank.approveLoan(customerName, amount);
+		if (result) {
+			out.println("Successfull laon approval of " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+	}
+	
+	public void repayLoan() {
+		String customerName = getCustomerNameInput();
+		double amount = getAmountInput("Please enter the amout to repay");	
+		
+		boolean result = bank.repayLoan(customerName, amount);
+		if (result) {
+			out.println("Successfull laon repayment of " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+	}
+	
+	public void getAccountBalance() {
+		String customerName = getCustomerNameInput();
+		
+		Double balance = bank.getBalance(customerName);
+		if (balance != null) {
+			out.println("The account balance of " + customerName + " is " + balance);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+	}
+	
+	public void getLoanAmount() {
+		String customerName = getCustomerNameInput();
+		
+		Double amount = bank.getLoan(customerName);
+		if (amount != null) {
+			out.println("The account balance of " + customerName + " is " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+	}
+	
+	public void getTotalDeposits() {
+		out.println("The total edposit is " + bank.getTotalDeposits());
 	}
 	
 	private String getCustomerNameInput() {
@@ -82,7 +143,7 @@ public class Runner {
 	
 	public void showMenu() {
 		
-
+ 
 		if (isFirstRun) {
 		out.println();
 		out.println("************************************************************");
