@@ -25,19 +25,44 @@ public class InputValidator {
 
 				// Check if the input is within the specified range
 				if (input < range[0] || input > range[1]) {
-					System.out.println("Input out of range. Please enter a valid number");
+					System.out.println("Input out of range. Please enter a valid value");
 					showPrompt.prompt();
 				} else {
 					validInput = true;
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Invalid input. Please enter a valid number");
+				System.out.println("Invalid input. Please enter a valid value");
 				showPrompt.prompt();
 			}
 		}
 
 		return input;
 	}
+	
+	// Validates numeric input from the user within a specific rage
+		public double validateNumericInput(Prompter showPrompt, double[] range) {
+			double input = 0.0d;
+			boolean validInput = false;
+
+			while (!validInput) {
+				try {
+					input = Double.parseDouble(scanner.next());
+
+					// Check if the input is within the specified range
+					if (input < range[0] || input > range[1]) {
+						System.out.println("Input out of range. Please enter a valid value");
+						showPrompt.prompt();
+					} else {
+						validInput = true;
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Invalid input. Please enter a valid value");
+					showPrompt.prompt();
+				}
+			}
+
+			return input;
+		}
 
 	// Validate name input from the user
 	public String validateNameInput(Prompter showPrompt) {

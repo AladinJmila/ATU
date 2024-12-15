@@ -25,12 +25,12 @@ public class Runner {
 			// Define the valid range for the menu choices
 			int[] range = {1, 9};
 			// Validate and get suer input for menu choice
-			int choice = validator.validateNumericInput(() -> showMenu(), range);
+			int choice = validator.validateNumericInput( () -> showMenu(), range);
 			
 			// Handle then user's menu choice
 			switch(choice) {
 				case 1 -> addNewAccount();
-				case 2 -> out.println(choice);
+				case 2 -> depositMoney();
 				case 3 -> out.println(choice);
 				case 4 -> out.println(choice);
 				case 5 -> out.println(choice);
@@ -44,20 +44,40 @@ public class Runner {
 	}
 	
 	public void addNewAccount() {
-		String namePrompt = "Please enter the customer's name: ";
-		out.print(namePrompt);
-		String customerName = validator.validateNameInput(() -> out.print(namePrompt));
-		
-		int[] range = { 0, 100_000_000 };
-		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-		String formattedRange = numberFormat.format(range[0]) + " - " + numberFormat.format(range[1]);
-		String amountPrompt = "Please enter the initial deposit amount (" + formattedRange + "): ";
-	
-		out.print(amountPrompt);
-		int amount = validator.validateNumericInput(() -> out.print(amountPrompt), range );	
+		String customerName = getCustomerNameInput();
+		double amount = getAmountInput("Please enter the initial deposit amount");	
 		
 		bank.addAccount(customerName, amount);
 		out.println(bank.findAccount(customerName).toString());
+	}
+	
+	public void depositMoney() {
+		String customerName = getCustomerNameInput();
+		double amount = getAmountInput("Please enter the deposit amount");	
+		
+		boolean result = bank.deposit(customerName, amount);
+		if (result) {
+			out.println("Deposit added successfully");
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
+		}
+		out.println(bank.findAccount(customerName).toString());
+	}
+	
+	private String getCustomerNameInput() {
+		String prompt = "Please enter the customer's name: ";
+		out.print(prompt);
+		return validator.validateNameInput(() -> out.print(prompt));
+	}
+	
+	private double getAmountInput(String prompt) {
+		double[] range = { 0.0d, 100_000_000.0d };
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+		String formattedRange = numberFormat.format(range[0]) + " - " + numberFormat.format(range[1]);
+		String amountPrompt = prompt + " (" + formattedRange + "): ";
+	
+		out.print(amountPrompt);
+		return validator.validateNumericInput(() -> out.print(amountPrompt), range );	
 	}
 	
 	public void showMenu() {
