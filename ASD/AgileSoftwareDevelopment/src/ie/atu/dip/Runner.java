@@ -47,8 +47,12 @@ public class Runner {
 		String customerName = getCustomerNameInput();
 		double amount = getAmountInput("Please enter the initial deposit amount");	
 		
-		bank.addAccount(customerName, amount);
-		out.println("Account successfully created for " + customerName + " with an initial depoist of " + amount);
+	    try {
+	        bank.addAccount(customerName, amount);
+	        out.println("Account successfully created for " + customerName + " with an initial deposit of " + amount);
+	    } catch (IllegalArgumentException e) {
+	        out.println("Error: " + e.getMessage());
+	    }
 	}
 	
 	public void depositMoney() {
