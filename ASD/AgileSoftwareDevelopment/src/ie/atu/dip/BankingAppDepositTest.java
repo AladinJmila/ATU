@@ -17,7 +17,8 @@ public class BankingAppDepositTest {
 	@Test
 	void testDepositWithExistingName() {
 		assertTrue(bank.deposit(TestUtils.MOCK_NAME, 500.0));
-		TestUtils.assertAccountDetails(bank, TestUtils.MOCK_NAME, 1500.0, 1, 1500.0);
+		TestUtils.assertAccountDetails(bank, TestUtils.MOCK_NAME, (TestUtils.MOCK_AMOUNT + 500.00), 1,
+				(TestUtils.MOCK_AMOUNT + 500.00));
 	}
 
 	@Test
@@ -42,13 +43,14 @@ public class BankingAppDepositTest {
 	@Test
 	void testDepositWithDepositGreaterThanZero() {
 		assertTrue(bank.deposit(TestUtils.MOCK_NAME, 500.0));
-		TestUtils.assertAccountDetails(bank, "John Smith", 1500.0, 1, 1500.0);
+		TestUtils.assertAccountDetails(bank, "John Smith", (TestUtils.MOCK_AMOUNT + 500.00), 1,
+				(TestUtils.MOCK_AMOUNT + 500.00));
 	}
 
 	@Test
 	void testDepositWithDepositEqualsZero() {
 		assertTrue(bank.deposit(TestUtils.MOCK_NAME, 0.0));
-		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+		TestUtils.assertAccountDetails(bank, "John Smith", TestUtils.MOCK_AMOUNT, 1, TestUtils.MOCK_AMOUNT);
 	}
 
 	@Test

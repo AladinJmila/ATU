@@ -6,7 +6,7 @@ public abstract class TestUtils {
 	public static final String MOCK_NAME = "John Smith";
 	public static final double MOCK_AMOUNT = 1000.0d;
 	public static final String INVALID_NAME_ERROR_MESSAGE = "Account holder name cannot be null or empty";
-	public static final String INVALID_DEPOSIT_ERROR_MESSAGE = "Deposit cannot be negative";
+	public static final String INVALID_DEPOSIT_ERROR_MESSAGE = "Amount cannot be negative";
 	
 	public static void assertAccountDetails(BankingApp bank, String expectedName, double expectedBalance, int expectedSize,
 			double expectedTotalDeposit) {
