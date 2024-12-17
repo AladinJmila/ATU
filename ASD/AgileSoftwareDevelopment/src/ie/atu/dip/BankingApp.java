@@ -60,6 +60,9 @@ public class BankingApp {
      * @return True if the deposit is successful, otherwise false.
      */
     public boolean deposit(String accountHolder, double amount) {
+    	if (accountHolder == null || accountHolder.trim().isEmpty()) 
+    		throw new IllegalArgumentException("Account holder name cannot be null or empty");
+    	
     	 if (amount < 0) 
              throw new IllegalArgumentException("Deposit cannot be negative");
          
