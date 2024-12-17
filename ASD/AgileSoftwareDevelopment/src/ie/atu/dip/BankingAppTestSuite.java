@@ -5,6 +5,6 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @SelectClasses({ BankingAppFindAccountTest.class, BankingAppAddAccountTest.class, BankingAppDepositTest.class,
-		BankingAppWithdrawTest.class })
+		BankingAppWithdrawTest.class, BankingAppApproveLoanTest.class, BankingAppRepayLoanTest.class })
 class BankingAppTestSuite {
 }

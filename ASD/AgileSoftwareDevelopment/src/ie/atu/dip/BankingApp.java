@@ -92,11 +92,13 @@ public class BankingApp {
 			throw new IllegalArgumentException("Amount cannot be negative");
 
 		Account account = findAccount(accountHolder);
-		if (account == null || amount <= 0) return false;
+		if (account == null || amount <= 0)
+			return false;
 		if (account.withdraw(amount)) {
 			totalDeposits -= amount;
 			return true;
 		}
+
 		return false;
 	}
 
@@ -108,9 +110,17 @@ public class BankingApp {
 	 * @return True if the loan is approved, otherwise false.
 	 */
 	public boolean approveLoan(String accountHolder, double loanAmount) {
+		if (accountHolder == null || accountHolder.trim().isEmpty())
+			throw new IllegalArgumentException("Account holder name cannot be null or empty");
+
+		if (loanAmount < 0)
+			throw new IllegalArgumentException("Amount cannot be negative");
+
 		Account account = findAccount(accountHolder);
+
 		if (account == null || loanAmount > totalDeposits)
 			return false;
+
 		account.approveLoan(loanAmount);
 		totalDeposits -= loanAmount;
 		return true;
