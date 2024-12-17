@@ -43,12 +43,12 @@ public class BankingApp {
      * @param initialDeposit The initial deposit amount.
      */
     public void addAccount(String accountHolder, double initialDeposit) {
-    	if (accountHolder == null || accountHolder.trim().isEmpty()) {
+    	if (accountHolder == null || accountHolder.trim().isEmpty()) 
     		throw new IllegalArgumentException("Account holder name cannot be null or empty");
-    	}
-        if (initialDeposit < 0) {
+    	
+        if (initialDeposit < 0) 
             throw new IllegalArgumentException("Deposit cannot be negative");
-        }
+        
         accounts.add(new Account(accountHolder, initialDeposit));
         totalDeposits += initialDeposit;
     }
@@ -60,8 +60,13 @@ public class BankingApp {
      * @return True if the deposit is successful, otherwise false.
      */
     public boolean deposit(String accountHolder, double amount) {
+    	 if (amount < 0) 
+             throw new IllegalArgumentException("Deposit cannot be negative");
+         
+    	 
         Account account = findAccount(accountHolder);
-        if (account == null || amount <= 0) return false;
+        if (account == null) return false;
+        
         account.deposit(amount);
         totalDeposits += amount;
         return true;

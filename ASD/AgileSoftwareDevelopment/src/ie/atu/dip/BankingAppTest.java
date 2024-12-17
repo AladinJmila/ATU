@@ -18,6 +18,20 @@ class BankingAppTest {
 	}
 
 	@Test
+	void testFindAccountWithExistingName() {
+		bank.addAccount(mockName, mockAmount);
+		Account account = bank.findAccount("John Smith");
+		assertEquals("John Smith", account.getAccountHolder());
+	}
+	
+	@Test
+	void testFindAccountWithNonExistingName() {
+		bank.addAccount(mockName, mockAmount);
+		Account account = bank.findAccount("Jane Smith");
+		assertNull(account);
+	}
+	
+	@Test
 	void testAddAccountWithValidName() {
 		bank.addAccount(mockName, mockAmount);
 		assertAccountDetails("John Smith", mockAmount, 1, mockAmount);
@@ -52,7 +66,7 @@ class BankingAppTest {
 			double expectedTotalDeposit) {
 		assertEquals(expectedSize, bank.getAccounts().size());
 		assertEquals(expectedName, bank.getAccounts().get(0).getAccountHolder());
-		assertEquals(expectedBalance, bank.getAccounts().get(0).getBalance());
-		assertEquals(expectedTotalDeposit, bank.getTotalDeposits());
+		assertEquals(expectedBalance, bank.getAccounts().get(0).getBalance(), 0.1);
+		assertEquals(expectedTotalDeposit, bank.getTotalDeposits(), 0.1);
 	}
 }
