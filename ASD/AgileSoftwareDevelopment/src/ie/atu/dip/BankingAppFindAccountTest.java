@@ -5,15 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BankAccountFindAccountTest {
+public class BankingAppFindAccountTest {
 	private BankingApp bank;
-	private String mockName = "John Smith";
-	private double mockAmount = 1000.0d;
 
 	@BeforeEach
 	void setUp() {
 		bank = new BankingApp();
-		bank.addAccount(mockName, mockAmount);
+		bank.addAccount(TestUtils.MOCK_NAME, TestUtils.MOCK_AMOUNT);
 	}
 
 	@Test
