@@ -7,21 +7,16 @@ interface Prompter {
 	void prompt();
 }
 
-public class InputValidator {
-	private Scanner scanner;
-
-	InputValidator(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
+public abstract class InputValidator {
+	
 	// Validates numeric input from the user within a specific rage
-	public int validateNumericInput(Prompter showPrompt, int[] range) {
+	public static int validateNumericInput(Scanner scanner, Prompter showPrompt, int[] range) {
 		int input = 0;
 		boolean validInput = false;
 
 		while (!validInput) {
 			try {
-				input = Integer.parseInt(scanner.next());
+				input = Integer.parseInt(scanner.nextLine());
 
 				// Check if the input is within the specified range
 				if (input < range[0] || input > range[1]) {
@@ -40,13 +35,13 @@ public class InputValidator {
 	}
 	
 	// Validates numeric input from the user within a specific rage
-		public double validateNumericInput(Prompter showPrompt, double[] range) {
+		public static double validateNumericInput(Scanner scanner, Prompter showPrompt, double[] range) {
 			double input = 0.0d;
 			boolean validInput = false;
 
 			while (!validInput) {
 				try {
-					input = Double.parseDouble(scanner.next());
+					input = Double.parseDouble(scanner.nextLine());
 
 					// Check if the input is within the specified range
 					if (input < range[0] || input > range[1]) {
@@ -65,11 +60,12 @@ public class InputValidator {
 		}
 
 	// Validate name input from the user
-	public String validateNameInput(Prompter showPrompt) {
+	public static String validateNameInput(Scanner scanner, Prompter showPrompt) {
 		boolean validInput = false;
-		String input = scanner.next();
+		String input = "";
 
 		while (!validInput) {
+			input = scanner.nextLine();
 
 			// Check if input is valid (letters, spaces, hyphens, and apostrophes)
 			if (input.matches("[a-zA-Z\\s'-]+")) {

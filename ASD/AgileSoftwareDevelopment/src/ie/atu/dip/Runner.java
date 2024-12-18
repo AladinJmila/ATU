@@ -9,12 +9,10 @@ public class Runner {
 	private boolean isFirstRun = true;
 	private boolean keepRunning = true;
 	private Scanner scanner;
-	private InputValidator validator;
 	private BankingApp bank;
 	
 	Runner() {
 		scanner = new Scanner(System.in);
-		validator = new InputValidator(scanner);
 		bank = new BankingApp();	
 	}
 	
@@ -25,7 +23,7 @@ public class Runner {
 			// Define the valid range for the menu choices
 			int[] range = {1, 9};
 			// Validate and get suer input for menu choice
-			int choice = validator.validateNumericInput( () -> showMenu(), range);
+			int choice = InputValidator.validateNumericInput(scanner, () -> showMenu(), range);
 			
 			// Handle then user's menu choice
 			switch(choice) {
@@ -57,74 +55,98 @@ public class Runner {
 	
 	public void depositMoney() {
 		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the deposit amount");	
-		
-		boolean result = bank.deposit(customerName, amount);
-		if (result) {
-			out.println("Successfull deposit of " + amount);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+		double amount = getAmountInput("Please enter the deposit amount");
+
+		try {
+			boolean result = bank.deposit(customerName, amount);
+			if (result) {
+				out.println("Successfull deposit of " + amount);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
-	
+
 	public void withdrawMoney() {
 		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the amout to withdraw");	
-		
-		boolean result = bank.withdraw(customerName, amount);
-		if (result) {
-			out.println("Successfull withdrwal of " + amount);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+		double amount = getAmountInput("Please enter the amout to withdraw");
+
+		try {
+			boolean result = bank.withdraw(customerName, amount);
+			if (result) {
+				out.println("Successfull withdrwal of " + amount);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
 	
 	public void approveLoan() {
 		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the laon amount");	
-		
-		boolean result = bank.approveLoan(customerName, amount);
-		if (result) {
-			out.println("Successfull laon approval of " + amount);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+		double amount = getAmountInput("Please enter the laon amount");
+
+		try {
+			boolean result = bank.approveLoan(customerName, amount);
+			if (result) {
+				out.println("Successfull laon approval of " + amount);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
 	
 	public void repayLoan() {
 		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the amout to repay");	
-		
-		boolean result = bank.repayLoan(customerName, amount);
-		if (result) {
-			out.println("Successfull laon repayment of " + amount);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+		double amount = getAmountInput("Please enter the amout to repay");
+
+		try {
+			boolean result = bank.repayLoan(customerName, amount);
+			if (result) {
+				out.println("Successfull laon repayment of " + amount);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
 	
 	public void getAccountBalance() {
 		String customerName = getCustomerNameInput();
-		
-		Double balance = bank.getBalance(customerName);
-		if (balance != null) {
-			out.println("The account balance of " + customerName + " is " + balance);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+
+		try {
+			Double balance = bank.getBalance(customerName);
+			if (balance != null) {
+				out.println("The account balance of " + customerName + " is " + balance);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
 	
 	public void getLoanAmount() {
 		String customerName = getCustomerNameInput();
-		
-		Double amount = bank.getLoan(customerName);
-		if (amount != null) {
-			out.println("The account balance of " + customerName + " is " + amount);
-		} else {
-			out.println("Customer not found. Please try again or create an account.");
+
+		try {
+			Double amount = bank.getLoan(customerName);
+			if (amount != null) {
+				out.println("The account balance of " + customerName + " is " + amount);
+			} else {
+				out.println("Customer not found. Please try again or create an account.");
+			}
+		} catch (IllegalArgumentException e) {
+			out.println("Error: " + e.getMessage());
 		}
 	}
-	
+
 	public void getTotalDeposits() {
 		out.println("The total edposit is " + bank.getTotalDeposits());
 	}
@@ -132,7 +154,7 @@ public class Runner {
 	private String getCustomerNameInput() {
 		String prompt = "Please enter the customer's name: ";
 		out.print(prompt);
-		return validator.validateNameInput(() -> out.print(prompt));
+		return InputValidator.validateNameInput(scanner, () -> out.print(prompt));
 	}
 	
 	private double getAmountInput(String prompt) {
@@ -142,7 +164,7 @@ public class Runner {
 		String amountPrompt = prompt + " (" + formattedRange + "): ";
 	
 		out.print(amountPrompt);
-		return validator.validateNumericInput(() -> out.print(amountPrompt), range );	
+		return InputValidator.validateNumericInput(scanner, () -> out.print(amountPrompt), range );	
 	}
 	
 	public void showMenu() {
