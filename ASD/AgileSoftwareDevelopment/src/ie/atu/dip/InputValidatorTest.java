@@ -110,7 +110,7 @@ public class InputValidatorTest {
 
 	@Test
     public void testValidateNameInputWithInvalidInputThenValidInput() {
-		// Simulate user input: invalid input
+		// Simulate user input: invalid input followed by valid input
         String input = "$5fad@\nJohn Smith\n";
         scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
 

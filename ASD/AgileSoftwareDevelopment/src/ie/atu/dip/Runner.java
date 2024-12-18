@@ -42,8 +42,8 @@ public class Runner {
 	}
 	
 	public void addNewAccount() {
-		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the initial deposit amount");	
+		String customerName = getCustomerNameInput(scanner);
+		double amount = getAmountInput(scanner, "Please enter the initial deposit amount");	
 		
 	    try {
 	        bank.addAccount(customerName, amount);
@@ -54,8 +54,8 @@ public class Runner {
 	}
 	
 	public void depositMoney() {
-		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the deposit amount");
+		String customerName = getCustomerNameInput(scanner);
+		double amount = getAmountInput(scanner, "Please enter the deposit amount");
 
 		try {
 			boolean result = bank.deposit(customerName, amount);
@@ -70,8 +70,8 @@ public class Runner {
 	}
 
 	public void withdrawMoney() {
-		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the amout to withdraw");
+		String customerName = getCustomerNameInput(scanner);
+		double amount = getAmountInput(scanner, "Please enter the amout to withdraw");
 
 		try {
 			boolean result = bank.withdraw(customerName, amount);
@@ -86,8 +86,8 @@ public class Runner {
 	}
 	
 	public void approveLoan() {
-		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the laon amount");
+		String customerName = getCustomerNameInput(scanner);
+		double amount = getAmountInput(scanner, "Please enter the laon amount");
 
 		try {
 			boolean result = bank.approveLoan(customerName, amount);
@@ -102,8 +102,8 @@ public class Runner {
 	}
 	
 	public void repayLoan() {
-		String customerName = getCustomerNameInput();
-		double amount = getAmountInput("Please enter the amout to repay");
+		String customerName = getCustomerNameInput(scanner);
+		double amount = getAmountInput(scanner, "Please enter the amout to repay");
 
 		try {
 			boolean result = bank.repayLoan(customerName, amount);
@@ -118,7 +118,7 @@ public class Runner {
 	}
 	
 	public void getAccountBalance() {
-		String customerName = getCustomerNameInput();
+		String customerName = getCustomerNameInput(scanner);
 
 		try {
 			Double balance = bank.getBalance(customerName);
@@ -133,7 +133,7 @@ public class Runner {
 	}
 	
 	public void getLoanAmount() {
-		String customerName = getCustomerNameInput();
+		String customerName = getCustomerNameInput(scanner);
 
 		try {
 			Double amount = bank.getLoan(customerName);
@@ -151,13 +151,13 @@ public class Runner {
 		out.println("The total edposit is " + bank.getTotalDeposits());
 	}
 	
-	private String getCustomerNameInput() {
+	public String getCustomerNameInput(Scanner scanner) {
 		String prompt = "Please enter the customer's name: ";
 		out.print(prompt);
 		return InputValidator.validateNameInput(scanner, () -> out.print(prompt));
 	}
 	
-	private double getAmountInput(String prompt) {
+	public double getAmountInput(Scanner scanner, String prompt) {
 		double[] range = { 0.0d, 100_000_000.0d };
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 		String formattedRange = numberFormat.format(range[0]) + " - " + numberFormat.format(range[1]);
