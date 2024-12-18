@@ -1,7 +1,5 @@
 package ie.atu.dip;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
@@ -88,5 +86,55 @@ public class RunnerTest {
 		runner.withdrawMoney();
 		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
 	}
+	
+	@Test
+	void testApproveLoanWithExistingAccount() {
+		// Simulate user input: valid input
+		String input = "John Smith\n500\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.approveLoan();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 500.0);
+	}
+	
+	@Test
+	void testApproveLoanWithNoneExistingAccount() {
+		// Simulate user input: valid input
+		String input = "Jane Smith\n500\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.approveLoan();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	/*
+	@Test
+	void testRepayLoanWithExistingAccount() {
+		// Simulate user input: valid input
+		String input = "John Smith\n500\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.repayLoan();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1500.0, 1, 1500.0);
+	}
+	
+	@Test
+	void testRepayLoanWithNoneExistingAccount() {
+		// Simulate user input: valid input
+		String input = "Jane Smith\n500\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.repayLoan();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	*/
 
 }

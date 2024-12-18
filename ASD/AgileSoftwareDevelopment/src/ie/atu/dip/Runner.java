@@ -79,7 +79,7 @@ public class Runner {
 		if (result) {
 			out.println("Successfull withdrwal of " + amount);
 		} else {
-			out.println("Customer not found. Please try again or create an account.");
+			out.println("Customer not found or Invalid amount. Please try again or create an account.");
 		}
 
 	}
@@ -88,32 +88,26 @@ public class Runner {
 		String customerName = getCustomerNameInput(scanner);
 		double amount = getAmountInput(scanner, "Please enter the laon amount");
 
-		try {
-			boolean result = bank.approveLoan(customerName, amount);
-			if (result) {
-				out.println("Successfull laon approval of " + amount);
-			} else {
-				out.println("Customer not found. Please try again or create an account.");
-			}
-		} catch (IllegalArgumentException e) {
-			out.println("Error: " + e.getMessage());
+		boolean result = bank.approveLoan(customerName, amount);
+		if (result) {
+			out.println("Successfull laon approval of " + amount);
+		} else {
+			out.println("Customer not found or Invalid amount. Please try again or create an account.");
 		}
+
 	}
-	
+
 	public void repayLoan() {
 		String customerName = getCustomerNameInput(scanner);
 		double amount = getAmountInput(scanner, "Please enter the amout to repay");
 
-		try {
-			boolean result = bank.repayLoan(customerName, amount);
-			if (result) {
-				out.println("Successfull laon repayment of " + amount);
-			} else {
-				out.println("Customer not found. Please try again or create an account.");
-			}
-		} catch (IllegalArgumentException e) {
-			out.println("Error: " + e.getMessage());
+		boolean result = bank.repayLoan(customerName, amount);
+		if (result) {
+			out.println("Successfull laon repayment of " + amount);
+		} else {
+			out.println("Customer not found or Invalid amount. Please try again or create an account.");
 		}
+
 	}
 	
 	public void getAccountBalance() {
