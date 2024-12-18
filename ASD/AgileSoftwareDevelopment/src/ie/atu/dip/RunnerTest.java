@@ -32,6 +32,7 @@ public class RunnerTest {
 	@AfterEach
 	void setDown() {
 		runner = null;
+		bank = null;
 	}
 	
 	@Test
@@ -111,17 +112,24 @@ public class RunnerTest {
 		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
 	}
 	
-	/*
+
 	@Test
 	void testRepayLoanWithExistingAccount() {
 		// Simulate user input: valid input
-		String input = "John Smith\n500\n";
-		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-		
+		String input1 = "John Smith\n500\n";
+		scanner = new Scanner(new ByteArrayInputStream(input1.getBytes()));
+
 		runner = new Runner(scanner, bank);
-		
+
+		runner.approveLoan();
+		// Simulate user input: valid input
+		String input2 = "John Smith\n250\n";
+		scanner = new Scanner(new ByteArrayInputStream(input2.getBytes()));
+
+		runner = new Runner(scanner, bank);
+
 		runner.repayLoan();
-		TestUtils.assertAccountDetails(bank, "John Smith", 1500.0, 1, 1500.0);
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 750.0);
 	}
 	
 	@Test
@@ -135,6 +143,77 @@ public class RunnerTest {
 		runner.repayLoan();
 		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
 	}
-	*/
 
+	@Test
+	void testGetAccountBalanceWithExistingAccount() {
+		// Simulate user input: valid input
+		String input = "John Smith\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.getAccountBalance();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	@Test
+	void testGetAccountBalanceWithNoneExistingAccount() {
+		// Simulate user input: valid input
+		String input = "Jane Smith\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.getAccountBalance();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	
+	@Test
+	void testGetLoanAmountWithExistingAccount() {
+		// Simulate user input: valid input
+		String input = "John Smith\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.getLoanAmount();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	@Test
+	void testGetLoanAmountWithNoneExistingAccount() {
+		// Simulate user input: valid input
+		String input = "Jane Smith\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+		
+		runner = new Runner(scanner, bank);
+		
+		runner.getLoanAmount();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	@Test
+	void testGetTotalDeposits() {
+		runner.getTotalDeposits();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+	
+	@Test
+	void testShowMenu() {
+		runner.showMenu();
+		TestUtils.assertAccountDetails(bank, "John Smith", 1000.0, 1, 1000.0);
+	}
+
+	@Test
+	void testInit() {
+		bank = new BankingApp();
+
+		// Simulate user input: valid input
+		String input = "1\nJohn Smith\n1000\n2\nJohn Smith\n1000\n3\nJohn Smith\n1000\n4\nJohn Smith\n500\n5\nJohn Smith\n500\n6\nJohn Smith\n7\nJohn Smith\n8\n9\n";
+		scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+
+		runner = new Runner(scanner, bank);
+		runner.init();
+	}
 }
