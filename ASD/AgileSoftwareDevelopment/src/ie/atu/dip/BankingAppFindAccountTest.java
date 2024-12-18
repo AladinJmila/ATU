@@ -16,7 +16,7 @@ public class BankingAppFindAccountTest {
 
 	@Test
 	void testFindAccountWithExistingName() {
-		Account account = bank.findAccount("John Smith");
+		Account account = bank.findAccount(TestUtils.MOCK_NAME);
 		assertEquals("John Smith", account.getAccountHolder());
 	}
 

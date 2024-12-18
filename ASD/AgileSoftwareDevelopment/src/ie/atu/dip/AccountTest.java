@@ -8,22 +8,20 @@ import org.junit.jupiter.api.Test;
 
 class AccountTest {
 	private Account account;
-	private String mockName = "John Smith";
-	private double mockAmount = 1000.0d;
 	
 	@BeforeEach
 	public void setUp() {
-		account = new Account(mockName, mockAmount);
+		account = new Account(TestUtils.MOCK_NAME, TestUtils.MOCK_AMOUNT);
 	}
     
 	@Test
     void testGetAccountHolder() {
-		assertEquals("John Smith", account.getAccountHolder());
+		assertEquals(TestUtils.MOCK_NAME, account.getAccountHolder());
     }
 
 	@Test
     void testGetBalance() {
-        assertEquals(1000.0, account.getBalance(), 0.1);
+        assertEquals(TestUtils.MOCK_AMOUNT, account.getBalance(), 0.1);
     }
 
 	@Test
@@ -34,7 +32,7 @@ class AccountTest {
 	@Test
     void testDeposit() {
 	  account.deposit(500.0);
-      assertEquals(1500.0, account.getBalance(), 0.1);
+      assertEquals((TestUtils.MOCK_AMOUNT + 500), account.getBalance(), 0.1);
     }
 
 	@Test

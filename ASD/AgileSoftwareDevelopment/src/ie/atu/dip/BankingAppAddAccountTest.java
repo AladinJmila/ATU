@@ -36,7 +36,7 @@ public class BankingAppAddAccountTest {
 	@Test
 	void testAddAccountWithValidDeposit() {
 		bank.addAccount(TestUtils.MOCK_NAME, TestUtils.MOCK_AMOUNT);
-		TestUtils.assertAccountDetails(bank, "John Smith", TestUtils.MOCK_AMOUNT, 1, TestUtils.MOCK_AMOUNT);
+		TestUtils.assertAccountDetails(bank, TestUtils.MOCK_NAME, TestUtils.MOCK_AMOUNT, 1, TestUtils.MOCK_AMOUNT);
 	}
 
 	@Test

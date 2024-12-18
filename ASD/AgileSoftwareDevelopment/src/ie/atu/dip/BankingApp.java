@@ -134,9 +134,15 @@ public class BankingApp {
 	 * @return True if the repayment is successful, otherwise false.
 	 */
 	public boolean repayLoan(String accountHolder, double amount) {
+		if (accountHolder == null || accountHolder.trim().isEmpty())
+			throw new IllegalArgumentException("Account holder name cannot be null or empty");
+
+		if (amount < 0)
+			throw new IllegalArgumentException("Amount cannot be negative");
+		
 		Account account = findAccount(accountHolder);
-		if (account == null || amount <= 0)
-			return false;
+		if (account == null || amount <= 0) return false;
+		
 		if (account.repayLoan(amount)) {
 			totalDeposits += amount;
 			return true;
@@ -151,6 +157,9 @@ public class BankingApp {
 	 * @return The balance if the account exists, otherwise null.
 	 */
 	public Double getBalance(String accountHolder) {
+		if (accountHolder == null || accountHolder.trim().isEmpty())
+			throw new IllegalArgumentException("Account holder name cannot be null or empty");
+		
 		Account account = findAccount(accountHolder);
 		return account != null ? account.getBalance() : null;
 	}
@@ -162,6 +171,9 @@ public class BankingApp {
 	 * @return The loan amount if the account exists, otherwise null.
 	 */
 	public Double getLoan(String accountHolder) {
+		if (accountHolder == null || accountHolder.trim().isEmpty())
+			throw new IllegalArgumentException("Account holder name cannot be null or empty");
+		
 		Account account = findAccount(accountHolder);
 		return account != null ? account.getLoan() : null;
 	}
