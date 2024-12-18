@@ -15,6 +15,11 @@ public class Runner {
 		scanner = new Scanner(System.in);
 		bank = new BankingApp();	
 	}
+
+	Runner(Scanner scanner, BankingApp bank) {
+		this.scanner = scanner;
+		this.bank = bank;	
+	}
 	
 	public void init() {
 		while(keepRunning) {
@@ -43,46 +48,40 @@ public class Runner {
 	
 	public void addNewAccount() {
 		String customerName = getCustomerNameInput(scanner);
-		double amount = getAmountInput(scanner, "Please enter the initial deposit amount");	
+		double amount = getAmountInput(scanner, "Please enter the initial deposit amount");
 		
-	    try {
-	        bank.addAccount(customerName, amount);
-	        out.println("Account successfully created for " + customerName + " with an initial deposit of " + amount);
-	    } catch (IllegalArgumentException e) {
-	        out.println("Error: " + e.getMessage());
-	    }
+		// Error handling is not required, InputValidator is handling safe guarding
+		bank.addAccount(customerName, amount);
+		out.println("Account successfully created for " + customerName + " with an initial deposit of " + amount);
+
 	}
 	
 	public void depositMoney() {
 		String customerName = getCustomerNameInput(scanner);
 		double amount = getAmountInput(scanner, "Please enter the deposit amount");
 
-		try {
-			boolean result = bank.deposit(customerName, amount);
-			if (result) {
-				out.println("Successfull deposit of " + amount);
-			} else {
-				out.println("Customer not found. Please try again or create an account.");
-			}
-		} catch (IllegalArgumentException e) {
-			out.println("Error: " + e.getMessage());
+		// Error handling is not required, InputValidator is handling safe guarding
+		boolean result = bank.deposit(customerName, amount);
+		if (result) {
+			out.println("Successfull deposit of " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
 		}
+
 	}
 
 	public void withdrawMoney() {
 		String customerName = getCustomerNameInput(scanner);
 		double amount = getAmountInput(scanner, "Please enter the amout to withdraw");
 
-		try {
-			boolean result = bank.withdraw(customerName, amount);
-			if (result) {
-				out.println("Successfull withdrwal of " + amount);
-			} else {
-				out.println("Customer not found. Please try again or create an account.");
-			}
-		} catch (IllegalArgumentException e) {
-			out.println("Error: " + e.getMessage());
+		// Error handling is not required, InputValidator is handling safe guarding
+		boolean result = bank.withdraw(customerName, amount);
+		if (result) {
+			out.println("Successfull withdrwal of " + amount);
+		} else {
+			out.println("Customer not found. Please try again or create an account.");
 		}
+
 	}
 	
 	public void approveLoan() {
