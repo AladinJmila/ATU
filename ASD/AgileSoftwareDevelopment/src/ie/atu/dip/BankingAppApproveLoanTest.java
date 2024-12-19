@@ -2,11 +2,19 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class BankingAppApproveLoanTest {
 	private BankingApp bank;
+	
+	@BeforeAll
+    static void approveLoanTestsStarted() {
+        System.out.println("Approve loan tests started.");
+    }
 
 	@BeforeEach
 	void setUp() {
@@ -64,4 +72,14 @@ public class BankingAppApproveLoanTest {
 				() -> bank.approveLoan(TestUtils.MOCK_NAME, -500.0));
 		assertEquals(TestUtils.INVALID_DEPOSIT_ERROR_MESSAGE, exception.getMessage());
 	}
+	
+	@AfterEach
+	void reset() {
+		bank = null;
+	}
+	
+	@AfterAll
+    static void approveLoanTestsEnded() {
+        System.out.println("Approve loan tests ended.");
+    }
 }

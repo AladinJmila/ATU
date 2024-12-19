@@ -2,11 +2,19 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BankingAppWithdrawTest {
 	private BankingApp bank;
+	
+	@BeforeAll
+    static void withdrawTestsStarted() {
+        System.out.println("Withdraw an amount tests started.");
+    }
 
 	@BeforeEach
 	void setUp() {
@@ -70,5 +78,16 @@ public class BankingAppWithdrawTest {
 				() -> bank.withdraw(TestUtils.MOCK_NAME, -500.0));
 		assertEquals(TestUtils.INVALID_DEPOSIT_ERROR_MESSAGE, exception.getMessage());
 	}
+	
+	@AfterEach
+	void reset() {
+		bank = null;
+	}
+	
+	@AfterAll
+	static void withdrawTestsEnded() {
+        System.out.println("Withdraw an amount tests ended.");
+    }
+	
 
 }

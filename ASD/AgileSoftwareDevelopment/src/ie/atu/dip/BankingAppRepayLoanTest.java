@@ -2,12 +2,19 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BankingAppRepayLoanTest {
 	private BankingApp bank;
+	
+	@BeforeAll
+    static void repalyLoanTestsStarted() {
+        System.out.println("Repay loan tests started.");
+    }
 
 	@BeforeEach
 	void setUp() {
@@ -74,4 +81,9 @@ public class BankingAppRepayLoanTest {
 	void reset() {
 		bank = null;
 	}
+	
+	@AfterAll
+    static void repalyLoanTestsEnded() {
+        System.out.println("Repay loan tests ended.");
+    }
 }

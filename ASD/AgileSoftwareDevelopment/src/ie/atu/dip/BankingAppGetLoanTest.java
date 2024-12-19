@@ -2,11 +2,20 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class BankingAppGetLoanTest {
 	private BankingApp bank;
+	
+	@BeforeAll
+    static void getLoanTestsStarted() {
+        System.out.println("Get loan tests started.");
+    }
 
 	@BeforeEach
 	void setUp() {
@@ -36,4 +45,14 @@ public class BankingAppGetLoanTest {
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> bank.getLoan("  "));
 		assertEquals(TestUtils.INVALID_NAME_ERROR_MESSAGE, exception.getMessage());
 	}
+	
+	@AfterEach
+	void reset() {
+		bank = null;
+	}
+	
+	@AfterAll
+    static void getLoanTestsEnded() {
+        System.out.println("Get loan tests ended.");
+    }
 }

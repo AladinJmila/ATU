@@ -3,19 +3,26 @@ package ie.atu.dip;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * Edge cases have already been tested in BankingApp & InputValidator
- * This is purely to increase test coverage
+ * This is purely to increase test coverage, so I'm only testing the happy path
  */
 
 public class RunnerTest {
 	private Runner runner;
 	private Scanner scanner;
 	private BankingApp bank;
+	
+	@BeforeAll
+	static void runnerTestsStarted() {
+		System.out.println("Runner tests started.");
+	}
 
 	@BeforeEach
 	void setUp() {
@@ -27,12 +34,6 @@ public class RunnerTest {
 
 		runner = new Runner(scanner, bank);
 		runner.addNewAccount();
-	}
-
-	@AfterEach
-	void setDown() {
-		runner = null;
-		bank = null;
 	}
 	
 	@Test
@@ -215,5 +216,17 @@ public class RunnerTest {
 
 		runner = new Runner(scanner, bank);
 		runner.init();
+	}
+	
+	@AfterEach
+	void reset() {
+		runner = null;
+		scanner = null;
+		bank = null;
+	}
+	
+	@AfterAll
+	static void runnerTestsEnded() {
+		System.out.println("Runner tests ended.");
 	}
 }

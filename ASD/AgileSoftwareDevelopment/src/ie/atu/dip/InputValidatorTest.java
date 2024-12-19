@@ -5,11 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class InputValidatorTest {
 	private Scanner scanner;
+	
+	@BeforeAll
+	static void inputValidatorTestsStarted() {
+		System.out.println("Input validator tests started.");
+	}
 	
 	@Test 
 	void testValidateNumericInputWithValidInputInteger() {
@@ -119,5 +126,14 @@ public class InputValidatorTest {
         assertEquals("John Smith", result);
     }
    
+	@AfterEach
+	void reset() {
+		scanner = null;
+	}
+
+	@AfterAll
+	static void inputValidatorTestsEnded() {
+		System.out.println("Input validator tests ended.");
+	}
 
 }

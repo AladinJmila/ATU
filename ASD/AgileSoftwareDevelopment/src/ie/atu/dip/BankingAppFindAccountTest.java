@@ -2,11 +2,19 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BankingAppFindAccountTest {
 	private BankingApp bank;
+	
+	@BeforeAll
+    static void findAccountTestsStarted() {
+        System.out.println("Find account tests started.");
+    }
 
 	@BeforeEach
 	void setUp() {
@@ -31,4 +39,14 @@ public class BankingAppFindAccountTest {
 		Account account = bank.findAccount(null);
 		assertNull(account);
 	}
+	
+	@AfterEach
+	void reset() {
+		bank = null;
+	}
+	
+	@AfterAll
+    static void findAccountTestsEnded() {
+        System.out.println("Find account tests ended.");
+    }
 }

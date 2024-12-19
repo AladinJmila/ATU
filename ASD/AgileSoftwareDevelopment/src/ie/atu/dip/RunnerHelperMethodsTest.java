@@ -6,18 +6,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
  * Edge cases have already been tested in BankingApp & InputValidator
- * This is purely to increase test coverage
+ * This is purely to increase test coverage, so I'm only testing the happy path
  */
 
 public class RunnerHelperMethodsTest {
 	private Runner runner;
 	private Scanner scanner;
 
-
+	@BeforeAll
+	static void RunnerHelperMethodsTestsStarted() {
+		System.out.println("Runner helper methods tests started.");
+	}
 
 	@Test
 	void testGetCustomerNameInput() {
@@ -41,5 +47,16 @@ public class RunnerHelperMethodsTest {
 		
 		double result = runner.getAmountInput(scanner, "Please try again");
 		assertEquals(1000.0, result);
+	}
+	
+	@AfterEach
+	void reset() {
+		runner = null;
+		scanner = null;
+	}
+
+	@AfterAll
+	static void RunnerHelperMethodsTestsEnded() {
+		System.out.println("Runner helper methods tests ended.");
 	}
 }
