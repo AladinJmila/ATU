@@ -1,9 +1,14 @@
 package ie.atu.sw;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -12,14 +17,16 @@ public class Runner {
 	public static void main(String[] args) throws Exception {
 		String embeddingsFile = "./embeddings.txt";
 		String google1000File = "./google-1000.txt";
+		String inputFile = "./input.txt";
 		ConcurrentHashMap<String, double[]> embeddingsMap = new ConcurrentHashMap<>();
-		ConcurrentHashMap<String, double[]> google1000Map = new ConcurrentHashMap<>();
+		ConcurrentSkipListMap<String, double[]> google1000Map = new ConcurrentSkipListMap<>();
+		CosineDistance cosineDistance = new CosineDistance();
 		// private String outputFile = "./out.txt";
 
 		try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-			Files.lines(Paths.get(embeddingsFile)).forEach(text -> {
+			Files.lines(Paths.get(embeddingsFile)).forEach(line -> {
 				pool.execute(() -> {
-					var elements = text.split(",", 2);
+					var elements = line.split(",", 2);
 					var embeddingsText = elements[1].split(",");
 					var embeddings = new double[embeddingsText.length];
 
@@ -37,11 +44,65 @@ public class Runner {
 		}
 
 		try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-
 			Files.lines(Paths.get(google1000File)).forEach(word -> {
 				pool.execute(() -> {
 					google1000Map.put(word, embeddingsMap.get(word));
 				});
+			});
+
+			pool.shutdown();
+			pool.awaitTermination(1, TimeUnit.MINUTES);
+		}
+
+		List<String> google1000Words = google1000Map.keySet().stream().toList();
+		List<double[]> google1000Weights = google1000Map.values().stream().toList();
+
+		try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+			Files.lines(Paths.get(inputFile)).forEach(line -> {
+				pool.execute(() -> {
+					var words = line.split(" ");
+					StringBuilder sb = new StringBuilder();
+					TreeMap<Double, String> results = new TreeMap<>();
+
+					for (int i = 0; i < words.length; i++) {
+						if (google1000Map.containsKey(words[i].toLowerCase())) {
+							// System.out.println(words[i] + " is in google 1000 -> return word as is");
+							sb.append(words[i] + " ");
+							continue;
+						}
+						if (!embeddingsMap.containsKey(words[i].toLowerCase())) {
+							// System.out.println(words[i] + " -> is not is embeddings -> return word as
+							// is");
+							sb.append(words[i] + " ");
+							continue;
+						}
+
+						System.out.println(words[i]);
+						for (int j = 0; j < google1000Map.size(); j++) {
+							double distance = cosineDistance.getDistance(embeddingsMap.get(words[i]),
+									google1000Weights.get(j));
+							if (distance > 0.9) {
+								results.put(distance, google1000Words.get(j));
+							}
+						}
+
+						if (results.size() > 0) {
+							// System.out.println(
+							// words[i] + " -> has a good match -> return " +
+							// results.get(results.lastKey()));
+							sb.append(results.get(results.lastKey()) + " ");
+						} else {
+							// System.out.println(words[i] + " -> does not have a good match -> return word
+							// as is");
+							sb.append(words[i] + " ");
+						}
+						System.out.println(results.keySet());
+						System.out.println(results.values());
+					}
+
+					System.out.println(sb.toString());
+				});
+				System.out.println(line);
 			});
 		}
 
