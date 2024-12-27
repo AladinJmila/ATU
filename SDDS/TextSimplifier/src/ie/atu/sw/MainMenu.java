@@ -125,20 +125,6 @@ public class MainMenu {
 		var google1000Map = new Google1000Mapper().map(google1000FilePath, embeddingsMap);
 
 		new TextSimplifier(inputFilePath, embeddingsMap, google1000Map).simplifyText();
-
-		// Get search terms from the user
-		// getUserInput();
-
-		// if (!isAlreadyInvoked) {
-		// // Perform the search and plot the results
-		// String[][] result = searcher.search(searchTerms, inputFile,
-		// optionsMenu.getTotalWordsToOutput(),
-		// optionsMenu.getSearchMode(), optionsMenu.getReturnUnmachted());
-		// plotter.plot(result, optionsMenu.getSearchMode(),
-		// optionsMenu.getTotalWordsToOutput());
-
-		// isAlreadyInvoked = true;
-		// }
 	}
 
 	// Displays and handles the options configuration menu.
