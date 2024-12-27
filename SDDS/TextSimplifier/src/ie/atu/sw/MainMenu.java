@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 
 public class MainMenu {
-	private String embeddingsFilePath;
-	private String google1000FilePath;
-	private String inputFilePath;
+	private String embeddingsFilePath = "./embeddings.txt";
+	private String google1000FilePath = "./google-1000.txt";
+	private String inputFilePath = "./input.txt";
 	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private ConsoleLogger log;
@@ -36,7 +36,7 @@ public class MainMenu {
 	}
 
 	// Initializes and runs the main menu loop.
-	public void init() throws IOException {
+	public void init() throws Exception {
 		while (keepRunning) {
 			menuHandler.showMainMenu();
 
@@ -110,7 +110,7 @@ public class MainMenu {
 	}
 
 	// Handles the user's search input and performs the search operation.
-	private void handleTextSimplification() throws IOException {
+	private void handleTextSimplification() throws Exception {
 		if (embeddingsFilePath == null) {
 			log.error("Missing Embedding file.");
 			setEmbeddingsFilePath();
@@ -120,6 +120,11 @@ public class MainMenu {
 		}
 
 		inputFilePath = setInputFilePath("Enter input file path");
+
+		var embeddingsMap = new EmbeddingsMapper().map(embeddingsFilePath);
+		var google1000Map = new Google1000Mapper().map(google1000FilePath, embeddingsMap);
+
+		new TextSimplifier(inputFilePath, embeddingsMap, google1000Map).simplifyText();
 
 		// Get search terms from the user
 		// getUserInput();
