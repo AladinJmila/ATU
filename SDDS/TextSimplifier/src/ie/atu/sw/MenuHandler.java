@@ -27,12 +27,12 @@ public class MenuHandler {
 			out.print(ConsoleColour.YELLOW_BOLD);
 			out.println("    *");
 			out.println("*                                                          *");
-			out.print("*          ");
+			out.print("*             ");
 			out.print(ConsoleColour.CYAN_UNDERLINED);
 			out.print("Virtual Threaded Text Simplifier");
 			out.print(ConsoleColour.RESET);
 			out.print(ConsoleColour.YELLOW_BOLD);
-			out.println("          *");
+			out.println("             *");
 			out.println("*                                                          *");
 			out.println("************************************************************");
 		}
@@ -42,9 +42,9 @@ public class MenuHandler {
 		out.println("| 1 | Specify Embeddings File");
 		out.println("| 2 | Specify Google 1000 File");
 		out.println("| 3 | Specify an Output File (default: ./out.txt)");
-		out.println("| 3 | Execute, Analyse and Report");
-		out.println("| 4 | Configure Options");
-		out.println("| 5 | Quit");
+		out.println("| 4 | Execute, Analyse and Report");
+		out.println("| 5 | Configure Options");
+		out.println("| 6 | Quit");
 		out.println("---------------------------------------------------");
 		log.cyanBoldTitle("Select Option [1-5]> ");
 

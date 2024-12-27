@@ -10,7 +10,9 @@ import java.util.Scanner;
  */
 
 public class MainMenu {
-	private String inputFile;
+	private String embeddingsFilePath;
+	private String google1000FilePath;
+	private String inputFilePath;
 	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private ConsoleLogger log;
@@ -39,18 +41,19 @@ public class MainMenu {
 			menuHandler.showMainMenu();
 
 			// Define the valid range for menu choices
-			int[] range = { 1, 5 };
+			int[] range = { 1, 6 };
 			// Validate and get user input for menu choice
 			int choice = validator.validateNumericInput(
 					() -> menuHandler.showMainMenu(), range);
 
 			// Handle the user's menu choice
 			switch (choice) {
-				case 1 -> setInputFilePath();
-				case 2 -> setOutputFilePath();
-				case 3 -> handleSearchInput();
-				case 4 -> configureOptions();
-				case 5 -> keepRunning = false;
+				case 1 -> setEmbeddingsFilePath();
+				case 2 -> setGoogle1000FilePath();
+				case 3 -> setOutputFilePath();
+				case 4 -> handleTextSimplification();
+				case 5 -> configureOptions();
+				case 6 -> keepRunning = false;
 				default -> log.error(
 						"Invalid Selection, choose a number from " + range[0] + " to " + range[1] + ".");
 
@@ -58,35 +61,39 @@ public class MainMenu {
 		}
 	}
 
-	// Prompts the user to set the input file path.
-	private void setInputFilePath() {
-		log.cyanBoldTitle("Enter input file path ( Example: ./path/fileName.txt): ", true);
-		inputFile = scanner.next();
-
-		// Check if the provided file path exists
-		if (inputFile == null) {
-			log.error("Missing Embedding file.");
-			handleMissingInputFile();
-		} else if (!fileExists(inputFile)) {
-			log.error("Invalid path.");
-			handleMissingInputFile();
-		} else {
-			log.info("Input file path succesfully added");
-		}
+	private void setEmbeddingsFilePath() {
+		embeddingsFilePath = setInputFilePath("Enter embeddings file path");
 	}
 
-	// Repeatedly prompts the user to provide a valid input file path until the file
-	// exists
-	private void handleMissingInputFile() {
-		while (true) {
-			// Prompt the user to set the input file path
-			setInputFilePath();
-			if (fileExists(inputFile)) {
-				break; // Exit the loop if the file exists
-			} else {
-				log.error("The file seems to be missing. Please try again.");
+	private void setGoogle1000FilePath() {
+		google1000FilePath = setInputFilePath("Enter Google 1000 file path");
+	}
+
+	// Prompts the user to set the input file path.
+	private String setInputFilePath(String prompt) {
+		String filePath = "";
+		boolean isValidFile = false;
+
+		while (!isValidFile) {
+			log.cyanBoldTitle(prompt + " (Example: ./path/fileName.txt): ", true);
+			filePath = scanner.next();
+
+			// Check if the provided file path exists
+			if (filePath == null) {
+				log.error("Missing Embedding file.");
+				continue;
 			}
+
+			if (!fileExists(filePath)) {
+				log.error("Invalid path.");
+				continue;
+			}
+
+			isValidFile = true;
+			log.info("Input file path succesfully added");
+
 		}
+		return filePath;
 	}
 
 	// Checks if the specified file exists
@@ -103,19 +110,19 @@ public class MainMenu {
 	}
 
 	// Handles the user's search input and performs the search operation.
-	private void handleSearchInput() throws IOException {
-		if (inputFile == null) {
+	private void handleTextSimplification() throws IOException {
+		if (embeddingsFilePath == null) {
 			log.error("Missing Embedding file.");
-			handleMissingInputFile();
-		} else if (!fileExists(inputFile)) {
-			log.error("Invalid path.");
-			handleMissingInputFile();
+			setEmbeddingsFilePath();
+		} else if (google1000FilePath == null) {
+			log.error("Missing Google 1000 file.");
+			setGoogle1000FilePath();
 		}
 
-		log.cyanBoldTitle("Enter the search term or a phrase of 10 words maximum: ", true);
+		inputFilePath = setInputFilePath("Enter input file path");
 
 		// Get search terms from the user
-		getUserInput();
+		// getUserInput();
 
 		// if (!isAlreadyInvoked) {
 		// // Perform the search and plot the results
