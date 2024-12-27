@@ -3,13 +3,10 @@ package ie.atu.sw;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -19,42 +16,12 @@ public class Runner {
 		String embeddingsFile = "./embeddings.txt";
 		String google1000File = "./google-1000.txt";
 		String inputFile = "./input.txt";
-		ConcurrentHashMap<String, double[]> embeddingsMap = new ConcurrentHashMap<>();
-		ConcurrentSkipListMap<String, double[]> google1000Map = new ConcurrentSkipListMap<>();
 		CosineDistance cosineDistance = new CosineDistance();
 		QuickSort quickSort = new QuickSort();
 		// private String outputFile = "./out.txt";
 
-		try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-			Files.lines(Paths.get(embeddingsFile)).forEach(line -> {
-				pool.execute(() -> {
-					var elements = line.split(",", 2);
-					var embeddingsText = elements[1].split(",");
-					var embeddings = new double[embeddingsText.length];
-
-					for (int i = 0; i < embeddings.length; i++) {
-
-						embeddings[i] = Double.parseDouble(embeddingsText[i]);
-					}
-
-					embeddingsMap.put(elements[0], embeddings);
-				});
-			});
-
-			pool.shutdown();
-			pool.awaitTermination(1, TimeUnit.MINUTES);
-		}
-
-		try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-			Files.lines(Paths.get(google1000File)).forEach(word -> {
-				pool.execute(() -> {
-					google1000Map.put(word, embeddingsMap.get(word));
-				});
-			});
-
-			pool.shutdown();
-			pool.awaitTermination(1, TimeUnit.MINUTES);
-		}
+		var embeddingsMap = new EmbeddingsMapper().map(embeddingsFile);
+		var google1000Map = new Google1000Mapper().map(google1000File, embeddingsMap);
 
 		var entries = google1000Map.entrySet().stream().toList();
 
@@ -67,7 +34,7 @@ public class Runner {
 
 					for (int i = 0; i < words.length; i++) {
 						// Array to hold the word index and the cosine distance
-						// double[][] result = new double[FileProcessor.WORDS_COUNT - 1][2];
+
 						if (google1000Map.containsKey(words[i].toLowerCase())) {
 							// System.out.println(words[i] + " is in google 1000 -> return word as is");
 							sb.append(words[i] + " ");
