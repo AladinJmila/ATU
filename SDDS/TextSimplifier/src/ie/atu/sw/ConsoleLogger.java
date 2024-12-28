@@ -7,7 +7,6 @@ import static java.lang.System.out;
  */
 
 public abstract class ConsoleLogger {
-
 	public static final String TAB = "   ";
 
 	public static void cyanBoldTitle(String message, boolean newLine) {

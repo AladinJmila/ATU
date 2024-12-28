@@ -49,12 +49,8 @@ public class MenuHandler {
 	public void showOptionsMenu() {
 		ConsoleLogger.cyanBoldTitle(tab + " Configure Options Menu: ", true);
 		out.println(tab + "-----------------------------------------------------------------------------------------");
-		out.println(tab + "| 1 | Specify the number of results to return (default: 10)");
-		out.println(tab + "| 2 | Specify the maximum number of words to process at once (default: 10)");
-		out.println(tab + "| 3 | Choose search mode: whole sentence (A, default) or individual words (B)");
-		out.println(tab + "| 4 | Return unmatched results (yes/no) - (default: yes)");
-		out.println(tab + "|   | -->  Selecting \"no\" is recommended if you chose individual words (option B) above");
-		out.println(tab + "| 5 | Return to the Main Menu");
+		out.println(tab + "| 1 | Specify the tolerance level");
+		out.println(tab + "| 2 | Return to the Main Menu");
 		out.println(tab + "-----------------------------------------------------------------------------------------");
 		ConsoleLogger.cyanBoldTitle(tab + "Select Option [1-5]> ");
 	}

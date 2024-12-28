@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class EmbeddingsMapper implements SimpleMapper {
+public class EmbeddingsMapper implements Mappator {
     @Override
     public ConcurrentHashMap<String, double[]> map(String filePath) throws Exception {
         ConcurrentHashMap<String, double[]> embeddingsMap = new ConcurrentHashMap<>();

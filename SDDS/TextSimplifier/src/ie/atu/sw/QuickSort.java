@@ -2,7 +2,8 @@ package ie.atu.sw;
 
 import java.util.List;
 
-/*
+/**
+ * 
  * This implementation was informed by material from codewithmosh.com
  */
 
@@ -13,6 +14,7 @@ public class QuickSort {
 	}
 
 	// Method that adds the partition range needed for recursive call
+
 	private void sort(List<double[]> list, int start, int end) {
 		// Base case: if there is nothing left to partition, return
 		if (start >= end)

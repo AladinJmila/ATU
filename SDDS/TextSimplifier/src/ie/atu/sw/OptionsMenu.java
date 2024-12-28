@@ -8,17 +8,15 @@ import java.util.Scanner;
 
 public class OptionsMenu {
 	private MenuHandler menuHandler;
-	private InputValidator validator;
+	private IntegersValidator intValidator;
+	private DoublesValidator doubleValidator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
-	private int totalWordsToOutput = 10;
-	private int wordsToProcessCount = 10;
-	private String searchMode = "whole sentence";
-	private boolean returnUnmachted = true;
+	private double toleranceLevel = 0.7;
 
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
-		validator = new InputValidator(scanner);
+		intValidator = new IntegersValidator(scanner);
 	}
 
 	// Initializes and runs the options menu loop.
@@ -27,85 +25,32 @@ public class OptionsMenu {
 		while (keepRunning) {
 			menuHandler.showOptionsMenu();
 			// Define the valid range for menu choices
-			int[] range = { 1, 5 };
+			Integer[] range = { 1, 5 };
 			// Validate and get user input for menu choice
-			int choice = validator.validateNumericInput(
-					() -> menuHandler.showOptionsMenu(), range, tab);
+			int choice = intValidator.validate(() -> menuHandler.showOptionsMenu(), range, tab);
 
 			// Handle the user's menu choice
 			switch (choice) {
-				case 1 -> setTotalWordsToOutput();
-				case 2 -> setWordsToProcessCount();
-				case 3 -> setSearchMode();
-				case 4 -> setReturnUnmached();
-				case 5 -> keepRunning = false;
+				case 1 -> setToleranceLevel();
+				case 2 -> keepRunning = false;
 				default -> ConsoleLogger.error(
 						tab, "Invalid Selection, choose a number from " + range[0] + " to " + range[1] + ".");
 			}
 		}
 	}
 
-	public int getTotalWordsToOutput() {
-		return totalWordsToOutput;
+	public double getToleranceLevel() {
+		return toleranceLevel;
 	}
 
-	private void setTotalWordsToOutput() {
-		// Define the valid range for the number of words to output
-		int[] range = { 1, 100 };
+	private void setToleranceLevel() {
+		// Define the valid range for the number of tolerance level
+		Double[] range = { 0.0, 1.0 };
 		String prompt = tab + "Enter a number between " + range[0] + " and " + range[1] + ": ";
 		ConsoleLogger.cyanBoldTitle(prompt);
-		// Validate and set the total words to output
-		totalWordsToOutput = validator.validateNumericInput(
-				() -> ConsoleLogger.cyanBoldTitle(prompt), range, tab);
+		// Validate and set the tolerance level
+		toleranceLevel = doubleValidator.validate(() -> ConsoleLogger.cyanBoldTitle(prompt), range, tab);
 
-		ConsoleLogger.info(tab, "Number of results is updated successfully: " + totalWordsToOutput);
-	}
-
-	public int getWordsToProcessCount() {
-		return wordsToProcessCount;
-	}
-
-	public void setWordsToProcessCount() {
-		// Define the valid range for the number of words to process
-		int[] range = { 1, 20 };
-		String prompt = tab + "Enter a number between " + range[0] + " and " + range[1] + ": ";
-		ConsoleLogger.cyanBoldTitle(prompt);
-		// Validate and set the words to process count
-		wordsToProcessCount = validator.validateNumericInput(
-				() -> ConsoleLogger.cyanBoldTitle(prompt), range, tab);
-
-		ConsoleLogger.info(tab, "Number of words is updated successfully: " + wordsToProcessCount);
-	}
-
-	public String getSearchMode() {
-		return searchMode;
-	}
-
-	private void setSearchMode() {
-		// Define the valid options for search mode
-		String[] options = { "A", "B" };
-		String prompt = tab + "Enter " + options[0] + " or " + options[1] + ": ";
-		ConsoleLogger.cyanBoldTitle(prompt);
-		// Validate and set the search mode
-		char input = validator.validateOptionInput(
-				() -> ConsoleLogger.cyanBoldTitle(prompt), options, tab).charAt(0);
-		searchMode = input == 'A' ? "whole sentence" : "individual words";
-		ConsoleLogger.info(tab, "You preference is updated successfully: " + input);
-	}
-
-	public boolean getReturnUnmachted() {
-		return returnUnmachted;
-	}
-
-	private void setReturnUnmached() {
-		// Define the valid options for returning unmatched words
-		String[] options = { "yes", "no" };
-		String prompt = tab + "Enter \"" + options[0] + "\" or \"" + options[1] + "\": ";
-		ConsoleLogger.cyanBoldTitle(prompt);
-		// Validate and set the return unmatched flag
-		String input = validator.validateOptionInput(
-				() -> ConsoleLogger.cyanBoldTitle(prompt), options, tab);
-		returnUnmachted = input.equals("YES") ? true : false;
-		ConsoleLogger.info(tab, "You preference is updated successfully: " + input);
+		ConsoleLogger.info(tab, "Number of results is updated successfully: " + toleranceLevel);
 	}
 }

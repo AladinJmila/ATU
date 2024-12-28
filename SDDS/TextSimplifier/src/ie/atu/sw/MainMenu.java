@@ -14,7 +14,7 @@ public class MainMenu {
 	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private OptionsMenu optionsMenu;
-	private InputValidator validator;
+	private IntegersValidator integersValidator;
 	private boolean keepRunning = true;
 	public static String outputFile = "out.txt";
 
@@ -23,7 +23,7 @@ public class MainMenu {
 		scanner = new Scanner(System.in);
 		menuHandler = new MenuHandler();
 		optionsMenu = new OptionsMenu(scanner);
-		validator = new InputValidator(scanner);
+		integersValidator = new IntegersValidator(scanner);
 	}
 
 	// Initializes and runs the main menu loop.
@@ -32,10 +32,9 @@ public class MainMenu {
 			menuHandler.showMainMenu();
 
 			// Define the valid range for menu choices
-			int[] range = { 1, 6 };
+			Integer[] range = { 1, 6 };
 			// Validate and get user input for menu choice
-			int choice = validator.validateNumericInput(
-					() -> menuHandler.showMainMenu(), range);
+			int choice = integersValidator.validate(() -> menuHandler.showMainMenu(), range);
 
 			// Handle the user's menu choice
 			switch (choice) {
@@ -60,6 +59,20 @@ public class MainMenu {
 		google1000FilePath = FilePathLoader.loadPath(scanner, "Enter Google 1000 file path");
 	}
 
+	private String getInputFilePath() {
+		if (embeddingsFilePath == null) {
+			ConsoleLogger.error("Missing Embedding file.");
+			setEmbeddingsFilePath();
+		}
+
+		if (google1000FilePath == null) {
+			ConsoleLogger.error("Missing Google 1000 file.");
+			setGoogle1000FilePath();
+		}
+
+		return FilePathLoader.loadPath(scanner, "Enter input file path");
+	}
+
 	// Prompts the user to set the output file path.
 	private void setOutputFilePath() {
 		ConsoleLogger.cyanBoldTitle("Enter output file path: ", true);
@@ -69,15 +82,7 @@ public class MainMenu {
 
 	// Handles the user's search input and performs the search operation.
 	private void handleTextSimplification() throws Exception {
-		if (embeddingsFilePath == null) {
-			ConsoleLogger.error("Missing Embedding file.");
-			setEmbeddingsFilePath();
-		} else if (google1000FilePath == null) {
-			ConsoleLogger.error("Missing Google 1000 file.");
-			setGoogle1000FilePath();
-		}
-
-		inputFilePath = FilePathLoader.loadPath(scanner, "Enter input file path");
+		inputFilePath = getInputFilePath();
 
 		var embeddingsMap = new EmbeddingsMapper().map(embeddingsFilePath);
 		var google1000Map = new Google1000Mapper().map(google1000FilePath, embeddingsMap);

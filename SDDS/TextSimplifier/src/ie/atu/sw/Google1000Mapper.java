@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class Google1000Mapper implements ExtendedMapper {
+public class Google1000Mapper implements ExtendedMappator {
     @Override
     public ConcurrentHashMap<String, double[]> map(String filePath, ConcurrentHashMap<String, double[]> map)
             throws Exception {
