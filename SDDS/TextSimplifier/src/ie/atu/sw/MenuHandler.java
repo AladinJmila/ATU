@@ -7,13 +7,8 @@ import static java.lang.System.out;
  */
 
 public class MenuHandler {
-	ConsoleLogger log;
 	String tab = ConsoleLogger.TAB;
 	private boolean isFirstRun = true;
-
-	MenuHandler() {
-		log = new ConsoleLogger();
-	}
 
 	public void showMainMenu() {
 		out.println();
@@ -37,7 +32,7 @@ public class MenuHandler {
 			out.println("************************************************************");
 		}
 
-		log.cyanBoldTitle(" Main Menu:", true);
+		ConsoleLogger.cyanBoldTitle(" Main Menu:", true);
 		out.println("---------------------------------------------------");
 		out.println("| 1 | Specify Embeddings File");
 		out.println("| 2 | Specify Google 1000 File");
@@ -46,13 +41,13 @@ public class MenuHandler {
 		out.println("| 5 | Configure Options");
 		out.println("| 6 | Quit");
 		out.println("---------------------------------------------------");
-		log.cyanBoldTitle("Select Option [1-5]> ");
+		ConsoleLogger.cyanBoldTitle("Select Option [1-5]> ");
 
 		isFirstRun = false;
 	}
 
 	public void showOptionsMenu() {
-		log.cyanBoldTitle(tab + " Configure Options Menu: ", true);
+		ConsoleLogger.cyanBoldTitle(tab + " Configure Options Menu: ", true);
 		out.println(tab + "-----------------------------------------------------------------------------------------");
 		out.println(tab + "| 1 | Specify the number of results to return (default: 10)");
 		out.println(tab + "| 2 | Specify the maximum number of words to process at once (default: 10)");
@@ -61,7 +56,7 @@ public class MenuHandler {
 		out.println(tab + "|   | -->  Selecting \"no\" is recommended if you chose individual words (option B) above");
 		out.println(tab + "| 5 | Return to the Main Menu");
 		out.println(tab + "-----------------------------------------------------------------------------------------");
-		log.cyanBoldTitle(tab + "Select Option [1-5]> ");
+		ConsoleLogger.cyanBoldTitle(tab + "Select Option [1-5]> ");
 	}
 
 }

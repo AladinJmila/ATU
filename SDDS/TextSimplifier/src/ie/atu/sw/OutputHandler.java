@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OutputHandler {
-    private ConsoleLogger logger = new ConsoleLogger();
     private String outputPath = "./";
     private String fileName = generateFormattedDateTime() + " - simplified.txt";
 
@@ -36,7 +35,7 @@ public class OutputHandler {
 
         print.close();
 
-        logger.info("Results file will launch automatically!");
+        ConsoleLogger.info("Results file will launch automatically!");
 
         System.out.println(ConsoleColour.GREEN); // Change the colour of the console text
         int size = 100; // The size of the meter. 100 equates to 100%

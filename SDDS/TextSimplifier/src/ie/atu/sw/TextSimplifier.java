@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TextSimplifier {
     private WordProcessor processor = new SimpleWordProcessor();
-    private ConsoleLogger logger = new ConsoleLogger();
     private ConcurrentHashMap<String, double[]> embeddingsMap;
     private ConcurrentHashMap<String, double[]> google1000Map;
     private String inputFilePath = "";
@@ -28,7 +27,7 @@ public class TextSimplifier {
         AtomicInteger index = new AtomicInteger(0);
 
         try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-            logger.info("Processing the input file...");
+            ConsoleLogger.info("Processing the input file...");
 
             Files.lines(Paths.get(inputFilePath)).forEach(line -> {
                 pool.execute(() -> {
@@ -36,7 +35,6 @@ public class TextSimplifier {
                     StringBuilder sb = new StringBuilder();
 
                     for (int i = 0; i < words.length; i++) {
-                        System.out.println("This is: " + words[i]);
                         var processedWord = processor.processWord(words[i], embeddingsMap, google1000Map, entries);
                         sb.append(processedWord + " ");
                     }

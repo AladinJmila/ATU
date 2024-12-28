@@ -13,11 +13,9 @@ interface Prompter {
  */
 
 public class InputValidator {
-	private ConsoleLogger log;
 	private Scanner scanner;
 
 	InputValidator(Scanner scanner) {
-		log = new ConsoleLogger();
 		this.scanner = scanner;
 	}
 
@@ -33,14 +31,14 @@ public class InputValidator {
 
 				// Check if the input is within the specified range
 				if (input < range[0] || input > range[1]) {
-					log.error(tab, "Input out of range, please enter a valid number.");
+					ConsoleLogger.error(tab, "Input out of range, please enter a valid number.");
 					showPrompt.prompt();
 				} else {
 					validInput = true;
 				}
 
 			} catch (NumberFormatException e) {
-				log.error(tab, "Invalid input, please enter a valid number.");
+				ConsoleLogger.error(tab, "Invalid input, please enter a valid number.");
 				showPrompt.prompt();
 			}
 
@@ -72,7 +70,7 @@ public class InputValidator {
 			if (Arrays.asList(options).contains(input)) {
 				validInput = true;
 			} else {
-				log.error(tab, "Invalid input, please enter a valid option.");
+				ConsoleLogger.error(tab, "Invalid input, please enter a valid option.");
 				showPrompt.prompt();
 			}
 
