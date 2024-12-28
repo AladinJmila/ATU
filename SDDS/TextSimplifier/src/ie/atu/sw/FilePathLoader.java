@@ -5,7 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public abstract class FilePathLoader {
+public final class FilePathLoader {
+    private FilePathLoader() {
+    }
+
     public static String loadPath(Scanner scanner, String prompt) {
         String filePath = "";
         boolean isValidFile = false;
