@@ -17,12 +17,13 @@ public class SimpleWordProcessor implements WordProcessor {
         List<double[]> results = new ArrayList<>();
 
         if (google1000Map.containsKey(word.toLowerCase())) {
-            logger.info(word + " is in google 1000 -> return word as is");
+            logger.info("Word '" + word + "' found in common words list - keeping original");
+
             return word;
         }
 
         if (!embeddingsMap.containsKey(word.toLowerCase())) {
-            logger.info(word + " -> is not is embeddings -> return word as is");
+            logger.info("Word '" + word + "' not found in embeddings dictionary - keeping original");
             return word;
         }
 
@@ -37,11 +38,11 @@ public class SimpleWordProcessor implements WordProcessor {
         if (results.size() > 0) {
             quickSort.sort(results);
             var bestMatch = entries.get((int) results.get(results.size() - 1)[0]).getKey();
-            logger.info("Returning best match: " + bestMatch);
+            logger.info("Found simpler alternative for '" + word + "': '" + bestMatch + "'");
             return bestMatch;
         }
 
-        logger.info(word + " -> no match found -> return word as is");
+        logger.info("No suitable alternative found for '" + word + "' - keeping original");
         return word;
     }
 }
