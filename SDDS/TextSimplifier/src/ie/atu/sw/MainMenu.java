@@ -14,7 +14,7 @@ public class MainMenu {
 	private Scanner scanner;
 	private MenuHandler menuHandler;
 	private OptionsMenu optionsMenu;
-	private IntegersValidator integersValidator;
+	private IntegerValidator integersValidator;
 	private boolean keepRunning = true;
 	public static String outputFile = "out.txt";
 
@@ -23,7 +23,7 @@ public class MainMenu {
 		scanner = new Scanner(System.in);
 		menuHandler = new MenuHandler();
 		optionsMenu = new OptionsMenu(scanner);
-		integersValidator = new IntegersValidator(scanner);
+		integersValidator = new IntegerValidator(scanner);
 	}
 
 	// Initializes and runs the main menu loop.

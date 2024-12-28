@@ -2,27 +2,28 @@ package ie.atu.sw;
 
 import java.util.Scanner;
 
-public class IntegersValidator implements Validator<Integer> {
+public class DoubleValidator implements Validator<Double> {
+
     private Scanner scanner;
 
-    IntegersValidator(Scanner scanner) {
+    DoubleValidator(Scanner scanner) {
         this.scanner = scanner;
     }
 
     @Override
-    public Integer validate(Prompter showPrompt, Integer[] range) {
+    public Double validate(Prompter showPrompt, Double[] range) {
         return validate(showPrompt, range, "");
     }
 
     // Validates numeric input from the user within a specified range with a tab.
-    public Integer validate(Prompter showPrompt, Integer[] range, String tab) {
-        int input = 0;
+    public Double validate(Prompter showPrompt, Double[] range, String tab) {
+        Double input = 0.0;
         boolean validInput = false;
 
         // Loop until a valid input is provided
         while (!validInput) {
             try {
-                input = Integer.parseInt(scanner.next());
+                input = Double.parseDouble(scanner.next());
 
                 // Check if the input is within the specified range
                 if (input < range[0] || input > range[1]) {
@@ -41,5 +42,4 @@ public class IntegersValidator implements Validator<Integer> {
 
         return input;
     }
-
 }

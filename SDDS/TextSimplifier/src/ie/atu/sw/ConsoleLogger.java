@@ -6,8 +6,11 @@ import static java.lang.System.out;
  * Handles various styled logging operations
  */
 
-public abstract class ConsoleLogger {
+public final class ConsoleLogger {
 	public static final String TAB = "   ";
+
+	private ConsoleLogger() {
+	}
 
 	public static void cyanBoldTitle(String message, boolean newLine) {
 		out.println();

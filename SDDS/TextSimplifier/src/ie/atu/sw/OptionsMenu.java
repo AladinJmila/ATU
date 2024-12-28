@@ -8,15 +8,15 @@ import java.util.Scanner;
 
 public class OptionsMenu {
 	private MenuHandler menuHandler;
-	private IntegersValidator intValidator;
-	private DoublesValidator doubleValidator;
+	private IntegerValidator intValidator;
+	private DoubleValidator doubleValidator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
 	private double toleranceLevel = 0.7;
 
 	public OptionsMenu(Scanner scanner) {
 		menuHandler = new MenuHandler();
-		intValidator = new IntegersValidator(scanner);
+		intValidator = new IntegerValidator(scanner);
 	}
 
 	// Initializes and runs the options menu loop.
