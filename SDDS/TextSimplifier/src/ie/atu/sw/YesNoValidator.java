@@ -34,7 +34,11 @@ public class YesNoValidator extends TextValidator {
             }
         }
 
-        return input.equals("yes") || input.equals("no") || input.equals("y") || input.equals("n");
+        if (input.equals("yes") || input.equals("y")) {
+            return true;
+        }
+
+        return false;
     }
 
 }

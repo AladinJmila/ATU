@@ -62,6 +62,6 @@ public class OptionsMenu implements MenuHandlator {
 		// Validate and set the launch file option
 		boolean launchFileOption = yesNoValidator.validate(() -> ConsoleLogger.cyanBoldTitle(prompt), validOptions,
 				tab);
-		new OutputHandler().setLauchFile(launchFileOption);
+		OutputHandler.setLauchFile(launchFileOption);
 	}
 }

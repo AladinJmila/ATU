@@ -8,19 +8,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OutputHandler {
-    private String outputPath = "./";
+    private static String outputPath = "./";
     private String fileName = generateFormattedDateTime() + " - simplified.txt";
-    private boolean launchFile = true;
+    private static boolean launchFile = true;
 
     OutputHandler() {
     }
 
     OutputHandler(String inputPath) {
-        this.fileName = generateFormattedDateTime() + " - " + extractFileName(inputPath) + " - simplified.txt";
-    }
-
-    OutputHandler(String outputPath, String inputPath) {
-        this.outputPath = outputPath;
         this.fileName = generateFormattedDateTime() + " - " + extractFileName(inputPath) + " - simplified.txt";
     }
 
@@ -64,7 +59,11 @@ public class OutputHandler {
         return LocalDateTime.now().toString().replace("T", " ").split("\\.")[0].replaceAll(":", "_");
     }
 
-    public void setLauchFile(boolean launchFile) {
-        this.launchFile = launchFile;
+    public static void setLauchFile(boolean shouldLaunchFile) {
+        launchFile = shouldLaunchFile;
+    }
+
+    public static void setOutputPath(String newOutputPath) {
+        outputPath = newOutputPath;
     }
 }

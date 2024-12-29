@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class MainMenu implements MenuHandlator {
 	private String embeddingsFilePath = "./embeddings.txt";
 	private String google1000FilePath = "./google-1000.txt";
-	private String inputFilePath = "./input.txt";
+	private String inputFilePath = "";
 	private Scanner scanner;
 	private MainMenuRenderer menuRenderer = new MainMenuRenderer();;
 	private OptionsMenu optionsMenu;
@@ -77,6 +77,9 @@ public class MainMenu implements MenuHandlator {
 	private void setOutputFilePath() {
 		ConsoleLogger.cyanBoldTitle("Enter output file path: ", true);
 		outputFile = scanner.next();
+		if (outputFile != null) {
+			OutputHandler.setOutputPath(outputFile);
+		}
 		ConsoleLogger.info("Output file path succesfully added");
 	}
 

@@ -32,12 +32,12 @@ public class MainMenuRenderer implements MenuRenderator {
         out.println("---------------------------------------------------");
         out.println("| 1 | Specify Embeddings File");
         out.println("| 2 | Specify Google 1000 File");
-        out.println("| 3 | Specify an Output File (default: ./out.txt)");
-        out.println("| 4 | Execute, Analyse and Report");
+        out.println("| 3 | Specify an Output Path (default: ./)");
+        out.println("| 4 | Simplify my input");
         out.println("| 5 | Configure Options");
         out.println("| 6 | Quit");
         out.println("---------------------------------------------------");
-        ConsoleLogger.cyanBoldTitle("Select Option [1-5]> ");
+        ConsoleLogger.cyanBoldTitle("Select Option [1-6]> ");
 
         isFirstRun = false;
     }

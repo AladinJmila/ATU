@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleWordProcessor implements WordProcessor {
-    private double tolerance = 0.7;
+    private static double tolerance = 0.7;
 
     @Override
     public String processWord(String word, ConcurrentHashMap<String, double[]> embeddingsMap,
@@ -44,10 +44,10 @@ public class SimpleWordProcessor implements WordProcessor {
         return word;
     }
 
-    public void setTolerance(double tolerance) {
-        if (tolerance < 0 || tolerance > 1.0) {
+    public void setTolerance(double mewTolerance) {
+        if (mewTolerance < 0 || mewTolerance > 1.0) {
             throw new IllegalArgumentException("Tolerance must be between 0 and 1");
         }
-        this.tolerance = tolerance;
+        tolerance = mewTolerance;
     }
 }
