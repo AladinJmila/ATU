@@ -2,11 +2,10 @@ package ie.atu.sw;
 
 import java.util.Scanner;
 
-public class TextValidator implements Validator<String, Boolean> {
-    protected Scanner scanner;
+public class YesNoValidator extends TextValidator {
 
-    TextValidator(Scanner scanner) {
-        this.scanner = scanner;
+    YesNoValidator(Scanner scanner) {
+        super(scanner);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class TextValidator implements Validator<String, Boolean> {
             }
         }
 
-        return validInput;
+        return input.equals("yes") || input.equals("no") || input.equals("y") || input.equals("n");
     }
 
 }

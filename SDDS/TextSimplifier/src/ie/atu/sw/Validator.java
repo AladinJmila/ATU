@@ -5,6 +5,6 @@ interface Prompter {
     void prompt();
 }
 
-public interface Validator<T> {
-    public T validate(Prompter showPrompt, T[] range);
+public interface Validator<T, R> {
+    public R validate(Prompter showPrompt, T[] range);
 }

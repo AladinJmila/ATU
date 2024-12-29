@@ -2,7 +2,7 @@ package ie.atu.sw;
 
 import java.util.Scanner;
 
-public class IntegerValidator implements Validator<Integer> {
+public class IntegerValidator implements Validator<Integer, Integer> {
     private Scanner scanner;
 
     IntegerValidator(Scanner scanner) {
