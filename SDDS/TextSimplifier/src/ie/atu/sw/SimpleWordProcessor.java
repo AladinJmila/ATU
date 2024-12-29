@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleWordProcessor implements WordProcessor {
+    private double tolerance = 0.7;
 
     @Override
     public String processWord(String word, ConcurrentHashMap<String, double[]> embeddingsMap,
@@ -27,7 +28,7 @@ public class SimpleWordProcessor implements WordProcessor {
         for (int j = 0; j < google1000Map.size(); j++) {
             double distance = CosineDistance.getDistance(embeddingsMap.get(word),
                     entries.get(j).getValue());
-            if (distance > 0.7) {
+            if (distance > tolerance) {
                 results.add(new double[] { (double) j, distance });
             }
         }
@@ -41,5 +42,12 @@ public class SimpleWordProcessor implements WordProcessor {
 
         ConsoleLogger.info("No suitable alternative found for '" + word + "' - keeping original");
         return word;
+    }
+
+    public void setTolerance(double tolerance) {
+        if (tolerance < 0 || tolerance > 1.0) {
+            throw new IllegalArgumentException("Tolerance must be between 0 and 1");
+        }
+        this.tolerance = tolerance;
     }
 }

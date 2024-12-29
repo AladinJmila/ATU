@@ -12,7 +12,6 @@ public class OptionsMenu implements MenuHandlator {
 	private DoubleValidator doubleValidator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
-	private double toleranceLevel = 0.7;
 
 	public OptionsMenu(Scanner scanner) {
 		intValidator = new IntegerValidator(scanner);
@@ -40,17 +39,14 @@ public class OptionsMenu implements MenuHandlator {
 		}
 	}
 
-	public double getToleranceLevel() {
-		return toleranceLevel;
-	}
-
 	private void setToleranceLevel() {
 		// Define the valid range for the number of tolerance level
 		Double[] range = { 0.0, 1.0 };
 		String prompt = tab + "Enter a number between " + range[0] + " and " + range[1] + ": ";
 		ConsoleLogger.cyanBoldTitle(prompt);
 		// Validate and set the tolerance level
-		toleranceLevel = doubleValidator.validate(() -> ConsoleLogger.cyanBoldTitle(prompt), range, tab);
+		double toleranceLevel = doubleValidator.validate(() -> ConsoleLogger.cyanBoldTitle(prompt), range, tab);
+		new SimpleWordProcessor().setTolerance(toleranceLevel);
 
 		ConsoleLogger.info(tab, "Number of results is updated successfully: " + toleranceLevel);
 	}

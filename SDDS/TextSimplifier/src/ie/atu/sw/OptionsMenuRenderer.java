@@ -9,9 +9,10 @@ public final class OptionsMenuRenderer implements MenuRenderator {
         ConsoleLogger.cyanBoldTitle(tab + " Configure Options Menu: ", true);
         out.println(tab + "-----------------------------------------------------------------------------------------");
         out.println(tab + "| 1 | Specify the tolerance level");
-        out.println(tab + "| 2 | Return to the Main Menu");
+        out.println(tab + "| 2 | Launch file automatically when processing completes");
+        out.println(tab + "| 3 | Return to the Main Menu");
         out.println(tab + "-----------------------------------------------------------------------------------------");
-        ConsoleLogger.cyanBoldTitle(tab + "Select Option [1-5]> ");
+        ConsoleLogger.cyanBoldTitle(tab + "Select Option [1-3]> ");
     }
 
 }

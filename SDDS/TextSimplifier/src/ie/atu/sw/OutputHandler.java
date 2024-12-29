@@ -10,6 +10,7 @@ import java.util.List;
 public class OutputHandler {
     private String outputPath = "./";
     private String fileName = generateFormattedDateTime() + " - simplified.txt";
+    private boolean launchFile = true;
 
     OutputHandler() {
     }
@@ -47,8 +48,10 @@ public class OutputHandler {
                 e.printStackTrace();
             } // Slows things down so the animation is visible
         }
+
         // Launch the output file
-        Utilities.launchFile(filePath);
+        if (launchFile)
+            Utilities.launchFile(filePath);
     }
 
     private String extractFileName(String path) {
@@ -59,5 +62,9 @@ public class OutputHandler {
 
     private String generateFormattedDateTime() {
         return LocalDateTime.now().toString().replace("T", " ").split("\\.")[0].replaceAll(":", "_");
+    }
+
+    public void setLauchFile(boolean launchFile) {
+        this.launchFile = launchFile;
     }
 }
