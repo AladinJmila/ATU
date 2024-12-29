@@ -2,7 +2,7 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 
-public final class OptionsMenuRenderer implements MenuRenderor {
+public final class OptionsMenuRenderer implements MenuRenderator {
 
     @Override
     public void renderMenu() {

@@ -2,7 +2,7 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 
-public class MainMenuRenderer implements MenuRenderor {
+public class MainMenuRenderer implements MenuRenderator {
     private boolean isFirstRun = true;
 
     @Override

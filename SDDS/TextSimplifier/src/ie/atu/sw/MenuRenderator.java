@@ -1,6 +1,6 @@
 package ie.atu.sw;
 
-public interface MenuRenderor {
+public interface MenuRenderator {
     String tab = ConsoleLogger.TAB;
 
     public void renderMenu();

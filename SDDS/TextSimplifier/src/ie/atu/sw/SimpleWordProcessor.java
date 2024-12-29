@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleWordProcessor implements WordProcessor {
-    private final CosineDistance cosineDistance = new CosineDistance();
     private final QuickSort quickSort = new QuickSort();
 
     @Override
@@ -27,7 +26,7 @@ public class SimpleWordProcessor implements WordProcessor {
         }
 
         for (int j = 0; j < google1000Map.size(); j++) {
-            double distance = cosineDistance.getDistance(embeddingsMap.get(word),
+            double distance = CosineDistance.getDistance(embeddingsMap.get(word),
                     entries.get(j).getValue());
             if (distance > 0.7) {
                 results.add(new double[] { (double) j, distance });

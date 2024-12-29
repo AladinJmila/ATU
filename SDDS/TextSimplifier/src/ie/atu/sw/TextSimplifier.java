@@ -47,7 +47,7 @@ public class TextSimplifier {
             pool.shutdown();
             pool.awaitTermination(1, TimeUnit.MINUTES);
 
-            new OutputHandler(inputFilePath).generateOutputFile(textResults.values().stream().toList().reversed());
+            new OutputHandler(inputFilePath).generateFile(textResults.values().stream().toList().reversed());
         }
     }
 }

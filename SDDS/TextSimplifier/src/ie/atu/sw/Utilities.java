@@ -1,6 +1,9 @@
 package ie.atu.sw;
 
-public class Utilities {
+public final class Utilities {
+	private Utilities() {
+	}
+
 	public static void launchFile(String filePath) {
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime runtime = Runtime.getRuntime();

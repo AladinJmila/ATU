@@ -7,12 +7,12 @@ import java.util.Scanner;
  * MainMenu class handles the main menu operations of the application.
  */
 
-public class MainMenu implements Menutor {
+public class MainMenu implements MenuHandlator {
 	private String embeddingsFilePath = "./embeddings.txt";
 	private String google1000FilePath = "./google-1000.txt";
 	private String inputFilePath = "./input.txt";
 	private Scanner scanner;
-	private MainMenuRenderer menuHandler = new MainMenuRenderer();;
+	private MainMenuRenderer menuRenderer = new MainMenuRenderer();;
 	private OptionsMenu optionsMenu;
 	private IntegerValidator integersValidator;
 	private boolean keepRunning = true;
@@ -27,14 +27,14 @@ public class MainMenu implements Menutor {
 
 	// Initializes and runs the main menu loop.
 	@Override
-	public void showMenu() throws Exception {
+	public void handleMenu() throws Exception {
 		while (keepRunning) {
-			menuHandler.renderMenu();
+			menuRenderer.renderMenu();
 
 			// Define the valid range for menu choices
 			Integer[] range = { 1, 6 };
 			// Validate and get user input for menu choice
-			int choice = integersValidator.validate(() -> menuHandler.renderMenu(), range);
+			int choice = integersValidator.validate(() -> menuRenderer.renderMenu(), range);
 
 			// Handle the user's menu choice
 			switch (choice) {
@@ -95,6 +95,6 @@ public class MainMenu implements Menutor {
 		out.println();
 		out.println("   | Configure Options Menu: ");
 		out.print(ConsoleColour.WHITE);
-		optionsMenu.showMenu();
+		optionsMenu.handleMenu();
 	}
 }

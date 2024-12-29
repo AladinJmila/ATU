@@ -23,7 +23,7 @@ public class OutputHandler {
         this.fileName = generateFormattedDateTime() + " - " + extractFileName(inputPath) + " - simplified.txt";
     }
 
-    public void generateOutputFile(List<String> linesToPlot) throws IOException {
+    public void generateFile(List<String> linesToPlot) throws IOException {
         var filePath = Paths.get(outputPath, fileName).toString();
         var out = new FileWriter(filePath);
         var print = new PrintWriter(out);

@@ -4,16 +4,15 @@ package ie.atu.sw;
  * Compute the cosine distance between two vectors
  */
 
-public class CosineDistance {
-	private double searchTermSquaredSum;
+public final class CosineDistance {
+	private CosineDistance() {
+	}
 
 	// Compute the cosine distance between two vectors
-	public double getDistance(double[] searchTermVector, double[] compareToVector) {
+	public static double getDistance(double[] searchTermVector, double[] compareToVector) {
 		// compute the search term squared sum only if it's 0.0 to preserve resources if
 		// it was already computed once
-		if (searchTermSquaredSum == 0.0d) {
-			searchTermSquaredSum = computeSquaredSum(searchTermVector);
-		}
+		double searchTermSquaredSum = computeSquaredSum(searchTermVector);
 
 		// return the computed distance
 		return computeDotProduct(searchTermVector, compareToVector)
@@ -21,7 +20,7 @@ public class CosineDistance {
 	}
 
 	// Compute the dot product of two vectors
-	private double computeDotProduct(double[] v1, double[] v2) {
+	private static double computeDotProduct(double[] v1, double[] v2) {
 		double result = 0.0d;
 
 		for (int i = 0; i < v1.length; i++) {
@@ -32,7 +31,7 @@ public class CosineDistance {
 	}
 
 	// Compute the squared sum of a vector
-	private double computeSquaredSum(double[] array) {
+	private static double computeSquaredSum(double[] array) {
 		double result = 0.0d;
 
 		for (int i = 0; i < array.length; i++) {

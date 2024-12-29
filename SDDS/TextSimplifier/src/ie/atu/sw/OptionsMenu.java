@@ -6,8 +6,8 @@ import java.util.Scanner;
  * OptionsMenu class handles the configuration options for the application.
  */
 
-public class OptionsMenu implements Menutor {
-	private OptionsMenuRenderer menuHandler = new OptionsMenuRenderer();
+public class OptionsMenu implements MenuHandlator {
+	private OptionsMenuRenderer menuRenderer = new OptionsMenuRenderer();
 	private IntegerValidator intValidator;
 	private DoubleValidator doubleValidator;
 	private boolean keepRunning = true;
@@ -21,14 +21,14 @@ public class OptionsMenu implements Menutor {
 
 	// Initializes and runs the options menu loop.
 	@Override
-	public void showMenu() {
+	public void handleMenu() {
 		keepRunning = true;
 		while (keepRunning) {
-			menuHandler.renderMenu();
+			menuRenderer.renderMenu();
 			// Define the valid range for menu choices
 			Integer[] range = { 1, 5 };
 			// Validate and get user input for menu choice
-			int choice = intValidator.validate(() -> menuHandler.renderMenu(), range, tab);
+			int choice = intValidator.validate(() -> menuRenderer.renderMenu(), range, tab);
 
 			// Handle the user's menu choice
 			switch (choice) {
