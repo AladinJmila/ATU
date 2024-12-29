@@ -7,15 +7,18 @@ import java.util.List;
  * This implementation was informed by material from codewithmosh.com
  */
 
-public class QuickSort {
+public final class QuickSort {
+	private QuickSort() {
+	}
+
 	// Method that takes only the array to sort as input
-	public void sort(List<double[]> list) {
+	public static void sort(List<double[]> list) {
 		sort(list, 0, list.size() - 1);
 	}
 
 	// Method that adds the partition range needed for recursive call
 
-	private void sort(List<double[]> list, int start, int end) {
+	private static void sort(List<double[]> list, int start, int end) {
 		// Base case: if there is nothing left to partition, return
 		if (start >= end)
 			return;
@@ -31,7 +34,7 @@ public class QuickSort {
 	}
 
 	// Method to partition the array around a pivot element
-	private int partition(List<double[]> list, int start, int end) {
+	private static int partition(List<double[]> list, int start, int end) {
 		// Set the pivot element as the last element in the current partition
 		var pivot = list.get(end)[1];
 		// Initialize the boundary index to track where the partitioning edge is
@@ -50,7 +53,7 @@ public class QuickSort {
 		return boundary;
 	}
 
-	private void swap(List<double[]> list, int index1, int index2) {
+	private static void swap(List<double[]> list, int index1, int index2) {
 		var temp = list.get(index1);
 		list.set(index1, list.get(index2));
 		list.set(index2, temp);

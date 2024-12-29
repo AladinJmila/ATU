@@ -2,11 +2,12 @@ package ie.atu.sw;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class TextSimplifier {
     private WordProcessor processor = new SimpleWordProcessor();
@@ -24,30 +25,46 @@ public class TextSimplifier {
     public void simplifyText() throws Exception {
         var entries = google1000Map.entrySet().stream().toList();
         var textResults = new ConcurrentSkipListMap<Integer, String>();
-        AtomicInteger index = new AtomicInteger(0);
 
         try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
             ConsoleLogger.info("Processing the input file...");
 
-            Files.lines(Paths.get(inputFilePath)).forEach(line -> {
-                pool.execute(() -> {
+            var lines = Files.readAllLines(Paths.get(inputFilePath));
+            var futures = new ArrayList<Future<?>>();
+
+            // Process lines with pre-assigned indices
+            for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
+                final int currentIndex = lineIndex; // Capture for lambda
+                final String line = lines.get(lineIndex);
+
+                futures.add(pool.submit(() -> {
                     var words = line.split(" ");
                     StringBuilder sb = new StringBuilder();
 
                     for (int i = 0; i < words.length; i++) {
                         var processedWord = processor.processWord(words[i], embeddingsMap, google1000Map, entries);
-                        sb.append(processedWord + " ");
+                        sb.append(processedWord).append(" ");
                     }
 
-                    textResults.put(index.get(), sb.toString());
-                    index.incrementAndGet();
-                });
-            });
+                    String processedLine = sb.toString().trim();
+                    textResults.put(currentIndex, processedLine);
+
+                    ConsoleLogger.warn(String.format("Added line %d to map: %s",
+                            currentIndex,
+                            processedLine.substring(0, Math.min(20, processedLine.length()))));
+                }));
+            }
+
+            // Wait for all futures to complete
+            for (Future<?> future : futures) {
+                future.get();
+            }
 
             pool.shutdown();
-            pool.awaitTermination(1, TimeUnit.MINUTES);
+            if (!pool.awaitTermination(1, TimeUnit.MINUTES))
+                pool.shutdownNow();
 
-            new OutputHandler(inputFilePath).generateFile(textResults.values().stream().toList().reversed());
+            new OutputHandler(inputFilePath).generateFile(textResults.values().stream().toList());
         }
     }
 }

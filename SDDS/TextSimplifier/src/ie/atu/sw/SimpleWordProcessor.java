@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleWordProcessor implements WordProcessor {
-    private final QuickSort quickSort = new QuickSort();
 
     @Override
     public String processWord(String word, ConcurrentHashMap<String, double[]> embeddingsMap,
@@ -34,7 +33,7 @@ public class SimpleWordProcessor implements WordProcessor {
         }
 
         if (results.size() > 0) {
-            quickSort.sort(results);
+            QuickSort.sort(results);
             var bestMatch = entries.get((int) results.get(results.size() - 1)[0]).getKey();
             ConsoleLogger.info("Found simpler alternative for '" + word + "': '" + bestMatch + "'");
             return bestMatch;
