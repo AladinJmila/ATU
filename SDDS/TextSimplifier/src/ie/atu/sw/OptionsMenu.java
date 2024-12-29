@@ -10,12 +10,14 @@ public class OptionsMenu implements MenuHandlator {
 	private OptionsMenuRenderer menuRenderer = new OptionsMenuRenderer();
 	private IntegerValidator intValidator;
 	private DoubleValidator doubleValidator;
+	private YesNoValidator yesNoValidator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
 
 	public OptionsMenu(Scanner scanner) {
 		intValidator = new IntegerValidator(scanner);
 		doubleValidator = new DoubleValidator(scanner);
+		yesNoValidator = new YesNoValidator(scanner);
 	}
 
 	// Initializes and runs the options menu loop.
@@ -32,7 +34,8 @@ public class OptionsMenu implements MenuHandlator {
 			// Handle the user's menu choice
 			switch (choice) {
 				case 1 -> setToleranceLevel();
-				case 2 -> keepRunning = false;
+				case 2 -> setLaunchFile();
+				case 3 -> keepRunning = false;
 				default -> ConsoleLogger.error(
 						tab, "Invalid Selection, choose a number from " + range[0] + " to " + range[1] + ".");
 			}
@@ -49,5 +52,16 @@ public class OptionsMenu implements MenuHandlator {
 		new SimpleWordProcessor().setTolerance(toleranceLevel);
 
 		ConsoleLogger.info(tab, "Number of results is updated successfully: " + toleranceLevel);
+	}
+
+	private void setLaunchFile() {
+		String[] validOptions = { "yes", "no", "y", "n" };
+		String prompt = tab + "Do you want to launch the file automatically when processing completes? (yes/no): ";
+		ConsoleLogger.cyanBoldTitle(prompt);
+
+		// Validate and set the launch file option
+		boolean launchFileOption = yesNoValidator.validate(() -> ConsoleLogger.cyanBoldTitle(prompt), validOptions,
+				tab);
+		new OutputHandler().setLauchFile(launchFileOption);
 	}
 }

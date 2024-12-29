@@ -10,6 +10,10 @@ public class YesNoValidator extends TextValidator {
 
     @Override
     public Boolean validate(Prompter showPrompt, String[] validOptions) {
+        return validate(showPrompt, validOptions, "");
+    }
+
+    public Boolean validate(Prompter showPrompt, String[] validOptions, String tab) {
         String input = "";
         boolean validInput = false;
 
@@ -25,7 +29,7 @@ public class YesNoValidator extends TextValidator {
             }
 
             if (!validInput) {
-                ConsoleLogger.error("Invalid input, please enter a valid option.");
+                ConsoleLogger.error(tab, "Invalid input, please enter a valid option.");
                 showPrompt.prompt();
             }
         }
