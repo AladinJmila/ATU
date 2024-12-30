@@ -4,7 +4,6 @@ package ie.atu.sw;
  * A utility class that provides methods to compute the cosine distance between
  * vectors.
  */
-
 public final class CosineDistance {
 	private CosineDistance() {
 	}

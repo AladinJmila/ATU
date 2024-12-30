@@ -2,9 +2,19 @@ package ie.atu.sw;
 
 import static java.lang.System.out;
 
+/**
+ * This class is responsible for rendering the main menu of the application
+ * It implements the MenuRenderator interface.
+ */
 public class MainMenuRenderer implements MenuRenderator {
+    /** Flag to determine if it's the first time rendering the menu */
     private boolean isFirstRun = true;
 
+    /**
+     * Renders the main menu of the application.
+     * On the first run, it displays a welcome banner.
+     * Subsequently, it shows the menu options for the user to choose from.
+     */
     @Override
     public void renderMenu() {
         out.println();
