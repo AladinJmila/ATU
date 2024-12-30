@@ -16,8 +16,9 @@ public final class ConsoleLogger {
 	 * Logs a message and a new line using a custom color theme picked specifically
 	 * for this project.
 	 * 
-	 * @param message
-	 * @param newLine
+	 * @param message The text content to be displayed in the console
+	 * @param newLine If true, adds a line break after the message; if false,
+	 *                continues on the same line
 	 */
 	public static void cyanBoldTitle(String message, boolean newLine) {
 		out.println();
@@ -34,7 +35,7 @@ public final class ConsoleLogger {
 	 * Logs a message using a custom color theme picked specifically
 	 * for this project.
 	 * 
-	 * @param message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void cyanBoldTitle(String message) {
 		cyanBoldTitle(message, false);
@@ -43,8 +44,8 @@ public final class ConsoleLogger {
 	/**
 	 * Logs an informational message in green with a prefix to the console
 	 * 
-	 * @param prefix
-	 * @param message
+	 * @param prefix  The prefix to be prepended to the message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void info(String prefix, String message) {
 		out.println("");
@@ -56,7 +57,7 @@ public final class ConsoleLogger {
 	/**
 	 * Logs an informational message in green to the console
 	 * 
-	 * @param message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void info(String message) {
 		info("", message);
@@ -65,8 +66,8 @@ public final class ConsoleLogger {
 	/**
 	 * Logs a warning message in yellow with a prefix to the console
 	 * 
-	 * @param prefix
-	 * @param message
+	 * @param prefix  The prefix to be prepended to the message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void warn(String prefix, String message) {
 		out.println("");
@@ -78,7 +79,7 @@ public final class ConsoleLogger {
 	/**
 	 * Logs a warning message in yellow to the console
 	 * 
-	 * @param message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void warn(String message) {
 		warn("", message);
@@ -87,8 +88,8 @@ public final class ConsoleLogger {
 	/**
 	 * Logs an error message in red with a prefix to the console
 	 * 
-	 * @param prefix
-	 * @param message
+	 * @param prefix  The prefix to be prepended to the message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void error(String prefix, String message) {
 		out.println("");
@@ -100,7 +101,7 @@ public final class ConsoleLogger {
 	/**
 	 * Logs an error message in red to the console
 	 * 
-	 * @param message
+	 * @param message The text content to be displayed in the console
 	 */
 	public static void error(String message) {
 		error("", message);
