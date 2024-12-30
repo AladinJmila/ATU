@@ -3,10 +3,14 @@ package ie.atu.sw;
 import static java.lang.System.out;
 import java.util.Scanner;
 
-/*
- * MainMenu class handles the main menu operations of the application.
+/**
+ * MainMenu class provides the main menu interface for the Text Simplifier
+ * application.
+ * This class handles user interactions and menu operations.
+ * 
+ * @author Alaeddine Jmila
+ * @version 1.0
  */
-
 public class MainMenu implements MenuHandlator {
 	private String embeddingsFilePath = "./embeddings.txt";
 	private String google1000FilePath = "./google-1000.txt";
@@ -25,7 +29,9 @@ public class MainMenu implements MenuHandlator {
 		integersValidator = new IntegerValidater(scanner);
 	}
 
-	// Initializes and runs the main menu loop.
+	/**
+	 * Displays the main menu options to the user and handles user input.
+	 */
 	@Override
 	public void handleMenu() throws Exception {
 		while (keepRunning) {
@@ -51,14 +57,26 @@ public class MainMenu implements MenuHandlator {
 		}
 	}
 
+	/**
+	 * Sets the file path for the embeddings file based on user input.
+	 */
 	private void setEmbeddingsFilePath() {
 		embeddingsFilePath = FilePathLoader.loadPath(scanner, "Enter embeddings file path");
 	}
 
+	/**
+	 * Sets the file path for the Google 1000 common words file based on user input.
+	 */
 	private void setGoogle1000FilePath() {
 		google1000FilePath = FilePathLoader.loadPath(scanner, "Enter Google 1000 file path");
 	}
 
+	/**
+	 * Gets the input file path from the user. If necessary files (embeddings or
+	 * Google 1000) are missing, prompts the user to provide them first.
+	 * 
+	 * @return String The validated input file path
+	 */
 	private String getInputFilePath() {
 		if (embeddingsFilePath == null) {
 			ConsoleLogger.error("Missing Embedding file.");
@@ -73,7 +91,10 @@ public class MainMenu implements MenuHandlator {
 		return FilePathLoader.loadPath(scanner, "Enter input file path");
 	}
 
-	// Prompts the user to set the output file path.
+	/**
+	 * Prompts the user to set the output file path and updates the OutputHandler
+	 * with the new path.
+	 */
 	private void setOutputFilePath() {
 		ConsoleLogger.cyanBoldTitle("Enter output file path: ", true);
 		outputFile = scanner.next();
@@ -83,7 +104,16 @@ public class MainMenu implements MenuHandlator {
 		ConsoleLogger.info("Output file path succesfully added");
 	}
 
-	// Handles the user's search input and performs the search operation.
+	/**
+	 * Handles the text simplification process by:
+	 * 1. Getting the input file path
+	 * 2. Loading and mapping the embeddings
+	 * 3. Processing the Google 1000 common words
+	 * 4. Performing text simplification
+	 * 
+	 * @throws Exception If there are errors during file processing or text
+	 *                   simplification
+	 */
 	private void handleTextSimplification() throws Exception {
 		inputFilePath = getInputFilePath();
 
@@ -93,7 +123,9 @@ public class MainMenu implements MenuHandlator {
 		new TextSimplifier(inputFilePath, embeddingsMap, google1000Map).simplifyText();
 	}
 
-	// Displays and handles the options configuration menu.
+	/**
+	 * Displays the options configuration menu
+	 */
 	private void configureOptions() {
 		out.println();
 		out.println("   | Configure Options Menu: ");
