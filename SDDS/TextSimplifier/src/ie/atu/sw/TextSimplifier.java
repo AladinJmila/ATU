@@ -48,10 +48,6 @@ public class TextSimplifier {
 
                     String processedLine = sb.toString().trim();
                     textResults.put(currentIndex, processedLine);
-
-                    ConsoleLogger.warn(String.format("Added line %d to map: %s",
-                            currentIndex,
-                            processedLine.substring(0, Math.min(20, processedLine.length()))));
                 }));
             }
 
