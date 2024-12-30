@@ -7,9 +7,6 @@ import java.util.Scanner;
  * MainMenu class provides the main menu interface for the Text Simplifier
  * application.
  * This class handles user interactions and menu operations.
- * 
- * @author Alaeddine Jmila
- * @version 1.0
  */
 public class MainMenu implements MenuHandlator {
 	private String embeddingsFilePath = "./embeddings.txt";
