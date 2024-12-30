@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A validator class that handles integer input validation within specified
  * ranges.
  */
-public class IntegerValidator implements Validator<Integer, Integer> {
+public class IntegerValidater implements Validator<Integer, Integer> {
     /** The scanner object used to read user input */
     private Scanner scanner;
 
@@ -15,7 +15,7 @@ public class IntegerValidator implements Validator<Integer, Integer> {
      * 
      * @param scanner The Scanner object to read input from
      */
-    IntegerValidator(Scanner scanner) {
+    IntegerValidater(Scanner scanner) {
         this.scanner = scanner;
     }
 

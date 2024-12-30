@@ -8,16 +8,16 @@ import java.util.Scanner;
 
 public class OptionsMenu implements MenuHandlator {
 	private OptionsMenuRenderer menuRenderer = new OptionsMenuRenderer();
-	private IntegerValidator intValidator;
-	private DoubleValidator doubleValidator;
-	private YesNoValidator yesNoValidator;
+	private IntegerValidater intValidator;
+	private DoubleValidater doubleValidator;
+	private YesNoValidater yesNoValidator;
 	private boolean keepRunning = true;
 	private String tab = ConsoleLogger.TAB;
 
 	public OptionsMenu(Scanner scanner) {
-		intValidator = new IntegerValidator(scanner);
-		doubleValidator = new DoubleValidator(scanner);
-		yesNoValidator = new YesNoValidator(scanner);
+		intValidator = new IntegerValidater(scanner);
+		doubleValidator = new DoubleValidater(scanner);
+		yesNoValidator = new YesNoValidater(scanner);
 	}
 
 	// Initializes and runs the options menu loop.

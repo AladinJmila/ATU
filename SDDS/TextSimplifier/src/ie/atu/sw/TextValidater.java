@@ -8,7 +8,7 @@ import java.util.Scanner;
  * This class implements the Validator interface for String input and Boolean
  * output.
  */
-public class TextValidator implements Validator<String, Boolean> {
+public class TextValidater implements Validator<String, Boolean> {
     /** The Scanner object used to read input from the user. */
     protected Scanner scanner;
 
@@ -17,7 +17,7 @@ public class TextValidator implements Validator<String, Boolean> {
      * 
      * @param scanner The Scanner object to use for reading input
      */
-    TextValidator(Scanner scanner) {
+    TextValidater(Scanner scanner) {
         this.scanner = scanner;
     }
 

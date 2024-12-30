@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A validator class that handles double precision floating point input
  * validation.
  */
-public class DoubleValidator implements Validator<Double, Double> {
+public class DoubleValidater implements Validator<Double, Double> {
 
     /** The Scanner object used to read input from the user */
     private Scanner scanner;
@@ -16,7 +16,7 @@ public class DoubleValidator implements Validator<Double, Double> {
      * 
      * @param scanner The Scanner object to read input from
      */
-    DoubleValidator(Scanner scanner) {
+    DoubleValidater(Scanner scanner) {
         this.scanner = scanner;
     }
 

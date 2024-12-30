@@ -7,14 +7,14 @@ import java.util.Scanner;
  * This class extends TextValidator and specifically validates user input
  * against yes/no responses (including variations like 'y' and 'n').
  */
-public class YesNoValidator extends TextValidator {
+public class YesNoValidater extends TextValidater {
 
     /**
      * Constructs a new YesNoValidator with the specified Scanner.
      *
      * @param scanner The Scanner object used to read user input
      */
-    YesNoValidator(Scanner scanner) {
+    YesNoValidater(Scanner scanner) {
         super(scanner);
     }
 
