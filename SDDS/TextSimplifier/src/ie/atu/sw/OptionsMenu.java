@@ -2,10 +2,9 @@ package ie.atu.sw;
 
 import java.util.Scanner;
 
-/*
- * OptionsMenu class handles the configuration options for the application.
+/**
+ * This class handles the configuration options for the application.
  */
-
 public class OptionsMenu implements MenuHandlator {
 	private OptionsMenuRenderer menuRenderer = new OptionsMenuRenderer();
 	private IntegerValidater intValidator;
@@ -20,7 +19,10 @@ public class OptionsMenu implements MenuHandlator {
 		yesNoValidator = new YesNoValidater(scanner);
 	}
 
-	// Initializes and runs the options menu loop.
+	/**
+	 * Initializes and runs the options menu loop.
+	 * Displays menu options and handles user input until exit is selected.
+	 */
 	@Override
 	public void handleMenu() {
 		keepRunning = true;
@@ -42,6 +44,11 @@ public class OptionsMenu implements MenuHandlator {
 		}
 	}
 
+	/**
+	 * Sets the tolerance level for word processing.
+	 * Prompts user for a value between 0.0 and 1.0 and updates the
+	 * SimpleWordProcessor with the new tolerance level.
+	 */
 	private void setToleranceLevel() {
 		// Define the valid range for the number of tolerance level
 		Double[] range = { 0.0, 1.0 };
@@ -54,6 +61,10 @@ public class OptionsMenu implements MenuHandlator {
 		ConsoleLogger.info(tab, "Number of results is updated successfully: " + toleranceLevel);
 	}
 
+	/**
+	 * Configures whether to automatically launch the output file after processing.
+	 * Prompts user for yes/no input and updates the OutputHandler accordingly.
+	 */
 	private void setLaunchFile() {
 		String[] validOptions = { "yes", "no", "y", "n" };
 		String prompt = tab + "Do you want to launch the file automatically when processing completes? (yes/no): ";

@@ -3,6 +3,8 @@ package ie.atu.sw;
 import java.util.List;
 
 /**
+ * A utility class that implements the QuickSort algorithm for sorting lists
+ * of double arrays.
  * 
  * This implementation was informed by material from codewithmosh.com
  */
@@ -11,13 +13,23 @@ public final class QuickSort {
 	private QuickSort() {
 	}
 
-	// Method that takes only the array to sort as input
+	/**
+	 * Sorts a list of double arrays using the QuickSort algorithm.
+	 * The sorting is based on the second element (index 1) of each double array.
+	 *
+	 * @param list the list of double arrays to be sorted
+	 */
 	public static void sort(List<double[]> list) {
 		sort(list, 0, list.size() - 1);
 	}
 
-	// Method that adds the partition range needed for recursive call
-
+	/**
+	 * Recursive helper method that implements the QuickSort algorithm.
+	 * 
+	 * @param list  the list of double arrays to be sorted
+	 * @param start the starting index of the partition to sort
+	 * @param end   the ending index of the partition to sort
+	 */
 	private static void sort(List<double[]> list, int start, int end) {
 		// Base case: if there is nothing left to partition, return
 		if (start >= end)
@@ -33,7 +45,15 @@ public final class QuickSort {
 		sort(list, boundary + 1, end);
 	}
 
-	// Method to partition the array around a pivot element
+	/**
+	 * Partitions the list around a pivot element.
+	 * The pivot is chosen as the last element of the partition.
+	 * 
+	 * @param list  the list of double arrays to be partitioned
+	 * @param start the starting index of the partition
+	 * @param end   the ending index of the partition
+	 * @return the final position of the pivot element
+	 */
 	private static int partition(List<double[]> list, int start, int end) {
 		// Set the pivot element as the last element in the current partition
 		var pivot = list.get(end)[1];
@@ -53,6 +73,13 @@ public final class QuickSort {
 		return boundary;
 	}
 
+	/**
+	 * Swaps two elements in the list.
+	 * 
+	 * @param list   the list containing the elements to swap
+	 * @param index1 the index of the first element
+	 * @param index2 the index of the second element
+	 */
 	private static void swap(List<double[]> list, int index1, int index2) {
 		var temp = list.get(index1);
 		list.set(index1, list.get(index2));

@@ -1,9 +1,20 @@
 package ie.atu.sw;
 
+/**
+ * A utility class providing helper methods for file operations and console
+ * output.
+ */
 public final class Utilities {
 	private Utilities() {
 	}
 
+	/**
+	 * Launches a file using the default system application based on the operating
+	 * system.
+	 * Supports Windows, MacOS, and Linux-based systems.
+	 *
+	 * @param filePath the path to the file to be opened
+	 */
 	public static void launchFile(String filePath) {
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime runtime = Runtime.getRuntime();
@@ -26,6 +37,15 @@ public final class Utilities {
 		}
 	}
 
+	/**
+	 * Displays a progress bar in the console showing the completion status.
+	 * The progress bar uses Unicode block characters to create a visual
+	 * representation
+	 * of the progress.
+	 *
+	 * @param index the current progress value
+	 * @param total the total value representing 100% completion
+	 */
 	public static void printProgress(int index, int total) {
 		if (index > total)
 			return; // Out of range
