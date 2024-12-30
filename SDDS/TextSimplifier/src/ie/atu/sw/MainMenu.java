@@ -9,9 +9,9 @@ import java.util.Scanner;
  * This class handles user interactions and menu operations.
  */
 public class MainMenu implements MenuHandlator {
-	private String embeddingsFilePath = "./embeddings.txt";
-	private String google1000FilePath = "./google-1000.txt";
-	private String inputFilePath = "";
+	private String embeddingsFilePath;
+	private String google1000FilePath;
+	private String inputFilePath;
 	private Scanner scanner;
 	private MainMenuRenderer menuRenderer = new MainMenuRenderer();;
 	private OptionsMenu optionsMenu;
