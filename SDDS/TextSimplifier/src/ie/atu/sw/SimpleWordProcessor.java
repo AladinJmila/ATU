@@ -5,9 +5,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A concrete implementation of the WordProcessor interface that simplifies
+ * words by finding simpler alternatives based on word embeddings and cosine
+ * similarity.
+ * This processor uses a tolerance threshold to determine acceptable word
+ * replacements and maintains a list of common words that should not be
+ * simplified.
+ */
 public class SimpleWordProcessor implements WordProcessor {
     private static double tolerance = 0.7;
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * This implementation follows these steps:
+     * <ol>
+     * <li>Cleans the input word by removing punctuation and converting to
+     * lowercase</li>
+     * <li>Checks if the word is in the common words list (google1000Map)</li>
+     * <li>Verifies the word exists in the embeddings dictionary</li>
+     * <li>Calculates cosine similarity with potential replacements</li>
+     * <li>Returns the most similar common word if found, otherwise returns the
+     * original</li>
+     * </ol>
+     */
     @Override
     public String processWord(String word, ConcurrentHashMap<String, double[]> embeddingsMap,
             ConcurrentHashMap<String, double[]> google1000Map, List<Map.Entry<String, double[]>> entries) {
@@ -50,6 +72,13 @@ public class SimpleWordProcessor implements WordProcessor {
         return cleanWord;
     }
 
+    /**
+     * Sets the similarity tolerance threshold for word replacement.
+     * Higher values require closer similarity for word substitution.
+     *
+     * @param mewTolerance The new tolerance value, must be between 0 and 1
+     * @throws IllegalArgumentException if tolerance is not between 0 and 1
+     */
     public void setTolerance(double mewTolerance) {
         if (mewTolerance < 0 || mewTolerance > 1.0) {
             throw new IllegalArgumentException("Tolerance must be between 0 and 1");
