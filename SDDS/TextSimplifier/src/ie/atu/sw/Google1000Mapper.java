@@ -6,7 +6,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Implementation of ExtendedMappator that processes Google's 1000 most common
+ * words using virtual threads for concurrent processing.
+ */
 public class Google1000Mapper implements ExtendedMappator {
+    /**
+     * {@inheritDoc}
+     * 
+     * This implementation uses virtual threads for concurrent processing of the
+     * input file,
+     * with a timeout of 1 minute for the complete operation.
+     */
     @Override
     public ConcurrentHashMap<String, double[]> map(String filePath, ConcurrentHashMap<String, double[]> map)
             throws Exception {
