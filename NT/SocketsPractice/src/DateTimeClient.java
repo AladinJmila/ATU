@@ -8,7 +8,7 @@ public class DateTimeClient {
     public static void main(String[] args) {
         String host = "time.nist.gov";
 
-        try (Socket socket = new Socket("localhost", 113)) {
+        try (Socket socket = new Socket("localhost", 13)) {
             socket.setSoTimeout(15000); // Reduced timeout to 15 seconds
             InputStream input = socket.getInputStream();
             byte[] inputBytes = input.readAllBytes();
