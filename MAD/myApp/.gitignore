@@ -8,6 +8,7 @@
 
 # Node
 /node_modules
+/bin
 npm-debug.log
 yarn-error.log
 
@@ -38,5 +39,6 @@ testem.log
 /typings
 
 # System files
+**.DS_Store
 .DS_Store
 Thumbs.db
