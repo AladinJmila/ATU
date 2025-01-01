@@ -15,7 +15,7 @@ public class DateTimeServer {
                 try (Socket connection = server.accept()) {
                     Writer output = new OutputStreamWriter(connection.getOutputStream());
                     Date now = new Date();
-                    output.write(now + "\r\n");
+                    output.write("AJ " + now + "\r\n");
                     output.flush();
 
                 } catch (IOException e) {
