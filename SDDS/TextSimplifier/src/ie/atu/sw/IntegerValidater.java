@@ -27,6 +27,7 @@ public class IntegerValidater implements Validator<Integer, Integer> {
      *                   (index 1) allowed values
      * @return The validated integer within the specified range
      */
+    // O(1): calls O(1) method
     @Override
     public Integer validate(Prompter showPrompt, Integer[] range) {
         return validate(showPrompt, range, "");
@@ -43,6 +44,7 @@ public class IntegerValidater implements Validator<Integer, Integer> {
      * @param tab        A string prefix used for formatting console output
      * @return The validated integer within the specified range
      */
+    // O(1): has one while loop that doesn't operate on a collection
     public Integer validate(Prompter showPrompt, Integer[] range, String tab) {
         int input = 0;
         boolean validInput = false;

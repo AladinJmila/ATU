@@ -11,6 +11,7 @@ public final class OptionsMenuRenderer implements MenuRenderator {
     /**
      * Renders the options configuration menu to the console.
      */
+    // O(1): has no loops and no recursion
     @Override
     public void renderMenu() {
         ConsoleLogger.cyanBoldTitle(tab + " Configure Options Menu: ", true);

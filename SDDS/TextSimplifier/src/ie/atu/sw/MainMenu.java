@@ -29,6 +29,7 @@ public class MainMenu implements MenuHandlator {
 	/**
 	 * Displays the main menu options to the user and handles user input.
 	 */
+	// O(n^3): O(n^3 + 1 + 1 + 1 + 1) -> O(n^3 + 4) -> O(n^3)
 	@Override
 	public void handleMenu() throws Exception {
 		while (keepRunning) {
@@ -41,11 +42,11 @@ public class MainMenu implements MenuHandlator {
 
 			// Handle the user's menu choice
 			switch (choice) {
-				case 1 -> setEmbeddingsFilePath();
-				case 2 -> setGoogle1000FilePath();
-				case 3 -> setOutputFilePath();
-				case 4 -> handleTextSimplification();
-				case 5 -> configureOptions();
+				case 1 -> setEmbeddingsFilePath(); // O(1)
+				case 2 -> setGoogle1000FilePath(); // O(1)
+				case 3 -> setOutputFilePath(); // O(1)
+				case 4 -> handleTextSimplification(); // O(n^3)
+				case 5 -> configureOptions(); // O(1)
 				case 6 -> keepRunning = false;
 				default -> ConsoleLogger.error(
 						"Invalid Selection, choose a number from " + range[0] + " to " + range[1] + ".");
@@ -57,15 +58,15 @@ public class MainMenu implements MenuHandlator {
 	/**
 	 * Sets the file path for the embeddings file based on user input.
 	 */
-	private void setEmbeddingsFilePath() {
-		embeddingsFilePath = FilePathLoader.loadPath(scanner, "Enter embeddings file path");
+	private void setEmbeddingsFilePath() { // O(1)
+		embeddingsFilePath = FilePathLoader.loadPath(scanner, "Enter embeddings file path"); // O(1)
 	}
 
 	/**
 	 * Sets the file path for the Google 1000 common words file based on user input.
 	 */
-	private void setGoogle1000FilePath() {
-		google1000FilePath = FilePathLoader.loadPath(scanner, "Enter Google 1000 file path");
+	private void setGoogle1000FilePath() { // O(1)
+		google1000FilePath = FilePathLoader.loadPath(scanner, "Enter Google 1000 file path"); // O(1)
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class MainMenu implements MenuHandlator {
 	 * 
 	 * @return String The validated input file path
 	 */
-	private String getInputFilePath() {
+	private String getInputFilePath() { // O(1)
 		if (embeddingsFilePath == null) {
 			ConsoleLogger.error("Missing Embedding file.");
 			setEmbeddingsFilePath();
@@ -92,7 +93,7 @@ public class MainMenu implements MenuHandlator {
 	 * Prompts the user to set the output file path and updates the OutputHandler
 	 * with the new path.
 	 */
-	private void setOutputFilePath() {
+	private void setOutputFilePath() { // O(1)
 		ConsoleLogger.cyanBoldTitle("Enter output file path: ", true);
 		outputFile = scanner.next();
 		if (outputFile != null) {
@@ -111,22 +112,24 @@ public class MainMenu implements MenuHandlator {
 	 * @throws Exception If there are errors during file processing or text
 	 *                   simplification
 	 */
+	// O(n^3): O(1 + c + n^2 + n^3) -> O(n^2 + n^3) -> O(n^3)
 	private void handleTextSimplification() throws Exception {
-		inputFilePath = getInputFilePath();
+		inputFilePath = getInputFilePath(); // O(1)
 
-		var embeddingsMap = new EmbeddingsMapper().map(embeddingsFilePath);
-		var google1000Map = new Google1000Mapper().map(google1000FilePath, embeddingsMap);
+		var embeddingsMap = new EmbeddingsMapper().map(embeddingsFilePath); // O(n^2)
+		var google1000Map = new Google1000Mapper().map(google1000FilePath, embeddingsMap); // O(c)
 
-		new TextSimplifier(inputFilePath, embeddingsMap, google1000Map).simplifyText();
+		new TextSimplifier(inputFilePath, embeddingsMap, google1000Map).simplifyText(); // O(n^3)
 	}
 
 	/**
 	 * Displays the options configuration menu
 	 */
+	// O(1): all operations are O(1)
 	private void configureOptions() {
 		out.println();
 		out.println("   | Configure Options Menu: ");
 		out.print(ConsoleColour.WHITE);
-		optionsMenu.handleMenu();
+		optionsMenu.handleMenu(); // O(1)
 	}
 }

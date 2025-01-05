@@ -15,6 +15,7 @@ public final class Utilities {
 	 *
 	 * @param filePath the path to the file to be opened
 	 */
+	// O(1): has no loops and no recursion
 	public static void launchFile(String filePath) {
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime runtime = Runtime.getRuntime();

@@ -26,6 +26,7 @@ public class YesNoValidater extends TextValidater {
      * @return Boolean Returns true for "yes"/"y" responses, false for other valid
      *         inputs
      */
+    // O(1): calls O(1) method
     @Override
     public Boolean validate(Prompter showPrompt, String[] validOptions) {
         return validate(showPrompt, validOptions, "");
@@ -42,6 +43,7 @@ public class YesNoValidater extends TextValidater {
      * @return Boolean Returns true for "yes"/"y" responses, false for other valid
      *         inputs
      */
+    // O(1): has one while loop that doesn't operate on a collection
     public Boolean validate(Prompter showPrompt, String[] validOptions, String tab) {
         String input = "";
         boolean validInput = false;

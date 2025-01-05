@@ -30,18 +30,21 @@ public class SimpleWordProcessor implements WordProcessor {
      * original</li>
      * </ol>
      */
+    // O(n): has a loop with a nested O(n), the loop is on a constant of 1000
+    // O(c + 1 + (c * n) + n log n + 1) -> O(c + 2 + cn + n log n) -> O(n + n log n)
+    // -> O(n)
     @Override
     public String processWord(String word, ConcurrentHashMap<String, double[]> embeddingsMap,
             ConcurrentHashMap<String, double[]> google1000Map, List<Map.Entry<String, double[]>> entries) {
 
         List<double[]> results = new ArrayList<>();
 
-        String cleanWord = word.replaceAll("^\\p{Punct}+|\\p{Punct}+$", "").toLowerCase().trim();
+        String cleanWord = word.replaceAll("^\\p{Punct}+|\\p{Punct}+$", "").toLowerCase().trim(); // O(c)
 
         if (cleanWord.isEmpty())
             return word;
 
-        if (google1000Map.containsKey(cleanWord)) {
+        if (google1000Map.containsKey(cleanWord)) { // O(1)
             ConsoleLogger.info("Word '" + cleanWord + "' found in common words list - keeping original");
 
             return cleanWord;
@@ -52,18 +55,18 @@ public class SimpleWordProcessor implements WordProcessor {
             return cleanWord;
         }
 
-        for (int j = 0; j < google1000Map.size(); j++) {
+        for (int j = 0; j < google1000Map.size(); j++) { // O(c)
             double distance = CosineDistance.getDistance(embeddingsMap.get(
                     cleanWord),
-                    entries.get(j).getValue());
+                    entries.get(j).getValue()); // O(n)
             if (distance > tolerance) {
-                results.add(new double[] { (double) j, distance });
+                results.add(new double[] { (double) j, distance }); // O(c)
             }
         }
 
         if (results.size() > 0) {
-            QuickSort.sort(results);
-            var bestMatch = entries.get((int) results.get(results.size() - 1)[0]).getKey();
+            QuickSort.sort(results); // O(n log n)
+            var bestMatch = entries.get((int) results.get(results.size() - 1)[0]).getKey(); // O(1)
             ConsoleLogger.info("Found simpler alternative for '" + cleanWord + "': '" + bestMatch + "'");
             return bestMatch;
         }
@@ -79,6 +82,7 @@ public class SimpleWordProcessor implements WordProcessor {
      * @param mewTolerance The new tolerance value, must be between 0 and 1
      * @throws IllegalArgumentException if tolerance is not between 0 and 1
      */
+    // O(1): has no loops and no recursion
     public void setTolerance(double mewTolerance) {
         if (mewTolerance < 0 || mewTolerance > 1.0) {
             throw new IllegalArgumentException("Tolerance must be between 0 and 1");

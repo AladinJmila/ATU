@@ -17,6 +17,7 @@ public class TextValidater implements Validator<String, Boolean> {
      * 
      * @param scanner The Scanner object to use for reading input
      */
+    // O(1): calls O(1) method
     TextValidater(Scanner scanner) {
         this.scanner = scanner;
     }
@@ -30,6 +31,7 @@ public class TextValidater implements Validator<String, Boolean> {
      * @param validOptions An array of valid string options to check against
      * @return true if the input matches one of the valid options, false otherwise
      */
+    // O(1): has one while loop that doesn't operate on a collection
     @Override
     public Boolean validate(Prompter showPrompt, String[] validOptions) {
         String input = "";

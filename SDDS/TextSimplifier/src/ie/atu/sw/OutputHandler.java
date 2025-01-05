@@ -39,13 +39,14 @@ public class OutputHandler {
      * @param linesToPlot List of strings to write to the output file
      * @throws IOException If an I/O error occurs while writing to the file
      */
+    // O(n): has n times iteration operations but no nested loops
     public void generateFile(List<String> linesToPlot) throws IOException {
         var filePath = Paths.get(outputPath, fileName).toString();
         var out = new FileWriter(filePath);
         var print = new PrintWriter(out);
 
         // Write each line to the output file
-        linesToPlot.forEach(line -> print.printf("%s%n", line));
+        linesToPlot.forEach(line -> print.printf("%s%n", line)); // O(n)
 
         print.println();
 
@@ -55,7 +56,7 @@ public class OutputHandler {
 
         System.out.println(ConsoleColour.GREEN); // Change the colour of the console text
         int size = 100; // The size of the meter. 100 equates to 100%
-        for (int i = 0; i < size; i++) { // The loop equates to a sequence of processing steps
+        for (int i = 0; i < size; i++) { // O(n): The loop equates to a sequence of processing steps
             Utilities.printProgress(i + 1, size); // After each (some) steps, update the progress meter
             try {
                 Thread.sleep(10);
@@ -66,7 +67,7 @@ public class OutputHandler {
 
         // Launch the output file
         if (launchFile)
-            Utilities.launchFile(filePath);
+            Utilities.launchFile(filePath); // O(1)
     }
 
     /**
@@ -75,10 +76,11 @@ public class OutputHandler {
      * @param path The full path of the file
      * @return The filename without extension
      */
+    // O(c): has canstant time because there is a limit to the path length
     private String extractFileName(String path) {
-        var pathParts = path.split("/");
-        var fileName = pathParts[pathParts.length - 1];
-        return fileName.split("\\.")[0];
+        var pathParts = path.split("/"); // O(c)
+        var fileName = pathParts[pathParts.length - 1]; // O(1)
+        return fileName.split("\\.")[0]; // O(1)
     }
 
     /**
@@ -87,6 +89,8 @@ public class OutputHandler {
      *
      * @return Formatted date-time string
      */
+    // O(c): has canstant time because there is a limit to the datetime string
+    // length
     private String generateFormattedDateTime() {
         return LocalDateTime.now().toString().replace("T", " ").split("\\.")[0].replaceAll(":", "_");
     }
@@ -98,6 +102,7 @@ public class OutputHandler {
      * @param shouldLaunchFile true to launch the file automatically, false
      *                         otherwise
      */
+    // O(1): has no loops and no recursion
     public static void setLauchFile(boolean shouldLaunchFile) {
         launchFile = shouldLaunchFile;
     }
@@ -107,6 +112,7 @@ public class OutputHandler {
      *
      * @param newOutputPath The new directory path where output files will be saved
      */
+    // O(1): has no loops and no recursion
     public static void setOutputPath(String newOutputPath) {
         outputPath = newOutputPath;
     }

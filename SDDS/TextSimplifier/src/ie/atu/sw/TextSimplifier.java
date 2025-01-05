@@ -45,37 +45,40 @@ public class TextSimplifier {
      * @throws Exception if there are errors reading the input file or processing
      *                   the text
      */
+    // O(n^3): has 2 level nested iterative operations with the deepest containing
+    // O(n) operation: n for each line > n for each word > n for processWord method
+    // O(c + n + (n * n * n) + n) -> O(c + 2n + n^3) -> O(n^3)
     public void simplifyText() throws Exception {
-        var entries = google1000Map.entrySet().stream().toList();
+        var entries = google1000Map.entrySet().stream().toList(); // O(c) it's fixed to 1000
         var textResults = new ConcurrentSkipListMap<Integer, String>();
 
         try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
             ConsoleLogger.info("Processing the input file...");
 
-            var lines = Files.readAllLines(Paths.get(inputFilePath));
+            var lines = Files.readAllLines(Paths.get(inputFilePath)); // O(n)
             var futures = new ArrayList<Future<?>>();
 
             // Process lines with pre-assigned indices
-            for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
+            for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) { // O(n)
                 final int currentIndex = lineIndex; // Capture for lambda
                 final String line = lines.get(lineIndex);
 
-                futures.add(pool.submit(() -> {
-                    var words = line.split(" ");
+                futures.add(pool.submit(() -> { // O(n)
+                    var words = line.split(" "); // O(n)
                     StringBuilder sb = new StringBuilder();
 
-                    for (int i = 0; i < words.length; i++) {
-                        var processedWord = processor.processWord(words[i], embeddingsMap, google1000Map, entries);
+                    for (int i = 0; i < words.length; i++) { // O(n)
+                        var processedWord = processor.processWord(words[i], embeddingsMap, google1000Map, entries); // O(n)
                         sb.append(processedWord).append(" ");
                     }
 
-                    String processedLine = sb.toString().trim();
+                    String processedLine = sb.toString().trim(); // O(n)
                     textResults.put(currentIndex, processedLine);
                 }));
             }
 
             // Wait for all futures to complete
-            for (Future<?> future : futures) {
+            for (Future<?> future : futures) { // O(n)
                 future.get();
             }
 
@@ -83,7 +86,7 @@ public class TextSimplifier {
             if (!pool.awaitTermination(1, TimeUnit.MINUTES))
                 pool.shutdownNow();
 
-            new OutputHandler(inputFilePath).generateFile(textResults.values().stream().toList());
+            new OutputHandler(inputFilePath).generateFile(textResults.values().stream().toList()); // O(n)
         }
     }
 }

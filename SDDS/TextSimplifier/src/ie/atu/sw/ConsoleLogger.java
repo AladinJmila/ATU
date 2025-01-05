@@ -20,6 +20,7 @@ public final class ConsoleLogger {
 	 * @param newLine If true, adds a line break after the message; if false,
 	 *                continues on the same line
 	 */
+	// O(1): has no loops and no recursion
 	public static void cyanBoldTitle(String message, boolean newLine) {
 		out.println();
 		out.print(ConsoleColour.CYAN_BOLD);
@@ -37,6 +38,7 @@ public final class ConsoleLogger {
 	 * 
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void cyanBoldTitle(String message) {
 		cyanBoldTitle(message, false);
 	}
@@ -47,6 +49,7 @@ public final class ConsoleLogger {
 	 * @param prefix  The prefix to be prepended to the message
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void info(String prefix, String message) {
 		out.println("");
 		out.print(ConsoleColour.GREEN_BOLD);
@@ -59,6 +62,7 @@ public final class ConsoleLogger {
 	 * 
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void info(String message) {
 		info("", message);
 	}
@@ -69,6 +73,7 @@ public final class ConsoleLogger {
 	 * @param prefix  The prefix to be prepended to the message
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void warn(String prefix, String message) {
 		out.println("");
 		out.print(ConsoleColour.YELLOW_BOLD);
@@ -81,6 +86,7 @@ public final class ConsoleLogger {
 	 * 
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void warn(String message) {
 		warn("", message);
 	}
@@ -91,6 +97,7 @@ public final class ConsoleLogger {
 	 * @param prefix  The prefix to be prepended to the message
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void error(String prefix, String message) {
 		out.println("");
 		out.print(ConsoleColour.RED_BOLD);
@@ -103,6 +110,7 @@ public final class ConsoleLogger {
 	 * 
 	 * @param message The text content to be displayed in the console
 	 */
+	// O(1): has no loops and no recursion
 	public static void error(String message) {
 		error("", message);
 	}

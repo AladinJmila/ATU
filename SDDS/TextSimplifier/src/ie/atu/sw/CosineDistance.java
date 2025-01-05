@@ -17,12 +17,14 @@ public final class CosineDistance {
 	 *                         to compare against the search term
 	 * @return the cosine distance between the two vectors, ranging from -1 to 1
 	 */
+	// O(n): calls O(n) methods three times totalling to O(n + n + n) -> O(3n) ->
+	// O(n)
 	public static double getDistance(double[] searchTermVector, double[] compareToVector) {
-		double searchTermSquaredSum = computeSquaredSum(searchTermVector);
+		double searchTermSquaredSum = computeSquaredSum(searchTermVector); // O(n)
 
 		// return the computed distance
 		return computeDotProduct(searchTermVector, compareToVector)
-				/ Math.sqrt(searchTermSquaredSum * computeSquaredSum(compareToVector));
+				/ Math.sqrt(searchTermSquaredSum * computeSquaredSum(compareToVector)); // O(n)
 	}
 
 	/**
@@ -32,10 +34,11 @@ public final class CosineDistance {
 	 * @param v2 the second vector
 	 * @return the dot product of the two vectors
 	 */
+	// O(n): has one for loop iterating through an array
 	private static double computeDotProduct(double[] v1, double[] v2) {
 		double result = 0.0d;
 
-		for (int i = 0; i < v1.length; i++) {
+		for (int i = 0; i < v1.length; i++) { // O(n)
 			result += v1[i] * v2[i];
 		}
 
@@ -48,10 +51,11 @@ public final class CosineDistance {
 	 * @param array the input vector
 	 * @return the sum of squares of all elements in the vector
 	 */
+	// O(n): has one for loop iterating through an array
 	private static double computeSquaredSum(double[] array) {
 		double result = 0.0d;
 
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < array.length; i++) { // O(n)
 			result += Math.pow(array[i], 2);
 		}
 

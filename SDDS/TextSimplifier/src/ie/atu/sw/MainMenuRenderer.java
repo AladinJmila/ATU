@@ -15,6 +15,7 @@ public class MainMenuRenderer implements MenuRenderator {
      * On the first run, it displays a welcome banner.
      * Subsequently, it shows the menu options for the user to choose from.
      */
+    // O(1): has no loops and no recursion
     @Override
     public void renderMenu() {
         out.println();

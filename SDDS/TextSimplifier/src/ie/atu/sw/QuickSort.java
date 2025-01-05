@@ -19,6 +19,7 @@ public final class QuickSort {
 	 *
 	 * @param list the list of double arrays to be sorted
 	 */
+	// O(n log n)
 	public static void sort(List<double[]> list) {
 		sort(list, 0, list.size() - 1);
 	}
@@ -30,6 +31,7 @@ public final class QuickSort {
 	 * @param start the starting index of the partition to sort
 	 * @param end   the ending index of the partition to sort
 	 */
+	// O(n log n): Quick Sort runs in n log n in best case scenario
 	private static void sort(List<double[]> list, int start, int end) {
 		// Base case: if there is nothing left to partition, return
 		if (start >= end)
@@ -54,18 +56,19 @@ public final class QuickSort {
 	 * @param end   the ending index of the partition
 	 * @return the final position of the pivot element
 	 */
+	// O(n): contains one for loop
 	private static int partition(List<double[]> list, int start, int end) {
 		// Set the pivot element as the last element in the current partition
-		var pivot = list.get(end)[1];
+		var pivot = list.get(end)[1]; // O(1)
 		// Initialize the boundary index to track where the partitioning edge is
 		int boundary = start - 1;
 
-		for (int i = start; i <= end; i++) {
+		for (int i = start; i <= end; i++) { // O(n)
 			// If the current element is less than or equal the pivot, move it to the left
 			// side
 			if (list.get(i)[1] <= pivot) {
 				// Increment boundary and swap current element with the element at boundary
-				swap(list, i, ++boundary);
+				swap(list, i, ++boundary); // O(1)
 			}
 		}
 
@@ -80,6 +83,7 @@ public final class QuickSort {
 	 * @param index1 the index of the first element
 	 * @param index2 the index of the second element
 	 */
+	// O(1): swaps two items
 	private static void swap(List<double[]> list, int index1, int index2) {
 		var temp = list.get(index1);
 		list.set(index1, list.get(index2));

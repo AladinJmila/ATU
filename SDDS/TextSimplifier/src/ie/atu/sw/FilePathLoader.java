@@ -20,6 +20,7 @@ public final class FilePathLoader {
      * @param prompt  The prompt message to display to the user
      * @return A valid file path as a String
      */
+    // O(1): has one while loop that doesn't operate on a collection
     public static String loadPath(Scanner scanner, String prompt) {
         String filePath = "";
         boolean isValidFile = false;
@@ -52,6 +53,7 @@ public final class FilePathLoader {
      * @param pathString The file path to check
      * @return true if the file exists, false otherwise
      */
+    // O(1): has no loops and no recursion
     private static boolean fileExists(String pathString) {
         Path path = Paths.get(pathString);
         return Files.exists(path);

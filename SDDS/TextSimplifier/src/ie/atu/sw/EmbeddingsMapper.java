@@ -25,23 +25,24 @@ public class EmbeddingsMapper implements Mappator {
      * <li>Stores the results in a thread-safe map</li>
      * </ul>
      */
+    // O(n^2): has nested iterative operations, n each line then n each embedding of
+    // that line. O(n * (n + n + n) + 1) -> O(n * 3n) -> O(n^2).
     @Override
     public ConcurrentHashMap<String, double[]> map(String filePath) throws Exception {
         ConcurrentHashMap<String, double[]> embeddingsMap = new ConcurrentHashMap<>();
 
         try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
-            Files.lines(Paths.get(filePath)).forEach(line -> {
+            Files.lines(Paths.get(filePath)).forEach(line -> { // O(n)
                 pool.execute(() -> {
-                    var elements = line.split(",", 2);
-                    var embeddingsText = elements[1].split(",");
+                    var elements = line.split(",", 2); // O(n)
+                    var embeddingsText = elements[1].split(","); // O(n)
                     var embeddings = new double[embeddingsText.length];
 
-                    for (int i = 0; i < embeddings.length; i++) {
-
+                    for (int i = 0; i < embeddings.length; i++) { // O(n)
                         embeddings[i] = Double.parseDouble(embeddingsText[i]);
                     }
 
-                    embeddingsMap.put(elements[0], embeddings);
+                    embeddingsMap.put(elements[0], embeddings); // O(1)
                 });
             });
 

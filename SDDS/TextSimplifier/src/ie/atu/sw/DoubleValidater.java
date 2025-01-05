@@ -28,6 +28,7 @@ public class DoubleValidater implements Validator<Double, Double> {
      *                   (index 1) allowed values
      * @return The validated double value within the specified range
      */
+    // O(1): calls O(1) method
     @Override
     public Double validate(Prompter showPrompt, Double[] range) {
         return validate(showPrompt, range, "");
@@ -44,6 +45,7 @@ public class DoubleValidater implements Validator<Double, Double> {
      * @param tab        The string to use as a tab/indent prefix for error messages
      * @return The validated double value within the specified range
      */
+    // O(1): has one while loop that doesn't operate on a collection
     public Double validate(Prompter showPrompt, Double[] range, String tab) {
         Double input = 0.0;
         boolean validInput = false;
